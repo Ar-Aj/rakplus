@@ -11,6 +11,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 interface NavLink {
@@ -31,11 +32,23 @@ const NAV_LINKS: NavLink[] = [
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Track scroll position to intensify the glass effect after scrolling
+  // Track scroll position for glass effect and scroll direction for hiding/showing
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      setIsScrolled(currentScrollY > 50);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false); // scrolling down
+      } else {
+        setIsVisible(true); // scrolling up
+      }
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -58,8 +71,10 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        } ${
           isScrolled
-            ? "bg-white/15 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5"
+            ? "bg-gray-400/50 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5"
             : "bg-white/5 backdrop-blur-sm border-b border-white/10"
         }`}
       >
@@ -73,13 +88,14 @@ export default function Navbar() {
             className="relative z-10 flex items-center gap-2 group"
             aria-label="RAKPLUS Home"
           >
-            <span className="font-display text-xl lg:text-2xl font-bold text-white tracking-tight transition-opacity group-hover:opacity-80">
-              RAK
-              <span className="text-brand-green">PLUS</span>
-            </span>
-            <span className="hidden sm:inline-block text-[10px] text-white/50 uppercase tracking-[0.2em] font-medium border-l border-white/20 pl-2 ml-1">
-              Rohrsysteme
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt="RAKPLUS Logo"
+              width={300}
+              height={80}
+              className="h-12 lg:h-16 w-auto object-contain transition-opacity group-hover:opacity-80 py-1"
+              priority
+            />
           </Link>
 
           {/* ─── Desktop Links ─── */}

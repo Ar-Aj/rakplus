@@ -7,6 +7,7 @@
  */
 
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const PRODUCT_LINKS = [
@@ -57,12 +58,13 @@ export default function Footer() {
           {/* Column 1: Brand + Contact */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6 group">
-              <span className="font-display text-2xl font-bold tracking-tight text-white transition-opacity group-hover:opacity-80">
-                RAK<span className="text-brand-green">PLUS</span>
-              </span>
-              <span className="block text-[10px] text-white/40 uppercase tracking-[0.25em] mt-0.5">
-                Rohrsysteme
-              </span>
+              <Image
+                src="/images/logo.png"
+                alt="RAKPLUS Logo"
+                width={300}
+                height={80}
+                className="h-16 lg:h-20 w-auto object-contain transition-opacity group-hover:opacity-80"
+              />
             </Link>
 
             <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
