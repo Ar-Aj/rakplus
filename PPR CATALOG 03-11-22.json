@@ -1,0 +1,515 @@
+{
+    "companyDetails": {
+        "name": "RakPlus by Aquasmart Plastic Industries L.L.C",
+        "standards": [
+            "ISO 9001:2015",
+            "ISO 14001:2015",
+            "DIN 8077/8078",
+            "DIN 8076",
+            "DVS 2207",
+            "EN ISO 15874-2"
+        ],
+        "warranty": "50 years guaranteed service life"
+    },
+    "products": [
+        {
+            "id": 1,
+            "slug": "ppr-green-pn10",
+            "category": "PPR Green",
+            "title": "RAKPLUS PP-R Green Pipe SDR11/PN10",
+            "description": "Reliable Piping System for Hot & Cold Water Transmission, suitable for cold water applications.",
+            "features": [
+                "Very long life time with a guaranteed service life of 50 years",
+                "Cost effective pipeline networks",
+                "High impact strength & flexibility",
+                "Damage resistance"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "1.9",
+                    "weight": "0.107 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "2.3",
+                    "weight": "0.164 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "2.9",
+                    "weight": "0.261 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "3.7",
+                    "weight": "0.412 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "4.6",
+                    "weight": "0.638 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "slug": "ppr-green-pn16",
+            "category": "PPR Green",
+            "title": "RAKPLUS PP-R Green Pipe SDR7.4/PN16",
+            "description": "Medium pressure rating pipe for domestic water systems.",
+            "features": [
+                "Damped vibrations and sounds are absorbed resulting to noise reduction",
+                "Light weight, easy to install and low labour cost of installations",
+                "Resistant to corrosion as compared to metal products"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "2.8",
+                    "weight": "0.147 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "3.5",
+                    "weight": "0.229 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "4.4",
+                    "weight": "0.370 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "5.5",
+                    "weight": "0.578 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "6.9",
+                    "weight": "0.906 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "slug": "ppr-green-pn20",
+            "category": "PPR Green",
+            "title": "RAKPLUS PP-R Green Pipe SDR6/PN20",
+            "description": "Standard high-pressure pipe for hot and cold water plumbing networks.",
+            "features": [
+                "Environment-friendly as it takes less energy to manufacture PPR pipes",
+                "Hygienic and non-toxic compared to metal or other plastic products",
+                "High impact strength & flexibility"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "3.4",
+                    "weight": "0.172 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "4.2",
+                    "weight": "0.266 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "5.4",
+                    "weight": "0.432 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "6.7",
+                    "weight": "0.670 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "8.3",
+                    "weight": "1.040 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "slug": "ppr-green-pn25",
+            "category": "PPR Green",
+            "title": "RAKPLUS PP-R Green Pipe SDR5/PN25",
+            "description": "Extra heavy-duty PPR pipe for high temperature and high pressure demands.",
+            "features": [
+                "Suitable for pipe networks for aggressive fluids",
+                "Damage resistance and robust construction",
+                "Longest service life under continuous stress"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "4.1",
+                    "weight": "0.198 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "5.1",
+                    "weight": "0.307 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "6.5",
+                    "weight": "0.498 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "8.1",
+                    "weight": "0.775 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "10.1",
+                    "weight": "1.210 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "slug": "ppr-yellow-pn10",
+            "category": "PPR Yellow",
+            "title": "RAKPLUS PP-R Yellow Pipe SDR11/PN10",
+            "description": "Yellow custom-colored PPR pipe for cold water, maintaining identical specs to standard line.",
+            "features": [
+                "Available according to standards and custom colour",
+                "Very long life time with a guaranteed service life of 50 years",
+                "Hygienic and non-toxic"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "1.9",
+                    "weight": "0.107 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "2.3",
+                    "weight": "0.164 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "2.9",
+                    "weight": "0.261 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "3.7",
+                    "weight": "0.412 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "4.6",
+                    "weight": "0.638 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "slug": "ppr-yellow-pn16",
+            "category": "PPR Yellow",
+            "title": "RAKPLUS PP-R Yellow Pipe SDR7.4/PN16",
+            "description": "Yellow custom-colored PPR pipe for medium-pressure transmission systems.",
+            "features": [
+                "Available according to standards and custom colour",
+                "Light weight, easy to install",
+                "Damped vibrations and sounds"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "2.8",
+                    "weight": "0.147 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "3.5",
+                    "weight": "0.229 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "4.4",
+                    "weight": "0.370 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "5.5",
+                    "weight": "0.578 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "6.9",
+                    "weight": "0.906 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "slug": "ppr-yellow-pn20",
+            "category": "PPR Yellow",
+            "title": "RAKPLUS PP-R Yellow Pipe SDR6/PN20",
+            "description": "Standard high-pressure yellow PPR pipe for hot and cold water networks.",
+            "features": [
+                "Available according to standards and custom colour",
+                "Resistant to corrosion as compared to metal products",
+                "High impact strength & flexibility"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "3.4",
+                    "weight": "0.172 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "4.2",
+                    "weight": "0.266 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "5.4",
+                    "weight": "0.432 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "6.7",
+                    "weight": "0.670 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "8.3",
+                    "weight": "1.040 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "slug": "ppr-yellow-pn25",
+            "category": "PPR Yellow",
+            "title": "RAKPLUS PP-R Yellow Pipe SDR5/PN25",
+            "description": "Extra heavy-duty yellow PPR pipe for aggressive fluid and high-pressure transmission.",
+            "features": [
+                "Available according to standards and custom colour",
+                "Damage resistance",
+                "Highest pressure safety factor"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "4.1",
+                    "weight": "0.198 kg/m"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "5.1",
+                    "weight": "0.307 kg/m"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "6.5",
+                    "weight": "0.498 kg/m"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "8.1",
+                    "weight": "0.775 kg/m"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "10.1",
+                    "weight": "1.210 kg/m"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "slug": "ppr-fittings-green",
+            "category": "PPR Fittings Green",
+            "title": "RAKPLUS PP-R Green Fittings SDR6/PN20",
+            "description": "Green PPR fittings including sockets, elbows, tees, and transition pieces.",
+            "features": [
+                "Welding regulations for plastic pipes in accordance with DVS 2207",
+                "Matches pipe life span of 50 years",
+                "Resistant to high temperatures and extraction"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078",
+                    "DVS 2207"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "slug": "ppr-fittings-yellow",
+            "category": "PPR Fittings Yellow",
+            "title": "RAKPLUS PP-R Yellow Fittings SDR6/PN20",
+            "description": "Yellow custom-colored PPR fittings for integration with yellow piping networks.",
+            "features": [
+                "Color-matched to yellow pipe series",
+                "Includes standard and transition fittings with brass threads",
+                "Non-toxic and hygienic"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "DIN 8077/8078",
+                    "DVS 2207"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "50",
+                    "wallThickness": "Standard SDR6",
+                    "weight": "N/A"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "slug": "pex-systems",
+            "category": "PEX Systems",
+            "title": "RAKPLUS PEX Systems",
+            "description": "Cross-linked polyethylene (PEX) systems for flexible hot and cold water transmission.",
+            "features": [
+                "Highly flexible and robust",
+                "Excellent high-temperature resistance",
+                "Reliable piping system for hot & cold water transmission"
+            ],
+            "specifications": {
+                "temperatureResistance": "Continuous 0°C to 70°C, short-term peak up to 100°C",
+                "standards": [
+                    "German Standard",
+                    "EN ISO 15874-2"
+                ]
+            },
+            "dimensionalTable": [
+                {
+                    "outerDiameter": "16",
+                    "wallThickness": "N/A",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "20",
+                    "wallThickness": "N/A",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "25",
+                    "wallThickness": "N/A",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "32",
+                    "wallThickness": "N/A",
+                    "weight": "N/A"
+                },
+                {
+                    "outerDiameter": "40",
+                    "wallThickness": "N/A",
+                    "weight": "N/A"
+                }
+            ]
+        }
+    ]
+}
