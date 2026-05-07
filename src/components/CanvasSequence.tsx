@@ -192,7 +192,7 @@ export default function CanvasSequence({
                 if (idx !== currentIndex) {
                   currentIndex = idx;
                   const frame = frames[idx];
-                  if (frame && frame.naturalWidth) {
+                  if (frame && frame.naturalWidth && canvas && ctx) {
                     renderFrame(canvas, ctx, frame);
                   }
                 }
@@ -210,7 +210,7 @@ export default function CanvasSequence({
     const handleResize = () => {
       sizeCanvas();
       const frame = frames[currentIndex];
-      if (frame && frame.naturalWidth) {
+      if (frame && frame.naturalWidth && canvas && ctx) {
         renderFrame(canvas, ctx, frame);
       }
     };
