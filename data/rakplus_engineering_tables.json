@@ -1,0 +1,307 @@
+{
+    "pn10_sdr11": [
+        {
+            "part": "RP1020",
+            "od_mm": "20",
+            "wall_mm": "1.9",
+            "id_mm": "16.0",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.107"
+        },
+        {
+            "part": "RP1025",
+            "od_mm": "25",
+            "wall_mm": "2.3",
+            "id_mm": "20.4",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.164"
+        },
+        {
+            "part": "RP1032",
+            "od_mm": "32",
+            "wall_mm": "2.9",
+            "id_mm": "26.2",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.261"
+        },
+        {
+            "part": "RP1040",
+            "od_mm": "40",
+            "wall_mm": "3.7",
+            "id_mm": "32.6",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.412"
+        },
+        {
+            "part": "RP1050",
+            "od_mm": "50",
+            "wall_mm": "4.6",
+            "id_mm": "40.8",
+            "pack": "20 Mtrs",
+            "kg_mtr": "0.638"
+        },
+        {
+            "part": "RP1063",
+            "od_mm": "63",
+            "wall_mm": "5.8",
+            "id_mm": "51.4",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.010"
+        },
+        {
+            "part": "RP1075",
+            "od_mm": "75",
+            "wall_mm": "6.8",
+            "id_mm": "61.4",
+            "pack": "16 Mtrs",
+            "kg_mtr": "1.410"
+        },
+        {
+            "part": "RP1090",
+            "od_mm": "90",
+            "wall_mm": "8.2",
+            "id_mm": "73.6",
+            "pack": "12 Mtrs",
+            "kg_mtr": "2.030"
+        },
+        {
+            "part": "RP10110",
+            "od_mm": "110",
+            "wall_mm": "10.0",
+            "id_mm": "90.0",
+            "pack": "8 Mtrs",
+            "kg_mtr": "3.010"
+        }
+    ],
+    "pn16_sdr74": [
+        {
+            "part": "RP1620",
+            "od_mm": "20",
+            "wall_mm": "2.8",
+            "id_mm": "14.4",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.147"
+        },
+        {
+            "part": "RP1625",
+            "od_mm": "25",
+            "wall_mm": "3.5",
+            "id_mm": "18.0",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.229"
+        },
+        {
+            "part": "RP1632",
+            "od_mm": "32",
+            "wall_mm": "4.4",
+            "id_mm": "23.2",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.370"
+        },
+        {
+            "part": "RP1640",
+            "od_mm": "40",
+            "wall_mm": "5.5",
+            "id_mm": "29.0",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.578"
+        },
+        {
+            "part": "RP1650",
+            "od_mm": "50",
+            "wall_mm": "6.9",
+            "id_mm": "36.2",
+            "pack": "20 Mtrs",
+            "kg_mtr": "0.906"
+        },
+        {
+            "part": "RP1663",
+            "od_mm": "63",
+            "wall_mm": "8.6",
+            "id_mm": "45.8",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.426"
+        },
+        {
+            "part": "RP1675",
+            "od_mm": "75",
+            "wall_mm": "10.3",
+            "id_mm": "54.4",
+            "pack": "16 Mtrs",
+            "kg_mtr": "2.031"
+        },
+        {
+            "part": "RP1690",
+            "od_mm": "90",
+            "wall_mm": "12.3",
+            "id_mm": "65.4",
+            "pack": "12 Mtrs",
+            "kg_mtr": "2.880"
+        },
+        {
+            "part": "RP16110",
+            "od_mm": "110",
+            "wall_mm": "15.1",
+            "id_mm": "79.8",
+            "pack": "8 Mtrs",
+            "kg_mtr": "4.295"
+        }
+    ],
+    "pn20_sdr6": [
+        {
+            "part": "RP2020",
+            "od_mm": "20",
+            "wall_mm": "3.4",
+            "id_mm": "13.2",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.172"
+        },
+        {
+            "part": "RP2025",
+            "od_mm": "25",
+            "wall_mm": "4.2",
+            "id_mm": "16.6",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.266"
+        },
+        {
+            "part": "RP2032",
+            "od_mm": "32",
+            "wall_mm": "5.4",
+            "id_mm": "21.2",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.432"
+        },
+        {
+            "part": "RP2040",
+            "od_mm": "40",
+            "wall_mm": "6.7",
+            "id_mm": "26.6",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.670"
+        },
+        {
+            "part": "RP2050",
+            "od_mm": "50",
+            "wall_mm": "8.3",
+            "id_mm": "33.4",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.040"
+        },
+        {
+            "part": "RP2063",
+            "od_mm": "63",
+            "wall_mm": "10.5",
+            "id_mm": "42.0",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.645"
+        },
+        {
+            "part": "RP2075",
+            "od_mm": "75",
+            "wall_mm": "12.5",
+            "id_mm": "50.0",
+            "pack": "16 Mtrs",
+            "kg_mtr": "2.340"
+        },
+        {
+            "part": "RP2090",
+            "od_mm": "90",
+            "wall_mm": "15.0",
+            "id_mm": "60.0",
+            "pack": "12 Mtrs",
+            "kg_mtr": "3.360"
+        },
+        {
+            "part": "RP20110",
+            "od_mm": "110",
+            "wall_mm": "18.3",
+            "id_mm": "73.4",
+            "pack": "8 Mtrs",
+            "kg_mtr": "5.008"
+        }
+    ],
+    "pn25_sdr5": [
+        {
+            "part": "RP2520",
+            "od_mm": "20",
+            "wall_mm": "4.1",
+            "id_mm": "11.8",
+            "water_l_mtr": "0.111",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.198"
+        },
+        {
+            "part": "RP2525",
+            "od_mm": "25",
+            "wall_mm": "5.1",
+            "id_mm": "14.8",
+            "water_l_mtr": "0.178",
+            "pack": "100 Mtrs",
+            "kg_mtr": "0.307"
+        },
+        {
+            "part": "RP2532",
+            "od_mm": "32",
+            "wall_mm": "6.5",
+            "id_mm": "19.0",
+            "water_l_mtr": "0.291",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.498"
+        },
+        {
+            "part": "RP2540",
+            "od_mm": "40",
+            "wall_mm": "8.1",
+            "id_mm": "23.8",
+            "water_l_mtr": "0.461",
+            "pack": "40 Mtrs",
+            "kg_mtr": "0.775"
+        },
+        {
+            "part": "RP2550",
+            "od_mm": "50",
+            "wall_mm": "10.1",
+            "id_mm": "29.8",
+            "water_l_mtr": "0.703",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.210"
+        },
+        {
+            "part": "RP2563",
+            "od_mm": "63",
+            "wall_mm": "12.7",
+            "id_mm": "37.6",
+            "water_l_mtr": "1.137",
+            "pack": "20 Mtrs",
+            "kg_mtr": "1.910"
+        },
+        {
+            "part": "RP2575",
+            "od_mm": "75",
+            "wall_mm": "15.1",
+            "id_mm": "44.8",
+            "water_l_mtr": "1.619",
+            "pack": "16 Mtrs",
+            "kg_mtr": "2.701"
+        },
+        {
+            "part": "RP2590",
+            "od_mm": "90",
+            "wall_mm": "18.1",
+            "id_mm": "53.8",
+            "water_l_mtr": "2.336",
+            "pack": "12 Mtrs",
+            "kg_mtr": "3.880"
+        },
+        {
+            "part": "RP25110",
+            "od_mm": "110",
+            "wall_mm": "22.1",
+            "id_mm": "65.8",
+            "water_l_mtr": "2.742",
+            "pack": "8 Mtrs",
+            "kg_mtr": "5.780"
+        }
+    ]
+}

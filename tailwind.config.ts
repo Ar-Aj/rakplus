@@ -14,6 +14,12 @@ const config: Config = {
         "brand-red": "#DD0000",
         "brand-yellow": "#FFCC00",
         "bg-cream": "#F9FAFB",
+        "obsidian": "#070707",
+        "obsidian-light": "#0F0F0F",
+        "obsidian-border": "#1A1A1A",
+        "curtain-text": "#E5E7EB",
+        "curtain-muted": "#9CA3AF",
+        "curtain-accent": "#22C55E",
       },
       fontFamily: {
         sans: ['"Inter"', "system-ui", "sans-serif"],

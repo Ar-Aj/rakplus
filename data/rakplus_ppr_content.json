@@ -1,0 +1,40 @@
+{
+    "shared_content": {
+        "featuresGrid": [
+            "Engineered for a guaranteed service life of 50 years.",
+            "Maximum thermal stability and structural flexibility.",
+            "Zero corrosion and zero scaling compared to traditional metal systems.",
+            "100% virgin PP-R material ensuring pure, non-toxic potable water.",
+            "Industry-leading low thermal conductivity (0.24 W/mK).",
+            "Exceptional noise reduction via damped vibrations and sound absorption."
+        ],
+        "applicationsList": [
+            "Hot and cold potable water transmission in residential, commercial, and high-rise developments.",
+            "High-demand HVAC and compressed air systems.",
+            "Complex pipe networks for swimming pool facilities and rainwater utilization.",
+            "Industrial transport of aggressive fluids, including highly acidic and alkaline chemicals."
+        ]
+    },
+    "unique_content": {
+        "pn10_sdr11": {
+            "title": "RAKPLUS® PP-R Pipes — SDR11 / PN10 (DIN 8077/78)",
+            "shortDescription": "Engineered for superior cold water transmission at 10 bar pressure, manufactured to strict German standards.",
+            "overviewParagraph": "The RAKPLUS® SDR11/PN10 series is the definitive solution for high-volume cold water distribution. Manufactured using premium Polypropylene Random-Copolymer (PP-R), this system delivers unmatched rigidity and compression strength. Certified to DIN 8077/8078 standards, it ensures a flawless, hygienic water supply for the GCC's most demanding residential and commercial infrastructure."
+        },
+        "pn16_sdr74": {
+            "title": "RAKPLUS® PP-R Pipes — SDR7.4 / PN16 (DIN 8077/78)",
+            "shortDescription": "Advanced hot and cold water transmission rated for 16 bar pressure, engineered to German precision.",
+            "overviewParagraph": "The RAKPLUS® SDR7.4/PN16 system provides exceptional thermal stability for both hot and cold water networks. Engineered to withstand continuous operating temperatures up to 70°C, this system utilizes advanced multi-layer co-extrusion technology. It is the premier choice for mixed-use developments requiring absolute reliability and zero-leak molecular fusion."
+        },
+        "pn20_sdr6": {
+            "title": "RAKPLUS® PP-R Pipes — SDR6 / PN20 (DIN 8077/78)",
+            "shortDescription": "High-pressure thermal transmission rated for 20 bar, delivering maximum structural integrity.",
+            "overviewParagraph": "Designed for heavy-duty HVAC and pressurized water systems, the RAKPLUS® SDR6/PN20 series guarantees flawless performance under extreme conditions. With industry-leading impact resistance and a 50-year service life, it prevents energy loss in high-temperature systems while maintaining 100% hygienic water quality across commercial and industrial networks."
+        },
+        "pn25_sdr5": {
+            "title": "RAKPLUS® PP-R Pipes — SDR5 / PN25 (DIN 8077/78)",
+            "shortDescription": "Maximum pressure containment rated for 25 bar, representing the pinnacle of thermoplastic engineering.",
+            "overviewParagraph": "The RAKPLUS® SDR5/PN25 series is the ultimate industrial piping solution. Engineered for maximum pressure containment, this system is virtually indestructible. Built to handle severe fluid transmission, highly aggressive chemicals, and extreme thermal shock, it represents the absolute highest standard of German-engineered PP-R manufacturing in the UAE."
+        }
+    }
+}
