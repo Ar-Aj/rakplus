@@ -18,13 +18,12 @@
  */
 
 import { useRef } from "react";
-import Link from "next/link";
 import LiquidButton from "@/components/ui/LiquidButton";
 import Image from "next/image";
 import CanvasSequence from "@/components/CanvasSequence";
 import CinematicCurtain from "@/components/CinematicCurtain";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
-import { ArrowRight, ShieldCheck, Award, Wrench, Droplets } from "lucide-react";
+import { ShieldCheck, Award, Wrench, Droplets } from "lucide-react";
 
 // ─── CTAs — Red → Yellow ───────────────────────────────────────────────
 function PrimaryCTA({ href, children }: { href: string; children: React.ReactNode }) {

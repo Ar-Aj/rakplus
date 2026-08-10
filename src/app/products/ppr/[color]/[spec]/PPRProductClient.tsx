@@ -16,9 +16,8 @@
  */
 
 import Link from "next/link";
-import LiquidButton from "@/components/ui/LiquidButton";
 import CinematicCurtain from "@/components/CinematicCurtain";
-import { getAdjacentSpecs, VALID_COLORS } from "@/config/pprData";
+import { getAdjacentSpecs } from "@/config/pprData";
 import type { PprSpecConfig } from "@/types/pprTypes";
 import {
   ArrowRight,

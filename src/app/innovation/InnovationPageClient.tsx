@@ -18,11 +18,10 @@
  */
 
 import { useRef } from "react";
-import Link from "next/link";
 import LiquidButton from "@/components/ui/LiquidButton";
 import CanvasSequence from "@/components/CanvasSequence";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
-import { ArrowRight, FlaskConical, Layers, Shield, Cpu } from "lucide-react";
+import { FlaskConical, Layers, Shield, Cpu } from "lucide-react";
 
 // ─── CTAs — Red → Yellow ─────────────────────────────────────────────────
 function PrimaryCTA({ href, children }: { href: string; children: React.ReactNode }) {

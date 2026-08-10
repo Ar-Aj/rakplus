@@ -59,7 +59,6 @@ export function useHUDReveal(containerRef: React.RefObject<HTMLElement | HTMLDiv
 
       // ── 2. 3D Skew Heading Snap ──
       // Headings feel like they're snapping from perspective depth into the plane
-      const perspective = "800px";
       container.querySelectorAll(".hud-skew-heading").forEach((el) => {
         gsap.set(el, {
           rotateX: -18,

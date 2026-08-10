@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
-import LiquidButton from "@/components/ui/LiquidButton";
 
 interface NavLink {
   label: string;
