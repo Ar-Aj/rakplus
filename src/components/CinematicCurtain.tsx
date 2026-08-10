@@ -1,19 +1,18 @@
 "use client";
 
 /**
- * CinematicCurtain — The $50k Theatrical Content Reveal
+ * CinematicCurtain — Phase 22.1 Elite GSAP Reveal
  *
- * Architecture:
- * 1. An obsidian (#070707) block sits below the canvas sequence sections
- * 2. As the user scrolls past the video lock-point, the curtain
- *    translates from 100vh → 0 via GSAP ScrollTrigger
- * 3. Once fully revealed, it unpins and becomes normal document flow
- * 4. Children inside the curtain use IntersectionObserver for
- *    staggered reveal animations
+ * Material: Pristine White Frosted Glass
+ *   bg-white/95 backdrop-blur-2xl rounded-t-[40px]
+ *   shadow-[0_-20px_60px_rgba(0,0,0,0.08)]
  *
- * Integration: Placed as a sibling AFTER the HUD content sections
- * in each page's main container. The canvas stays fixed behind
- * everything, so the curtain naturally covers it as it rises.
+ * Elite GSAP Physics:
+ *   1. H1/H2 — Clip-path y: 100% → 0% (power4.out, 1.2s)
+ *   2. Grid items — Staggered y: 60 → 0, stagger: 0.15
+ *   3. Images — Clip-path polygon wipe reveal
+ *   4. CTAs — scale: 0.95 → 1.05 spring on hover
+ *   5. Parallax — yPercent scrub on scroll
  */
 
 import { useEffect, useRef, type ReactNode } from "react";
@@ -24,7 +23,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface CinematicCurtainProps {
   children: ReactNode;
-  /** Optional unique ID for debugging ScrollTrigger instances */
   id?: string;
 }
 
@@ -35,27 +33,25 @@ export default function CinematicCurtain({
   const curtainRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // ─── GSAP ScrollTrigger: Slide-up reveal ───
+  // ─── 1. Curtain Slide-Up Reveal ───
   useEffect(() => {
     const curtain = curtainRef.current;
     if (!curtain) return;
 
     const ctx = gsap.context(() => {
-      // The curtain starts fully below the viewport via CSS transform
-      // ScrollTrigger animates it upward as the user scrolls into its zone
       gsap.fromTo(
         curtain,
-        { yPercent: 30, opacity: 0.3 },
+        { yPercent: 12, opacity: 0.85 },
         {
           yPercent: 0,
           opacity: 1,
-          ease: "power2.out",
+          ease: "power3.out",
           scrollTrigger: {
             id: `${id}-reveal`,
             trigger: curtain,
-            start: "top bottom",    // Animation begins when top of curtain hits bottom of viewport
-            end: "top 20%",         // Fully revealed when top of curtain reaches 20% from viewport top
-            scrub: 0.6,             // Smooth, cinematic scrub
+            start: "top bottom",
+            end: "top 15%",
+            scrub: 0.8,
           },
         }
       );
@@ -64,46 +60,181 @@ export default function CinematicCurtain({
     return () => ctx.revert();
   }, [id]);
 
-  // ─── IntersectionObserver: Staggered child reveals ───
+  // ─── 2. Elite GSAP Content Reveals ───
   useEffect(() => {
     const content = contentRef.current;
     if (!content) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
+    const ctx = gsap.context(() => {
+
+      // ── A. Clip-Path Heading Reveals ──
+      // Wraps each heading line in overflow-hidden; text slides up from 100%
+      content.querySelectorAll(".gsap-heading").forEach((el) => {
+        // Wrap inner text nodes in a span if not already
+        const inner = el.querySelector(".gsap-heading-inner") ?? el;
+        gsap.set(inner, { y: "100%", opacity: 0 });
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 88%",
+          onEnter: () => {
+            gsap.to(inner, {
+              y: "0%",
+              opacity: 1,
+              duration: 1.2,
+              ease: "power4.out",
+              clearProps: "transform,opacity",
+            });
+          },
+          once: true,
         });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
-    );
+      });
 
-    const children = content.querySelectorAll(".reveal-curtain-child");
-    children.forEach((child) => observer.observe(child));
+      // ── B. Staggered Grid Items (stagger: 0.15) ──
+      const staggerGroups = content.querySelectorAll(".gsap-stagger-group");
+      staggerGroups.forEach((group) => {
+        const items = group.querySelectorAll(".gsap-stagger-item");
+        gsap.set(items, { y: 60, opacity: 0 });
 
-    return () => observer.disconnect();
+        ScrollTrigger.create({
+          trigger: group,
+          start: "top 85%",
+          onEnter: () => {
+            gsap.to(items, {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              stagger: 0.15,
+              clearProps: "transform,opacity",
+            });
+          },
+          once: true,
+        });
+      });
+
+      // ── C. Clip-Path Image Wipe Reveal ──
+      // polygon(0 0, 0 0, 0 100%, 0 100%) → polygon(0 0, 100% 0, 100% 100%, 0 100%)
+      content.querySelectorAll(".gsap-img-wipe").forEach((el) => {
+        gsap.set(el, { clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" });
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 85%",
+          onEnter: () => {
+            gsap.to(el, {
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+              duration: 1.4,
+              ease: "power4.inOut",
+              clearProps: "clipPath",
+            });
+          },
+          once: true,
+        });
+      });
+
+      // ── D. Parallax on Images ──
+      content.querySelectorAll(".gsap-parallax").forEach((el) => {
+        gsap.to(el, {
+          yPercent: -18,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el.parentElement ?? el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        });
+      });
+
+      // ── E. CTA Scale Hover + Viewport Entrance ──
+      content.querySelectorAll(".gsap-cta").forEach((el) => {
+        gsap.set(el, { scale: 0.9, opacity: 0 });
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
+          onEnter: () => {
+            gsap.to(el, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.7,
+              ease: "back.out(1.7)",
+              clearProps: "transform,opacity",
+            });
+          },
+          once: true,
+        });
+
+        // Hover: scale 1.05
+        const scaleUp = () => gsap.to(el, { scale: 1.05, duration: 0.25, ease: "power2.out" });
+        const scaleDown = () => gsap.to(el, { scale: 1, duration: 0.25, ease: "power2.in" });
+        (el as HTMLElement).addEventListener("mouseenter", scaleUp);
+        (el as HTMLElement).addEventListener("mouseleave", scaleDown);
+      });
+
+      // ── F. Stat Counter Animations ──
+      content.querySelectorAll(".gsap-counter").forEach((el) => {
+        const target = parseFloat(el.getAttribute("data-target") ?? "0");
+        const isInt = Number.isInteger(target);
+        const obj = { val: 0 };
+
+        gsap.set(el, { opacity: 0, y: 20 });
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 88%",
+          onEnter: () => {
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
+            gsap.to(obj, {
+              val: target,
+              duration: 2,
+              ease: "power2.out",
+              onUpdate: () => {
+                el.textContent = isInt ? Math.round(obj.val).toString() : obj.val.toFixed(2);
+              },
+            });
+          },
+          once: true,
+        });
+      });
+
+      // ── G. Simple fade-slide fallback for reveal-curtain-child ──
+      content.querySelectorAll(".reveal-curtain-child").forEach((el) => {
+        gsap.set(el, { y: 40, opacity: 0 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
+          onEnter: () => {
+            gsap.to(el, {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+            });
+          },
+          once: true,
+        });
+      });
+
+    }, contentRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <div
       ref={curtainRef}
-      className="curtain-obsidian relative w-full overflow-hidden"
+      className="relative z-20 w-full"
       style={{ willChange: "transform, opacity" }}
     >
-      {/* ─── Top Edge: Gradient fade from transparent to obsidian ─── */}
-      <div
-        className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, #070707 100%)",
-        }}
-      />
-
-      {/* ─── Content Container ─── */}
-      <div ref={contentRef} className="relative z-20">
-        {children}
+      {/* ─── Frosted White Curtain Panel ─── */}
+      <div className="bg-white/95 backdrop-blur-2xl rounded-t-[40px] shadow-[0_-20px_60px_rgba(0,0,0,0.08)] min-h-screen">
+        {/* ─── Content ─── */}
+        <div ref={contentRef} className="relative z-10">
+          {children}
+        </div>
       </div>
     </div>
   );

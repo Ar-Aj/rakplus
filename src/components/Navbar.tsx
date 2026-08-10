@@ -1,18 +1,19 @@
 "use client";
 
 /**
- * Navbar — Fixed glassmorphism navigation bar.
+ * Navbar — Phase 20.2 Clean White Navigation
  *
- * Sits at z-50 above all content including the canvas sequence.
- * Uses backdrop-blur + semi-transparent background for readability
- * over the changing video canvas. Mobile hamburger triggers a
- * full-screen overlay nav.
+ * Minimal, premium navbar designed for white backgrounds.
+ * Pitch-black typography, emerald hover accents, clean borders.
+ * Hides on scroll-down, reappears on scroll-up.
+ * Mobile: Full-screen white overlay with staggered link reveals.
  */
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
+import LiquidButton from "@/components/ui/LiquidButton";
 
 interface NavLink {
   label: string;
@@ -34,13 +35,13 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Track scroll position for glass effect and scroll direction for hiding/showing
+  // Track scroll position for styling and direction for hide/show
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       setIsScrolled(currentScrollY > 50);
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -74,8 +75,8 @@ export default function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
           isScrolled
-            ? "bg-gray-400/50 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5"
-            : "bg-white/5 backdrop-blur-sm border-b border-white/10"
+            ? "bg-white/95 backdrop-blur-xl border-b border-border shadow-sm"
+            : "bg-white/80 backdrop-blur-md border-b border-transparent"
         }`}
       >
         <nav
@@ -93,7 +94,7 @@ export default function Navbar() {
               alt="RAKPLUS Logo"
               width={300}
               height={80}
-              className="h-12 lg:h-16 w-auto object-contain transition-opacity group-hover:opacity-80 py-1"
+              className="h-12 lg:h-16 w-auto object-contain transition-opacity group-hover: py-1"
               priority
             />
           </Link>
@@ -104,11 +105,11 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium text-white/90 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/10 flex items-center gap-1 group"
+                  className="relative px-4 py-2 text-sm font-medium text-ink/80 hover:text-emerald transition-colors duration-200 rounded-lg hover:bg-surface flex items-center gap-1 group"
                 >
                   {link.label}
                   {link.hasDropdown && (
-                    <ChevronDown className="w-3.5 h-3.5 text-white/50 group-hover:text-white/80 transition-transform duration-200 group-hover:translate-y-0.5" />
+                    <ChevronDown className="w-3.5 h-3.5 text-ink/40 group-hover:text-emerald transition-transform duration-200 group-hover:translate-y-0.5" />
                   )}
                 </Link>
               </li>
@@ -119,7 +120,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/contact"
-              className="px-5 py-2.5 bg-brand-green hover:bg-brand-green/90 text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-green/25 hover:-translate-y-0.5"
+              className="px-5 py-2.5 bg-pitch-black hover:bg-emerald text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-emerald/25 hover:-translate-y-0.5"
             >
               Get a Quote
             </Link>
@@ -127,7 +128,7 @@ export default function Navbar() {
 
           {/* ─── Mobile Hamburger ─── */}
           <button
-            className="lg:hidden relative z-10 p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+            className="lg:hidden relative z-10 p-2 text-ink hover:bg-surface rounded-lg transition-colors"
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
@@ -154,7 +155,7 @@ export default function Navbar() {
       >
         {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-brand-charcoal/95 backdrop-blur-2xl"
+          className="absolute inset-0 bg-white/98 backdrop-blur-2xl"
           onClick={() => setIsMobileOpen(false)}
         />
 
@@ -172,7 +173,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setIsMobileOpen(false)}
-                  className={`block w-full text-center py-4 text-2xl font-display font-semibold text-white hover:text-brand-green transition-all duration-300 rounded-xl hover:bg-white/5 ${
+                  className={`block w-full text-center py-4 text-2xl font-sans font-semibold text-ink hover:text-emerald transition-all duration-300 rounded-xl hover:bg-surface ${
                     isMobileOpen
                       ? "translate-y-0 opacity-100"
                       : "translate-y-4 opacity-0"
@@ -185,7 +186,7 @@ export default function Navbar() {
                 >
                   {link.label}
                   {link.hasDropdown && (
-                    <ChevronDown className="inline-block w-5 h-5 ml-1 text-white/50" />
+                    <ChevronDown className="inline-block w-5 h-5 ml-1 text-ink/40" />
                   )}
                 </Link>
               </li>
@@ -208,7 +209,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setIsMobileOpen(false)}
-              className="block w-full text-center py-4 bg-brand-green hover:bg-brand-green/90 text-white text-lg font-semibold rounded-xl transition-all duration-200"
+              className="block w-full text-center py-4 bg-pitch-black hover:bg-emerald text-white text-lg font-semibold rounded-xl transition-all duration-300"
             >
               Get a Quote
             </Link>
@@ -216,7 +217,7 @@ export default function Navbar() {
 
           {/* Mobile brand badge */}
           <p
-            className={`mt-12 text-xs text-white/30 uppercase tracking-[0.3em] transition-all duration-500 ${
+            className={`mt-12 text-xs text-slate uppercase tracking-[0.3em] transition-all duration-500 ${
               isMobileOpen ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: isMobileOpen ? "600ms" : "0ms" }}

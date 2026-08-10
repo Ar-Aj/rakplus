@@ -103,12 +103,12 @@ export default function ProductsPage() {
             <p className="text-xs font-semibold text-brand-green uppercase tracking-[0.3em] mb-4">
               Product Catalog
             </p>
-            <h1 className="font-display tracking-tight text-brand-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]">
+            <h1 className="font-sans tracking-tight text-brand-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]">
               The RAKPLUS
               <br />
               <span className="text-brand-green">Arsenal.</span>
             </h1>
-            <p className="mt-6 text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
+            <p className="mt-6 text-base sm:text-lg text-neutral-950 leading-relaxed max-w-xl">
               11 precision-engineered piping products — manufactured by
               Aquasmart Plastic Industries L.L.C to DIN 8077/8078 and DVS 2207
               German standards. Every product backed by a 50-year guarantee.
@@ -133,15 +133,15 @@ export default function ProductsPage() {
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 lg:mb-12">
                 <div>
                   <h2
-                    className={`font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-charcoal`}
+                    className={`font-sans text-2xl sm:text-3xl font-bold tracking-tight text-brand-charcoal`}
                   >
                     {category.name}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-500 leading-relaxed max-w-lg">
+                  <p className="mt-2 text-sm text-neutral-950 leading-relaxed max-w-lg">
                     {category.description}
                   </p>
                 </div>
-                <span className="text-xs text-gray-400 font-medium uppercase tracking-widest flex-shrink-0">
+                <span className="text-xs text-neutral-950 font-medium uppercase tracking-widest flex-shrink-0">
                   {products.length} product{products.length !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -156,7 +156,7 @@ export default function ProductsPage() {
                   >
                     {/* Product ID */}
                     <div className="mb-8">
-                      <span className="text-[10px] font-mono text-white/25 uppercase tracking-widest">
+                      <span className="text-[10px] font-mono text-white uppercase tracking-widest">
                         #{String(product.id).padStart(2, "0")}
                       </span>
                     </div>
@@ -168,16 +168,16 @@ export default function ProductsPage() {
                       >
                         {product.category}
                       </span>
-                      <h3 className="font-display text-base lg:text-lg font-semibold text-white tracking-tight leading-snug mb-2 group-hover:text-white/90 transition-colors">
+                      <h3 className="font-sans text-base lg:text-lg font-semibold text-white tracking-tight leading-snug mb-2 group-hover:text-white transition-colors">
                         {product.title}
                       </h3>
-                      <p className="text-xs text-white/40 leading-relaxed line-clamp-2 mb-6">
+                      <p className="text-xs text-white leading-relaxed line-clamp-2 mb-6">
                         {product.description}
                       </p>
 
                       {/* Specs peek */}
                       {product.dimensionalTable.length > 0 && (
-                        <p className="text-[10px] text-white/25 font-medium uppercase tracking-widest mb-4">
+                        <p className="text-[10px] text-white font-medium uppercase tracking-widest mb-4">
                           {product.dimensionalTable.length} size
                           {product.dimensionalTable.length !== 1
                             ? "s"
@@ -188,10 +188,10 @@ export default function ProductsPage() {
 
                       {/* CTA row */}
                       <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                        <span className="text-xs font-medium text-white/50 group-hover:text-white/80 transition-colors">
+                        <span className="text-xs font-medium text-white group-hover:text-white transition-colors">
                           View details
                         </span>
-                        <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
                   </Link>
@@ -205,10 +205,10 @@ export default function ProductsPage() {
       {/* ─── Bottom CTA ─── */}
       <section className="py-20 lg:py-28 px-6 lg:px-8 bg-white border-t border-gray-100">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-brand-charcoal tracking-tight">
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold text-brand-charcoal tracking-tight">
             Need a Custom Solution?
           </h2>
-          <p className="mt-4 text-base text-gray-500 leading-relaxed max-w-lg mx-auto">
+          <p className="mt-4 text-base text-neutral-950 leading-relaxed max-w-lg mx-auto">
             Our engineering team at Aquasmart Plastic Industries can help
             specify the exact pipe and fitting configuration for your project.
           </p>

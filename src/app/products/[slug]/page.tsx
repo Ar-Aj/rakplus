@@ -141,7 +141,7 @@ export default function ProductPage({ params }: PageProps) {
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 text-sm text-gray-500 mb-8"
+            className="flex items-center gap-2 text-sm text-neutral-950 mb-8"
             aria-label="Breadcrumb"
           >
             <Link
@@ -150,14 +150,14 @@ export default function ProductPage({ params }: PageProps) {
             >
               Home
             </Link>
-            <span className="text-gray-300">/</span>
+            <span className="text-neutral-950">/</span>
             <Link
               href="/products"
               className="hover:text-brand-charcoal transition-colors"
             >
               Products
             </Link>
-            <span className="text-gray-300">/</span>
+            <span className="text-neutral-950">/</span>
             <span className="text-brand-charcoal font-medium truncate max-w-[200px]">
               {product.title}
             </span>
@@ -177,10 +177,10 @@ export default function ProductPage({ params }: PageProps) {
                       {product.category}
                     </span>
                   </div>
-                  <p className="text-white/30 text-sm font-medium uppercase tracking-[0.2em]">
+                  <p className="text-white text-sm font-medium uppercase tracking-[0.2em]">
                     3D Product View
                   </p>
-                  <p className="text-white/15 text-xs mt-2 tracking-wide">
+                  <p className="text-white text-xs mt-2 tracking-wide">
                     Coming Soon
                   </p>
                 </div>
@@ -188,7 +188,7 @@ export default function ProductPage({ params }: PageProps) {
 
               {/* Product ID badge */}
               <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-                <span className="text-xs font-mono text-white/60">
+                <span className="text-xs font-mono text-white">
                   ID #{String(product.id).padStart(2, "0")}
                 </span>
               </div>
@@ -206,12 +206,12 @@ export default function ProductPage({ params }: PageProps) {
               </div>
 
               {/* Title */}
-              <h1 className="font-display tracking-tight text-brand-charcoal text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6">
+              <h1 className="font-sans tracking-tight text-brand-charcoal text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6">
                 {product.title}
               </h1>
 
               {/* Description */}
-              <p className="text-gray-600 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
+              <p className="text-neutral-950 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
                 {product.description}
               </p>
 
@@ -224,7 +224,7 @@ export default function ProductPage({ params }: PageProps) {
                       <Thermometer className="w-5 h-5 text-brand-red" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-neutral-950 uppercase tracking-wider mb-1">
                         Temperature
                       </p>
                       <p className="text-sm text-brand-charcoal font-medium leading-snug">
@@ -241,7 +241,7 @@ export default function ProductPage({ params }: PageProps) {
                       <Shield className="w-5 h-5 text-brand-yellow" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-neutral-950 uppercase tracking-wider mb-1">
                         Certifications
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -295,11 +295,11 @@ export default function ProductPage({ params }: PageProps) {
                   >
                     <Award className={`w-5 h-5 ${accent.text}`} />
                   </div>
-                  <h2 className="font-display text-2xl font-bold text-brand-charcoal tracking-tight">
+                  <h2 className="font-sans text-2xl font-bold text-brand-charcoal tracking-tight">
                     Key Features
                   </h2>
                 </div>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-neutral-950 text-sm leading-relaxed">
                   Engineering advantages of the {product.title}.
                 </p>
               </div>
@@ -342,11 +342,11 @@ export default function ProductPage({ params }: PageProps) {
                 <div className="w-10 h-10 rounded-xl bg-brand-charcoal/10 flex items-center justify-center">
                   <Ruler className="w-5 h-5 text-brand-charcoal" />
                 </div>
-                <h2 className="font-display text-2xl font-bold text-brand-charcoal tracking-tight">
+                <h2 className="font-sans text-2xl font-bold text-brand-charcoal tracking-tight">
                   Specifications
                 </h2>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p className="text-neutral-950 text-sm leading-relaxed">
                 Technical data for the {product.category} range, sourced from
                 the RAKPLUS catalog.
               </p>
@@ -370,7 +370,7 @@ export default function ProductPage({ params }: PageProps) {
                 <div className="mt-6 p-4 rounded-2xl bg-white border border-brand-yellow/20">
                   <div className="flex items-center gap-2 mb-2">
                     <Thermometer className="w-4 h-4 text-brand-yellow" />
-                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-neutral-950 uppercase tracking-wider">
                       Operating Temperature
                     </span>
                   </div>
@@ -392,19 +392,19 @@ export default function ProductPage({ params }: PageProps) {
                         <tr className="bg-brand-charcoal text-white">
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/80"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
                           >
                             Outer Diameter (mm)
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/80"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
                           >
                             Wall Thickness (mm)
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/80"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
                           >
                             Weight
                           </th>
@@ -426,10 +426,10 @@ export default function ProductPage({ params }: PageProps) {
                               </span>{" "}
                               {row.outerDiameter}
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">
+                            <td className="px-6 py-4 text-sm text-neutral-950">
                               {row.wallThickness}
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">
+                            <td className="px-6 py-4 text-sm text-neutral-950">
                               {row.weight}
                             </td>
                           </tr>
@@ -440,7 +440,7 @@ export default function ProductPage({ params }: PageProps) {
 
                   {/* Table footer */}
                   <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
-                    <p className="text-[11px] text-gray-400 tracking-wide">
+                    <p className="text-[11px] text-neutral-950 tracking-wide">
                       {product.dimensionalTable.length} size
                       {product.dimensionalTable.length !== 1 ? "s" : ""}{" "}
                       available · Data sourced from RAKPLUS product catalog
@@ -450,11 +450,11 @@ export default function ProductPage({ params }: PageProps) {
               ) : (
                 /* Graceful fallback when no dimensional table exists */
                 <div className="flex flex-col items-center justify-center py-16 rounded-2xl bg-white border border-dashed border-gray-200">
-                  <Ruler className="w-8 h-8 text-gray-300 mb-3" />
-                  <p className="text-sm text-gray-400 font-medium">
+                  <Ruler className="w-8 h-8 text-neutral-950 mb-3" />
+                  <p className="text-sm text-neutral-950 font-medium">
                     Dimensional data not available for this product.
                   </p>
-                  <p className="text-xs text-gray-300 mt-1">
+                  <p className="text-xs text-neutral-950 mt-1">
                     Contact us for detailed specifications.
                   </p>
                 </div>
@@ -475,9 +475,9 @@ export default function ProductPage({ params }: PageProps) {
               href={`/products/${prev.slug}`}
               className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
             >
-              <ArrowLeft className="w-4 h-4 text-gray-400 group-hover:text-brand-green transition-colors group-hover:-translate-x-1 duration-200" />
+              <ArrowLeft className="w-4 h-4 text-neutral-950 group-hover:text-brand-green transition-colors group-hover:-translate-x-1 duration-200" />
               <div className="text-right">
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+                <p className="text-[10px] text-neutral-950 uppercase tracking-widest font-medium">
                   Previous
                 </p>
                 <p className="text-sm text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">
@@ -491,7 +491,7 @@ export default function ProductPage({ params }: PageProps) {
 
           <Link
             href="/products"
-            className="text-xs text-gray-400 uppercase tracking-[0.2em] font-medium hover:text-brand-charcoal transition-colors"
+            className="text-xs text-neutral-950 uppercase tracking-[0.2em] font-medium hover:text-brand-charcoal transition-colors"
           >
             All Products
           </Link>
@@ -502,14 +502,14 @@ export default function ProductPage({ params }: PageProps) {
               className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
             >
               <div>
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+                <p className="text-[10px] text-neutral-950 uppercase tracking-widest font-medium">
                   Next
                 </p>
                 <p className="text-sm text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">
                   {next.title}
                 </p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-brand-green transition-colors group-hover:translate-x-1 duration-200" />
+              <ArrowRight className="w-4 h-4 text-neutral-950 group-hover:text-brand-green transition-colors group-hover:translate-x-1 duration-200" />
             </Link>
           ) : (
             <div />

@@ -105,7 +105,7 @@ export default function SustainabilityPage() {
             <p className="text-xs font-bold text-brand-green uppercase tracking-[0.3em] mb-6 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
               Sustainability
             </p>
-            <h1 className="font-display tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.9]">
+            <h1 className="font-sans tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.9]">
               100% Safe.
               <br />
               <span className="text-brand-green drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
@@ -114,17 +114,17 @@ export default function SustainabilityPage() {
               <span className="text-red-600">.</span>
             </h1>
 
-            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white/95 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-2xl mx-auto md:leading-relaxed">
+            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-2xl mx-auto md:leading-relaxed">
               100% safe, hygienic, and non-toxic potable water systems.
               DIN 8077/8078 certified for drinking water transmission.
             </p>
 
             <div className="mt-10 sm:mt-14 flex flex-col items-center gap-2 animate-bounce">
-              <span className="text-white/80 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+              <span className="text-white text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                 Scroll to explore
               </span>
               <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 text-white/80 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -155,7 +155,7 @@ export default function SustainabilityPage() {
               </span>
             </div>
 
-            <h2 className="font-display tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95]">
+            <h2 className="font-sans tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95]">
               Zero Scaling.
               <br />
               <span className="text-brand-yellow drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
@@ -164,7 +164,7 @@ export default function SustainabilityPage() {
               <span className="text-red-600">.</span>
             </h2>
 
-            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white/95 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto md:leading-relaxed">
+            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto md:leading-relaxed">
               Zero scaling, zero corrosion. Guaranteed service life of over
               50 years. PP-R is chemically inert — no biofilm formation,
               no galvanic corrosion, consistent flow rates decade after decade.
@@ -177,10 +177,10 @@ export default function SustainabilityPage() {
                 { value: "50yr", label: "Flow Life" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <span className="block text-2xl sm:text-3xl font-extrabold font-display text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] tabular-nums">
+                  <span className="block text-2xl sm:text-3xl font-extrabold font-sans text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] tabular-nums">
                     {stat.value}
                   </span>
-                  <span className="text-[10px] sm:text-xs text-white/80 font-bold uppercase tracking-wider drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]">
+                  <span className="text-[10px] sm:text-xs text-white font-bold uppercase tracking-wider drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]">
                     {stat.label}
                   </span>
                 </div>
@@ -204,7 +204,7 @@ export default function SustainabilityPage() {
               </span>
             </div>
 
-            <h2 className="font-display tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95]">
+            <h2 className="font-sans tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95]">
               Eco-Friendly
               <br />
               <span className="text-brand-green drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
@@ -213,7 +213,7 @@ export default function SustainabilityPage() {
               <span className="text-red-600">.</span>
             </h2>
 
-            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white/95 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto md:leading-relaxed">
+            <p className="mt-6 sm:mt-8 text-lg md:text-xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto md:leading-relaxed">
               Environmentally friendly manufacturing. Fully recyclable PP-R
               polymers. Lower energy consumption than copper, steel, or iron
               alternatives — with zero toxic byproducts.
@@ -246,7 +246,7 @@ export default function SustainabilityPage() {
               </span>
             </div>
 
-            <h2 className="font-display tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95]">
+            <h2 className="font-sans tracking-tight text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95]">
               Certified
               <br />
               <span className="text-brand-yellow drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
@@ -255,7 +255,7 @@ export default function SustainabilityPage() {
               <span className="text-red-600">.</span>
             </h2>
 
-            <p className="mt-6 text-base sm:text-lg text-white/95 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto leading-relaxed">
+            <p className="mt-6 text-base sm:text-lg text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] font-bold max-w-xl mx-auto leading-relaxed">
               Proudly holding ISO 9001:2015 quality management and
               ISO 14001:2015 environmental management certifications.
               Every product is tested, traceable, and guaranteed.
@@ -284,10 +284,10 @@ export default function SustainabilityPage() {
         <article className="relative z-10 bg-transparent py-20 lg:py-28 px-6 lg:px-8">
           <div className="relative z-10 max-w-7xl mx-auto reveal-section">
             <div className="max-w-2xl mb-16">
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
+              <h2 className="font-sans text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
                 Engineering a Sustainable Pipeline<span className="text-red-600">.</span>
               </h2>
-              <p className="text-white/95 leading-relaxed font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+              <p className="text-white leading-relaxed font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                 RAKPLUS PP-R pipes are environment-friendly as they take less
                 energy to manufacture than metal alternatives. From raw material
                 to end-of-life recyclability, every stage of the RAKPLUS
@@ -307,10 +307,10 @@ export default function SustainabilityPage() {
                   >
                     <pillar.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="font-display text-lg font-extrabold text-white tracking-tight mb-3 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+                  <h3 className="font-sans text-lg font-extrabold text-white tracking-tight mb-3 drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                     {pillar.title}
                   </h3>
-                  <p className="text-sm text-white/90 leading-relaxed font-bold drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                  <p className="text-sm text-white leading-relaxed font-bold drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                     {pillar.description}
                   </p>
                 </section>
@@ -324,24 +324,24 @@ export default function SustainabilityPage() {
           <div className="relative z-10 max-w-7xl mx-auto reveal-section">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <div>
-                <h2 className="font-display text-3xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
+                <h2 className="font-sans text-3xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
                   Safe for Drinking Water<span className="text-red-600">.</span>
                 </h2>
-                <p className="text-white/95 leading-relaxed mb-4 font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+                <p className="text-white leading-relaxed mb-4 font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                   Water quality is not negotiable. RAKPLUS PP-R pipes are
                   certified under DIN 8077/8078 specifically for potable drinking
                   water transmission — meaning they have been independently
                   tested and verified to introduce zero contaminants into the
                   water supply.
                 </p>
-                <p className="text-white/95 leading-relaxed mb-4 font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+                <p className="text-white leading-relaxed mb-4 font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                   The smooth, chemically inert inner surface of PP-R prevents
                   biofilm formation, mineral scaling, and particulate buildup
                   that plague metal piping systems. This translates to
                   consistently clean water and maintained flow rates throughout
                   the entire 50-year service life.
                 </p>
-                <p className="text-white/95 leading-relaxed font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+                <p className="text-white leading-relaxed font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
                   For projects where water hygiene is critical — hospitals,
                   schools, food processing facilities, and residential
                   developments — RAKPLUS delivers the assurance of
@@ -352,7 +352,7 @@ export default function SustainabilityPage() {
 
               <div className="flex flex-col justify-center">
                 <div className="p-8 lg:p-10 rounded-2xl bg-white/5 backdrop-blur-md border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                  <h3 className="font-display text-2xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
+                  <h3 className="font-sans text-2xl font-extrabold text-white tracking-tight mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
                     Environmental Comparison
                   </h3>
                   <div className="space-y-4">
@@ -387,25 +387,25 @@ export default function SustainabilityPage() {
                         key={row.label}
                         className="grid grid-cols-3 gap-4 py-3 border-b border-white/10 last:border-b-0"
                       >
-                        <span className="text-sm font-bold text-white/95 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                        <span className="text-sm font-bold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                           {row.label}
                         </span>
                         <span className="text-sm text-brand-green font-extrabold text-center drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                           {row.ppr}
                         </span>
-                        <span className="text-sm text-white/60 font-bold text-center">
+                        <span className="text-sm text-white font-bold text-center">
                           {row.metal}
                         </span>
                       </div>
                     ))}
                     <div className="grid grid-cols-3 gap-4 pt-2">
-                      <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest">
+                      <span className="text-[10px] text-white font-bold uppercase tracking-widest">
                         Property
                       </span>
                       <span className="text-[10px] text-brand-green font-extrabold uppercase tracking-widest text-center">
                         RAKPLUS PP-R
                       </span>
-                      <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest text-center">
+                      <span className="text-[10px] text-white font-bold uppercase tracking-widest text-center">
                         Metal Pipe
                       </span>
                     </div>
@@ -419,10 +419,10 @@ export default function SustainabilityPage() {
         {/* ─── CTA (transparent) ─── */}
         <section className="relative py-20 px-6 lg:px-8 bg-transparent">
           <div className="relative z-10 max-w-3xl mx-auto text-center reveal-section">
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
+            <h2 className="font-sans text-3xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
               Build with Confidence<span className="text-red-600">.</span>
             </h2>
-            <p className="mt-4 text-white/95 leading-relaxed max-w-lg mx-auto font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
+            <p className="mt-4 text-white leading-relaxed max-w-lg mx-auto font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)]">
               Choose a piping system that protects both your project and the
               environment — for the next 50 years.
             </p>

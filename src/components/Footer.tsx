@@ -1,9 +1,9 @@
 /**
- * Footer — Corporate footer with real contact data from the RAKPLUS submittal.
+ * Footer — Phase 20.4 Pitch-Black Corporate Footer
  *
- * Uses bg-brand-charcoal with white text for an authoritative, heavy feel.
- * Contact data extracted directly from the technical submittal JSON:
- * Al Haseeb Trading Co L.L.C, PO Box 21842, Sharjah - U.A.E
+ * Solid pitch-black background (intentional dark block — not transparent).
+ * Clean 4-column grid with real contact data from the RAKPLUS submittal.
+ * Contact data: Al Haseeb Trading Co L.L.C, PO Box 21842, Sharjah - U.A.E
  */
 
 import Link from "next/link";
@@ -46,11 +46,11 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative bg-black/50 backdrop-blur-lg text-white border-t border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+      className="relative bg-pitch-black text-white"
       aria-label="Site footer"
     >
       {/* ─── Top accent bar ─── */}
-      <div className="h-1 bg-gradient-to-r from-brand-green via-brand-yellow to-brand-red" />
+      <div className="h-px bg-gradient-to-r from-emerald via-emerald/40 to-transparent" />
 
       {/* ─── Main footer content ─── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
@@ -63,19 +63,19 @@ export default function Footer() {
                 alt="RAKPLUS Logo"
                 width={300}
                 height={80}
-                className="h-16 lg:h-20 w-auto object-contain transition-opacity group-hover:opacity-80"
+                className="h-16 lg:h-20 w-auto object-contain transition-opacity group-hover:"
               />
             </Link>
 
-            <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
+            <p className="text-sm text-white leading-relaxed mb-6 max-w-xs">
               Reliable PP-R &amp; PEX piping systems for hot &amp; cold water
               transmission. Made in UAE to German DIN standards.
             </p>
 
             {/* Contact Info — extracted from submittal */}
             <address className="not-italic space-y-3">
-              <div className="flex items-start gap-3 text-sm text-white/60">
-                <MapPin className="w-4 h-4 text-brand-green mt-0.5 flex-shrink-0" />
+              <div className="flex items-start gap-3 text-sm text-white">
+                <MapPin className="w-4 h-4 text-emerald mt-0.5 flex-shrink-0" />
                 <span>
                   Al Haseeb Trading Co L.L.C
                   <br />
@@ -86,16 +86,16 @@ export default function Footer() {
               </div>
               <a
                 href="tel:+97165612877"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-brand-green transition-colors"
+                className="flex items-center gap-3 text-sm text-white hover:text-emerald transition-colors"
               >
-                <Phone className="w-4 h-4 text-brand-green flex-shrink-0" />
+                <Phone className="w-4 h-4 text-emerald flex-shrink-0" />
                 +971 6 5612877
               </a>
               <a
                 href="mailto:info@rakplus.com"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-brand-green transition-colors"
+                className="flex items-center gap-3 text-sm text-white hover:text-emerald transition-colors"
               >
-                <Mail className="w-4 h-4 text-brand-green flex-shrink-0" />
+                <Mail className="w-4 h-4 text-emerald flex-shrink-0" />
                 info@rakplus.com
               </a>
             </address>
@@ -103,7 +103,7 @@ export default function Footer() {
 
           {/* Column 2: Products (split into 2 sub-columns) */}
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-6">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-6">
               Products
             </h3>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2">
@@ -111,7 +111,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-white/60 hover:text-brand-green transition-colors duration-200 py-1"
+                  className="text-sm text-white hover:text-emerald transition-colors duration-200 py-1"
                 >
                   {link.label}
                 </Link>
@@ -121,7 +121,7 @@ export default function Footer() {
 
           {/* Column 3: Company + Certifications */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-6">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-6">
               Company
             </h3>
             <ul className="space-y-2 mb-8">
@@ -129,7 +129,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 hover:text-brand-green transition-colors duration-200"
+                    className="text-sm text-white hover:text-emerald transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -137,14 +137,14 @@ export default function Footer() {
               ))}
             </ul>
 
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-4">
               Certifications
             </h3>
             <div className="flex flex-wrap gap-2">
               {CERTIFICATIONS.map((cert) => (
                 <span
                   key={cert}
-                  className="inline-block px-2.5 py-1 text-[10px] font-medium text-white/50 border border-white/10 rounded-md uppercase tracking-wider"
+                  className="inline-block px-2.5 py-1 text-[10px] font-medium text-white border border-white/10 rounded-md uppercase tracking-wider"
                 >
                   {cert}
                 </span>
@@ -157,35 +157,35 @@ export default function Footer() {
       {/* ─── Bottom bar ─── */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-white">
             &copy; {currentYear} RakPlus by Aquasmart Plastic Industries L.L.C.
             All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              className="text-xs text-white hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              className="text-xs text-white hover:text-white transition-colors"
             >
               Terms of Service
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-white/20 uppercase tracking-widest">
+            <span className="text-[10px] text-white uppercase tracking-widest">
               Made in UAE
             </span>
             {/* German flag colors micro-accent */}
             <div className="flex gap-0.5">
-              <div className="w-3 h-1.5 bg-brand-charcoal border border-white/20 rounded-sm" />
-              <div className="w-3 h-1.5 bg-brand-red rounded-sm" />
+              <div className="w-3 h-1.5 bg-pitch-black border border-white/20 rounded-sm" />
+              <div className="w-3 h-1.5 bg-crimson rounded-sm" />
               <div className="w-3 h-1.5 bg-brand-yellow rounded-sm" />
             </div>
-            <span className="text-[10px] text-white/20 uppercase tracking-widest">
+            <span className="text-[10px] text-white uppercase tracking-widest">
               German Standard
             </span>
           </div>

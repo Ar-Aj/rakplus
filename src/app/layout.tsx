@@ -47,15 +47,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-bg-cream text-brand-charcoal font-sans antialiased">
+      <body className="bg-studio-white text-ink font-sans antialiased">
         <SmoothScroll>
           {/* Fixed navigation — z-50 above everything */}
           <Navbar />
 
-          {/* Semantic main wrapper */}
-          <main id="main-content" className="relative">
+          {/* Page content — individual pages own their <main> tags */}
+          <div id="main-content" className="relative">
             {children}
-          </main>
+          </div>
 
           {/* Corporate footer */}
           <Footer />

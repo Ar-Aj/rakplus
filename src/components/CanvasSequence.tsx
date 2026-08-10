@@ -74,6 +74,9 @@ interface CanvasSequenceProps {
   mobilePath: string;
   /** Exact number of frames in the sequence */
   frameCount: number;
+  desktopFrameCount?: number;
+  tabletFrameCount?: number;
+  mobileFrameCount?: number;
   /**
    * Optional ref to a specific DOM element to use as the ScrollTrigger.
    * When provided, this takes priority over useDocumentScroll.
@@ -96,6 +99,9 @@ export default function CanvasSequence({
   tabletPath,
   mobilePath,
   frameCount,
+  desktopFrameCount,
+  tabletFrameCount,
+  mobileFrameCount,
   scrollTriggerRef,
   useDocumentScroll = false,
   className,
@@ -111,13 +117,13 @@ export default function CanvasSequence({
     if (!ctx) return;
 
     // ─── 1. Device Detection (3-tier) ───
-    const getBasePath = () => {
-      if (window.innerWidth < TABLET_BREAKPOINT)  return mobilePath;
-      if (window.innerWidth < DESKTOP_BREAKPOINT) return tabletPath ?? desktopPath;
-      return desktopPath;
+    const getActiveTierData = () => {
+      if (window.innerWidth < TABLET_BREAKPOINT) return { path: mobilePath, count: mobileFrameCount ?? frameCount };
+      if (window.innerWidth < DESKTOP_BREAKPOINT) return { path: tabletPath ?? desktopPath, count: tabletFrameCount ?? desktopFrameCount ?? frameCount };
+      return { path: desktopPath, count: desktopFrameCount ?? frameCount };
     };
 
-    let basePath = getBasePath();
+    let { path: basePath, count: currentFrameCount } = getActiveTierData();
     // Track which tier we're in so resize can detect a crossing
     const getTier = () =>
       window.innerWidth < TABLET_BREAKPOINT  ? "mobile"
@@ -126,7 +132,7 @@ export default function CanvasSequence({
     let currentTier = getTier();
 
     console.log(
-      `[CanvasSequence] ${window.innerWidth}px → ${basePath} (${frameCount} frames, docScroll=${useDocumentScroll})`
+      `[CanvasSequence] ${window.innerWidth}px → ${basePath} (${currentFrameCount} frames, docScroll=${useDocumentScroll})`
     );
 
     // ─── 2. Size Canvas ───
@@ -141,7 +147,7 @@ export default function CanvasSequence({
     sizeCanvas();
 
     // ─── 3. Frame Storage ───
-    const framesRef = { current: new Array<HTMLImageElement | null>(frameCount) };
+    const framesRef = { current: new Array<HTMLImageElement | null>(currentFrameCount) };
     let currentIndex = 0;
     // GSAP context — rebuilt on breakpoint swap
     let gsapCtx = gsap.context(() => {}, containerRef.current ?? document.body);
@@ -155,7 +161,7 @@ export default function CanvasSequence({
       });
 
       // Reset frame array and index for the new path
-      framesRef.current = new Array(frameCount);
+      framesRef.current = new Array(currentFrameCount);
       currentIndex = 0;
 
       const firstImage = new Image();
@@ -181,7 +187,7 @@ export default function CanvasSequence({
     function loadRemainingFrames(path: string) {
       let loaded = 1;
 
-      for (let i = 2; i <= frameCount; i++) {
+      for (let i = 2; i <= currentFrameCount; i++) {
         const img = new Image();
         img.decoding = "async";
         const src = frameSrc(path, i);
@@ -190,14 +196,14 @@ export default function CanvasSequence({
         img.onload = () => {
           framesRef.current[i - 1] = img;
           loaded++;
-          if (loaded === frameCount) onAllFramesLoaded();
+          if (loaded === currentFrameCount) onAllFramesLoaded();
         };
 
         img.onerror = () => {
           console.warn(`[CanvasSequence] ⚠ Failed: "${src}"`);
           framesRef.current[i - 1] = new Image();
           loaded++;
-          if (loaded === frameCount) onAllFramesLoaded();
+          if (loaded === currentFrameCount) onAllFramesLoaded();
         };
       }
     }
@@ -205,7 +211,7 @@ export default function CanvasSequence({
     // ─── 6. Init GSAP After All Frames Load ───
     function onAllFramesLoaded() {
       console.log(
-        `[CanvasSequence] ✓ All ${frameCount} frames loaded. Initializing GSAP.`
+        `[CanvasSequence] ✓ All ${currentFrameCount} frames loaded. Initializing GSAP.`
       );
 
       // Tear down previous GSAP context before rebuilding
@@ -235,7 +241,7 @@ export default function CanvasSequence({
         gsap.to(
           { frame: 0 },
           {
-            frame: frameCount - 1,
+            frame: currentFrameCount - 1,
             ease: "none",
             scrollTrigger: {
               id: "canvas-sequence",
@@ -245,8 +251,8 @@ export default function CanvasSequence({
               scrub: 0.1, // tightened for maximum sensitivity (Phase 13.3)
               onUpdate: (self) => {
                 const idx = Math.min(
-                  frameCount - 1,
-                  Math.max(0, Math.round(self.progress * (frameCount - 1)))
+                  currentFrameCount - 1,
+                  Math.max(0, Math.round(self.progress * (currentFrameCount - 1)))
                 );
                 if (idx !== currentIndex) {
                   currentIndex = idx;
@@ -287,7 +293,9 @@ export default function CanvasSequence({
       // Tier changed → swap frame set entirely
       if (newTier !== currentTier) {
         currentTier = newTier;
-        basePath = getBasePath();
+        const tierData = getActiveTierData();
+        basePath = tierData.path;
+        currentFrameCount = tierData.count;
         console.log(`[CanvasSequence] Tier swap → ${newTier} (${basePath})`);
         loadSequence(basePath);
         return;
@@ -310,7 +318,7 @@ export default function CanvasSequence({
       window.removeEventListener("resize", handleResize);
       gsapCtx.revert();
     };
-  }, [desktopPath, tabletPath, mobilePath, frameCount, useDocumentScroll, scrollTriggerRef]);
+  }, [desktopPath, tabletPath, mobilePath, frameCount, desktopFrameCount, tabletFrameCount, mobileFrameCount, useDocumentScroll, scrollTriggerRef]);
 
   return (
     <div

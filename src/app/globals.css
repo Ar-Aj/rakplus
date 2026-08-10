@@ -6,14 +6,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap");
 
-/* ─── Base Layer: Typography & Accessibility ─── */
+/* ═══════════════════════════════════════════════════════
+   BASE LAYER — Typography, Accessibility & Defaults
+   Design System: Studio White / Pitch Black / Emerald
+   ═══════════════════════════════════════════════════════ */
+
 @layer base {
   html {
     @apply scroll-smooth;
   }
 
   body {
-    @apply bg-bg-cream text-brand-charcoal font-sans antialiased;
+    @apply bg-studio-white text-ink font-sans antialiased;
     line-height: 1.625; /* WCAG-exceeding leading-relaxed */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -76,10 +80,60 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   CINEMATIC CURTAIN — Deep Obsidian Content Blocks
+   HERO VIDEO OVERLAY — Contained gradient mask
+   Only used inside hero sections over canvas sequences.
    ═══════════════════════════════════════════════════════ */
 
-/* Obsidian base with ultra-subtle noise grain texture */
+.hero-gradient-mask {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.45) 40%,
+    rgba(0, 0, 0, 0.65) 70%,
+    rgba(0, 0, 0, 0.80) 100%
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   GSAP ANIMATION HELPERS
+   ═══════════════════════════════════════════════════════ */
+
+/* Clip-path heading reveal — text slides up from 100% inside overflow:hidden */
+.gsap-heading {
+  overflow: hidden;
+}
+
+.gsap-heading-inner {
+  display: block;
+  /* GSAP sets y: '100%' on this element, so must be block/flex */
+}
+
+/* Initial invisible state for stagger items — GSAP sets these, not CSS */
+/* Do NOT set opacity:0 here; GSAP's gsap.set() handles that to avoid flash */
+
+/* Stagger group — just a structural marker */
+.gsap-stagger-group { }
+.gsap-stagger-item  { }
+
+/* Legacy section reveals — kept for pages still using IntersectionObserver */
+.reveal-section {
+  opacity: 1; /* HUD sections: always visible over video */
+}
+
+.reveal-curtain-child {
+  /* GSAP sets opacity:0 + y:40 on mount. CSS here is just structural. */
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════════════════
+   CINEMATIC CURTAIN — Legacy (kept during migration)
+   Will be deprecated in Phase 20.5
+   ═══════════════════════════════════════════════════════ */
+
 .curtain-obsidian {
   background-color: #070707;
   position: relative;
@@ -101,7 +155,6 @@
   z-index: 1;
 }
 
-/* ─── Curtain Typography ─── */
 .curtain-heading {
   font-family: "Clash Display", "Inter", system-ui, sans-serif;
   letter-spacing: -0.04em;
@@ -120,14 +173,12 @@
   color: #9CA3AF;
 }
 
-/* ─── Stat Numerals ─── */
 .curtain-stat {
   font-variant-numeric: tabular-nums;
   font-family: "Clash Display", "Inter", system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
-/* ─── Asymmetrical Stagger Grid ─── */
 .stagger-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -154,7 +205,6 @@
   }
 }
 
-/* ─── Reveal Animation for Curtain Children ─── */
 .reveal-curtain-child {
   opacity: 0;
   transform: translateY(40px);
@@ -167,13 +217,6 @@
   transform: translateY(0);
 }
 
-/* Stagger delay utilities */
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.35s; }
-.reveal-delay-4 { transition-delay: 0.5s; }
-
-/* ─── Floating parallax shimmer on 3D assets ─── */
 @keyframes float-parallax {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
@@ -189,7 +232,6 @@
   }
 }
 
-/* ─── Accent Line ─── */
 .curtain-accent-line {
   width: 80px;
   height: 3px;
@@ -197,7 +239,6 @@
   border-radius: 2px;
 }
 
-/* ─── Certification Badge (dark mode) ─── */
 .curtain-badge {
   display: inline-flex;
   align-items: center;
@@ -219,10 +260,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   PPR PRODUCT PAGES — Curtain Reveal Dark Mode Styles
+   PPR PRODUCT PAGES — Legacy (kept during migration)
    ═══════════════════════════════════════════════════════ */
 
-/* ─── Glowing Bullet Points ─── */
 .ppr-glow-bullet {
   position: relative;
   display: flex;
@@ -249,7 +289,6 @@ li:hover .ppr-glow-bullet::before {
   filter: blur(6px);
 }
 
-/* ─── Frosted Glass Table Header ─── */
 .ppr-table-header {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -257,7 +296,6 @@ li:hover .ppr-glow-bullet::before {
   border-bottom: 1px solid rgba(34, 197, 94, 0.15);
 }
 
-/* ─── Hero Background Animated Pulse ─── */
 @keyframes ppr-pulse {
   0%, 100% {
     background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
@@ -277,4 +315,3 @@ li:hover .ppr-glow-bullet::before {
     background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
   }
 }
-
