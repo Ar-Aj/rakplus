@@ -117,6 +117,9 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[5vh] md:min-h-[10vh] pointer-events-none" aria-hidden="true" />
+
         {/* ═══ SECTION 2 — German Engineering ═══ */}
         <section
           id="engineering-section"
@@ -179,6 +182,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[5vh] md:min-h-[10vh] pointer-events-none" aria-hidden="true" />
 
         {/* ═══ SECTION 3 — GCC Trust ═══ */}
         <section
@@ -243,6 +249,9 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[5vh] md:min-h-[10vh] pointer-events-none" aria-hidden="true" />
+
         {/* ═══ SECTION 4 — Potable Water CTA ═══ */}
         <section
           id="contact-section"
@@ -282,6 +291,10 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ═══ SCROLL BUFFER INJECTION ═══ */}
+        {/* Forces extra scroll distance so GSAP sequence hits max frames before curtain overlay */}
+        <div className="w-full h-[50vh] md:h-[80vh] bg-transparent pointer-events-none" aria-hidden="true" />
 
         {/* ═══════════════════════════════════════════════════════
             CINEMATIC CURTAIN — Pristine White Frosted Glass
