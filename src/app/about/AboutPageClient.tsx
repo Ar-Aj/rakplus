@@ -58,25 +58,32 @@ function SpecPill({ label }: { label: string }) {
 // ─── Page ───────────────────────────────────────────────────────────────
 export default function AboutPageClient() {
   const contentRef = useRef<HTMLDivElement>(null);
+  // sequenceRef — tight boundary around HUD sections only (excludes CinematicCurtain).
+  // GSAP end = "85% bottom" of this wrapper = 2x faster scrub, locks final frame.
+  const sequenceRef = useRef<HTMLDivElement>(null);
   useHUDReveal(contentRef);
 
   return (
     <main className="relative w-full bg-transparent">
 
-      {/* ─── Canvas (scrollTriggerRef = early-finish at 85%) ─── */}
+      {/* ─── Canvas (scrollTriggerRef = sequenceRef, early-finish at 85%) ─── */}
       <CanvasSequence
         desktopPath="/about-desktop/"
         tabletPath="/about-tablet/"
         mobilePath="/about-mobile/"
         frameCount={155}
-        scrollTriggerRef={contentRef}
+        scrollTriggerRef={sequenceRef}
       />
 
       {/* ─── HUD Content — zero backgrounds, pitch-black text ─── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full flex flex-col gap-32 md:gap-48 pt-32 pb-40 px-[10vw]"
+        className="relative z-10 w-full flex flex-col pt-32 pb-0 px-[10vw]"
       >
+        {/* ┌─ sequenceRef boundary: GSAP canvas trigger is tethered to this div ─┐
+             It spans: 5 HUD sections + 4 cinematic spacers + 1 hold buffer.
+             CinematicCurtain is OUTSIDE so scrub ends before it. ─────────────── */}
+        <div ref={sequenceRef} className="flex flex-col w-full">
 
         {/* ══════════════════════════════════════════════════════
             S1 — AUTHORITY HOOK
@@ -134,10 +141,13 @@ export default function AboutPageClient() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ══════════════════════════════════════════════════════
             S2 — GERMAN ENGINEERING
             ══════════════════════════════════════════════════════ */}
-        <section id="about-technology" className="max-w-3xl">
+        <section id="about-technology" className="max-w-3xl mt-[10vh] md:mt-[20vh]">
 
           <div className="hud-blur-reveal">
             <Badge
@@ -183,10 +193,13 @@ export default function AboutPageClient() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ══════════════════════════════════════════════════════
             S3 — QUALITY CONTROL (right-anchored on desktop)
             ══════════════════════════════════════════════════════ */}
-        <section id="about-quality" className="max-w-3xl self-end text-right">
+        <section id="about-quality" className="max-w-3xl self-end text-right mt-[10vh] md:mt-[20vh]">
 
           <div className="hud-blur-reveal flex justify-end">
             <Badge
@@ -220,10 +233,13 @@ export default function AboutPageClient() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ══════════════════════════════════════════════════════
             S4 — 50-YEAR GUARANTEE
             ══════════════════════════════════════════════════════ */}
-        <section id="about-guarantee" className="text-center mx-auto w-full max-w-5xl">
+        <section id="about-guarantee" className="text-center mx-auto w-full max-w-5xl mt-[10vh] md:mt-[20vh]">
 
           <div className="hud-blur-reveal">
             <Badge
@@ -276,6 +292,9 @@ export default function AboutPageClient() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ══════════════════════════════════════════════════════
             S5 — CTA HUB
             ══════════════════════════════════════════════════════ */}
@@ -306,13 +325,19 @@ export default function AboutPageClient() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC HOLD BUFFER ═══ */}
+        {/* Phase 40: User scrolls through 50-70vh of empty space while GSAP locks final frame */}
+        <div className="w-full h-[50vh] md:h-[70vh] bg-transparent pointer-events-none" aria-hidden="true" />
+
+        </div>{/* ─── END sequenceRef boundary ─── */}
+
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
           CINEMATIC CURTAIN — "German Precision in the GCC"
           ═══════════════════════════════════════════════════════════ */}
       <CinematicCurtain id="about-curtain">
-        <article className="w-full px-[10vw] max-w-[1920px] mx-auto py-24 md:py-32 lg:py-40">
+        <article className="w-full px-[10vw] max-w-[1920px] mx-auto pt-[20vh] md:pt-[30vh] lg:pt-[35vh] pb-24 md:pb-32 lg:pb-40">
 
           {/* ─── Overline ─── */}
           <div className="mb-16 md:mb-24 reveal-curtain-child">
@@ -409,14 +434,17 @@ export default function AboutPageClient() {
             </div>
 
             {/* RIGHT: Factory image with wipe reveal */}
-            <div className="lg:col-span-5 gsap-img-wipe overflow-hidden rounded-3xl">
-              <div className="gsap-parallax h-full">
+            {/* HOTFIX Issue #03: Replaced scale-[1.1] with absolute h-[130%] top-[-15%] overscale.
+                overflow-hidden on wrapper clips the bleed. gsap-parallax yPercent scrub
+                now has full room to travel without exposing the container edge. */}
+            <div className="lg:col-span-5 gsap-img-wipe overflow-hidden rounded-3xl relative">
+              <div className="gsap-parallax relative w-full aspect-[4/3]">
                 <Image
                   src="/images/curtain-about-factory.png"
                   alt="RAKPLUS PP-R pipe on high-tech laser inspection table inside industrial manufacturing facility"
                   width={800}
                   height={600}
-                  className="w-full h-auto rounded-2xl scale-[1.1]"
+                  className="absolute top-[-15%] left-0 w-full h-[130%] object-cover gsap-parallax-image"
                   priority={false}
                 />
               </div>

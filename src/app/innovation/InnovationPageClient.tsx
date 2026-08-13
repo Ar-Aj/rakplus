@@ -56,12 +56,15 @@ function SpecPill({ label }: { label: string }) {
 // ─── Page ───────────────────────────────────────────────────────────────
 export default function InnovationPageClient() {
   const contentRef = useRef<HTMLDivElement>(null);
+  // sequenceRef — tight GSAP boundary (HUD sections only, excludes any footer).
+  // end = "85% bottom" of this wrapper = 2x faster scrub, locks final frame.
+  const sequenceRef = useRef<HTMLDivElement>(null);
   useHUDReveal(contentRef);
 
   return (
     <main className="relative w-full bg-transparent">
 
-      {/* ─── Canvas (scrollTriggerRef = early-finish at 85%) ─── */}
+      {/* ─── Canvas (scrollTriggerRef = sequenceRef, early-finish at 85%) ─── */}
       <CanvasSequence
         desktopPath="/innovation-desktop/"
         tabletPath="/innovation-tablet/"
@@ -69,14 +72,16 @@ export default function InnovationPageClient() {
         frameCount={155}
         tabletFrameCount={198}
         mobileFrameCount={198}
-        scrollTriggerRef={contentRef}
+        scrollTriggerRef={sequenceRef}
       />
 
       {/* ─── HUD Content — zero backgrounds, pitch-black text ─── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full flex flex-col gap-0 pt-40 pb-40 px-[10vw] bg-transparent"
+        className="relative z-10 w-full flex flex-col gap-0 pt-40 pb-0 px-[10vw] bg-transparent"
       >
+        {/* sequenceRef boundary: GSAP canvas trigger tethered here (sections + hold buffer) */}
+        <div ref={sequenceRef} className="flex flex-col w-full">
 
         {/* ══════════════════════════════════════════════════════
             GRID WRAPPER — alternating 2-col on desktop
@@ -127,7 +132,7 @@ export default function InnovationPageClient() {
               ────────────────────────────────────────────────── */}
           <section
             id="innovation-material"
-            className="lg:col-start-1 flex flex-col"
+            className="lg:col-start-1 flex flex-col mt-[10vh] md:mt-[20vh]"
           >
             <div className="hud-blur-reveal">
               <Badge
@@ -171,7 +176,7 @@ export default function InnovationPageClient() {
               ────────────────────────────────────────────────── */}
           <section
             id="innovation-german"
-            className="lg:col-start-2 flex flex-col"
+            className="lg:col-start-2 flex flex-col mt-[10vh] md:mt-[20vh]"
           >
             <div className="hud-blur-reveal">
               <Badge
@@ -271,6 +276,13 @@ export default function InnovationPageClient() {
           </section>
 
         </div>{/* /grid */}
+
+        {/* ═══ CINEMATIC HOLD BUFFER ═══ */}
+        {/* Phase 40: User scrolls through empty space while GSAP holds the final locked frame */}
+        <div className="w-full h-[50vh] md:h-[70vh] bg-transparent pointer-events-none" aria-hidden="true" />
+
+        </div>{/* ─── END sequenceRef boundary ─── */}
+
       </div>{/* /contentRef */}
     </main>
   );

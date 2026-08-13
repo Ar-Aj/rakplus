@@ -31,31 +31,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "1.9",
-                    "weight": "0.107 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "2.3",
-                    "weight": "0.164 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "2.9",
-                    "weight": "0.261 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "3.7",
-                    "weight": "0.412 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "4.6",
-                    "weight": "0.638 kg/m"
-                }
+                { "part": "RP1020", "dimension": 20, "wallThickness": 1.9, "innerDiameter": 16.0, "packingUnit": "100Mtrs", "weight": 0.107 },
+                { "part": "RP1025", "dimension": 25, "wallThickness": 2.3, "innerDiameter": 20.4, "packingUnit": "100Mtrs", "weight": 0.164 },
+                { "part": "RP1032", "dimension": 32, "wallThickness": 2.9, "innerDiameter": 26.2, "packingUnit": "40Mtrs", "weight": 0.261 },
+                { "part": "RP1040", "dimension": 40, "wallThickness": 3.7, "innerDiameter": 32.6, "packingUnit": "40Mtrs", "weight": 0.412 },
+                { "part": "RP1050", "dimension": 50, "wallThickness": 4.6, "innerDiameter": 40.8, "packingUnit": "20Mtrs", "weight": 0.638 },
+                { "part": "RP1063", "dimension": 63, "wallThickness": 5.8, "innerDiameter": 51.4, "packingUnit": "20Mtrs", "weight": 1.010 },
+                { "part": "RP1075", "dimension": 75, "wallThickness": 6.8, "innerDiameter": 61.4, "packingUnit": "16Mtrs", "weight": 1.410 },
+                { "part": "RP1090", "dimension": 90, "wallThickness": 8.2, "innerDiameter": 73.6, "packingUnit": "12Mtrs", "weight": 2.030 },
+                { "part": "RP10110", "dimension": 110, "wallThickness": 10.0, "innerDiameter": 90.0, "packingUnit": "8Mtrs", "weight": 3.010 }
             ]
         },
         {
@@ -76,31 +60,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "2.8",
-                    "weight": "0.147 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "3.5",
-                    "weight": "0.229 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "4.4",
-                    "weight": "0.370 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "5.5",
-                    "weight": "0.578 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "6.9",
-                    "weight": "0.906 kg/m"
-                }
+                { "part": "RP1620", "dimension": 20, "wallThickness": 2.8, "innerDiameter": 14.4, "packingUnit": "100Mtrs", "weight": 0.147 },
+                { "part": "RP1625", "dimension": 25, "wallThickness": 3.5, "innerDiameter": 18.0, "packingUnit": "100Mtrs", "weight": 0.229 },
+                { "part": "RP1632", "dimension": 32, "wallThickness": 4.4, "innerDiameter": 23.2, "packingUnit": "40Mtrs", "weight": 0.370 },
+                { "part": "RP1640", "dimension": 40, "wallThickness": 5.5, "innerDiameter": 29.0, "packingUnit": "40Mtrs", "weight": 0.578 },
+                { "part": "RP1650", "dimension": 50, "wallThickness": 6.9, "innerDiameter": 36.2, "packingUnit": "20Mtrs", "weight": 0.906 },
+                { "part": "RP1663", "dimension": 63, "wallThickness": 8.6, "innerDiameter": 45.8, "packingUnit": "20Mtrs", "weight": 1.426 },
+                { "part": "RP1675", "dimension": 75, "wallThickness": 10.3, "innerDiameter": 54.4, "packingUnit": "16Mtrs", "weight": 2.031 },
+                { "part": "RP1690", "dimension": 90, "wallThickness": 12.3, "innerDiameter": 65.4, "packingUnit": "12Mtrs", "weight": 2.880 },
+                { "part": "RP16110", "dimension": 110, "wallThickness": 15.1, "innerDiameter": 79.8, "packingUnit": "8Mtrs", "weight": 4.295 }
             ]
         },
         {
@@ -121,31 +89,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "3.4",
-                    "weight": "0.172 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "4.2",
-                    "weight": "0.266 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "5.4",
-                    "weight": "0.432 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "6.7",
-                    "weight": "0.670 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "8.3",
-                    "weight": "1.040 kg/m"
-                }
+                { "part": "RP2020", "dimension": 20, "wallThickness": 3.4, "innerDiameter": 13.2, "packingUnit": "100Mtrs", "weight": 0.172 },
+                { "part": "RP2025", "dimension": 25, "wallThickness": 4.2, "innerDiameter": 16.6, "packingUnit": "100Mtrs", "weight": 0.266 },
+                { "part": "RP2032", "dimension": 32, "wallThickness": 5.4, "innerDiameter": 21.2, "packingUnit": "40Mtrs", "weight": 0.432 },
+                { "part": "RP2040", "dimension": 40, "wallThickness": 6.7, "innerDiameter": 26.6, "packingUnit": "40Mtrs", "weight": 0.670 },
+                { "part": "RP2050", "dimension": 50, "wallThickness": 8.3, "innerDiameter": 33.4, "packingUnit": "20Mtrs", "weight": 1.040 },
+                { "part": "RP2063", "dimension": 63, "wallThickness": 10.5, "innerDiameter": 42.0, "packingUnit": "20Mtrs", "weight": 1.645 },
+                { "part": "RP2075", "dimension": 75, "wallThickness": 12.5, "innerDiameter": 50.0, "packingUnit": "16Mtrs", "weight": 2.340 },
+                { "part": "RP2090", "dimension": 90, "wallThickness": 15.0, "innerDiameter": 60.0, "packingUnit": "12Mtrs", "weight": 3.360 },
+                { "part": "RP20110", "dimension": 110, "wallThickness": 18.3, "innerDiameter": 73.4, "packingUnit": "8Mtrs", "weight": 5.008 }
             ]
         },
         {
@@ -166,31 +118,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "4.1",
-                    "weight": "0.198 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "5.1",
-                    "weight": "0.307 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "6.5",
-                    "weight": "0.498 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "8.1",
-                    "weight": "0.775 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "10.1",
-                    "weight": "1.210 kg/m"
-                }
+                { "part": "RP2520", "dimension": 20, "wallThickness": 4.1, "innerDiameter": 11.8, "waterContent": 0.111, "packingUnit": "100Mtrs", "weight": 0.198 },
+                { "part": "RP2525", "dimension": 25, "wallThickness": 5.1, "innerDiameter": 14.8, "waterContent": 0.178, "packingUnit": "100Mtrs", "weight": 0.307 },
+                { "part": "RP2532", "dimension": 32, "wallThickness": 6.5, "innerDiameter": 19.0, "waterContent": 0.291, "packingUnit": "40Mtrs", "weight": 0.498 },
+                { "part": "RP2540", "dimension": 40, "wallThickness": 8.1, "innerDiameter": 23.8, "waterContent": 0.461, "packingUnit": "40Mtrs", "weight": 0.775 },
+                { "part": "RP2550", "dimension": 50, "wallThickness": 10.1, "innerDiameter": 29.8, "waterContent": 0.703, "packingUnit": "20Mtrs", "weight": 1.210 },
+                { "part": "RP2563", "dimension": 63, "wallThickness": 12.7, "innerDiameter": 37.6, "waterContent": 1.137, "packingUnit": "20Mtrs", "weight": 1.910 },
+                { "part": "RP2575", "dimension": 75, "wallThickness": 15.1, "innerDiameter": 44.8, "waterContent": 1.619, "packingUnit": "16Mtrs", "weight": 2.701 },
+                { "part": "RP2590", "dimension": 90, "wallThickness": 18.1, "innerDiameter": 53.8, "waterContent": 2.336, "packingUnit": "12Mtrs", "weight": 3.880 },
+                { "part": "RP25110", "dimension": 110, "wallThickness": 22.1, "innerDiameter": 65.8, "waterContent": 2.742, "packingUnit": "8Mtrs", "weight": 5.780 }
             ]
         },
         {
@@ -211,31 +147,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "1.9",
-                    "weight": "0.107 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "2.3",
-                    "weight": "0.164 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "2.9",
-                    "weight": "0.261 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "3.7",
-                    "weight": "0.412 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "4.6",
-                    "weight": "0.638 kg/m"
-                }
+                { "part": "RP1020", "dimension": 20, "wallThickness": 1.9, "innerDiameter": 16.0, "packingUnit": "100Mtrs", "weight": 0.107 },
+                { "part": "RP1025", "dimension": 25, "wallThickness": 2.3, "innerDiameter": 20.4, "packingUnit": "100Mtrs", "weight": 0.164 },
+                { "part": "RP1032", "dimension": 32, "wallThickness": 2.9, "innerDiameter": 26.2, "packingUnit": "40Mtrs", "weight": 0.261 },
+                { "part": "RP1040", "dimension": 40, "wallThickness": 3.7, "innerDiameter": 32.6, "packingUnit": "40Mtrs", "weight": 0.412 },
+                { "part": "RP1050", "dimension": 50, "wallThickness": 4.6, "innerDiameter": 40.8, "packingUnit": "20Mtrs", "weight": 0.638 },
+                { "part": "RP1063", "dimension": 63, "wallThickness": 5.8, "innerDiameter": 51.4, "packingUnit": "20Mtrs", "weight": 1.010 },
+                { "part": "RP1075", "dimension": 75, "wallThickness": 6.8, "innerDiameter": 61.4, "packingUnit": "16Mtrs", "weight": 1.410 },
+                { "part": "RP1090", "dimension": 90, "wallThickness": 8.2, "innerDiameter": 73.6, "packingUnit": "12Mtrs", "weight": 2.030 },
+                { "part": "RP10110", "dimension": 110, "wallThickness": 10.0, "innerDiameter": 90.0, "packingUnit": "8Mtrs", "weight": 3.010 }
             ]
         },
         {
@@ -256,31 +176,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "2.8",
-                    "weight": "0.147 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "3.5",
-                    "weight": "0.229 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "4.4",
-                    "weight": "0.370 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "5.5",
-                    "weight": "0.578 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "6.9",
-                    "weight": "0.906 kg/m"
-                }
+                { "part": "RP1620", "dimension": 20, "wallThickness": 2.8, "innerDiameter": 14.4, "packingUnit": "100Mtrs", "weight": 0.147 },
+                { "part": "RP1625", "dimension": 25, "wallThickness": 3.5, "innerDiameter": 18.0, "packingUnit": "100Mtrs", "weight": 0.229 },
+                { "part": "RP1632", "dimension": 32, "wallThickness": 4.4, "innerDiameter": 23.2, "packingUnit": "40Mtrs", "weight": 0.370 },
+                { "part": "RP1640", "dimension": 40, "wallThickness": 5.5, "innerDiameter": 29.0, "packingUnit": "40Mtrs", "weight": 0.578 },
+                { "part": "RP1650", "dimension": 50, "wallThickness": 6.9, "innerDiameter": 36.2, "packingUnit": "20Mtrs", "weight": 0.906 },
+                { "part": "RP1663", "dimension": 63, "wallThickness": 8.6, "innerDiameter": 45.8, "packingUnit": "20Mtrs", "weight": 1.426 },
+                { "part": "RP1675", "dimension": 75, "wallThickness": 10.3, "innerDiameter": 54.4, "packingUnit": "16Mtrs", "weight": 2.031 },
+                { "part": "RP1690", "dimension": 90, "wallThickness": 12.3, "innerDiameter": 65.4, "packingUnit": "12Mtrs", "weight": 2.880 },
+                { "part": "RP16110", "dimension": 110, "wallThickness": 15.1, "innerDiameter": 79.8, "packingUnit": "8Mtrs", "weight": 4.295 }
             ]
         },
         {
@@ -301,31 +205,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "3.4",
-                    "weight": "0.172 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "4.2",
-                    "weight": "0.266 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "5.4",
-                    "weight": "0.432 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "6.7",
-                    "weight": "0.670 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "8.3",
-                    "weight": "1.040 kg/m"
-                }
+                { "part": "RP2020", "dimension": 20, "wallThickness": 3.4, "innerDiameter": 13.2, "packingUnit": "100Mtrs", "weight": 0.172 },
+                { "part": "RP2025", "dimension": 25, "wallThickness": 4.2, "innerDiameter": 16.6, "packingUnit": "100Mtrs", "weight": 0.266 },
+                { "part": "RP2032", "dimension": 32, "wallThickness": 5.4, "innerDiameter": 21.2, "packingUnit": "40Mtrs", "weight": 0.432 },
+                { "part": "RP2040", "dimension": 40, "wallThickness": 6.7, "innerDiameter": 26.6, "packingUnit": "40Mtrs", "weight": 0.670 },
+                { "part": "RP2050", "dimension": 50, "wallThickness": 8.3, "innerDiameter": 33.4, "packingUnit": "20Mtrs", "weight": 1.040 },
+                { "part": "RP2063", "dimension": 63, "wallThickness": 10.5, "innerDiameter": 42.0, "packingUnit": "20Mtrs", "weight": 1.645 },
+                { "part": "RP2075", "dimension": 75, "wallThickness": 12.5, "innerDiameter": 50.0, "packingUnit": "16Mtrs", "weight": 2.340 },
+                { "part": "RP2090", "dimension": 90, "wallThickness": 15.0, "innerDiameter": 60.0, "packingUnit": "12Mtrs", "weight": 3.360 },
+                { "part": "RP20110", "dimension": 110, "wallThickness": 18.3, "innerDiameter": 73.4, "packingUnit": "8Mtrs", "weight": 5.008 }
             ]
         },
         {
@@ -346,31 +234,15 @@
                 ]
             },
             "dimensionalTable": [
-                {
-                    "outerDiameter": "20",
-                    "wallThickness": "4.1",
-                    "weight": "0.198 kg/m"
-                },
-                {
-                    "outerDiameter": "25",
-                    "wallThickness": "5.1",
-                    "weight": "0.307 kg/m"
-                },
-                {
-                    "outerDiameter": "32",
-                    "wallThickness": "6.5",
-                    "weight": "0.498 kg/m"
-                },
-                {
-                    "outerDiameter": "40",
-                    "wallThickness": "8.1",
-                    "weight": "0.775 kg/m"
-                },
-                {
-                    "outerDiameter": "50",
-                    "wallThickness": "10.1",
-                    "weight": "1.210 kg/m"
-                }
+                { "part": "RP2520", "dimension": 20, "wallThickness": 4.1, "innerDiameter": 11.8, "waterContent": 0.111, "packingUnit": "100Mtrs", "weight": 0.198 },
+                { "part": "RP2525", "dimension": 25, "wallThickness": 5.1, "innerDiameter": 14.8, "waterContent": 0.178, "packingUnit": "100Mtrs", "weight": 0.307 },
+                { "part": "RP2532", "dimension": 32, "wallThickness": 6.5, "innerDiameter": 19.0, "waterContent": 0.291, "packingUnit": "40Mtrs", "weight": 0.498 },
+                { "part": "RP2540", "dimension": 40, "wallThickness": 8.1, "innerDiameter": 23.8, "waterContent": 0.461, "packingUnit": "40Mtrs", "weight": 0.775 },
+                { "part": "RP2550", "dimension": 50, "wallThickness": 10.1, "innerDiameter": 29.8, "waterContent": 0.703, "packingUnit": "20Mtrs", "weight": 1.210 },
+                { "part": "RP2563", "dimension": 63, "wallThickness": 12.7, "innerDiameter": 37.6, "waterContent": 1.137, "packingUnit": "20Mtrs", "weight": 1.910 },
+                { "part": "RP2575", "dimension": 75, "wallThickness": 15.1, "innerDiameter": 44.8, "waterContent": 1.619, "packingUnit": "16Mtrs", "weight": 2.701 },
+                { "part": "RP2590", "dimension": 90, "wallThickness": 18.1, "innerDiameter": 53.8, "waterContent": 2.336, "packingUnit": "12Mtrs", "weight": 3.880 },
+                { "part": "RP25110", "dimension": 110, "wallThickness": 22.1, "innerDiameter": 65.8, "waterContent": 2.742, "packingUnit": "8Mtrs", "weight": 5.780 }
             ]
         },
         {

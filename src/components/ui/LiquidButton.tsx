@@ -31,11 +31,11 @@ export default function LiquidButton({ href, children, className = "", isPrimary
       .to(greenLayerRef.current, {
         clipPath: "circle(150% at 50% 50%)",
         duration: 0.85,
-        ease: "power4.inOut",
+        ease: "expo.inOut",  // HOTFIX Issue #01: power4.inOut → expo.inOut (spec-compliant)
       }, 0)
       // Text physically reacts to the liquid momentum
       .to(textRef.current, {
-        y: -4,
+        y: -2,         // HOTFIX Issue #02: y: -4 → y: -2 (spec-compliant)
         scale: 1.05,
         duration: 0.3,
         ease: "power2.out",

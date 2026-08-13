@@ -7,11 +7,12 @@
 
 /** A single row in a dimensional/specification table */
 export interface DimensionalRow {
-  /** Outer diameter in mm (e.g. "20", "25", "32") */
-  outerDiameter: string;
-  /** Wall thickness in mm (e.g. "1.9") or descriptive (e.g. "Standard SDR6") */
+  part: string;
+  dimension: string;
   wallThickness: string;
-  /** Weight per meter (e.g. "0.107 Kg/Mtr") or "N/A" */
+  innerDiameter: string;
+  waterContent?: string;
+  packingUnit: string;
   weight: string;
 }
 
@@ -58,9 +59,14 @@ export interface RawProductJSON {
     standards: string[];
   };
   dimensionalTable: Array<{
-    outerDiameter: string;
-    wallThickness: string;
-    weight: string;
+    part?: string;
+    dimension?: number | string;
+    outerDiameter?: string;
+    wallThickness?: number | string;
+    innerDiameter?: number | string;
+    waterContent?: number | string;
+    packingUnit?: string;
+    weight?: number | string;
   }>;
 }
 

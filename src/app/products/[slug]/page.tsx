@@ -31,6 +31,28 @@ import {
   getAllProductSlugs,
   getProductBySlug,
 } from "@/config/products";
+import dynamic from "next/dynamic";
+
+const ProductViewerTrigger = dynamic(
+  () => import("@/components/3d/ProductViewerTrigger"),
+  { ssr: false }
+);
+
+const LiveCoverCanvas = dynamic(
+  () => import("@/components/3d/LiveCoverCanvas"),
+  { ssr: false }
+);
+
+// ─── SDR Model Dictionary ─────────────────────────────────────────────────────
+// Maps product title substrings to their exact GLB asset path.
+// Returns null when no model exists — the 3D block is hidden in that case.
+function getModelPath(productTitle: string): string | null {
+  if (productTitle.includes("SDR11"))  return "/3D Models/rakplusSDR11.glb";
+  if (productTitle.includes("SDR7.4")) return "/3D Models/rakplusSDR7.4.glb";
+  if (productTitle.includes("SDR6"))   return "/3D Models/rakplusSD6.glb";   // Exact filename per spec
+  if (productTitle.includes("SDR5"))   return "/3D Models/rakplusSDR5.glb";
+  return null;
+}
 
 // ─── Static Params ───
 
@@ -131,6 +153,8 @@ export default function ProductPage({ params }: PageProps) {
   const hasDimensionalTable =
     product.dimensionalTable && product.dimensionalTable.length > 0;
 
+  const hasWaterContent = hasDimensionalTable && product.dimensionalTable.some(row => row.waterContent !== undefined && row.waterContent !== "N/A");
+
   return (
     <article className="min-h-screen bg-bg-cream">
       {/* ─── Hero Section ─── */}
@@ -167,27 +191,24 @@ export default function ProductPage({ params }: PageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* ─── Left Column: Product Visual ─── */}
             <div className="relative">
-              <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] rounded-3xl bg-gradient-to-b from-brand-charcoal to-black overflow-hidden flex items-center justify-center">
-                {/* Future: Product-specific 3D Canvas or Video */}
-                <div className="text-center px-8">
-                  <div
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border ${accent.badge} mb-6`}
-                  >
-                    <span className="text-xs font-semibold uppercase tracking-[0.15em]">
-                      {product.category}
-                    </span>
+              {(() => {
+                const modelPath = getModelPath(product.title);
+                return modelPath ? (
+                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 z-0 opacity-80 mix-blend-lighten">
+                      <LiveCoverCanvas modelPath={modelPath} />
+                    </div>
+                    <ProductViewerTrigger modelPath={modelPath} />
                   </div>
-                  <p className="text-white text-sm font-medium uppercase tracking-[0.2em]">
-                    3D Product View
-                  </p>
-                  <p className="text-white text-xs mt-2 tracking-wide">
-                    Coming Soon
-                  </p>
-                </div>
-              </div>
+                ) : (
+                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                    <p className="text-white/40 text-xs font-mono uppercase tracking-widest">3D Model Unavailable</p>
+                  </div>
+                );
+              })()}
 
               {/* Product ID badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+              <div className="absolute top-6 right-6 z-10 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
                 <span className="text-xs font-mono text-white">
                   ID #{String(product.id).padStart(2, "0")}
                 </span>
@@ -392,21 +413,47 @@ export default function ProductPage({ params }: PageProps) {
                         <tr className="bg-brand-charcoal text-white">
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
                           >
-                            Outer Diameter (mm)
+                            PART
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
                           >
-                            Wall Thickness (mm)
+                            DIMENSIONS (mm)
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
                           >
-                            Weight
+                            WALL THICKNESS (mm)
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
+                          >
+                            INNER DIAMETER (mm)
+                          </th>
+                          {hasWaterContent && (
+                            <th
+                              scope="col"
+                              className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
+                            >
+                              WATER CONTENT (l/mtr)
+                            </th>
+                          )}
+                          <th
+                            scope="col"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
+                          >
+                            PACKING UNIT
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
+                          >
+                            Kg/Mtr.
                           </th>
                         </tr>
                       </thead>
@@ -420,16 +467,30 @@ export default function ProductPage({ params }: PageProps) {
                               index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"
                             }`}
                           >
-                            <td className="px-6 py-4 text-sm font-medium text-brand-charcoal">
+                            <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap">
+                              {row.part}
+                            </td>
+                            <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap">
                               <span className={`font-semibold ${accent.text}`}>
                                 ⌀
                               </span>{" "}
-                              {row.outerDiameter}
+                              {row.dimension}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950">
+                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
                               {row.wallThickness}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950">
+                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                              {row.innerDiameter}
+                            </td>
+                            {hasWaterContent && (
+                              <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                                {row.waterContent}
+                              </td>
+                            )}
+                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                              {row.packingUnit}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
                               {row.weight}
                             </td>
                           </tr>

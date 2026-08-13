@@ -10,6 +10,7 @@
  */
 
 import Link from "next/link";
+import { useRef } from "react";
 import CanvasSequence from "@/components/CanvasSequence";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
@@ -73,6 +74,11 @@ const PILLARS = [
 // ─── Page ───
 export default function SustainabilityPage() {
   useScrollReveal();
+  // sequenceRef — tight GSAP boundary (4 HUD sections + spacers + hold buffer).
+  // end = "85% bottom" of this wrapper = 2x faster scrub, locks final frame.
+  const sequenceRef = useRef<HTMLDivElement>(null);
+  // contentRef used for scroll reveals (covers all scrolling content)
+  const contentRef = useRef<HTMLDivElement>(null);
 
   return (
     <main className="relative w-full bg-transparent">
@@ -88,12 +94,16 @@ export default function SustainabilityPage() {
       {/* ─── Canvas Sequence (Untrapped Background) ─── */}
       <CanvasSequence
         desktopPath="/sustainability-desktop/"
+        tabletPath="/sustainability-tablet/"
         mobilePath="/sustainability-mobile/"
         frameCount={121}
+        scrollTriggerRef={sequenceRef}
       />
 
       {/* ─── Scrolling Content (Sibling to Canvas) ─── */}
-      <div className="relative z-10 flex flex-col w-full">
+      <div ref={contentRef} className="relative z-10 flex flex-col w-full">
+        {/* sequenceRef boundary: GSAP canvas trigger tethered here */}
+        <div ref={sequenceRef} className="flex flex-col w-full">
         {/* ═══════════════════════════════════════════════════════════
             SECTION 1 — Pure Water. Clean Future.
             ═══════════════════════════════════════════════════════════ */}
@@ -140,12 +150,15 @@ export default function SustainabilityPage() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ═══════════════════════════════════════════════════════════
             SECTION 2 — Zero Scaling. Zero Corrosion.
             ═══════════════════════════════════════════════════════════ */}
         <section
           id="zero-scaling-section"
-          className="min-h-screen flex flex-col items-center justify-center py-20"
+          className="min-h-screen flex flex-col items-center justify-center py-20 mt-[10vh] md:mt-[20vh]"
         >
           <div className="text-center px-6 max-w-4xl mx-auto reveal-section">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-red-600/50 mb-8 shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
@@ -189,12 +202,15 @@ export default function SustainabilityPage() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ═══════════════════════════════════════════════════════════
             SECTION 3 — Eco-Friendly Manufacturing
             ═══════════════════════════════════════════════════════════ */}
         <section
           id="eco-manufacturing-section"
-          className="min-h-screen flex flex-col items-center justify-center py-20"
+          className="min-h-screen flex flex-col items-center justify-center py-20 mt-[10vh] md:mt-[20vh]"
         >
           <div className="text-center px-6 max-w-4xl mx-auto reveal-section">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-red-600/50 mb-8 shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
@@ -231,12 +247,15 @@ export default function SustainabilityPage() {
           </div>
         </section>
 
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[10vh] md:min-h-[15vh] pointer-events-none" aria-hidden="true" />
+
         {/* ═══════════════════════════════════════════════════════════
             SECTION 4 — ISO/DIN Certifications Grid
             ═══════════════════════════════════════════════════════════ */}
         <section
           id="certifications-section"
-          className="min-h-screen flex flex-col items-center justify-center py-20"
+          className="min-h-screen flex flex-col items-center justify-center py-20 mt-[10vh] md:mt-[20vh]"
         >
           <div className="text-center px-6 max-w-4xl mx-auto reveal-section">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-red-600/50 mb-8 shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
@@ -279,6 +298,12 @@ export default function SustainabilityPage() {
             </div>
           </div>
         </section>
+
+        {/* ═══ CINEMATIC HOLD BUFFER ═══ */}
+        {/* Phase 40: User scrolls through empty space while GSAP holds the final locked frame */}
+        <div className="w-full h-[50vh] md:h-[70vh] bg-transparent pointer-events-none" aria-hidden="true" />
+
+        </div>{/* ─── END sequenceRef boundary ─── */}
 
         {/* ─── Below-Fold: Sustainability Pillars Section ─── */}
         <article className="relative z-10 bg-transparent py-20 lg:py-28 px-6 lg:px-8">

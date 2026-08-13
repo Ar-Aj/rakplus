@@ -63,8 +63,12 @@ function parseDimensionalTable(
     .map((row) => {
       try {
         return {
-          outerDiameter: String(row.outerDiameter ?? ""),
-          wallThickness: String(row.wallThickness ?? ""),
+          part: String(row.part ?? "N/A"),
+          dimension: String(row.dimension ?? row.outerDiameter ?? "N/A"),
+          wallThickness: String(row.wallThickness ?? "N/A"),
+          innerDiameter: String(row.innerDiameter ?? "N/A"),
+          ...(row.waterContent !== undefined ? { waterContent: String(row.waterContent) } : {}),
+          packingUnit: String(row.packingUnit ?? "N/A"),
           weight: String(row.weight ?? "N/A"),
         };
       } catch {

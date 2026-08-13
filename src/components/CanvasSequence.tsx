@@ -52,14 +52,15 @@ function renderFrame(
   const h = img.naturalHeight;
   if (!w || !h) return;
 
-  // Scale to cover: whichever axis needs more scaling wins
+  // True Full-Bleed Cover Math
   const scale = Math.max(canvas.width / w, canvas.height / h);
 
   // Center-anchor: equal overflow on both sides of each axis
   const x = canvas.width  / 2 - (w / 2) * scale;
   const y = canvas.height / 2 - (h / 2) * scale;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img, x, y, w * scale, h * scale);
 }
 
@@ -328,7 +329,7 @@ export default function CanvasSequence({
     >
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 z-[-1] w-full h-[100dvh] pointer-events-none"
+        className="fixed inset-0 w-full h-screen z-[-1] pointer-events-none object-cover"
         aria-hidden="true"
         role="img"
         aria-label="RAKPLUS cinematic scroll sequence"

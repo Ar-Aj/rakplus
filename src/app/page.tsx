@@ -49,6 +49,10 @@ function CurtainPrimaryCTA({ href, children }: { href: string; children: React.R
 // ─── Page ───
 export default function HomePage() {
   const hudRef = useRef<HTMLDivElement>(null);
+  // sequenceRef — wraps ONLY the 4 transparent HUD sections + hold buffer.
+  // Passed to CanvasSequence as scrollTriggerRef so GSAP end = "85% bottom"
+  // of this tighter region, compressing the scrub to finish well before the curtain.
+  const sequenceRef = useRef<HTMLDivElement>(null);
   useHUDReveal(hudRef);
   useLiquidReveal(hudRef);
 
@@ -58,31 +62,43 @@ export default function HomePage() {
        ──────────────────────────────────────────────────── */
     <main className="relative w-full bg-transparent">
 
-      {/* ─── Canvas Sequence — Full-Page, Document Scroll ─── */}
+      {/* ─── Canvas Sequence — Scrub ends at 85% of sequenceRef (section track only) ─── */}
       <CanvasSequence
         desktopPath="/home-desktop/"
         tabletPath="/home-tablet/"
         mobilePath="/home-mobile/"
         frameCount={240}
-        useDocumentScroll={true}
+        scrollTriggerRef={sequenceRef}
       />
 
       {/* ─── Scrolling HUD Sections (over video, transparent bg) ─── */}
       <div ref={hudRef} className="relative z-10 flex flex-col w-full">
 
+        {/* ┌───────────────────────────────────────────────────────────────
+             sequenceRef BOUNDARY — GSAP canvas scrub is tethered to this div.
+             It spans: 4 HUD sections + 3 cinematic spacers + 1 cinematic hold buffer.
+             The curtain is OUTSIDE this boundary so the scrub ends before it.
+             └─────────────────────────────────────────────────────────────── */}
+        <div ref={sequenceRef} className="flex flex-col w-full">
+
         {/* ═══ SECTION 1 — Hero ═══ */}
         <section
           id="hero-section"
-          className="min-h-[80vh] flex flex-col justify-center py-20 px-[10vw]"
+          className="relative min-h-[80vh] flex flex-col justify-center py-20 w-full overflow-hidden"
         >
-          <div className="w-full max-w-[1920px] mx-auto">
+          {/* Top content wrapper with smart padding */}
+          <div className="w-full px-6 md:px-12 max-w-screen-2xl mx-auto">
             {/* Overline */}
             <p className="text-neutral-950/50 text-[10px] md:text-xs font-bold uppercase tracking-[0.35em] mb-6 hud-blur-reveal">
               <span className="text-red-600">German Standard</span> Engineering · Made in UAE
             </p>
+          </div>
 
-            {/* Heading — Hydro-Kinetic Reveal */}
-            <div className="mb-6 hud-liquid-reveal">
+          {/* Heading — Hydro-Kinetic Reveal (FULL BLEED MASK BOUNDARY) */}
+          {/* This wrapper must touch the edges of the screen so the mask sweeps from the true left/right */}
+          <div className="w-full mb-6 hud-liquid-reveal">
+            {/* Inner wrapper applies the elegant padding to align text */}
+            <div className="w-full px-6 md:px-12 max-w-screen-2xl mx-auto">
               <h1 className="font-sans font-extrabold leading-[0.85] tracking-tighter text-neutral-950
                 text-[clamp(4rem,12vw,10rem)]">
                 <span className="relative pb-4 inline-block text-neutral-950 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EVOLVE</span>.<br className="hidden sm:block" />{" "}
@@ -90,7 +106,10 @@ export default function HomePage() {
                 <span className="relative pb-4 inline-block text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EMPOWER</span><span className="text-emerald-600">.</span>
               </h1>
             </div>
+          </div>
 
+          {/* Bottom content wrapper with smart padding */}
+          <div className="w-full px-6 md:px-12 max-w-screen-2xl mx-auto">
             <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-14">
               <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Premium PP-R Piping Systems in the <span className="text-red-600">UAE</span>. Manufactured to strict
@@ -292,16 +311,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ═══ SCROLL BUFFER INJECTION ═══ */}
-        {/* Forces extra scroll distance so GSAP sequence hits max frames before curtain overlay */}
-        <div className="w-full h-[50vh] md:h-[80vh] bg-transparent pointer-events-none" aria-hidden="true" />
+        {/* ═══ CINEMATIC HOLD BUFFER ═══ */}
+        {/* Phase 39: Final locked-frame buffer — user scrolls through empty space while
+            GSAP scrub finishes the last frames and holds the solid pipe image for ~1s. */}
+        <div className="w-full h-[50vh] md:h-[70vh] bg-transparent pointer-events-none" aria-hidden="true" />
+
+        </div>{/* ─── END sequenceRef boundary ─── */}
 
         {/* ═══════════════════════════════════════════════════════
             CINEMATIC CURTAIN — Pristine White Frosted Glass
             Slides up from below the video.
             ═══════════════════════════════════════════════════ */}
         <CinematicCurtain id="home-curtain">
-          <article className="w-full px-[10vw] max-w-[1920px] mx-auto py-24 md:py-32 lg:py-40">
+          <article className="w-full px-[10vw] max-w-[1920px] mx-auto pt-[20vh] md:pt-[30vh] lg:pt-[35vh] pb-24 md:pb-32 lg:pb-40">
 
             {/* ─── Overline ─── */}
             <div className="mb-20 md:mb-32 reveal-curtain-child">
