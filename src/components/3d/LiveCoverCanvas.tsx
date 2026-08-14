@@ -11,18 +11,17 @@ interface LiveCoverCanvasProps {
 
 export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
   return (
-    <Canvas dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
+    <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
       {/* Studio Lighting Rig */}
       <ambientLight intensity={0.15} />
-      <directionalLight position={[5, 8, 3]} intensity={2.5} castShadow />
-      <spotLight position={[-5, 3, 4]} intensity={3} angle={0.4} penumbra={1} />
-      <Environment preset="city" />
+      <directionalLight position={[5, 10, 5]} intensity={2.5} castShadow />
+      <directionalLight position={[-5, -5, 5]} intensity={0.5} color="#ffffff" />
+      <Environment preset="city" environmentIntensity={0.4} />
 
       <Suspense fallback={null}>
         {/* margin={0.6} — tight macro close-up crop for the card teaser */}
         <Bounds fit clip observe margin={0.6}>
-          {/* -45° Y rotation — barrel-angle perspective without breaking camera math */}
-          <Center rotation={[0, -Math.PI / 4, 0]}>
+          <Center rotation={[0, Math.PI / 4.5, Math.PI / 20]}>
             <PipeModel modelPath={modelPath} />
           </Center>
         </Bounds>
@@ -30,8 +29,6 @@ export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
 
       {/* Non-interactive — only the CTA button triggers the modal */}
       <OrbitControls
-        autoRotate
-        autoRotateSpeed={1.0}
         enableZoom={false}
         enablePan={false}
         enableRotate={false}

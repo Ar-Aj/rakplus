@@ -32,6 +32,7 @@ import {
   getProductBySlug,
 } from "@/config/products";
 import dynamic from "next/dynamic";
+import FittingGallery from "@/components/products/FittingGallery";
 
 const ProductViewerTrigger = dynamic(
   () => import("@/components/3d/ProductViewerTrigger"),
@@ -152,6 +153,9 @@ export default function ProductPage({ params }: PageProps) {
   const { prev, next } = getAdjacentProducts(params.slug);
   const hasDimensionalTable =
     product.dimensionalTable && product.dimensionalTable.length > 0;
+  
+  const hasFittingItems =
+    product.fittingItems && product.fittingItems.length > 0;
 
   const hasWaterContent = hasDimensionalTable && product.dimensionalTable.some(row => row.waterContent !== undefined && row.waterContent !== "N/A");
 
@@ -402,9 +406,11 @@ export default function ProductPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* Dimensional Table */}
+            {/* Dimensional Table or Fitting Gallery */}
             <div className="lg:col-span-2">
-              {hasDimensionalTable ? (
+              {hasFittingItems ? (
+                <FittingGallery fittingItems={product.fittingItems!} accent={accent} />
+              ) : hasDimensionalTable ? (
                 <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -509,11 +515,11 @@ export default function ProductPage({ params }: PageProps) {
                   </div>
                 </div>
               ) : (
-                /* Graceful fallback when no dimensional table exists */
+                /* Graceful fallback when no dimensional table or fittings exist */
                 <div className="flex flex-col items-center justify-center py-16 rounded-2xl bg-white border border-dashed border-gray-200">
                   <Ruler className="w-8 h-8 text-neutral-950 mb-3" />
                   <p className="text-sm text-neutral-950 font-medium">
-                    Dimensional data not available for this product.
+                    Technical data not available for this product.
                   </p>
                   <p className="text-xs text-neutral-950 mt-1">
                     Contact us for detailed specifications.

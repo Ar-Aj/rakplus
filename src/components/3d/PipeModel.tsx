@@ -25,18 +25,17 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
 
       if (isDecal) return;
 
-      // Ensure MeshStandardMaterial
-      if (!(mesh.material as THREE.MeshStandardMaterial).isMeshStandardMaterial) {
-        mesh.material = new THREE.MeshStandardMaterial();
-      }
-
-      // Inject photorealistic deep-green PP-R polymer properties
-      const mat = mesh.material as THREE.MeshStandardMaterial;
-      mat.color.set("#127b43");
-      mat.roughness = 0.35;
-      mat.metalness = 0.05;
-      mat.envMapIntensity = 1.5;
-      mat.needsUpdate = true;
+      // Inject photorealistic deep-green PP-R polymer properties (Blender BSDF translation)
+      mesh.material = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color('#0E6B3D'),
+        roughness: 0.45,
+        metalness: 0.0,
+        ior: 1.46,
+        clearcoat: 0.1,
+        clearcoatRoughness: 0.4,
+        envMapIntensity: 0.7
+      });
+      mesh.material.needsUpdate = true;
     });
   }, [scene]);
 

@@ -78,6 +78,29 @@ function parseDimensionalTable(
     .filter((row): row is DimensionalRow => row !== null);
 }
 
+/** Safely parse fitting items, returning undefined if none exist */
+function parseFittingItems(
+  raw: RawProductJSON["fittingItems"]
+): ProductConfig["fittingItems"] {
+  if (!Array.isArray(raw)) return undefined;
+
+  return raw.map((item) => ({
+    name: String(item.name ?? "Unknown Fitting"),
+    type: String(item.type ?? "fitting"),
+    standard: String(item.standard ?? ""),
+    coverImage: String(item.coverImage ?? ""),
+    specifications: Array.isArray(item.specifications)
+      ? item.specifications.map((row) => ({
+          partNumber: String(row.partNumber ?? "N/A"),
+          dimension: String(row.dimension ?? "N/A"),
+          packingUnit: Number(row.packingUnit ?? 0),
+          piecesPerPack: Number(row.piecesPerPack ?? 0),
+          ...(row.piecesPerBox !== undefined ? { piecesPerBox: Number(row.piecesPerBox) } : {}),
+        }))
+      : [],
+  }));
+}
+
 /** Convert a raw JSON product entry into a typed ProductConfig */
 function parseProduct(
   raw: RawProductJSON,
@@ -113,6 +136,7 @@ function parseProduct(
       ),
     },
     dimensionalTable: parseDimensionalTable(raw.dimensionalTable),
+    fittingItems: parseFittingItems(raw.fittingItems),
     videoSequenceUrl: null, // Placeholder for Phase 2 Locomotive Scroll
   };
 }

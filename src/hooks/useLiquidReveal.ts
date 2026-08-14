@@ -30,7 +30,7 @@ export function useLiquidReveal(containerRef: React.RefObject<HTMLElement | null
         });
 
         gsap.to(el, {
-          "--liquid-progress": "115%",
+          "--liquid-progress": "150%",
           ease: "none",
           scrollTrigger: {
             trigger: el,
@@ -54,7 +54,7 @@ export function useLiquidReveal(containerRef: React.RefObject<HTMLElement | null
           start: "top 85%",
           onEnter: () => {
             gsap.to(el, {
-              "--liquid-progress": "115%",
+              "--liquid-progress": "150%",
               duration: 0.8,
               ease: "power2.out",
             });

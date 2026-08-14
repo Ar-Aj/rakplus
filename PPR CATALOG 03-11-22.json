@@ -263,31 +263,563 @@
                     "DVS 2207"
                 ]
             },
-            "dimensionalTable": [
+            "fittingItems": [
                 {
-                    "outerDiameter": "20",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Socket",
+                    "type": "socket",
+                    "standard": "SDR6/PN20",
+                    "coverImage": "/images/fittings/socket.jpg",
+                    "specifications": [
+                        { "partNumber": "RPS-20", "dimension": "20mm", "packingUnit": 20, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-25", "dimension": "25mm", "packingUnit": 20, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-32", "dimension": "32mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPS-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPS-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPS-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPS-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPS-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 30 }
+                    ]
                 },
                 {
-                    "outerDiameter": "25",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Reducer Socket",
+                    "type": "reducer-socket",
+                    "standard": "SDR6/PN20",
+                    "coverImage": "/images/fittings/reducer-socket.jpg",
+                    "specifications": [
+                        { "partNumber": "RPRS-2520", "dimension": "25/20mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-3220", "dimension": "32/20mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-3225", "dimension": "32/25mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-4020", "dimension": "40/20mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-4025", "dimension": "40/25mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-4032", "dimension": "40/32mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-5020", "dimension": "50/20mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-5025", "dimension": "50/25mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-5032", "dimension": "50/32mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-5040", "dimension": "50/40mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6320", "dimension": "63/20mm", "packingUnit": 1, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6325", "dimension": "63/25mm", "packingUnit": 1, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6332", "dimension": "63/32mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-6340", "dimension": "63/40mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-6350", "dimension": "63/50mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-7540", "dimension": "75/40mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-7550", "dimension": "75/50mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-7563", "dimension": "75/63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9050", "dimension": "90/50mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9063", "dimension": "90/63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9075", "dimension": "90/75mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11063", "dimension": "110/63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11075", "dimension": "110/75mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11090", "dimension": "110/90mm", "packingUnit": 1, "piecesPerPack": 40 }
+                    ]
                 },
                 {
-                    "outerDiameter": "32",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Elbow 90°",
+                    "type": "elbow-90",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPE90-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPE90-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 400 },
+                        { "partNumber": "RPE90-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 },
+                        { "partNumber": "RPE90-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPE90-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPE90-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPE90-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPE90-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPE90-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
                 },
                 {
-                    "outerDiameter": "40",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Elbow 45°",
+                    "type": "elbow-45",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPE45-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPE45-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 400 },
+                        { "partNumber": "RPE45-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 },
+                        { "partNumber": "RPE45-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPE45-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPE45-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPE45-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPE45-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPE45-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
                 },
                 {
-                    "outerDiameter": "50",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Reducer Elbow",
+                    "type": "reducer-elbow",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPRE-2520", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPRE-3225", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 250 },
+                        { "partNumber": "RPRE-4032", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 150 }
+                    ]
+                },
+                {
+                    "name": "Spigot Elbow 90°",
+                    "type": "spigot-elbow-90",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPSE-3225", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 300 },
+                        { "partNumber": "RPSE-4032", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 }
+                    ]
+                },
+                {
+                    "name": "Reducer Tee",
+                    "type": "reducer-tee",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPRT-202520", "dimension": "20X25X20mm", "packingUnit": 10, "piecesPerPack": 250 },
+                        { "partNumber": "RPRT-252020", "dimension": "25X20X20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPRT-252025", "dimension": "25X20X25mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPRT-253225", "dimension": "25X32X25mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPRT-322032", "dimension": "32X20X32mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRT-322525", "dimension": "32X25X25mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRT-323225", "dimension": "32X32X25mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRT-402040", "dimension": "40X20X40mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPRT-402540", "dimension": "40X25X40mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPRT-403240", "dimension": "40X32X40mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPRT-502550", "dimension": "50X25X50mm", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPRT-502550", "dimension": "50X25X50mm", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPRT-503250", "dimension": "50X32X50mm", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPRT-504050", "dimension": "50X40X50mm", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPRT-632063", "dimension": "63X20X63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRT-632563", "dimension": "63X25X63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRT-633263", "dimension": "63X32X63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRT-634063", "dimension": "63X40X63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRT-635063", "dimension": "63X50X63mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPRT-753275", "dimension": "75X32X75mm", "packingUnit": 1, "piecesPerPack": 25 },
+                        { "partNumber": "RPRT-754075", "dimension": "75X40X75mm", "packingUnit": 1, "piecesPerPack": 25 },
+                        { "partNumber": "RPRT-755075", "dimension": "75X50X75mm", "packingUnit": 1, "piecesPerPack": 25 },
+                        { "partNumber": "RPRT-756375", "dimension": "75X63X75mm", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPRT-904090", "dimension": "90X40X90mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPRT-905090", "dimension": "90X50X90mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPRT-906390", "dimension": "90X63X90mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPRT-907590", "dimension": "90X75X90mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPRT-11050110", "dimension": "110X50X110mm", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPRT-11063110", "dimension": "110X63X110mm", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPRT-11075110", "dimension": "110X75X110mm", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPRT-11090110", "dimension": "110X90X110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
+                },
+                {
+                    "name": "Cross Tee",
+                    "type": "cross-tee",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPXT-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPXT-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPXT-30", "dimension": "30mm", "packingUnit": 5, "piecesPerPack": 150 }
+                    ]
+                },
+                {
+                    "name": "Equal Tee",
+                    "type": "equal-tee",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPT-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPT-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPT-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPT-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPT-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPT-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPT-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 25 },
+                        { "partNumber": "RPT-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPT-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
+                },
+                {
+                    "name": "Union Both Ends Welding",
+                    "type": "union-both-ends-welding",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPU-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPU-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPU-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Cross Over Long Type",
+                    "type": "cross-over-long-type",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPCOL-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPCOL-25", "dimension": "25mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPCOL-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 75 }
+                    ]
+                },
+                {
+                    "name": "Cross Over Short Type",
+                    "type": "cross-over-short-type",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPU-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 300 },
+                        { "partNumber": "RPU-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 300 }
+                    ]
+                },
+                {
+                    "name": "End Cap",
+                    "type": "end-cap",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPEC-20", "dimension": "20mm", "packingUnit": 25, "piecesPerPack": 400 },
+                        { "partNumber": "RPEC-25", "dimension": "25mm", "packingUnit": 25, "piecesPerPack": 250 },
+                        { "partNumber": "RPEC-32", "dimension": "32mm", "packingUnit": 20, "piecesPerPack": 200 },
+                        { "partNumber": "RPEC-40", "dimension": "40mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPEC-50", "dimension": "50mm", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPEC-63", "dimension": "63mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPEC-75", "dimension": "75mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPEC-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPEC-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 25 }
+                    ]
+                },
+                {
+                    "name": "Saddle Socket",
+                    "type": "saddle-socket",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPSS-5025", "dimension": "50X25mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPSS-5032", "dimension": "50X32mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPSS-6320", "dimension": "63X20mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPSS-6325", "dimension": "63X25mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPSS-6332", "dimension": "63X32mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPSS-7520", "dimension": "75X20mm", "packingUnit": 2, "piecesPerPack": 100 },
+                        { "partNumber": "RPSS-7525", "dimension": "75X25mm", "packingUnit": 2, "piecesPerPack": 100 },
+                        { "partNumber": "RPSS-7532", "dimension": "75X32mm", "packingUnit": 2, "piecesPerPack": 100 },
+                        { "partNumber": "RPSS-9020", "dimension": "90X20mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPSS-9025", "dimension": "90X25mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPSS-9032", "dimension": "90X32mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPSS-11020", "dimension": "110X20mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPSS-11025", "dimension": "110X25mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPSS-11032", "dimension": "110X32mm", "packingUnit": 1, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Bend",
+                    "type": "bend",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPB-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPB-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPB-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 100 }
+                    ]
+                },
+                {
+                    "name": "End Plug Type A (Short)",
+                    "type": "end-plug-type-a",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPEPA-½\"", "dimension": "½\"", "packingUnit": 100, "piecesPerPack": 1500 },
+                        { "partNumber": "RPEPA-¾\"", "dimension": "¾\"", "packingUnit": 100, "piecesPerPack": 1000 },
+                        { "partNumber": "RPEPA-1\"", "dimension": "1\"", "packingUnit": 50, "piecesPerPack": 500 }
+                    ]
+                },
+                {
+                    "name": "End Plug Type B (Long)",
+                    "type": "end-plug-type-b",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPEPB-½\"", "dimension": "20mm", "packingUnit": 50, "piecesPerPack": 400 },
+                        { "partNumber": "RPEPB-¾\"", "dimension": "25mm", "packingUnit": 50, "piecesPerPack": 300 }
+                    ]
+                },
+                {
+                    "name": "Bracket for Pipe",
+                    "type": "bracket-for-pipe",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPBT-20", "dimension": "20mm", "packingUnit": 100, "piecesPerPack": 1500 },
+                        { "partNumber": "RPBT-25", "dimension": "25mm", "packingUnit": 100, "piecesPerPack": 1000 },
+                        { "partNumber": "RPBT-32", "dimension": "32mm", "packingUnit": 100, "piecesPerPack": 500 },
+                        { "partNumber": "RPBT-40", "dimension": "40mm", "packingUnit": 50, "piecesPerPack": 300 }
+                    ]
+                },
+                {
+                    "name": "Bracket with Clamp",
+                    "type": "bracket-with-clamp",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPBT-25", "dimension": "25mm", "packingUnit": 100, "piecesPerPack": 500 },
+                        { "partNumber": "RPBT-32", "dimension": "32mm", "packingUnit": 50, "piecesPerPack": 500 }
+                    ]
+                },
+                {
+                    "name": "Pipe Hanging Clamp",
+                    "type": "pipe-hanging-clamp",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPHC-20", "dimension": "20mm", "packingUnit": 100, "piecesPerPack": 200 },
+                        { "partNumber": "RPHC-25", "dimension": "25mm", "packingUnit": 100, "piecesPerPack": 200 },
+                        { "partNumber": "RPHC-32", "dimension": "32mm", "packingUnit": 50, "piecesPerPack": 100 },
+                        { "partNumber": "RPHC-40", "dimension": "40mm", "packingUnit": 50, "piecesPerPack": 100 }
+                    ]
+                },
+                {
+                    "name": "PPR Ball Valve - Lever Type",
+                    "type": "ppr-ball-valve-lever-type",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPBVL-20", "dimension": "20mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPBVL-25", "dimension": "25mm", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPBVL-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPBVL-40", "dimension": "40mm", "packingUnit": 2, "piecesPerPack": 30 },
+                        { "partNumber": "RPBVL-50", "dimension": "50mm", "packingUnit": 2, "piecesPerPack": 20 },
+                        { "partNumber": "RPBVL-63", "dimension": "63mm", "packingUnit": 2, "piecesPerPack": 10 }
+                    ]
+                },
+                {
+                    "name": "PPR Manifold",
+                    "type": "ppr-manifold",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPMF 3225 - 2W", "dimension": "32 X 25 mm (Two Way)", "packingUnit": 100, "piecesPerPack": null },
+                        { "partNumber": "RPMF 3225 - 3W", "dimension": "32 X 25 mm (Three Way)", "packingUnit": 100, "piecesPerPack": null },
+                        { "partNumber": "RPMF 3225 - 4W", "dimension": "32 X 25 mm (Four Way)", "packingUnit": 100, "piecesPerPack": null },
+                        { "partNumber": "RPMF 4032 - 2W", "dimension": "40 X 32 mm (Two Way)", "packingUnit": 75, "piecesPerPack": null },
+                        { "partNumber": "RPMF 4032 - 3W", "dimension": "40 X 32 mm (Three Way)", "packingUnit": 75, "piecesPerPack": null },
+                        { "partNumber": "RPMF 4032 - 4W", "dimension": "40 X 32 mm (Four Way)", "packingUnit": 75, "piecesPerPack": null },
+                        { "partNumber": "RPMF 5025 - 4W", "dimension": "50 X 25 mm (Four Way)", "packingUnit": 30, "piecesPerPack": null },
+                        { "partNumber": "RPMF 5032 - 4W", "dimension": "50 X 32 mm (Four Way)", "packingUnit": 30, "piecesPerPack": null },
+                        { "partNumber": "RPMF 6322 - 4W", "dimension": "63 X 25 mm (Four Way)", "packingUnit": 10, "piecesPerPack": null },
+                        { "partNumber": "RPMF 6332 - 4W", "dimension": "63 X 32 mm (Four Way)", "packingUnit": 10, "piecesPerPack": null }
+                    ]
+                },
+                {
+                    "name": "Transition Female Socket-Round",
+                    "type": "transition-female-socket-round",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFS - 20½\"", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFS - 20¾\"", "dimension": "20mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFS - 25½\"", "dimension": "25mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFS - 25¾\"", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFS - 32¾\"", "dimension": "32mm X ¾\"", "packingUnit": 5, "piecesPerPack": 100 }
+                    ]
+                },
+                {
+                    "name": "Transition Female Socket-Hexagonal",
+                    "type": "transition-female-socket-hexagonal",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFSH - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFSH - 401", "dimension": "40mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFSH - 401½", "dimension": "40mm X 1½\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFSH - 501½", "dimension": "50mm X 1½\"", "packingUnit": 2, "piecesPerPack": 30 },
+                        { "partNumber": "RPFSH - 632", "dimension": "63mm X 2\"", "packingUnit": 2, "piecesPerPack": 25 },
+                        { "partNumber": "RPFSH - 752½", "dimension": "75mm X 2½\"", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPFSH - 903", "dimension": "90mm X 3\"", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPFSH - 1104", "dimension": "110mm X 4\"", "packingUnit": 1, "piecesPerPack": 5 }
+                    ]
+                },
+                {
+                    "name": "Transition Male Socket-Round",
+                    "type": "transition-male-socket-round",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPMS - 20½", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPMS - 20¾", "dimension": "20mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPMS - 25½", "dimension": "25mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPMS - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPMS - 32¾", "dimension": "32mm X ¾\"", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPMS - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPMS - 501½", "dimension": "50mm X 1½\"", "packingUnit": 2, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Transition Male Socket-Hexagonal",
+                    "type": "transition-male-socket-hexagonal",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPMSH - 321", "dimension": "32 X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPMSH - 401", "dimension": "40 X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPMSH - 401½", "dimension": "40 X 1½\"", "packingUnit": 5, "piecesPerPack": 40 },
+                        { "partNumber": "RPMSH - 501½", "dimension": "50 X 1½\"", "packingUnit": 2, "piecesPerPack": 40 },
+                        { "partNumber": "RPMSH - 632", "dimension": "63 X 2\"", "packingUnit": 2, "piecesPerPack": 25 },
+                        { "partNumber": "RPMSH - 752½", "dimension": "75 X 2½\"", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPMSH - 903", "dimension": "90 X 3\"", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPMSH - 1104", "dimension": "110mm X 4\"", "packingUnit": 1, "piecesPerPack": 5 }
+                    ]
+                },
+                {
+                    "name": "Transition Female Union-Brass",
+                    "type": "transition-female-union-brass",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFU - 201½", "dimension": "20mm X 1½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFU - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFU - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFU - 401½", "dimension": "40mm X 1½\"", "packingUnit": 2, "piecesPerPack": 40 },
+                        { "partNumber": "RPFU - 501½", "dimension": "50mm X 1½\"", "packingUnit": 2, "piecesPerPack": 30 },
+                        { "partNumber": "RPFU - 632", "dimension": "63mm X 2\"", "packingUnit": 1, "piecesPerPack": 15 }
+                    ]
+                },
+                {
+                    "name": "Transition Female Tee - Round/Hexagon",
+                    "type": "transition-female-tee-round-hexagon",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFT - 20½", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFT - 20¾", "dimension": "20mm X ¾\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFT - 25½", "dimension": "25mm X ½\"", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPFT - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 150 },
+                        { "partNumber": "RPFT - 32½", "dimension": "32mm X ½\"", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPFT - 32¾", "dimension": "32mm X ¾\"", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPFT - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFTH - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Transition Valve Body",
+                    "type": "transition-valve-body",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPVB - 20½", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPVB - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPVB - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPVB - 401¼", "dimension": "40mm X 1¼\"", "packingUnit": 2, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Transition Female Elbow - Round/Hexagon",
+                    "type": "transition-female-elbow-round-hexagon",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFE - 20½", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 20¾", "dimension": "20mm X ¾\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 25½", "dimension": "25mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFE - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFE - 32½", "dimension": "32mm X ½\"", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 32¾", "dimension": "32mm X ¾\"", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPFE - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 },
+                        { "partNumber": "RPFEH - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Transition Male Elbow",
+                    "type": "transition-male-elbow",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFE - 20½", "dimension": "20mm X ½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 20¾", "dimension": "20mm X ¾\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 25½", "dimension": "25mm X ½\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFE - 25¾", "dimension": "25mm X ¾\"", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPFE - 32½", "dimension": "32mm X ½\"", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPFE - 32¾", "dimension": "32mm X ¾\"", "packingUnit": 5, "piecesPerPack": 75 },
+                        { "partNumber": "RPFE - 321", "dimension": "32mm X 1\"", "packingUnit": 5, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Transition Female Wall Elbow",
+                    "type": "transition-female-wall-elbow",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPFWE - 20½", "dimension": "20mm - X ½\"", "packingUnit": 10, "piecesPerPack": 100 },
+                        { "partNumber": "RPFWE - 25½", "dimension": "25mm - X ½\"", "packingUnit": 10, "piecesPerPack": 100 }
+                    ]
+                },
+                {
+                    "name": "Transition Wall Mount Group-Horizontal",
+                    "type": "transition-wall-mount-group-horizontal",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPWMGH - 20", "dimension": "20 mm", "packingUnit": 5, "piecesPerPack": 30 },
+                        { "partNumber": "RPWMGH - 25", "dimension": "25 mm", "packingUnit": 5, "piecesPerPack": 40 }
+                    ]
+                },
+                {
+                    "name": "Transition Wall Mount Group-Vertical",
+                    "type": "transition-wall-mount-group-vertical",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPWMGV - 25", "dimension": "25 mm", "packingUnit": 5, "piecesPerPack": 40 }
+                    ]
+                },
+                {
+                    "name": "Stop Valve With Round Wheel",
+                    "type": "stop-valve-with-round-wheel",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPSV - 20", "dimension": "20mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPSV - 25", "dimension": "25mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPSV - 32", "dimension": "32mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPSV - 40", "dimension": "40mm", "packingUnit": 1, "piecesPerPack": 50 }
+                    ]
+                },
+                {
+                    "name": "Concealed Valve",
+                    "type": "concealed-valve",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPCV - 20", "dimension": "20mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPCV - 25", "dimension": "25mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPCV - 32", "dimension": "32mm", "packingUnit": 1, "piecesPerPack": 40 }
+                    ]
+                },
+                {
+                    "name": "Ball Valve - Brass",
+                    "type": "ball-valve-brass",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPBBV - 20", "dimension": "20mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPBBV - 25", "dimension": "25mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPBBV - 32", "dimension": "32mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPBBV - 40", "dimension": "40mm", "packingUnit": 1, "piecesPerPack": 15 },
+                        { "partNumber": "RPBBV - 50", "dimension": "50mm", "packingUnit": 1, "piecesPerPack": 10 },
+                        { "partNumber": "RPBBV - 63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
+                },
+                {
+                    "name": "Angle Valve - V5",
+                    "type": "angle-valve-v5",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPAV5 - ½\"", "dimension": "½\" X ½\"", "packingUnit": 1, "piecesPerPack": 100 }
+                    ]
+                },
+                {
+                    "name": "Angle Valve - V8",
+                    "type": "angle-valve-v8",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPAV8 - ½\"", "dimension": "½\" X ½\"", "packingUnit": 1, "piecesPerPack": 100 }
+                    ]
                 }
             ]
         },
@@ -309,31 +841,110 @@
                     "DVS 2207"
                 ]
             },
-            "dimensionalTable": [
+            "fittingItems": [
                 {
-                    "outerDiameter": "20",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Socket",
+                    "type": "socket",
+                    "standard": "SDR6/PN20",
+                    "coverImage": "/images/fittings/socket.jpg",
+                    "specifications": [
+                        { "partNumber": "RPS-20", "dimension": "20mm", "packingUnit": 20, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-25", "dimension": "25mm", "packingUnit": 20, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-32", "dimension": "32mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPS-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPS-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPS-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPS-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPS-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPS-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 30 }
+                    ]
                 },
                 {
-                    "outerDiameter": "25",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Reducer Socket",
+                    "type": "reducer-socket",
+                    "standard": "SDR6/PN20",
+                    "coverImage": "/images/fittings/reducer-socket.jpg",
+                    "specifications": [
+                        { "partNumber": "RPRS-2520", "dimension": "25/20mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-3220", "dimension": "32/20mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-3225", "dimension": "32/25mm", "packingUnit": 25, "piecesPerPack": 200 },
+                        { "partNumber": "RPRS-4020", "dimension": "40/20mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-4025", "dimension": "40/25mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-4032", "dimension": "40/32mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-5020", "dimension": "50/20mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPRS-5025", "dimension": "50/25mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-5032", "dimension": "50/32mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-5040", "dimension": "50/40mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6320", "dimension": "63/20mm", "packingUnit": 1, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6325", "dimension": "63/25mm", "packingUnit": 1, "piecesPerPack": 100 },
+                        { "partNumber": "RPRS-6332", "dimension": "63/32mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-6340", "dimension": "63/40mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-6350", "dimension": "63/50mm", "packingUnit": 1, "piecesPerPack": 75 },
+                        { "partNumber": "RPRS-7540", "dimension": "75/40mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-7550", "dimension": "75/50mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-7563", "dimension": "75/63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9050", "dimension": "90/50mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9063", "dimension": "90/63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPRS-9075", "dimension": "90/75mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11063", "dimension": "110/63mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11075", "dimension": "110/75mm", "packingUnit": 1, "piecesPerPack": 40 },
+                        { "partNumber": "RPRS-11090", "dimension": "110/90mm", "packingUnit": 1, "piecesPerPack": 40 }
+                    ]
                 },
                 {
-                    "outerDiameter": "32",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Elbow 90°",
+                    "type": "elbow-90",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPE90-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPE90-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 400 },
+                        { "partNumber": "RPE90-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 },
+                        { "partNumber": "RPE90-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPE90-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPE90-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPE90-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPE90-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPE90-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
                 },
                 {
-                    "outerDiameter": "40",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Elbow 45°",
+                    "type": "elbow-45",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPE45-20", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPE45-25", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 400 },
+                        { "partNumber": "RPE45-32", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 },
+                        { "partNumber": "RPE45-40", "dimension": "40mm", "packingUnit": 5, "piecesPerPack": 150 },
+                        { "partNumber": "RPE45-50", "dimension": "50mm", "packingUnit": 5, "piecesPerPack": 100 },
+                        { "partNumber": "RPE45-63", "dimension": "63mm", "packingUnit": 1, "piecesPerPack": 50 },
+                        { "partNumber": "RPE45-75", "dimension": "75mm", "packingUnit": 1, "piecesPerPack": 30 },
+                        { "partNumber": "RPE45-90", "dimension": "90mm", "packingUnit": 1, "piecesPerPack": 20 },
+                        { "partNumber": "RPE45-110", "dimension": "110mm", "packingUnit": 1, "piecesPerPack": 10 }
+                    ]
                 },
                 {
-                    "outerDiameter": "50",
-                    "wallThickness": "Standard SDR6",
-                    "weight": "N/A"
+                    "name": "Reducer Elbow",
+                    "type": "reducer-elbow",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPRE-2520", "dimension": "20mm", "packingUnit": 10, "piecesPerPack": 200 },
+                        { "partNumber": "RPRE-3225", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 250 },
+                        { "partNumber": "RPRE-4032", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 150 }
+                    ]
+                },
+                {
+                    "name": "Spigot Elbow 90°",
+                    "type": "spigot-elbow-90",
+                    "standard": "SDR6/PN20",
+                    "coverImage": null,
+                    "specifications": [
+                        { "partNumber": "RPSE-3225", "dimension": "25mm", "packingUnit": 10, "piecesPerPack": 300 },
+                        { "partNumber": "RPSE-4032", "dimension": "32mm", "packingUnit": 5, "piecesPerPack": 200 }
+                    ]
                 }
             ]
         },

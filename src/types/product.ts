@@ -16,6 +16,24 @@ export interface DimensionalRow {
   weight: string;
 }
 
+/** A single row in a fitting specification table */
+export interface FittingRow {
+  partNumber: string;
+  dimension: string;
+  packingUnit: number;
+  piecesPerPack: number | null;
+  piecesPerBox?: number;
+}
+
+/** Complete configuration for an individual fitting item */
+export interface FittingItem {
+  name: string;
+  type: string;
+  standard: string;
+  coverImage: string;
+  specifications: FittingRow[];
+}
+
 /** Technical specifications for a product */
 export interface ProductSpecifications {
   /** Temperature range (e.g. "Continuous 0°C to 70°C, short-term peak up to 100°C") */
@@ -44,6 +62,8 @@ export interface ProductConfig {
   dimensionalTable: DimensionalRow[];
   /** Placeholder for Locomotive Scroll video sequence URL (Phase 2) */
   videoSequenceUrl: string | null;
+  /** Fitting collection (only populated for fitting categories) */
+  fittingItems?: FittingItem[];
 }
 
 /** The shape of each product entry in the source JSON files */
@@ -67,6 +87,19 @@ export interface RawProductJSON {
     waterContent?: number | string;
     packingUnit?: string;
     weight?: number | string;
+  }>;
+  fittingItems?: Array<{
+    name: string;
+    type: string;
+    standard: string;
+    coverImage: string;
+    specifications: Array<{
+      partNumber: string;
+      dimension: string;
+      packingUnit: number;
+      piecesPerPack: number | null;
+      piecesPerBox?: number;
+    }>;
   }>;
 }
 

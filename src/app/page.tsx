@@ -65,9 +65,9 @@ export default function HomePage() {
       {/* ─── Canvas Sequence — Scrub ends at 85% of sequenceRef (section track only) ─── */}
       <CanvasSequence
         desktopPath="/home-desktop/"
-        tabletPath="/home-tablet/"
-        mobilePath="/home-mobile/"
-        frameCount={240}
+        tabletPath="/home-desktop/"
+        mobilePath="/home-desktop/"
+        frameCount={337}
         scrollTriggerRef={sequenceRef}
       />
 
@@ -112,7 +112,7 @@ export default function HomePage() {
           <div className="w-full px-6 md:px-12 max-w-screen-2xl mx-auto">
             <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-14">
               <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
-                Premium PP-R Piping Systems in the <span className="text-red-600">UAE</span>. Manufactured to strict
+                Premium PP-R Piping Systems in the <span className="text-red-600">UAE</span>. Manufactured to strict{" "}
                 <span className="text-yellow-400">German Standard</span> <span className="text-yellow-400">DIN 8077/8078</span>.
               </p>
             </div>
@@ -155,18 +155,18 @@ export default function HomePage() {
                   </span>
                 </div>
 
-                <div className="hud-liquid-reveal pb-6">
+                <div className="hud-liquid-reveal pb-6 pr-2">
                   <h2 className="font-sans font-extrabold leading-tight tracking-tighter text-neutral-950
-                    text-[clamp(3rem,8vw,7rem)] mb-10">
+                    text-[clamp(2.7rem,7.2vw,6.3rem)] mb-10 pr-4">
                     <span className="text-red-600">German Standard</span>
                     <br />
-                    Engineering<span className="text-emerald-600">.</span>
+                    <span className="whitespace-nowrap">Engineering<span className="text-emerald-600">.</span><span className="text-transparent select-none pr-4">&nbsp;</span></span>
                   </h2>
                 </div>
 
                 <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-14">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
-                Manufactured using modern technology in strict accordance with
+                Manufactured using modern technology in strict accordance with{" "}
                   <span className="text-red-600">German standards</span> <span className="text-emerald-600">DIN 8077/8078</span>. Every pipe is produced with
                   precision tooling and <span className="text-yellow-400">DVS 2207</span> certified welding processes.
               </p>
@@ -296,7 +296,7 @@ export default function HomePage() {
 
               <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-14">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
-                Exceeding <span className="text-emerald-600">DIN 8077/8078</span> <span className="text-red-600">German Standard</span>s for Hygiene. RAKPLUS
+                Exceeding <span className="text-emerald-600">DIN 8077/8078</span> <span className="text-red-600">German Standards</span> for Hygiene. RAKPLUS
                 PP-R pipes are independently tested — hygienic, non-toxic,
                 and safe for your family&apos;s drinking water.
               </p>
@@ -306,6 +306,62 @@ export default function HomePage() {
                 <HeroCTA href="/contact" isPrimary>
                   Get a Quote
                 </HeroCTA>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[5vh] md:min-h-[10vh] pointer-events-none" aria-hidden="true" />
+
+        {/* ═══ SECTION 5 — Global Infrastructure ═══ */}
+        <section
+          id="infrastructure-section"
+          className="min-h-[80vh] flex flex-col justify-center py-16 md:py-28 px-[10vw]"
+        >
+          <div className="w-full max-w-[1920px] mx-auto">
+            <div className="max-w-4xl">
+              <div className="hud-skew-heading">
+                <h2 className="font-sans font-extrabold font-extrabold leading-[0.85] tracking-tighter text-neutral-950
+                  text-[clamp(3rem,8vw,7rem)] mb-10">
+                  Global
+                  <br />
+                  Infrastructure<span className="text-emerald-600">.</span>
+                </h2>
+              </div>
+
+              <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-14">
+                <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
+                  Engineered for the most demanding environments. The <span className="text-red-600">RAKPLUS®</span> system is designed for Hot & Cold potable water supply in residential and commercial buildings, HVAC, compressed air systems, and networks for aggressive fluids.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ CINEMATIC SPACER ═══ */}
+        <div className="w-full min-h-[5vh] md:min-h-[10vh] pointer-events-none" aria-hidden="true" />
+
+        {/* ═══ SECTION 6 — Built to Outlast ═══ */}
+        <section
+          id="fifty-year-promise-section"
+          className="min-h-[80vh] flex flex-col justify-center py-16 md:py-28 px-[10vw]"
+        >
+          <div className="w-full max-w-[1920px] mx-auto flex justify-end">
+            <div className="max-w-4xl w-full text-right">
+              <div className="hud-skew-heading">
+                <h2 className="font-sans font-extrabold font-extrabold leading-[0.85] tracking-tighter text-neutral-950
+                  text-[clamp(3rem,8vw,7rem)] mb-10">
+                  Built to
+                  <br />
+                  Outlast<span className="text-yellow-400">.</span>
+                </h2>
+              </div>
+
+              <div className="bg-emerald-50/40 backdrop-blur-md border-r-4 border-emerald-500 p-6 rounded-l-2xl max-w-3xl w-full mb-14 ml-auto text-left">
+                <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
+                  Manufactured using modern technology in accordance with strict <span className="text-red-600">German standards</span>. Characterized by high impact strength, our environment-friendly, lightweight piping networks deliver a guaranteed service life of <span className="text-emerald-600">min. 50 years</span>.
+                </p>
               </div>
             </div>
           </div>
