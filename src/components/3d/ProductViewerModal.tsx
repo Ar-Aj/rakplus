@@ -41,15 +41,24 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
 
       <div className="w-full h-full">
         <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: true }}>
-          {/* Studio Lighting Rig */}
-          <ambientLight intensity={0.15} />
-          <directionalLight position={[5, 10, 5]} intensity={2.5} castShadow />
-          <directionalLight position={[-5, -5, 5]} intensity={0.5} color="#ffffff" />
-          <Environment preset="city" environmentIntensity={0.4} />
+          {/* 1. Global Ambient - Lifts pitch-black shadows */}
+          <ambientLight intensity={0.6} />
+
+          {/* 2. Top-Down Key Light - Creates the main top highlight */}
+          <directionalLight position={[5, 10, 5]} intensity={3.5} castShadow />
+
+          {/* 3. Bottom Bounce Fill - Illuminates the underside of the pipe */}
+          <directionalLight position={[0, -5, 5]} intensity={1.5} color="#e0e0e0" />
+
+          {/* 4. Back Rim Light - Separates the dark pipe from the dark background */}
+          <spotLight position={[-10, 5, -5]} intensity={5} angle={0.3} penumbra={1} color="#ffffff" />
+
+          {/* 5. HDRI Environment - Provides realistic room reflections */}
+          <Environment preset="city" environmentIntensity={0.85} />
 
           <Suspense fallback={null}>
             <Bounds fit clip observe margin={1.2}>
-              <Center rotation={[0, Math.PI / 4.5, Math.PI / 20]}>
+              <Center rotation={[0, -Math.PI / 5, 0]}>
                 <PipeModel modelPath={modelPath} />
               </Center>
             </Bounds>

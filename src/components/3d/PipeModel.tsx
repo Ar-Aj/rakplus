@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -10,6 +10,28 @@ interface PipeModelProps {
 
 export default function PipeModel({ modelPath }: PipeModelProps) {
   const { scene } = useGLTF(modelPath);
+
+  // ── Procedural Noise Bump Map (Blender Noise Texture → Bump node translation) ──
+  const bumpMap = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 256;
+    const context = canvas.getContext("2d");
+    if (context) {
+      for (let x = 0; x < 256; x++) {
+        for (let y = 0; y < 256; y++) {
+          const val = Math.floor(Math.random() * 255);
+          context.fillStyle = `rgb(${val},${val},${val})`;
+          context.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(4, 4);
+    return tex;
+  }, []);
 
   useEffect(() => {
     scene.traverse((child) => {
@@ -25,19 +47,21 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
 
       if (isDecal) return;
 
-      // Inject photorealistic deep-green PP-R polymer properties (Blender BSDF translation)
+      // Restored true Blender hex + procedural noise bump for matte plastic surface
       mesh.material = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color('#0E6B3D'),
-        roughness: 0.45,
+        color: new THREE.Color("#074526"),
+        roughness: 0.95,
         metalness: 0.0,
         ior: 1.46,
-        clearcoat: 0.1,
-        clearcoatRoughness: 0.4,
-        envMapIntensity: 0.7
+        bumpMap: bumpMap,
+        bumpScale: 0.002,
+        clearcoat: 0,
+        clearcoatRoughness: 0.5,
+        envMapIntensity: 0.0,
       });
       mesh.material.needsUpdate = true;
     });
-  }, [scene]);
+  }, [scene, bumpMap]);
 
-  return <primitive object={scene} scale={1} />;
+  return <primitive object={scene} scale={1} rotation={[0, -Math.PI / 6, 0]} />;
 }
