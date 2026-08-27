@@ -26,7 +26,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 to-neutral-950">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#E5E7EB]">
       {/* Premium close button */}
       <button
         onClick={onClose}
@@ -42,7 +42,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
       <div className="w-full h-full">
         <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: true }}>
           {/* 1. Global Ambient - Lifts pitch-black shadows */}
-          <ambientLight intensity={0.6} />
+          <ambientLight intensity={1.5} />
 
           {/* 2. Top-Down Key Light - Creates the main top highlight */}
           <directionalLight position={[5, 10, 5]} intensity={3.5} castShadow />

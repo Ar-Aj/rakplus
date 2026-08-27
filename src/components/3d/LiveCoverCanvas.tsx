@@ -13,7 +13,7 @@ export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
   return (
     <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
       {/* 1. Global Ambient - Lifts pitch-black shadows */}
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={1.5} />
 
       {/* 2. Top-Down Key Light - Creates the main top highlight */}
       <directionalLight position={[5, 10, 5]} intensity={3.5} castShadow />

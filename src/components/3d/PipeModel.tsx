@@ -11,25 +11,25 @@ interface PipeModelProps {
 export default function PipeModel({ modelPath }: PipeModelProps) {
   const { scene } = useGLTF(modelPath);
 
-  // ── Procedural Noise Bump Map (Blender Noise Texture → Bump node translation) ──
-  const bumpMap = useMemo(() => {
+  // ── Procedural 512×512 Noise Texture (Blender Noise Texture → Bump node) ──
+  const noiseTexture = useMemo(() => {
     const canvas = document.createElement("canvas");
-    canvas.width = 256;
-    canvas.height = 256;
-    const context = canvas.getContext("2d");
-    if (context) {
-      for (let x = 0; x < 256; x++) {
-        for (let y = 0; y < 256; y++) {
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      for (let x = 0; x < 512; x++) {
+        for (let y = 0; y < 512; y++) {
           const val = Math.floor(Math.random() * 255);
-          context.fillStyle = `rgb(${val},${val},${val})`;
-          context.fillRect(x, y, 1, 1);
+          ctx.fillStyle = `rgb(${val},${val},${val})`;
+          ctx.fillRect(x, y, 1, 1);
         }
       }
     }
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(4, 4);
+    tex.repeat.set(8, 8);
     return tex;
   }, []);
 
@@ -38,30 +38,55 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
       const mesh = child as THREE.Mesh;
       if (!mesh.isMesh) return;
 
-      // Preserve text/decal meshes from Blender
+      const name = mesh.name.toLowerCase();
+      const mat = mesh.material as THREE.MeshStandardMaterial;
+
+      // ── Decal / Text / Logo meshes ──
+      // Detect by name OR by transparent material flag (how Blender exports decals)
       const isDecal =
-        mesh.name.toLowerCase().includes("text") ||
-        mesh.name.toLowerCase().includes("logo") ||
-        mesh.name.toLowerCase().includes("decal") ||
-        mesh.name.toLowerCase().includes("label");
+        name.includes("text") ||
+        name.includes("logo") ||
+        name.includes("curve") ||
+        name.includes("decal") ||
+        name.includes("label") ||
+        (mat && mat.transparent === true);
 
-      if (isDecal) return;
+      if (isDecal) {
+        // FIX A: More aggressive relative scale — closes the physical geometry gap
+        mesh.scale.x *= 0.985;
+        mesh.scale.z *= 0.985;
 
-      // Restored true Blender hex + procedural noise bump for matte plastic surface
-      mesh.material = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#074526"),
-        roughness: 0.95,
-        metalness: 0.0,
-        ior: 1.46,
-        bumpMap: bumpMap,
-        bumpScale: 0.002,
-        clearcoat: 0,
-        clearcoatRoughness: 0.5,
-        envMapIntensity: 0.0,
-      });
-      mesh.material.needsUpdate = true;
+        // FIX B: Replace material with exact Blender node translation + alphaTest
+        // alphaTest=0.5 discards transparent pixels so they stop catching white reflections
+        if (mesh.material) {
+          mesh.material = new THREE.MeshPhysicalMaterial({
+            map: mat?.map || null,
+            color: mat?.color || new THREE.Color("#ffffff"),
+            transparent: true,
+            alphaTest: 0.5,
+            roughness: 0.500,
+            metalness: 0.000,
+            ior: 1.500,
+            depthWrite: false,
+          });
+          mesh.material.needsUpdate = true;
+        }
+      } else {
+        // ── Main pipe body — exact Blender BSDF node values ──
+        mesh.material = new THREE.MeshPhysicalMaterial({
+          color: new THREE.Color("#0A5C33"),
+          roughness: 0.450,
+          metalness: 0.000,
+          ior: 1.460,
+          bumpMap: noiseTexture,
+          bumpScale: 0.023,
+          envMapIntensity: 0.4,
+          clearcoat: 0.0,
+        });
+        mesh.material.needsUpdate = true;
+      }
     });
-  }, [scene, bumpMap]);
+  }, [scene, noiseTexture]);
 
   return <primitive object={scene} scale={1} rotation={[0, -Math.PI / 6, 0]} />;
 }
