@@ -18,7 +18,7 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
       scene.traverse((child) => {
         const mesh = child as THREE.Mesh;
         if (mesh.isMesh) {
-          const mat = mesh.material as any;
+          const mat = mesh.material as THREE.MeshStandardMaterial;
           const isGreenBody = mat && mat.name && mat.name.toLowerCase().includes("green");
 
           // 1. Identify text/logo by common Blender names, material names, or texture maps
