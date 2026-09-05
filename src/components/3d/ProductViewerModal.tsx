@@ -1,8 +1,9 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls, ContactShadows, Bounds, Center } from "@react-three/drei";
+import { OrbitControls, ContactShadows, Bounds, Center } from "@react-three/drei";
 import { Suspense, useEffect } from "react";
+import * as THREE from "three";
 import PipeModel from "./PipeModel";
 
 interface ProductViewerModalProps {
@@ -26,7 +27,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#E5E7EB]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 to-neutral-950">
       {/* Premium close button */}
       <button
         onClick={onClose}
@@ -40,9 +41,11 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
       </button>
 
       <div className="w-full h-full">
-        <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: true }}>
+        <Canvas camera={{ fov: 45 }} dpr={[1, 2]} gl={{ alpha: false }}>
+          {/* Neutral dark grey background for raw texture evaluation */}
+          <color attach="background" args={['#2E2E2E']} />
           {/* 1. Global Ambient - Lifts pitch-black shadows */}
-          <ambientLight intensity={1.5} />
+          <ambientLight intensity={1.8} color="#ffffff" />
 
           {/* 2. Top-Down Key Light - Creates the main top highlight */}
           <directionalLight position={[5, 10, 5]} intensity={3.5} castShadow />
@@ -53,8 +56,9 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
           {/* 4. Back Rim Light - Separates the dark pipe from the dark background */}
           <spotLight position={[-10, 5, -5]} intensity={5} angle={0.3} penumbra={1} color="#ffffff" />
 
-          {/* 5. HDRI Environment - Provides realistic room reflections */}
-          <Environment preset="city" environmentIntensity={0.85} />
+          {/* 5. Rear Fill Light - Illuminates the back of the cylinder */}
+          <directionalLight intensity={3} position={[0, 2, -6]} color="#ffffff" />
+
 
           <Suspense fallback={null}>
             <Bounds fit clip observe margin={1.2}>
@@ -71,11 +75,17 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
             />
           </Suspense>
 
-          {/* makeDefault required for Bounds to hijack camera on fit */}
           <OrbitControls
             makeDefault
+            target={[0, 0, 0]}
+            enablePan={false}
             enableZoom={true}
-            maxPolarAngle={Math.PI / 2}
+            enableDamping={true}
+            dampingFactor={0.05}
+            autoRotate={false}
+            minPolarAngle={THREE.MathUtils.degToRad(55)}
+            maxPolarAngle={THREE.MathUtils.degToRad(125)}
+            zoomSpeed={0.7}
           />
         </Canvas>
       </div>

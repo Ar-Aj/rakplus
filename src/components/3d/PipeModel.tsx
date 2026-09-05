@@ -1,92 +1,63 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useEffect } from "react";
+import { useGLTF, Center } from "@react-three/drei";
 import * as THREE from "three";
 
 interface PipeModelProps {
-  modelPath: string;
+  modelPath?: string;
 }
+
+const MODEL_PATH = encodeURI("/3D Models/sdr6-25.glb");
 
 export default function PipeModel({ modelPath }: PipeModelProps) {
-  const { scene } = useGLTF(modelPath);
-
-  // ── Procedural 512×512 Noise Texture (Blender Noise Texture → Bump node) ──
-  const noiseTexture = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      for (let x = 0; x < 512; x++) {
-        for (let y = 0; y < 512; y++) {
-          const val = Math.floor(Math.random() * 255);
-          ctx.fillStyle = `rgb(${val},${val},${val})`;
-          ctx.fillRect(x, y, 1, 1);
-        }
-      }
-    }
-    const tex = new THREE.CanvasTexture(canvas);
-    tex.wrapS = THREE.RepeatWrapping;
-    tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(8, 8);
-    return tex;
-  }, []);
+  const { scene } = useGLTF(modelPath ?? MODEL_PATH);
 
   useEffect(() => {
-    scene.traverse((child) => {
-      const mesh = child as THREE.Mesh;
-      if (!mesh.isMesh) return;
+    if (scene) {
+      scene.traverse((child) => {
+        const mesh = child as THREE.Mesh;
+        if (mesh.isMesh) {
+          const mat = mesh.material as any;
+          const isGreenBody = mat && mat.name && mat.name.toLowerCase().includes("green");
 
-      const name = mesh.name.toLowerCase();
-      const mat = mesh.material as THREE.MeshStandardMaterial;
+          // 1. Identify text/logo by common Blender names, material names, or texture maps
+          const isDecal =
+            !isGreenBody &&
+            (Boolean(mesh.name.toLowerCase().match(/text|logo|curve|bezier|plane|decal|black/i)) ||
+              Boolean(mat && mat.name && mat.name.toLowerCase().includes("black")) ||
+              Boolean(mat && mat.map !== null && mat.map !== undefined));
 
-      // ── Decal / Text / Logo meshes ──
-      // Detect by name OR by transparent material flag (how Blender exports decals)
-      const isDecal =
-        name.includes("text") ||
-        name.includes("logo") ||
-        name.includes("curve") ||
-        name.includes("decal") ||
-        name.includes("label") ||
-        (mat && mat.transparent === true);
+          if (isDecal) {
+            // 2. Rescue the text: Force it to be visible and black
+            if (mat) {
+              mat.color = new THREE.Color("#050505");
+              mat.roughness = 1.0;
+              mat.needsUpdate = true;
+            }
+            return; // Stop processing this mesh
+          }
 
-      if (isDecal) {
-        // FIX A: More aggressive relative scale — closes the physical geometry gap
-        mesh.scale.x *= 0.985;
-        mesh.scale.z *= 0.985;
-
-        // FIX B: Replace material with exact Blender node translation + alphaTest
-        // alphaTest=0.5 discards transparent pixels so they stop catching white reflections
-        if (mesh.material) {
+          // 3. Apply the matte PP-R green ONLY to the remaining pipe body
           mesh.material = new THREE.MeshPhysicalMaterial({
-            map: mat?.map || null,
-            color: mat?.color || new THREE.Color("#ffffff"),
-            transparent: true,
-            alphaTest: 0.5,
-            roughness: 0.500,
-            metalness: 0.000,
-            ior: 1.500,
-            depthWrite: false,
+            color: new THREE.Color("#0A5C33"),
+            roughness: 0.65,
+            metalness: 0.0,
+            clearcoat: 0.0,
+            envMapIntensity: 0.2,
           });
-          mesh.material.needsUpdate = true;
         }
-      } else {
-        // ── Main pipe body — exact Blender BSDF node values ──
-        mesh.material = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color("#0A5C33"),
-          roughness: 0.450,
-          metalness: 0.000,
-          ior: 1.460,
-          bumpMap: noiseTexture,
-          bumpScale: 0.023,
-          envMapIntensity: 0.4,
-          clearcoat: 0.0,
-        });
-        mesh.material.needsUpdate = true;
-      }
-    });
-  }, [scene, noiseTexture]);
+      });
+    }
+  }, [scene]);
 
-  return <primitive object={scene} scale={1} rotation={[0, -Math.PI / 6, 0]} />;
+  return (
+    // Drei Center guarantees a perfect geometric pivot — no Box3 drift
+    <Center>
+      <primitive object={scene} rotation={[0, -Math.PI / 8, 0]} />
+    </Center>
+  );
 }
+
+// Pre-warm the asset before any component mounts
+useGLTF.preload(MODEL_PATH);

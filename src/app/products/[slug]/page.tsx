@@ -45,13 +45,17 @@ const LiveCoverCanvas = dynamic(
 );
 
 // ─── SDR Model Dictionary ─────────────────────────────────────────────────────
-// Maps product title substrings to their exact GLB asset path.
-// Returns null when no model exists — the 3D block is hidden in that case.
+// Only sdr6-25.glb currently exists in public/3D Models/.
+// All SDR variants temporarily share this asset until additional models are supplied.
 function getModelPath(productTitle: string): string | null {
-  if (productTitle.includes("SDR11"))  return "/3D Models/rakplusSDR11.glb";
-  if (productTitle.includes("SDR7.4")) return "/3D Models/rakplusSDR7.4.glb";
-  if (productTitle.includes("SDR6"))   return "/3D Models/rakplusSD6.glb";   // Exact filename per spec
-  if (productTitle.includes("SDR5"))   return "/3D Models/rakplusSDR5.glb";
+  if (
+    productTitle.includes("SDR11") ||
+    productTitle.includes("SDR7.4") ||
+    productTitle.includes("SDR6") ||
+    productTitle.includes("SDR5")
+  ) {
+    return encodeURI("/3D Models/sdr6-25.glb");
+  }
   return null;
 }
 
