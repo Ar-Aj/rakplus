@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, ContactShadows, Bounds, Center } from "@react-three/drei";
+import { OrbitControls, ContactShadows, Center } from "@react-three/drei";
 import { Suspense, useEffect } from "react";
 import * as THREE from "three";
 import PipeModel from "./PipeModel";
@@ -61,11 +61,9 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
 
 
           <Suspense fallback={null}>
-            <Bounds fit clip observe margin={1.2}>
-              <Center rotation={[0, -Math.PI / 5, 0]}>
-                <PipeModel modelPath={modelPath} />
-              </Center>
-            </Bounds>
+            <Center rotation={[0, -Math.PI / 5, 0]}>
+              <PipeModel modelPath={modelPath} />
+            </Center>
             <ContactShadows
               position={[0, -1.5, 0]}
               opacity={0.6}

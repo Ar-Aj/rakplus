@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Bounds, Center } from "@react-three/drei";
+import { OrbitControls, Center } from "@react-three/drei";
 import { Suspense } from "react";
 import * as THREE from "three";
 import PipeModel from "./PipeModel";
@@ -32,12 +32,9 @@ export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
 
 
       <Suspense fallback={null}>
-        {/* margin={0.6} — tight macro close-up crop for the card teaser */}
-        <Bounds fit clip observe margin={0.6}>
-          <Center>
-            <PipeModel modelPath={modelPath} />
-          </Center>
-        </Bounds>
+        <Center>
+          <PipeModel modelPath={modelPath} />
+        </Center>
       </Suspense>
 
       <OrbitControls
