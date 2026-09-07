@@ -53,8 +53,9 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
 
   return (
     // Drei Center guarantees a perfect geometric pivot — no Box3 drift
+    // Scale applied here so Center sees the final geometry size in the same render pass
     <Center>
-      <primitive object={scene} rotation={[0, -Math.PI / 8, 0]} />
+      <primitive object={scene} rotation={[0, -Math.PI / 8, 0]} scale={8} />
     </Center>
   );
 }
