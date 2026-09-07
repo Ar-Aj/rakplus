@@ -15,7 +15,7 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
 
   useEffect(() => {
     if (scene) {
-      scene.traverse((child: any) => {
+      scene.traverse((child) => {
         const mesh = child as THREE.Mesh;
         if (mesh.isMesh) {
           const mat = mesh.material as THREE.MeshStandardMaterial;
