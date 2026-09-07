@@ -15,7 +15,7 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
 
   useEffect(() => {
     if (scene) {
-      scene.traverse((child) => {
+      scene.traverse((child: any) => {
         const mesh = child as THREE.Mesh;
         if (mesh.isMesh) {
           const mat = mesh.material as THREE.MeshStandardMaterial;
@@ -35,17 +35,7 @@ export default function PipeModel({ modelPath }: PipeModelProps) {
               mat.roughness = 1.0;
               mat.needsUpdate = true;
             }
-            return; // Stop processing this mesh
           }
-
-          // 3. Apply the matte PP-R green ONLY to the remaining pipe body
-          mesh.material = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color("#0A5C33"),
-            roughness: 0.65,
-            metalness: 0.0,
-            clearcoat: 0.0,
-            envMapIntensity: 0.2,
-          });
         }
       });
     }

@@ -44,20 +44,12 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
         <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 3] }} dpr={[1, 2]} gl={{ alpha: false }}>
           {/* Neutral dark grey background for raw texture evaluation */}
           <color attach="background" args={['#2E2E2E']} />
-          {/* 1. Global Ambient - Lifts pitch-black shadows */}
-          <ambientLight intensity={1.8} color="#ffffff" />
 
-          {/* 2. Top-Down Key Light - Creates the main top highlight */}
-          <directionalLight position={[5, 10, 5]} intensity={3.5} castShadow />
-
-          {/* 3. Bottom Bounce Fill - Illuminates the underside of the pipe */}
-          <directionalLight position={[0, -5, 5]} intensity={1.5} color="#e0e0e0" />
-
-          {/* 4. Back Rim Light - Separates the dark pipe from the dark background */}
-          <spotLight position={[-10, 5, -5]} intensity={5} angle={0.3} penumbra={1} color="#ffffff" />
-
-          {/* 5. Rear Fill Light - Illuminates the back of the cylinder */}
-          <directionalLight intensity={3} position={[0, 2, -6]} color="#ffffff" />
+          {/* Normalized 4-point lighting rig matching standard WebGL viewer */}
+          <ambientLight intensity={0.5} color="#ffffff" />
+          <directionalLight position={[4, 6, 5]} intensity={2.0} castShadow />
+          <directionalLight position={[-5, 2, 3]} intensity={1.0} />
+          <directionalLight position={[0, 2, -6]} intensity={1.0} />
 
 
           <Suspense fallback={null}>
