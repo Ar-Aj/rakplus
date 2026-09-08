@@ -41,7 +41,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
       </button>
 
       <div className="w-full h-full">
-        <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 3] }} dpr={[1, 2]} gl={{ alpha: false }}>
+        <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 3] }} dpr={[1, 2]} gl={{ antialias: true }}>
           {/* Pure white background environment test */}
           <color attach="background" args={['#FFFFFF']} />
 
