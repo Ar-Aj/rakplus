@@ -19,9 +19,164 @@ import { productRegistry } from "@/config/products";
 import type { ProductConfig } from "@/types/product";
 
 export const metadata: Metadata = {
-  title: "Products — RAKPLUS PP-R & PEX Piping Systems",
+  title:
+    "Premium PP-R Pipes / Fittings in UAE | WRAS Approved | Rakplus by Aquasmart",
   description:
-    "Explore the complete RAKPLUS product range: PP-R Green and Yellow pipes (PN10–PN25), precision fittings, and PEX systems. DIN 8077/8078 certified. 50-year guarantee.",
+    "Explore the complete RAKPLUS range of PP-R Green and Yellow pipes (PN10–PN25), WRAS-approved fittings, and PEX systems. Engineered to German STD DIN 8077/78 and ISO 9001:2015 certified. Top PP-R pipe supplier in Dubai, UAE, and the GCC.",
+  keywords: [
+    "Premium PP-R Pipes UAE",
+    "WRAS Approved PP-R Fittings Dubai",
+    "Top PP-R Pipe Supplier GCC",
+    "PP-R pipes Dubai",
+    "PPR pipe manufacturer UAE",
+    "DIN 8077 PP-R pipes",
+    "PN20 SDR6 PP-R pipe",
+    "Rakplus PP-R",
+    "Aquasmart Plastic Industries",
+    "polypropylene pipe systems GCC",
+  ],
+  openGraph: {
+    title:
+      "Premium PP-R Pipes / Fittings in UAE | WRAS Approved | Rakplus",
+    description:
+      "11 precision-engineered PP-R and PEX piping products — manufactured to DIN 8077/78 German standards. ISO 9001:2015 certified. 50-year guarantee.",
+    type: "website",
+    locale: "en_AE",
+  },
+};
+
+// ─── JSON-LD Structured Data ───
+
+const jsonLdLocalBusiness = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "RakPlus by Aquasmart Plastic Industries L.L.C",
+  description:
+    "Manufacturer of premium PP-R pipe systems engineered to German STD DIN 8077/78. ISO 9001:2015 and ISO 14001:2015 certified. WRAS Approved materials.",
+  url: "https://rakplus.com",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AE",
+    addressRegion: "Ras Al Khaimah",
+  },
+  areaServed: ["AE", "SA", "QA", "KW", "BH", "OM"],
+  priceRange: "$$",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "RAKPLUS PP-R Pipes / Fittings Catalog",
+    itemListElement: [
+      {
+        "@type": "OfferCatalog",
+        name: "PP-R Green Pipes",
+        description: "PP-R Green Pipes PN10–PN25, SDR11 to SDR5",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "PP-R Yellow Pipes",
+        description: "PP-R Yellow Pipes PN10–PN25, SDR11 to SDR5",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "PP-R Fittings",
+        description:
+          "WRAS Approved PP-R fittings with DVS 2207 welding compliance",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "PEX Systems",
+        description: "Cross-linked polyethylene piping systems",
+      },
+    ],
+  },
+};
+
+const jsonLdProductCollection = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "RAKPLUS PP-R Pipe Systems",
+  description:
+    "Complete range of PP-R polypropylene random copolymer pipes and fittings. Engineered to DIN 8077/78 German standards. WRAS Approved. ISO 9001:2015 certified.",
+  brand: {
+    "@type": "Brand",
+    name: "Rakplus",
+  },
+  manufacturer: {
+    "@type": "Organization",
+    name: "Aquasmart Plastic Industries L.L.C",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "AE",
+    },
+  },
+  category: "Plumbing Pipes / Fittings",
+  material: "Polypropylene Random Copolymer (PP-R)",
+  additionalProperty: [
+    {
+      "@type": "PropertyValue",
+      name: "Certification",
+      value: "ISO 9001:2015, ISO 14001:2015",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Standards",
+      value: "DIN 8077/78, DIN 8076, DVS 2207, EN ISO 15874-2",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Approval",
+      value: "WRAS Approved",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Warranty",
+      value: "50 years guaranteed service life",
+    },
+  ],
+};
+
+// ─── FAQ Data (verified facts only) ───
+
+const FAQ_ITEMS = [
+  {
+    question: "What does SDR6 / PN20 mean for PP-R pipes?",
+    answer:
+      "SDR (Standard Dimension Ratio) is the ratio of the pipe's outer diameter to its wall thickness. SDR6 indicates a thicker wall, yielding a PN20 pressure rating — meaning the pipe can withstand a continuous operating pressure of 20 bar at 20°C. This makes SDR6/PN20 pipes ideal for high-pressure hot and cold water systems in commercial and residential buildings across Dubai and the GCC.",
+  },
+  {
+    question: "What is WRAS Approval and why does it matter in the UAE?",
+    answer:
+      "WRAS (Water Regulations Advisory Scheme) Approval certifies that a pipe or fitting material is safe for contact with drinking water. RAKPLUS PP-R pipes carry WRAS Approval, ensuring they meet rigorous hygiene and non-toxicity standards — a critical requirement for potable water systems in hotels, hospitals, and residential towers throughout the UAE.",
+  },
+  {
+    question:
+      "What German standards do RAKPLUS pipes conform to?",
+    answer:
+      "All RAKPLUS PP-R pipes are engineered to DIN 8077/78 (dimensions and pressure ratings for polypropylene pipes), DIN 8076 (fittings), and DVS 2207 (welding procedures). The manufacturing facility holds ISO 9001:2015 quality management and ISO 14001:2015 environmental management certifications.",
+  },
+  {
+    question:
+      "Are PP-R pipes suitable for the GCC climate?",
+    answer:
+      "Yes. PP-R (Polypropylene Random Copolymer) pipes are rated for continuous operation from 0°C to 70°C with short-term peaks up to 100°C. Their high impact strength, flexibility, and corrosion resistance make them an ideal choice for the demanding temperature cycles experienced in the UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, and Oman.",
+  },
+  {
+    question: "What guarantee does RAKPLUS offer?",
+    answer:
+      "RAKPLUS pipes carry a 50-year guaranteed service life when installed according to DIN 8077/78 specifications. This guarantee covers the full range of PP-R Green and Yellow pipes from PN10 through PN25.",
+  },
+];
+
+const jsonLdFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 // ─── Category Definitions ───
@@ -96,23 +251,64 @@ function getProductsForCategory(group: CategoryGroup): ProductConfig[] {
 export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-bg-cream">
+      {/* ─── JSON-LD Structured Data ─── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdLocalBusiness),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdProductCollection),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdFaq),
+        }}
+      />
+
       {/* ─── Hero Header ─── */}
       <section className="relative pt-28 lg:pt-40 pb-16 lg:pb-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <p className="text-xs font-semibold text-brand-green uppercase tracking-[0.3em] mb-4">
               Product Catalog
             </p>
-            <h1 className="font-sans tracking-tight text-brand-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]">
-              The RAKPLUS
+            <h1 className="font-sans tracking-tight text-brand-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]" style={{ textWrap: "balance" }}>
+              Premium PP-R Pipes / Fittings in UAE
               <br />
-              <span className="text-brand-green">Arsenal.</span>
+              <span className="text-brand-green">Rakplus</span>
             </h1>
-            <p className="mt-6 text-base sm:text-lg text-neutral-950 leading-relaxed max-w-xl">
-              11 precision-engineered piping products — manufactured by
-              Aquasmart Plastic Industries L.L.C to DIN 8077/8078 and DVS 2207
-              German standards. Every product backed by a 50-year guarantee.
+            <p className="mt-6 text-base sm:text-lg text-neutral-950 leading-relaxed max-w-2xl">
+              Engineered to German STD DIN 8077/78, Rakplus delivers
+              high-quality, WRAS-approved PP-R pipe systems designed for
+              extreme durability in the GCC climate. Manufactured by
+              Aquasmart Plastic Industries L.L.C with ISO 9001:2015 and
+              ISO 14001:2015 certifications — every product is backed by
+              a 50-year guaranteed service life.
             </p>
+
+            {/* Trust badges */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              {[
+                "WRAS Approved",
+                "ISO 9001:2015",
+                "DIN 8077/78",
+                "DVS 2207",
+                "50-Year Guarantee",
+              ].map((badge) => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center px-3 py-1.5 rounded-lg bg-brand-green/10 text-brand-green text-xs font-semibold tracking-wide"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -147,15 +343,22 @@ export default function ProductsPage() {
               </div>
 
               {/* Product Cards Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => (
                   <Link
                     key={product.slug}
                     href={`/products/${product.slug}`}
-                    className={`group relative flex flex-col justify-between p-6 rounded-2xl bg-brand-charcoal border-t-[3px] ${category.borderColor} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1`}
+                    className={`group relative flex flex-col rounded-2xl bg-brand-charcoal border-t-[3px] ${category.borderColor} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 overflow-hidden`}
                   >
+                    {/* 16:9 Cover Image Area */}
+                    <div className="aspect-video w-full bg-[#f5f5f5] flex items-center justify-center">
+                      <span className="text-4xl text-neutral-300 select-none">⬡</span>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="flex flex-col justify-between flex-1 p-6">
                     {/* Product ID */}
-                    <div className="mb-8">
+                    <div className="mb-4">
                       <span className="text-[10px] font-mono text-white uppercase tracking-widest">
                         #{String(product.id).padStart(2, "0")}
                       </span>
@@ -194,6 +397,7 @@ export default function ProductsPage() {
                         <ArrowRight className="w-4 h-4 text-white group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -201,6 +405,40 @@ export default function ProductsPage() {
           </section>
         );
       })}
+
+      {/* ─── Technical FAQ Section ─── */}
+      <section className="py-16 lg:py-24 px-6 lg:px-8 bg-white border-t border-gray-100" aria-label="Frequently Asked Questions">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-semibold text-brand-green uppercase tracking-[0.3em] mb-4">
+              Technical Knowledge
+            </p>
+            <h2 className="font-sans text-3xl sm:text-4xl font-bold text-brand-charcoal tracking-tight" style={{ textWrap: "balance" }}>
+              Frequently Asked Questions About PP-R Pipes / Fittings
+            </h2>
+            <p className="mt-4 text-sm text-neutral-950 leading-relaxed">
+              Understanding the standards and certifications behind
+              commercial plumbing systems in Dubai and the GCC.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {FAQ_ITEMS.map((item, index) => (
+              <article
+                key={index}
+                className="p-6 rounded-2xl bg-bg-cream border border-gray-100 hover:border-gray-200 transition-colors"
+              >
+                <h3 className="font-sans text-base font-semibold text-brand-charcoal tracking-tight mb-3 leading-snug">
+                  {item.question}
+                </h3>
+                <p className="text-sm text-neutral-950 leading-relaxed">
+                  {item.answer}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ─── Bottom CTA ─── */}
       <section className="py-20 lg:py-28 px-6 lg:px-8 bg-white border-t border-gray-100">

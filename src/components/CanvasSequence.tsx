@@ -91,6 +91,14 @@ interface CanvasSequenceProps {
    * Default: false (uses the internal container ref).
    */
   useDocumentScroll?: boolean;
+  /** Custom GSAP end trigger expression (e.g. "+=150%", "+=1500px", "85% bottom") */
+  end?: string;
+  /** Mobile-specific GSAP end trigger expression (e.g. "+=1500px", "+=150%") */
+  mobileEnd?: string;
+  /** GSAP scrub duration in seconds or boolean (default: 0.1 on desktop, 0.5 on mobile) */
+  scrub?: number | boolean;
+  /** Mobile-specific GSAP scrub duration in seconds or boolean (default: 0.5) */
+  mobileScrub?: number | boolean;
   /** Container className */
   className?: string;
 }
@@ -105,6 +113,10 @@ export default function CanvasSequence({
   mobileFrameCount,
   scrollTriggerRef,
   useDocumentScroll = false,
+  end,
+  mobileEnd,
+  scrub,
+  mobileScrub,
   className,
 }: CanvasSequenceProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -160,6 +172,19 @@ export default function CanvasSequence({
       ScrollTrigger.getAll().forEach(t => {
         if (t.vars.id === "canvas-sequence") t.kill();
       });
+
+      // Clear previous frames from memory to prevent memory leaks on mobile
+      if (framesRef.current) {
+        for (let i = 0; i < framesRef.current.length; i++) {
+          const img = framesRef.current[i];
+          if (img) {
+            img.onload = null;
+            img.onerror = null;
+            img.src = "";
+            framesRef.current[i] = null;
+          }
+        }
+      }
 
       // Reset frame array and index for the new path
       framesRef.current = new Array(currentFrameCount);
@@ -232,40 +257,56 @@ export default function CanvasSequence({
           ? document.documentElement
           : (containerRef.current ?? document.documentElement);
 
-      // Early-finish end: "85% bottom" = video locks on final frame
-      // while user can still freely scroll the last 15% + footer.
-      const triggerEnd = scrollTriggerRef?.current
-        ? "85% bottom"
+      const isMobile = window.innerWidth < TABLET_BREAKPOINT;
+
+      // Early-finish / Mobile-optimized trigger distance:
+      // Mobile: uses mobileEnd or compressed "+=1500px" for scrollTriggerRef to scrub quickly.
+      // Desktop: uses end prop or "85% bottom" of the scroll target.
+      const triggerEnd = isMobile && mobileEnd
+        ? mobileEnd
+        : end
+        ? end
+        : scrollTriggerRef?.current
+        ? (isMobile ? "+=1500px" : "85% bottom")
         : "bottom bottom";
 
+      // Buttery smooth scrub: 0.5 on mobile to keep pace with thumb swipes without lag.
+      const scrubValue = isMobile
+        ? (mobileScrub ?? 0.5)
+        : (scrub ?? 0.1);
+
+      let renderRequested = false;
+      const frame = { index: 0 };
+
       gsapCtx.add(() => {
-        gsap.to(
-          { frame: 0 },
-          {
-            frame: currentFrameCount - 1,
-            ease: "none",
-            scrollTrigger: {
-              id: "canvas-sequence",
-              trigger: scrollTarget,
-              start: "top top",
-              end: triggerEnd,
-              scrub: 0.1, // tightened for maximum sensitivity (Phase 13.3)
-              onUpdate: (self) => {
-                const idx = Math.min(
-                  currentFrameCount - 1,
-                  Math.max(0, Math.round(self.progress * (currentFrameCount - 1)))
-                );
-                if (idx !== currentIndex) {
-                  currentIndex = idx;
-                  const frame = framesRef.current[idx];
-                  if (frame?.naturalWidth && canvas && ctx) {
-                    renderFrame(canvas, ctx, frame);
-                  }
+        gsap.to(frame, {
+          index: currentFrameCount - 1,
+          snap: "index",
+          ease: "none",
+          scrollTrigger: {
+            id: "canvas-sequence",
+            trigger: scrollTarget,
+            start: "top top",
+            end: triggerEnd,
+            scrub: scrubValue,
+            onUpdate: () => {
+              const idx = Math.round(frame.index);
+              if (idx !== currentIndex) {
+                currentIndex = idx;
+                if (!renderRequested) {
+                  renderRequested = true;
+                  requestAnimationFrame(() => {
+                    const img = framesRef.current[currentIndex];
+                    if (img?.naturalWidth && canvas && ctx) {
+                      renderFrame(canvas, ctx, img);
+                    }
+                    renderRequested = false;
+                  });
                 }
-              },
+              }
             },
-          }
-        );
+          },
+        });
       });
 
       ScrollTrigger.refresh();
@@ -318,8 +359,33 @@ export default function CanvasSequence({
     return () => {
       window.removeEventListener("resize", handleResize);
       gsapCtx.revert();
+      if (framesRef.current) {
+        for (let i = 0; i < framesRef.current.length; i++) {
+          const img = framesRef.current[i];
+          if (img) {
+            img.onload = null;
+            img.onerror = null;
+            img.src = "";
+            framesRef.current[i] = null;
+          }
+        }
+      }
     };
-  }, [desktopPath, tabletPath, mobilePath, frameCount, desktopFrameCount, tabletFrameCount, mobileFrameCount, useDocumentScroll, scrollTriggerRef]);
+  }, [
+    desktopPath,
+    tabletPath,
+    mobilePath,
+    frameCount,
+    desktopFrameCount,
+    tabletFrameCount,
+    mobileFrameCount,
+    useDocumentScroll,
+    scrollTriggerRef,
+    end,
+    mobileEnd,
+    scrub,
+    mobileScrub,
+  ]);
 
   return (
     <div

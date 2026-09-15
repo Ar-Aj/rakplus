@@ -66,7 +66,7 @@ export default function HomePage() {
       <CanvasSequence
         desktopPath="/home-desktop/"
         tabletPath="/home-desktop/"
-        mobilePath="/home-desktop/"
+        mobilePath="/home-mobile/"
         frameCount={337}
         scrollTriggerRef={sequenceRef}
       />
