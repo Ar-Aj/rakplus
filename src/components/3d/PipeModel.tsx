@@ -1,54 +1,39 @@
 "use client";
 
-import { useEffect } from "react";
 import { useGLTF, Center } from "@react-three/drei";
-import * as THREE from "three";
 
 interface PipeModelProps {
   modelPath?: string;
+  color?: string;
+  category?: string;
 }
 
-const MODEL_PATH = encodeURI("/3D Models/sdr6-25.glb");
+const GREEN_MODEL_PATH = encodeURI("/3D Models/sdr6-32g.glb");
+const YELLOW_MODEL_PATH = encodeURI("/3D Models/sdr6-32y.glb");
 
-export default function PipeModel({ modelPath }: PipeModelProps) {
-  const { scene } = useGLTF(modelPath ?? MODEL_PATH);
+export default function PipeModel({ modelPath, color, category }: PipeModelProps) {
+  const isYellow =
+    color?.toLowerCase().includes("yellow") ||
+    category?.toLowerCase().includes("yellow") ||
+    modelPath?.toLowerCase().includes("32y") ||
+    modelPath?.toLowerCase().includes("yellow");
 
-  useEffect(() => {
-    if (scene) {
-      scene.traverse((child) => {
-        const mesh = child as THREE.Mesh;
-        if (mesh.isMesh) {
-          const mat = mesh.material as THREE.MeshStandardMaterial;
-          const isGreenBody = mat && mat.name && mat.name.toLowerCase().includes("green");
+  const resolvedModelPath =
+    modelPath && !modelPath.includes("sdr6-25")
+      ? modelPath
+      : isYellow
+      ? YELLOW_MODEL_PATH
+      : GREEN_MODEL_PATH;
 
-          // 1. Identify text/logo by common Blender names, material names, or texture maps
-          const isDecal =
-            !isGreenBody &&
-            (Boolean(mesh.name.toLowerCase().match(/text|logo|curve|bezier|plane|decal|black/i)) ||
-              Boolean(mat && mat.name && mat.name.toLowerCase().includes("black")) ||
-              Boolean(mat && mat.map !== null && mat.map !== undefined));
-
-          if (isDecal) {
-            // 2. Rescue the text: Force it to be visible and black
-            if (mat) {
-              mat.color = new THREE.Color("#050505");
-              mat.roughness = 1.0;
-              mat.needsUpdate = true;
-            }
-          }
-        }
-      });
-    }
-  }, [scene]);
+  const { scene } = useGLTF(resolvedModelPath);
 
   return (
-    // Drei Center guarantees a perfect geometric pivot — no Box3 drift
-    // Scale applied here so Center sees the final geometry size in the same render pass
     <Center>
       <primitive object={scene} rotation={[0, -Math.PI / 8, 0]} scale={8} />
     </Center>
   );
 }
 
-// Pre-warm the asset before any component mounts
-useGLTF.preload(MODEL_PATH);
+// Pre-warm both assets before any component mounts
+useGLTF.preload(GREEN_MODEL_PATH);
+useGLTF.preload(YELLOW_MODEL_PATH);

@@ -12,16 +12,16 @@ interface LiveCoverCanvasProps {
 
 export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
   return (
-    <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 3] }} dpr={[1, 2]} gl={{ antialias: true }}>
-      {/* Pure white background environment test */}
-      <color attach="background" args={['#FFFFFF']} />
+    <Canvas
+      camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4] }}
+      dpr={[1, 2]}
+      gl={{ antialias: true, toneMappingExposure: 1 }}
+    >
+      <color attach="background" args={["#ffffff"]} />
 
-      {/* Normalized 4-point lighting rig matching standard WebGL viewer */}
-      <ambientLight intensity={0.5} color="#ffffff" />
-      <directionalLight position={[4, 6, 5]} intensity={2.0} castShadow />
-      <directionalLight position={[-5, 2, 3]} intensity={1.0} />
-      <directionalLight position={[0, 2, -6]} intensity={1.0} />
-
+      {/* Flood ambient for uniform color, minimal direct for subtle depth */}
+      <ambientLight intensity={4.5} />
+      <directionalLight position={[0, 0, 5]} intensity={0.3} castShadow={false} />
 
       <Suspense fallback={null}>
         <Center>
@@ -37,6 +37,8 @@ export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
         enableDamping={true}
         dampingFactor={0.05}
         autoRotate={false}
+        minDistance={3.5}
+        maxDistance={10}
         minPolarAngle={THREE.MathUtils.degToRad(55)}
         maxPolarAngle={THREE.MathUtils.degToRad(125)}
         zoomSpeed={0.7}

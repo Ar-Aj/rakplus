@@ -12,7 +12,6 @@
 import Link from "next/link";
 import { useRef } from "react";
 import CanvasSequence from "@/components/CanvasSequence";
-import BannerBreaker from "@/components/ui/BannerBreaker";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   ArrowRight,
@@ -81,7 +80,19 @@ export default function SustainabilityPage() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <main className="relative w-full bg-transparent overflow-x-clip">
+    <main className="relative w-full bg-transparent">
+      {/* ─── Full-Screen Hero Video Banner ─── */}
+      <section className="relative w-full mt-16 lg:mt-20 h-auto aspect-[21/9] lg:aspect-auto lg:h-[100dvh] overflow-hidden">
+        <video 
+          src="/videos/banner/sustainability banner.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      </section>
+
       {/* ─── Canvas Sequence (Untrapped Background) ─── */}
       <CanvasSequence
         desktopPath="/sustainability-desktop/"
@@ -152,9 +163,6 @@ export default function SustainabilityPage() {
             </div>
           </section>
 
-          {/* ─── Video Line Breaker ─── */}
-          <BannerBreaker />
-
           {/* ═══════════════════════════════════════════════════════════
               SECTION 2 — Zero Scaling. Zero Corrosion.
               Uniform py-16 md:py-24 spacing structure
@@ -204,9 +212,6 @@ export default function SustainabilityPage() {
             </div>
           </section>
 
-          {/* ─── Video Line Breaker ─── */}
-          <BannerBreaker />
-
           {/* ═══════════════════════════════════════════════════════════
               SECTION 3 — Sustainable Manufacturing
               Uniform py-16 md:py-24 spacing structure
@@ -247,9 +252,6 @@ export default function SustainabilityPage() {
               </div>
             </div>
           </section>
-
-          {/* ─── Video Line Breaker ─── */}
-          <BannerBreaker />
 
           {/* ═══════════════════════════════════════════════════════════
               SECTION 4 — ISO/DIN Certifications Grid
@@ -304,9 +306,6 @@ export default function SustainabilityPage() {
 
         </div>{/* ─── END sequenceRef boundary ─── */}
 
-        {/* ─── Video Line Breaker ─── */}
-        <BannerBreaker />
-
         {/* ─── Below-Fold: Sustainability Pillars Section ─── */}
         <article className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">
           <div className="relative z-10 max-w-7xl mx-auto reveal-section">
@@ -347,9 +346,6 @@ export default function SustainabilityPage() {
             </div>
           </div>
         </article>
-
-        {/* ─── Video Line Breaker ─── */}
-        <BannerBreaker />
 
         {/* ─── Water Safety Deep Dive ─── */}
         <section className="relative py-16 md:py-24 px-6 lg:px-8 bg-transparent">
@@ -451,9 +447,6 @@ export default function SustainabilityPage() {
             </div>
           </div>
         </section>
-
-        {/* ─── Video Line Breaker ─── */}
-        <BannerBreaker />
 
         {/* ─── CTA Section ─── */}
         <section className="relative py-16 md:py-24 px-6 lg:px-8 bg-transparent">
