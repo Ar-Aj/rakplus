@@ -51,6 +51,19 @@ function validateCatalog(data: unknown): CatalogJSON {
 const catalogData = validateCatalog(rawCatalog);
 const submittalData = validateCatalog(rawSubmittal);
 
+// ─── Cover Image Map ───
+// Keyed by product slug → public image path
+const COVER_IMAGE_MAP: Record<string, string> = {
+  "ppr-green-pn10":  "/images/products/green/pn10-green-black.png",
+  "ppr-green-pn16":  "/images/products/green/pn-16-green-red.png",
+  "ppr-green-pn20":  "/images/products/green/pn-20-green-yellow.png",
+  "ppr-green-pn25":  "/images/products/green/pn-25-green-black.png",
+  "ppr-yellow-pn10": "/images/products/yellow/pn-10-beige-black.png",
+  "ppr-yellow-pn16": "/images/products/yellow/pn-16-beige-red.png",
+  "ppr-yellow-pn20": "/images/products/yellow/pn-20-beige-yellow.png",
+  "ppr-yellow-pn25": "/images/products/yellow/pn-25-beige-black.png",
+};
+
 // ─── Helpers ───
 
 /** Safely parse a dimensional table, returning [] on any malformed data */
@@ -137,6 +150,7 @@ function parseProduct(
     },
     dimensionalTable: parseDimensionalTable(raw.dimensionalTable),
     fittingItems: parseFittingItems(raw.fittingItems),
+    coverImage: COVER_IMAGE_MAP[raw.slug] ?? undefined,
     videoSequenceUrl: null, // Placeholder for Phase 2 Locomotive Scroll
   };
 }

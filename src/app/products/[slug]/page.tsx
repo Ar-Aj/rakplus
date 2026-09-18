@@ -210,6 +210,15 @@ export default function ProductPage({ params }: PageProps) {
                     </div>
                     <ProductViewerTrigger modelPath={modelPath} />
                   </div>
+                ) : product.coverImage ? (
+                  <div className="aspect-video lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={product.coverImage}
+                      alt={product.title}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
                 ) : (
                   <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
                     <p className="text-white/40 text-xs font-mono uppercase tracking-widest">3D Model Unavailable</p>

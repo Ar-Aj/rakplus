@@ -272,43 +272,133 @@ export default function ProductsPage() {
       />
 
       {/* ─── Hero Header ─── */}
-      <section className="relative pt-28 lg:pt-40 pb-16 lg:pb-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-4xl">
-            <p className="text-xs font-semibold text-brand-green uppercase tracking-[0.3em] mb-4">
-              Product Catalog
-            </p>
-            <h1 className="font-sans tracking-tight text-brand-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]" style={{ textWrap: "balance" }}>
-              Premium PP-R Pipes / Fittings in UAE
-              <br />
-              <span className="text-brand-green">Rakplus</span>
-            </h1>
-            <p className="mt-6 text-base sm:text-lg text-neutral-950 leading-relaxed max-w-2xl">
-              Engineered to German STD DIN 8077/78, Rakplus delivers
-              high-quality, WRAS-approved PP-R pipe systems designed for
-              extreme durability in the GCC climate. Manufactured by
-              Aquasmart Plastic Industries L.L.C with ISO 9001:2015 and
-              ISO 14001:2015 certifications — every product is backed by
-              a 50-year guaranteed service life.
-            </p>
+      {/*
+        LAYOUT STRATEGY:
+        ─ Mobile / Tablet (< lg): Video is a full-bleed background.
+          A dark gradient overlay sits above it; text content is layered
+          on top at z-10. The section has a fixed min-height so the video
+          fills the frame.
+        ─ Desktop (≥ lg): Normal document flow with overflow:visible.
+          Inner div switches to a 2-column grid. Text occupies the left
+          column; the square video is a standalone right-column element
+          that maintains its native 1:1 aspect ratio.
+      */}
+      <section
+        id="products-hero"
+        className="
+          relative overflow-hidden
+          pt-28 lg:pt-40
+          pb-16 lg:pb-24
+          px-6 lg:px-8
+          min-h-[80vh] lg:min-h-0
+        "
+      >
+        {/* ── Full-bleed background video — visible on mobile/tablet only ── */}
+        {/*
+          Hidden on lg+ (hidden lg:hidden would show on desktop — we want
+          the opposite: show on mobile/tablet, hide on desktop).
+          We use lg:hidden to suppress it at desktop breakpoint.
+        */}
+        <div
+          aria-hidden="true"
+          className="lg:hidden absolute inset-0 w-full h-full z-0"
+        >
+          <video
+            src="/videos/products hero/Rakplus Products Page 1-1.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          {/* Dark gradient overlay — ensures WCAG AA contrast for text */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        </div>
 
-            {/* Trust badges */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {[
-                "WRAS Approved",
-                "ISO 9001:2015",
-                "DIN 8077/78",
-                "DVS 2207",
-                "50-Year Guarantee",
-              ].map((badge) => (
-                <span
-                  key={badge}
-                  className="inline-flex items-center px-3 py-1.5 rounded-lg bg-brand-green/10 text-brand-green text-xs font-semibold tracking-wide"
-                >
-                  {badge}
-                </span>
-              ))}
+        {/* ── Content wrapper ── */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+
+          {/*
+            Desktop: 2-col grid (text | square video).
+            Mobile/Tablet: single column — text flows normally over the
+            background video defined above.
+          */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            {/* ── Left column: Text content ── */}
+            <div>
+              <p className="text-xs font-semibold text-brand-green lg:text-brand-green text-white/80 uppercase tracking-[0.3em] mb-4">
+                Product Catalog
+              </p>
+              <h1
+                className="
+                  font-sans tracking-tight
+                  text-white lg:text-brand-charcoal
+                  text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+                  font-bold leading-[0.95]
+                "
+                style={{ textWrap: "balance" }}
+              >
+                Premium PP-R Pipes / Fittings in UAE
+                <br />
+                <span className="text-brand-green">Rakplus</span>
+              </h1>
+              <p className="mt-6 text-base sm:text-lg text-white/90 lg:text-neutral-950 leading-relaxed max-w-2xl">
+                Engineered to German STD DIN 8077/78, Rakplus delivers
+                high-quality, WRAS-approved PP-R pipe systems designed for
+                extreme durability in the GCC climate. Manufactured by
+                Aquasmart Plastic Industries L.L.C with ISO 9001:2015 and
+                ISO 14001:2015 certifications — every product is backed by
+                a 50-year guaranteed service life.
+              </p>
+
+              {/* Trust badges */}
+              <div className="mt-8 flex flex-wrap gap-3">
+                {[
+                  "WRAS Approved",
+                  "ISO 9001:2015",
+                  "DIN 8077/78",
+                  "DVS 2207",
+                  "50-Year Guarantee",
+                ].map((badge) => (
+                  <span
+                    key={badge}
+                    className="
+                      inline-flex items-center px-3 py-1.5 rounded-lg
+                      bg-white/20 lg:bg-brand-green/10
+                      text-white lg:text-brand-green
+                      text-xs font-semibold tracking-wide
+                      backdrop-blur-sm lg:backdrop-blur-none
+                    "
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
             </div>
+
+            {/* ── Right column: Square standalone video — desktop only ── */}
+            {/*
+              aspect-square enforces the native 1:1 ratio.
+              Hidden on mobile/tablet since the video is already the
+              full-bleed background on those breakpoints.
+            */}
+            <div
+              aria-hidden="true"
+              className="hidden lg:block w-full max-w-lg mx-auto lg:mx-0 lg:ml-auto"
+            >
+              <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10">
+                <video
+                  src="/videos/products hero/Rakplus Products Page 1-1.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -351,8 +441,19 @@ export default function ProductsPage() {
                     className={`group relative flex flex-col rounded-2xl bg-brand-charcoal border-t-[3px] ${category.borderColor} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 overflow-hidden`}
                   >
                     {/* 16:9 Cover Image Area */}
-                    <div className="aspect-video w-full bg-[#f5f5f5] flex items-center justify-center">
-                      <span className="text-4xl text-neutral-300 select-none">⬡</span>
+                    <div className="aspect-video w-full overflow-hidden bg-neutral-950">
+                      {product.coverImage ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={product.coverImage}
+                          alt={product.title}
+                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-4xl text-neutral-600 select-none">⬡</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Card Body */}

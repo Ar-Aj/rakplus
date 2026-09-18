@@ -62,6 +62,8 @@ export interface ProductConfig {
   dimensionalTable: DimensionalRow[];
   /** Placeholder for Locomotive Scroll video sequence URL (Phase 2) */
   videoSequenceUrl: string | null;
+  /** Cover image path for product grid and detail hero */
+  coverImage?: string;
   /** Fitting collection (only populated for fitting categories) */
   fittingItems?: FittingItem[];
 }
