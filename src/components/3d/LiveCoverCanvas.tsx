@@ -12,24 +12,11 @@ interface LiveCoverCanvasProps {
 
 export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
   return (
-    <Canvas
-      flat
-      camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4] }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, toneMappingExposure: 0.8 }}
-    >
-      {/* Pure white background — HDR is lighting-only, not the scene bg */}
+    <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4] }} dpr={[1, 2]} gl={{ toneMapping: THREE.NeutralToneMapping, toneMappingExposure: 1.0 }}>
       <color attach="background" args={["#ffffff"]} />
 
-      {/* Custom HDR studio environment — provides realistic lighting + reflections.
-          background={false} prevents the HDR image from replacing the white bg. */}
-      <ambientLight intensity={0.5} />
-
       <Suspense fallback={null}>
-        <Environment
-          files={encodeURI("/3D Models/studio_small_08_4k.hdr")}
-          background={false}
-        />
+        <Environment files={encodeURI("/3D Models/studio_small_08_4k.hdr")} background={false} environmentIntensity={1.5} />
         <Center>
           <PipeModel modelPath={modelPath} />
         </Center>
