@@ -82,7 +82,7 @@ export default function SustainabilityPage() {
   return (
     <main className="relative w-full bg-transparent">
       {/* ─── Full-Screen Hero Video Banner ─── */}
-      <section className="relative w-full mt-16 lg:mt-20 h-auto aspect-[21/9] lg:aspect-auto lg:h-[100dvh] overflow-hidden">
+      <section className="relative w-full mt-16 lg:mt-20 min-h-[100dvh] overflow-hidden">
         <video 
           src="/videos/banner/sustainability banner.mp4" 
           autoPlay 
