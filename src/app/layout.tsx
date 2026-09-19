@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,6 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-studio-white text-ink font-sans antialiased">
+        <ScrollToTop />
         <SmoothScroll>
           {/* Fixed navigation — z-50 above everything */}
           <Navbar />

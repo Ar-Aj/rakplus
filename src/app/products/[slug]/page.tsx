@@ -169,7 +169,7 @@ export default function ProductPage({ params }: PageProps) {
     <article className="min-h-screen bg-bg-cream">
       {/* ─── Hero Section ─── */}
       <section
-        className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 px-6 lg:px-8"
+        className="relative pt-20 sm:pt-24 lg:pt-32 pb-10 lg:pb-24 px-4 sm:px-6 lg:px-8"
         aria-label="Product overview"
       >
         <div className="max-w-7xl mx-auto">
@@ -204,14 +204,14 @@ export default function ProductPage({ params }: PageProps) {
               {(() => {
                 const modelPath = getModelPath(product.title, product.category);
                 return modelPath ? (
-                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                  <div className="aspect-[4/3] sm:aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
                     <div className="absolute inset-0 z-0 opacity-80 mix-blend-lighten">
                       <LiveCoverCanvas modelPath={modelPath} />
                     </div>
                     <ProductViewerTrigger modelPath={modelPath} />
                   </div>
                 ) : product.coverImage ? (
-                  <div className="aspect-video lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl overflow-hidden">
+                  <div className="aspect-video lg:aspect-auto lg:h-[50vh] min-h-[200px] sm:min-h-[300px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={product.coverImage}
@@ -220,7 +220,7 @@ export default function ProductPage({ params }: PageProps) {
                     />
                   </div>
                 ) : (
-                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[400px] lg:min-h-[500px] rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
                     <p className="text-white/40 text-xs font-mono uppercase tracking-widest">3D Model Unavailable</p>
                   </div>
                 );
@@ -246,7 +246,7 @@ export default function ProductPage({ params }: PageProps) {
               </div>
 
               {/* Title */}
-              <h1 className="font-sans tracking-tight text-brand-charcoal text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6">
+              <h1 className="font-sans tracking-tight text-brand-charcoal text-2xl sm:text-3xl lg:text-5xl font-bold leading-[1.1] mb-4 sm:mb-6">
                 {product.title}
               </h1>
 
