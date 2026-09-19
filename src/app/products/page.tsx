@@ -17,6 +17,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { productRegistry } from "@/config/products";
 import type { ProductConfig } from "@/types/product";
+import ProductHeroVideo from "@/components/products/ProductHeroVideo";
 
 export const metadata: Metadata = {
   title:
@@ -274,14 +275,11 @@ export default function ProductsPage() {
       {/* ─── Hero Header ─── */}
       {/*
         LAYOUT STRATEGY:
-        ─ Mobile / Tablet (< lg): Video is a full-bleed background.
-          A dark gradient overlay sits above it; text content is layered
-          on top at z-10. The section has a fixed min-height so the video
-          fills the frame.
-        ─ Desktop (≥ lg): Normal document flow with overflow:visible.
-          Inner div switches to a 2-column grid. Text occupies the left
-          column; the square video is a standalone right-column element
-          that maintains its native 1:1 aspect ratio.
+        ─ Mobile (< md): Normal document flow. Text on top, square 1:1
+          video rendered below it in the same section — no background.
+        ─ Tablet (md – lg): Video is a full-bleed background with a dark
+          gradient overlay. Text is layered on top at z-10.
+        ─ Desktop (≥ lg): Two-column grid. Text left, square video right.
       */}
       <section
         id="products-hero"
@@ -290,18 +288,18 @@ export default function ProductsPage() {
           pt-28 lg:pt-40
           pb-16 lg:pb-24
           px-6 lg:px-8
-          min-h-[80vh] lg:min-h-0
+          md:min-h-[80vh] lg:min-h-0
         "
       >
-        {/* ── Full-bleed background video — visible on mobile/tablet only ── */}
+        {/* ── Full-bleed background video — TABLET ONLY (md to lg) ── */}
         {/*
-          Hidden on lg+ (hidden lg:hidden would show on desktop — we want
-          the opposite: show on mobile/tablet, hide on desktop).
-          We use lg:hidden to suppress it at desktop breakpoint.
+          hidden  → off on mobile (< md): mobile uses inline video below text.
+          md:block → on for tablet.
+          lg:hidden → off for desktop: desktop uses the grid column video.
         */}
         <div
           aria-hidden="true"
-          className="lg:hidden absolute inset-0 w-full h-full z-0"
+          className="hidden md:block lg:hidden absolute inset-0 w-full h-full z-0"
         >
           <video
             src="/videos/products hero/Rakplus Products Page 1-1.mp4"
@@ -327,13 +325,19 @@ export default function ProductsPage() {
 
             {/* ── Left column: Text content ── */}
             <div>
-              <p className="text-xs font-semibold text-brand-green lg:text-brand-green text-white/80 uppercase tracking-[0.3em] mb-4">
+              {/*
+                Overline colour:
+                  mobile  → solid brand-green (light bg, no overlay)
+                  tablet  → white/80 (over dark video overlay)
+                  desktop → solid brand-green (light bg, no overlay)
+              */}
+              <p className="text-xs font-semibold text-brand-green md:text-white/80 lg:text-brand-green uppercase tracking-[0.3em] mb-4">
                 Product Catalog
               </p>
               <h1
                 className="
                   font-sans tracking-tight
-                  text-white lg:text-brand-charcoal
+                  text-brand-charcoal md:text-white lg:text-brand-charcoal
                   text-4xl sm:text-5xl md:text-6xl lg:text-7xl
                   font-bold leading-[0.95]
                 "
@@ -343,7 +347,7 @@ export default function ProductsPage() {
                 <br />
                 <span className="text-brand-green">Rakplus</span>
               </h1>
-              <p className="mt-6 text-base sm:text-lg text-white/90 lg:text-neutral-950 leading-relaxed max-w-2xl">
+              <p className="mt-6 text-base sm:text-lg text-neutral-950 md:text-white/90 lg:text-neutral-950 leading-relaxed max-w-2xl">
                 Engineered to German STD DIN 8077/78, Rakplus delivers
                 high-quality, WRAS-approved PP-R pipe systems designed for
                 extreme durability in the GCC climate. Manufactured by
@@ -365,10 +369,10 @@ export default function ProductsPage() {
                     key={badge}
                     className="
                       inline-flex items-center px-3 py-1.5 rounded-lg
-                      bg-white/20 lg:bg-brand-green/10
-                      text-white lg:text-brand-green
+                      bg-brand-green/10 md:bg-white/20 lg:bg-brand-green/10
+                      text-brand-green md:text-white lg:text-brand-green
                       text-xs font-semibold tracking-wide
-                      backdrop-blur-sm lg:backdrop-blur-none
+                      md:backdrop-blur-sm lg:backdrop-blur-none
                     "
                   >
                     {badge}
@@ -377,27 +381,20 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            {/* ── Right column: Square standalone video — desktop only ── */}
+            {/* ── Mobile-only interactive video — below text, hidden on md+ ── */}
             {/*
-              aspect-square enforces the native 1:1 ratio.
-              Hidden on mobile/tablet since the video is already the
-              full-bleed background on those breakpoints.
+              No background video on mobile; video renders here in normal
+              flow. ProductHeroVideo starts muted (autoplay policy) and
+              exposes the pipe-styled mute toggle at bottom-left.
             */}
-            <div
-              aria-hidden="true"
-              className="hidden lg:block w-full max-w-lg mx-auto lg:mx-0 lg:ml-auto"
-            >
-              <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10">
-                <video
-                  src="/videos/products hero/Rakplus Products Page 1-1.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            <ProductHeroVideo wrapperClassName="block md:hidden w-full" />
+
+            {/* ── Desktop right-column interactive video — hidden below lg ── */}
+            {/*
+              aspect-square + shadow + ring identical to the mobile block.
+              ProductHeroVideo starts muted; pipe button at bottom-left.
+            */}
+            <ProductHeroVideo wrapperClassName="hidden lg:block w-full max-w-lg mx-auto lg:mx-0 lg:ml-auto" />
 
           </div>
         </div>

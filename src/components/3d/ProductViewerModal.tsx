@@ -41,6 +41,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
 
       <div className="w-full h-full">
         <Canvas
+          flat
           camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4.5] }}
           dpr={[1, 2]}
           gl={{ antialias: true, toneMappingExposure: 1 }}
@@ -48,7 +49,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
           <color attach="background" args={["#ffffff"]} />
 
           {/* Flood ambient for uniform color, minimal direct for subtle depth */}
-          <ambientLight intensity={4.5} />
+          <ambientLight intensity={2.5} />
           <directionalLight position={[0, 0, 5]} intensity={0.3} castShadow={false} />
 
           <Suspense fallback={null}>
