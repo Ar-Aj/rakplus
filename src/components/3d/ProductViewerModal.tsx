@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Center } from "@react-three/drei";
+import { OrbitControls, Center, Environment } from "@react-three/drei";
 import { Suspense, useEffect } from "react";
 import * as THREE from "three";
 import PipeModel from "./PipeModel";
@@ -42,15 +42,18 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
       <div className="w-full h-full">
         <Canvas
           flat
+          gl={{ antialias: true, toneMappingExposure: 1 }}
           camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4.5] }}
           dpr={[1, 2]}
-          gl={{ antialias: true, toneMappingExposure: 1 }}
         >
+          {/* Pure white background — HDR is lighting-only, not scene bg */}
           <color attach="background" args={["#ffffff"]} />
 
-          {/* Flood ambient for uniform color, minimal direct for subtle depth */}
-          <ambientLight intensity={2.5} />
-          <directionalLight position={[0, 0, 5]} intensity={0.3} castShadow={false} />
+          {/* Custom HDR studio environment — reflections + lighting only */}
+          <Environment files="/3D Models/studio_small_08_4k.hdr" background={false} />
+
+          {/* Subtle ambient fill to prevent fully-dark shadow faces */}
+          <ambientLight intensity={0.5} />
 
           <Suspense fallback={null}>
             <Center rotation={[0, -Math.PI / 5, 0]}>
@@ -66,7 +69,7 @@ export default function ProductViewerModal({ isOpen, onClose, modelPath }: Produ
             enableDamping={true}
             dampingFactor={0.05}
             autoRotate={false}
-            minDistance={3.5}
+            minDistance={4}
             maxDistance={10}
             minPolarAngle={THREE.MathUtils.degToRad(55)}
             maxPolarAngle={THREE.MathUtils.degToRad(125)}
