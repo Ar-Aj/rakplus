@@ -454,31 +454,36 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Card Body */}
-                    <div className="flex flex-col justify-between flex-1 p-7 sm:p-8 lg:p-9">
-                      {/* Product Header / Tag */}
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <span
-                          className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] rounded-md ${category.badgeClass}`}
-                        >
-                          {product.category}
-                        </span>
-                        <span className="text-xs font-mono text-white/50 uppercase tracking-widest">
-                          #{String(product.id).padStart(2, "0")}
-                        </span>
-                      </div>
+                    <div className="flex flex-col flex-1 p-7 sm:p-8 lg:p-9">
+                      {/* Top content (Badge + Title + Description) */}
+                      <div>
+                        {/* Product Header / Tag */}
+                        <div className="flex items-center justify-between gap-2 mb-4">
+                          <span
+                            className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] rounded-md ${category.badgeClass}`}
+                          >
+                            {product.category}
+                          </span>
+                          <span className="text-xs font-mono text-white/50 uppercase tracking-widest">
+                            #{String(product.id).padStart(2, "0")}
+                          </span>
+                        </div>
 
-                      {/* Product Info */}
-                      <div className="space-y-4 lg:space-y-5">
-                        <h3 className="font-sans text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors">
+                        {/* Title */}
+                        <h3 className="font-sans text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors mb-3">
                           {product.title}
                         </h3>
+
+                        {/* Description */}
                         <p className="text-base sm:text-lg leading-relaxed text-gray-300">
                           {product.description}
                         </p>
+                      </div>
 
-                        {/* Specs peek */}
+                      {/* Bottom content (Specs peek + CTA row) pinned to bottom */}
+                      <div className="mt-auto pt-6 space-y-4">
                         {product.dimensionalTable.length > 0 && (
-                          <p className="text-xs text-white/80 font-bold uppercase tracking-widest pt-2">
+                          <p className="text-xs text-white/80 font-bold uppercase tracking-widest">
                             {product.dimensionalTable.length} size
                             {product.dimensionalTable.length !== 1 ? "s" : ""}{" "}
                             available
@@ -486,7 +491,7 @@ export default function ProductsPage() {
                         )}
 
                         {/* CTA row */}
-                        <div className="flex items-center justify-between pt-5 border-t border-white/15">
+                        <div className="flex items-center justify-between pt-4 border-t border-white/15">
                           <span className="text-sm font-semibold text-white group-hover:text-white transition-colors">
                             View details
                           </span>
