@@ -5,14 +5,16 @@
  * Uses generateStaticParams() for Next.js static export and
  * generateMetadata() for dynamic SEO.
  *
- * Data pipeline:
- *   src/config/products.ts → getProductBySlug(slug) → ProductConfig → UI
+ * Architecture (Phase 22.0):
+ *   - Full-width dimensional table (no 2-col split for specs+table)
+ *   - Specs block (DIN tags, Temperature) lives BELOW the table
+ *   - Typography bumped +20% throughout (sm→base, base→lg, etc.)
+ *   - "View 3D" first column opens ProductViewerModal pre-seeded to that row's
+ *     exact size GLB and exposes a size-swap dropdown inside the modal
  *
- * Accessibility:
- *   - <article> wrapper for semantic structure
- *   - <th scope="col"> on dimensional table headers
- *   - tabular-nums on data cells for column alignment
- *   - Graceful hide when dimensionalTable is empty
+ * 3D Model path structure:
+ *   /3D Models/RAKPLUS {COLOR} PIPES/{SDR} {COLOR}/{SDR}-{size}-{COLOR}.glb
+ *   e.g. /3D Models/RAKPLUS GREEN PIPES/SDR6 GREEN/SDR6-20-GREEN.glb
  */
 
 import type { Metadata } from "next";
@@ -33,6 +35,7 @@ import {
 } from "@/config/products";
 import dynamic from "next/dynamic";
 import FittingGallery from "@/components/products/FittingGallery";
+import type { PipeSize } from "@/components/3d/ProductViewerModal";
 
 const ProductViewerTrigger = dynamic(
   () => import("@/components/3d/ProductViewerTrigger"),
@@ -44,47 +47,74 @@ const LiveCoverCanvas = dynamic(
   { ssr: false }
 );
 
-// ─── SDR Model Dictionary ─────────────────────────────────────────────────────
-function getModelPath(productTitle: string, category?: string): string | null {
-  const isPPRPipe =
-    productTitle.includes("SDR11") ||
-    productTitle.includes("SDR7.4") ||
-    productTitle.includes("SDR6") ||
-    productTitle.includes("SDR5");
+const TableRowViewer = dynamic(
+  () => import("@/components/3d/TableRowViewer"),
+  { ssr: false }
+);
 
-  if (isPPRPipe) {
-    const isYellow =
-      productTitle.toLowerCase().includes("yellow") ||
-      category?.toLowerCase().includes("yellow");
-    return encodeURI(isYellow ? "/3D Models/sdr6-32y.glb" : "/3D Models/sdr6-32g.glb");
-  }
+// ─── SDR Folder Resolver ──────────────────────────────────────────────────────
+// Maps title keywords → SDR label and color string used in folder/file names.
+// File pattern: /3D Models/RAKPLUS {COLOR} PIPES/{SDR} {COLOR}/{SDR}-{size}-{COLOR}.glb
+
+type ColorKey = "GREEN" | "YELLOW";
+
+function getSdrInfo(title: string, category?: string): {
+  sdr: string;
+  color: ColorKey;
+} | null {
+  const isYellow =
+    title.toLowerCase().includes("yellow") ||
+    category?.toLowerCase().includes("yellow");
+  const color: ColorKey = isYellow ? "YELLOW" : "GREEN";
+
+  if (title.includes("SDR11")) return { sdr: "SDR11", color };
+  if (title.includes("SDR7.4")) return { sdr: "SDR7.4", color };
+  if (title.includes("SDR6")) return { sdr: "SDR6", color };
+  if (title.includes("SDR5")) return { sdr: "SDR5", color };
   return null;
 }
 
-// ─── Static Params ───
+function buildModelPath(sdr: string, color: ColorKey, sizeMm: string): string {
+  // sizeMm from the table is like "20", "25", "32" — files use that directly
+  const folder = `/3D Models/RAKPLUS ${color} PIPES/${sdr} ${color}`;
+  const file = `${sdr}-${sizeMm}-${color}.glb`;
+  return encodeURI(`${folder}/${file}`);
+}
 
-/**
- * Tell Next.js exactly which 11 slugs to pre-render.
- * Drives the static export for all product pages.
- */
+/** Hero-level model path: uses 32mm as the representative size (matches old logic) */
+function getHeroModelPath(title: string, category?: string): string | null {
+  const info = getSdrInfo(title, category);
+  if (!info) return null;
+  return buildModelPath(info.sdr, info.color, "32");
+}
+
+/** All sizes for the current product's PN class — used to populate modal dropdown */
+function getAllSizes(
+  title: string,
+  category: string | undefined,
+  dimensionalTable: Array<{ dimension: string }>
+): PipeSize[] {
+  const info = getSdrInfo(title, category);
+  if (!info || !dimensionalTable?.length) return [];
+  return dimensionalTable.map((row) => ({
+    label: `${row.dimension}mm`,
+    modelPath: buildModelPath(info.sdr, info.color, row.dimension),
+  }));
+}
+
+// ─── Static Params ────────────────────────────────────────────────────────────
 export function generateStaticParams() {
   return getAllProductSlugs().map((slug) => ({ slug }));
 }
 
-// ─── Dynamic Metadata ───
-
+// ─── Dynamic Metadata ─────────────────────────────────────────────────────────
 interface PageProps {
   params: { slug: string };
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const product = getProductBySlug(params.slug);
-  if (!product) {
-    return {
-      title: "Product Not Found — RAKPLUS",
-    };
-  }
-
+  if (!product) return { title: "Product Not Found — RAKPLUS" };
   return {
     title: `${product.title} — RAKPLUS Piping Systems`,
     description: `${product.description} ${product.specifications.temperatureResistance}. ${product.specifications.standards.join(", ")} certified.`,
@@ -98,46 +128,32 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-// ─── Helper: Get adjacent products for navigation ───
-
+// ─── Adjacent navigation ───────────────────────────────────────────────────────
 function getAdjacentProducts(currentSlug: string) {
   const slugs = getAllProductSlugs();
-  const currentIndex = slugs.indexOf(currentSlug);
-  const prevSlug = currentIndex > 0 ? slugs[currentIndex - 1] : null;
-  const nextSlug =
-    currentIndex < slugs.length - 1 ? slugs[currentIndex + 1] : null;
-
+  const idx = slugs.indexOf(currentSlug);
   return {
-    prev: prevSlug ? getProductBySlug(prevSlug) : null,
-    next: nextSlug ? getProductBySlug(nextSlug) : null,
+    prev: idx > 0 ? getProductBySlug(slugs[idx - 1]) : null,
+    next: idx < slugs.length - 1 ? getProductBySlug(slugs[idx + 1]) : null,
   };
 }
 
-// ─── Helper: Category accent color ───
-
-function getCategoryAccent(category: string): {
-  text: string;
-  bg: string;
-  border: string;
-  badge: string;
-} {
-  if (category.includes("Yellow")) {
+// ─── Accent palette ───────────────────────────────────────────────────────────
+function getCategoryAccent(category: string) {
+  if (category.includes("Yellow"))
     return {
       text: "text-brand-yellow",
       bg: "bg-brand-yellow/10",
       border: "border-brand-yellow/30",
       badge: "bg-brand-yellow/15 text-brand-yellow border-brand-yellow/25",
     };
-  }
-  if (category.includes("PEX")) {
+  if (category.includes("PEX"))
     return {
       text: "text-brand-red",
       bg: "bg-brand-red/10",
       border: "border-brand-red/30",
       badge: "bg-brand-red/15 text-brand-red border-brand-red/25",
     };
-  }
-  // Default: Green
   return {
     text: "text-brand-green",
     bg: "bg-brand-green/10",
@@ -146,152 +162,121 @@ function getCategoryAccent(category: string): {
   };
 }
 
-// ─── Page Component ───
-
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ProductPage({ params }: PageProps) {
   const product = getProductBySlug(params.slug);
-
-  if (!product) {
-    notFound();
-  }
+  if (!product) notFound();
 
   const accent = getCategoryAccent(product.category);
   const { prev, next } = getAdjacentProducts(params.slug);
-  const hasDimensionalTable =
-    product.dimensionalTable && product.dimensionalTable.length > 0;
-  
-  const hasFittingItems =
-    product.fittingItems && product.fittingItems.length > 0;
+  const hasDimensionalTable = product.dimensionalTable?.length > 0;
+  const hasFittingItems = (product.fittingItems?.length ?? 0) > 0;
+  const hasWaterContent = hasDimensionalTable &&
+    product.dimensionalTable.some(
+      (r) => r.waterContent !== undefined && r.waterContent !== "N/A"
+    );
 
-  const hasWaterContent = hasDimensionalTable && product.dimensionalTable.some(row => row.waterContent !== undefined && row.waterContent !== "N/A");
+  const heroModelPath = getHeroModelPath(product.title, product.category);
+  const allSizes = hasDimensionalTable
+    ? getAllSizes(product.title, product.category, product.dimensionalTable)
+    : [];
+  const hasSizeModels = allSizes.length > 0;
 
   return (
     <article className="min-h-screen bg-bg-cream">
-      {/* ─── Hero Section ─── */}
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          HERO — Visual + Product Info (stacked, no 2-col specs split)
+          ═══════════════════════════════════════════════════════════════════════ */}
       <section
-        className="relative pt-20 sm:pt-24 lg:pt-32 pb-10 lg:pb-24 px-4 sm:px-6 lg:px-8"
+        className="relative pt-20 sm:pt-24 lg:pt-32 pb-10 lg:pb-20 px-4 sm:px-6 lg:px-[15vw]"
         aria-label="Product overview"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
+
           {/* Breadcrumb */}
-          <nav
-            className="flex items-center gap-2 text-sm text-neutral-950 mb-8"
-            aria-label="Breadcrumb"
-          >
-            <Link
-              href="/"
-              className="hover:text-brand-charcoal transition-colors"
-            >
-              Home
-            </Link>
-            <span className="text-neutral-950">/</span>
-            <Link
-              href="/products"
-              className="hover:text-brand-charcoal transition-colors"
-            >
-              Products
-            </Link>
-            <span className="text-neutral-950">/</span>
-            <span className="text-brand-charcoal font-medium truncate max-w-[200px]">
-              {product.title}
-            </span>
+          <nav className="flex items-center gap-2 text-base text-neutral-500 mb-8" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-brand-charcoal transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/products" className="hover:text-brand-charcoal transition-colors">Products</Link>
+            <span>/</span>
+            <span className="text-brand-charcoal font-medium truncate max-w-[200px]">{product.title}</span>
           </nav>
 
-          {/* Split Layout: Desktop 2-column, Mobile stacked */}
+          {/* 2-col on lg+: visual left, text right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-            {/* ─── Left Column: Product Visual ─── */}
+
+            {/* ── Visual column ── */}
             <div className="relative">
-              {(() => {
-                const modelPath = getModelPath(product.title, product.category);
-                return modelPath ? (
-                  <div className="aspect-[4/3] sm:aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 z-0 opacity-80 mix-blend-lighten">
-                      <LiveCoverCanvas modelPath={modelPath} />
-                    </div>
-                    <ProductViewerTrigger modelPath={modelPath} />
+              {heroModelPath ? (
+                <div className="aspect-[4/3] lg:aspect-auto lg:h-[55vh] min-h-[260px] sm:min-h-[360px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                  <div className="absolute inset-0 z-0 opacity-80 mix-blend-lighten">
+                    <LiveCoverCanvas modelPath={heroModelPath} />
                   </div>
-                ) : product.coverImage ? (
-                  <div className="aspect-video lg:aspect-auto lg:h-[50vh] min-h-[200px] sm:min-h-[300px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={product.coverImage}
-                      alt={product.title}
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-[4/3] lg:aspect-auto lg:h-[50vh] min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
-                    <p className="text-white/40 text-xs font-mono uppercase tracking-widest">3D Model Unavailable</p>
-                  </div>
-                );
-              })()}
+                  <ProductViewerTrigger
+                    modelPath={heroModelPath}
+                    sizes={hasSizeModels ? allSizes : undefined}
+                    initialSize={hasSizeModels ? allSizes[0].label : undefined}
+                  />
+                </div>
+              ) : product.coverImage ? (
+                <div className="aspect-video lg:aspect-auto lg:h-[55vh] min-h-[200px] sm:min-h-[320px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={product.coverImage}
+                    alt={product.title}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-[4/3] lg:aspect-auto lg:h-[55vh] min-h-[260px] sm:min-h-[340px] lg:min-h-[500px] rounded-2xl lg:rounded-3xl bg-neutral-950 relative overflow-hidden flex items-center justify-center">
+                  <p className="text-white/40 text-sm font-mono uppercase tracking-widest">3D Model Unavailable</p>
+                </div>
+              )}
 
               {/* Product ID badge */}
-              <div className="absolute top-6 right-6 z-10 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-                <span className="text-xs font-mono text-white">
-                  ID #{String(product.id).padStart(2, "0")}
-                </span>
+              <div className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                <span className="text-xs font-mono text-white">ID #{String(product.id).padStart(2, "0")}</span>
               </div>
             </div>
 
-            {/* ─── Right Column: Product Info ─── */}
+            {/* ── Text column ── */}
             <div className="lg:py-4">
-              {/* Category pill */}
-              <div
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border ${accent.badge} mb-4`}
-              >
-                <span className="text-xs font-semibold uppercase tracking-[0.15em]">
-                  {product.category}
-                </span>
+              <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border ${accent.badge} mb-4`}>
+                <span className="text-sm font-semibold uppercase tracking-[0.15em]">{product.category}</span>
               </div>
 
-              {/* Title */}
               <h1 className="font-sans tracking-tight text-brand-charcoal text-2xl sm:text-3xl lg:text-5xl font-bold leading-[1.1] mb-4 sm:mb-6">
                 {product.title}
               </h1>
 
-              {/* Description */}
-              <p className="text-neutral-950 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
+              <p className="text-neutral-700 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
                 {product.description}
               </p>
 
-              {/* Key Specs Quick View */}
+              {/* Quick-spec cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {/* Temperature */}
                 {product.specifications.temperatureResistance && (
                   <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100">
                     <div className="w-10 h-10 rounded-xl bg-brand-red/10 flex items-center justify-center flex-shrink-0">
                       <Thermometer className="w-5 h-5 text-brand-red" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-neutral-950 uppercase tracking-wider mb-1">
-                        Temperature
-                      </p>
-                      <p className="text-sm text-brand-charcoal font-medium leading-snug">
-                        {product.specifications.temperatureResistance}
-                      </p>
+                      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Temperature</p>
+                      <p className="text-base text-brand-charcoal font-medium leading-snug">{product.specifications.temperatureResistance}</p>
                     </div>
                   </div>
                 )}
-
-                {/* Standards */}
                 {product.specifications.standards.length > 0 && (
                   <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100">
                     <div className="w-10 h-10 rounded-xl bg-brand-yellow/10 flex items-center justify-center flex-shrink-0">
                       <Shield className="w-5 h-5 text-brand-yellow" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-neutral-950 uppercase tracking-wider mb-1">
-                        Certifications
-                      </p>
+                      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Certifications</p>
                       <div className="flex flex-wrap gap-1.5">
                         {product.specifications.standards.map((std) => (
-                          <span
-                            key={std}
-                            className="inline-block px-2 py-0.5 text-[11px] font-semibold text-brand-charcoal bg-gray-100 rounded-md"
-                          >
-                            {std}
-                          </span>
+                          <span key={std} className="inline-block px-2 py-0.5 text-xs font-semibold text-brand-charcoal bg-gray-100 rounded-md">{std}</span>
                         ))}
                       </div>
                     </div>
@@ -299,17 +284,17 @@ export default function ProductPage({ params }: PageProps) {
                 )}
               </div>
 
-              {/* CTA */}
+              {/* CTAs */}
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand-green hover:bg-brand-green/90 text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-green/25 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand-green hover:bg-brand-green/90 text-white text-base font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-green/25 hover:-translate-y-0.5"
                 >
                   Request a Quote
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-brand-charcoal text-sm font-medium rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:bg-gray-50"
+                  className="inline-flex items-center gap-2 px-6 py-3 text-brand-charcoal text-base font-medium rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:bg-gray-50"
                 >
                   View All Products
                 </Link>
@@ -319,283 +304,194 @@ export default function ProductPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ─── Features Section ─── */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          FEATURES SECTION
+          ═══════════════════════════════════════════════════════════════════════ */}
       {product.features.length > 0 && (
-        <section
-          className="py-16 lg:py-24 px-6 lg:px-8 bg-white border-y border-gray-100"
-          aria-label="Product features"
-        >
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-              {/* Section Header */}
-              <div className="lg:col-span-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className={`w-10 h-10 rounded-xl ${accent.bg} flex items-center justify-center`}
-                  >
-                    <Award className={`w-5 h-5 ${accent.text}`} />
-                  </div>
-                  <h2 className="font-sans text-2xl font-bold text-brand-charcoal tracking-tight">
-                    Key Features
-                  </h2>
-                </div>
-                <p className="text-neutral-950 text-sm leading-relaxed">
-                  Engineering advantages of the {product.title}.
-                </p>
+        <section className="py-14 lg:py-20 px-4 sm:px-6 lg:px-[15vw] bg-white border-y border-gray-100" aria-label="Product features">
+          <div className="w-full">
+            <div className="flex items-center gap-3 mb-8">
+              <div className={`w-10 h-10 rounded-xl ${accent.bg} flex items-center justify-center`}>
+                <Award className={`w-5 h-5 ${accent.text}`} />
               </div>
-
-              {/* Features List */}
-              <div className="lg:col-span-2">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {product.features.map((feature, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-3 p-4 rounded-xl bg-bg-cream/50 border border-gray-100 hover:border-gray-200 transition-colors duration-200"
-                    >
-                      <div
-                        className={`w-6 h-6 rounded-lg ${accent.bg} flex items-center justify-center flex-shrink-0 mt-0.5`}
-                      >
-                        <Check className={`w-3.5 h-3.5 ${accent.text}`} />
-                      </div>
-                      <span className="text-sm text-brand-charcoal leading-relaxed">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <h2 className="font-sans text-2xl lg:text-3xl font-bold text-brand-charcoal tracking-tight">Key Features</h2>
             </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {product.features.map((feature, index) => (
+                <li
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-bg-cream/50 border border-gray-100 hover:border-gray-200 transition-colors duration-200"
+                >
+                  <div className={`w-6 h-6 rounded-lg ${accent.bg} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                    <Check className={`w-3.5 h-3.5 ${accent.text}`} />
+                  </div>
+                  <span className="text-base text-brand-charcoal leading-relaxed">{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
 
-      {/* ─── Technical Specifications Section ─── */}
-      <section
-        className="py-16 lg:py-24 px-6 lg:px-8"
-        aria-label="Technical specifications"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-            {/* Section Header */}
-            <div className="lg:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-brand-charcoal/10 flex items-center justify-center">
-                  <Ruler className="w-5 h-5 text-brand-charcoal" />
-                </div>
-                <h2 className="font-sans text-2xl font-bold text-brand-charcoal tracking-tight">
-                  Specifications
-                </h2>
-              </div>
-              <p className="text-neutral-950 text-sm leading-relaxed">
-                Technical data for the {product.category} range, sourced from
-                the RAKPLUS catalog.
-              </p>
+      {/* ═══════════════════════════════════════════════════════════════════════
+          DIMENSIONAL TABLE — FULL WIDTH with "View 3D" first column
+          ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-14 lg:py-20 px-4 sm:px-6 lg:px-[15vw]" aria-label="Technical specifications">
+        <div className="w-full">
 
-              {/* Standards badges */}
-              {product.specifications.standards.length > 0 && (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {product.specifications.standards.map((std) => (
-                    <span
-                      key={std}
-                      className="inline-block px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-brand-red border border-brand-red/20 rounded-lg bg-brand-red/5"
-                    >
-                      {std}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Temperature card */}
-              {product.specifications.temperatureResistance && (
-                <div className="mt-6 p-4 rounded-2xl bg-white border border-brand-yellow/20">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Thermometer className="w-4 h-4 text-brand-yellow" />
-                    <span className="text-xs font-semibold text-neutral-950 uppercase tracking-wider">
-                      Operating Temperature
-                    </span>
-                  </div>
-                  <p className="text-sm text-brand-charcoal font-medium leading-relaxed">
-                    {product.specifications.temperatureResistance}
-                  </p>
-                </div>
-              )}
+          {/* Section header */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-brand-charcoal/10 flex items-center justify-center">
+              <Ruler className="w-5 h-5 text-brand-charcoal" />
             </div>
-
-            {/* Dimensional Table or Fitting Gallery */}
-            <div className="lg:col-span-2">
-              {hasFittingItems ? (
-                <FittingGallery fittingItems={product.fittingItems!} accent={accent} />
-              ) : hasDimensionalTable ? (
-                <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                      {/* Dark header row */}
-                      <thead>
-                        <tr className="bg-brand-charcoal text-white">
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            PART
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            DIMENSIONS (mm)
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            WALL THICKNESS (mm)
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            INNER DIAMETER (mm)
-                          </th>
-                          {hasWaterContent && (
-                            <th
-                              scope="col"
-                              className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                            >
-                              WATER CONTENT (l/mtr)
-                            </th>
-                          )}
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            PACKING UNIT
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap"
-                          >
-                            Kg/Mtr.
-                          </th>
-                        </tr>
-                      </thead>
-
-                      {/* Data rows with alternating colors + tabular-nums */}
-                      <tbody className="tabular-nums">
-                        {product.dimensionalTable.map((row, index) => (
-                          <tr
-                            key={index}
-                            className={`border-b border-gray-100 last:border-b-0 transition-colors duration-150 hover:bg-brand-green/5 ${
-                              index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"
-                            }`}
-                          >
-                            <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap">
-                              {row.part}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap">
-                              <span className={`font-semibold ${accent.text}`}>
-                                ⌀
-                              </span>{" "}
-                              {row.dimension}
-                            </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
-                              {row.wallThickness}
-                            </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
-                              {row.innerDiameter}
-                            </td>
-                            {hasWaterContent && (
-                              <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
-                                {row.waterContent}
-                              </td>
-                            )}
-                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
-                              {row.packingUnit}
-                            </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
-                              {row.weight}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Table footer */}
-                  <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
-                    <p className="text-[11px] text-neutral-950 tracking-wide">
-                      {product.dimensionalTable.length} size
-                      {product.dimensionalTable.length !== 1 ? "s" : ""}{" "}
-                      available · Data sourced from RAKPLUS product catalog
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                /* Graceful fallback when no dimensional table or fittings exist */
-                <div className="flex flex-col items-center justify-center py-16 rounded-2xl bg-white border border-dashed border-gray-200">
-                  <Ruler className="w-8 h-8 text-neutral-950 mb-3" />
-                  <p className="text-sm text-neutral-950 font-medium">
-                    Technical data not available for this product.
-                  </p>
-                  <p className="text-xs text-neutral-950 mt-1">
-                    Contact us for detailed specifications.
-                  </p>
-                </div>
-              )}
-            </div>
+            <h2 className="font-sans text-2xl lg:text-3xl font-bold text-brand-charcoal tracking-tight">
+              {hasFittingItems ? "Fittings Catalogue" : "Dimensional Specifications"}
+            </h2>
           </div>
+
+          {/* Full-width table or fitting gallery */}
+          {hasFittingItems ? (
+            <FittingGallery fittingItems={product.fittingItems!} accent={accent} />
+          ) : hasDimensionalTable ? (
+            <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-brand-charcoal text-white">
+                      {/* View 3D column — only when size-specific models exist */}
+                      {hasSizeModels && (
+                        <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap w-36">
+                          3D Model
+                        </th>
+                      )}
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">PART</th>
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">DIMENSIONS (mm)</th>
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">WALL THICKNESS (mm)</th>
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">INNER DIAMETER (mm)</th>
+                      {hasWaterContent && (
+                        <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">WATER CONTENT (l/mtr)</th>
+                      )}
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">PACKING UNIT</th>
+                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">Kg/Mtr.</th>
+                    </tr>
+                  </thead>
+                  <tbody className="tabular-nums divide-y divide-gray-100">
+                    {product.dimensionalTable.map((row, index) => {
+                      const sizeLabel = `${row.dimension}mm`;
+                      const rowModelPath = hasSizeModels
+                        ? allSizes.find((s) => s.label === sizeLabel)?.modelPath
+                        : undefined;
+                      return (
+                        <tr
+                          key={index}
+                          className={`transition-colors duration-150 hover:bg-brand-green/5 ${index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"}`}
+                        >
+                          {/* View 3D cell */}
+                          {hasSizeModels && (
+                            <td className="px-5 py-4">
+                              {rowModelPath ? (
+                                <TableRowViewer
+                                  modelPath={rowModelPath}
+                                  sizeLabel={sizeLabel}
+                                  allSizes={allSizes}
+                                  isYellow={product.category.includes("Yellow")}
+                                />
+                              ) : (
+                                <span className="text-xs text-neutral-300">—</span>
+                              )}
+                            </td>
+                          )}
+                          <td className="px-5 py-4 text-base font-medium text-brand-charcoal whitespace-nowrap">{row.part}</td>
+                          <td className="px-5 py-4 text-base font-medium text-brand-charcoal whitespace-nowrap">
+                            <span className={`font-semibold ${accent.text}`}>⌀</span>{" "}{row.dimension}
+                          </td>
+                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.wallThickness}</td>
+                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.innerDiameter}</td>
+                          {hasWaterContent && (
+                            <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.waterContent}</td>
+                          )}
+                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.packingUnit}</td>
+                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.weight}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <div className="px-5 py-3 bg-gray-50 border-t border-gray-100">
+                <p className="text-xs text-neutral-400 tracking-wide">
+                  {product.dimensionalTable.length} size{product.dimensionalTable.length !== 1 ? "s" : ""} available · Data sourced from RAKPLUS product catalog
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-16 rounded-2xl bg-white border border-dashed border-gray-200">
+              <Ruler className="w-8 h-8 text-neutral-300 mb-3" />
+              <p className="text-base text-neutral-500 font-medium">Technical data not available for this product.</p>
+              <p className="text-sm text-neutral-400 mt-1">Contact us for detailed specifications.</p>
+            </div>
+          )}
+
+          {/* ── Specs block BELOW the table ── */}
+          {(product.specifications.standards.length > 0 || product.specifications.temperatureResistance) && (
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {product.specifications.standards.length > 0 && (
+                <div className="p-5 rounded-2xl bg-white border border-gray-100">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield className="w-4 h-4 text-brand-red" />
+                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-500">Standards</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {product.specifications.standards.map((std) => (
+                      <span key={std} className="inline-block px-3 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-brand-red border border-brand-red/20 rounded-lg bg-brand-red/5">
+                        {std}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {product.specifications.temperatureResistance && (
+                <div className="p-5 rounded-2xl bg-white border border-brand-yellow/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Thermometer className="w-4 h-4 text-brand-yellow" />
+                    <span className="text-sm font-bold uppercase tracking-wider text-neutral-500">Operating Temperature</span>
+                  </div>
+                  <p className="text-base text-brand-charcoal font-medium leading-relaxed">{product.specifications.temperatureResistance}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ─── Product Navigation ─── */}
-      <section
-        className="py-12 px-6 lg:px-8 border-t border-gray-100"
-        aria-label="Product navigation"
-      >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PRODUCT NAVIGATION
+          ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-12 px-4 sm:px-6 lg:px-[15vw] border-t border-gray-100" aria-label="Product navigation">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-6">
           {prev ? (
-            <Link
-              href={`/products/${prev.slug}`}
-              className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
-            >
-              <ArrowLeft className="w-4 h-4 text-neutral-950 group-hover:text-brand-green transition-colors group-hover:-translate-x-1 duration-200" />
+            <Link href={`/products/${prev.slug}`} className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200">
+              <ArrowLeft className="w-4 h-4 text-neutral-400 group-hover:text-brand-green transition-colors group-hover:-translate-x-1 duration-200" />
               <div className="text-right">
-                <p className="text-[10px] text-neutral-950 uppercase tracking-widest font-medium">
-                  Previous
-                </p>
-                <p className="text-sm text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">
-                  {prev.title}
-                </p>
+                <p className="text-xs text-neutral-400 uppercase tracking-widest font-medium">Previous</p>
+                <p className="text-base text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">{prev.title}</p>
               </div>
             </Link>
-          ) : (
-            <div />
-          )}
+          ) : <div />}
 
-          <Link
-            href="/products"
-            className="text-xs text-neutral-950 uppercase tracking-[0.2em] font-medium hover:text-brand-charcoal transition-colors"
-          >
+          <Link href="/products" className="text-sm text-neutral-400 uppercase tracking-[0.2em] font-medium hover:text-brand-charcoal transition-colors">
             All Products
           </Link>
 
           {next ? (
-            <Link
-              href={`/products/${next.slug}`}
-              className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
-            >
+            <Link href={`/products/${next.slug}`} className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200">
               <div>
-                <p className="text-[10px] text-neutral-950 uppercase tracking-widest font-medium">
-                  Next
-                </p>
-                <p className="text-sm text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">
-                  {next.title}
-                </p>
+                <p className="text-xs text-neutral-400 uppercase tracking-widest font-medium">Next</p>
+                <p className="text-base text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">{next.title}</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-neutral-950 group-hover:text-brand-green transition-colors group-hover:translate-x-1 duration-200" />
+              <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-brand-green transition-colors group-hover:translate-x-1 duration-200" />
             </Link>
-          ) : (
-            <div />
-          )}
+          ) : <div />}
         </div>
       </section>
     </article>

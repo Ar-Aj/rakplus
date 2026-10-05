@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Box } from "lucide-react";
+import type { PipeSize } from "./ProductViewerModal";
 
 const ProductViewerModal = dynamic(() => import("./ProductViewerModal"), {
   ssr: false,
@@ -10,9 +11,13 @@ const ProductViewerModal = dynamic(() => import("./ProductViewerModal"), {
 
 interface ProductViewerTriggerProps {
   modelPath: string;
+  /** All sizes for this PN class — passed through to the modal dropdown */
+  sizes?: PipeSize[];
+  /** The size to pre-select when opening from the hero */
+  initialSize?: string;
 }
 
-export default function ProductViewerTrigger({ modelPath }: ProductViewerTriggerProps) {
+export default function ProductViewerTrigger({ modelPath, sizes, initialSize }: ProductViewerTriggerProps) {
   const [is3DModalOpen, setIs3DModalOpen] = useState(false);
 
   return (
@@ -31,6 +36,8 @@ export default function ProductViewerTrigger({ modelPath }: ProductViewerTrigger
         isOpen={is3DModalOpen}
         onClose={() => setIs3DModalOpen(false)}
         modelPath={modelPath}
+        sizes={sizes}
+        initialSize={initialSize}
       />
     </>
   );
