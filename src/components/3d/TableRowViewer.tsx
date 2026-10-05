@@ -15,6 +15,8 @@ interface TableRowViewerProps {
   allSizes: PipeSize[];
   /** True for Yellow/Beige PP-R products — drives button color */
   isYellow?: boolean;
+  /** Explicit colorTheme prop: 'green' | 'yellow' */
+  colorTheme?: "green" | "yellow";
 }
 
 export default function TableRowViewer({
@@ -22,14 +24,14 @@ export default function TableRowViewer({
   sizeLabel,
   allSizes,
   isYellow = false,
+  colorTheme,
 }: TableRowViewerProps) {
   const [open, setOpen] = useState(false);
 
-  const btnClass = isYellow
-    ? // Yellow/Beige — bright amber-yellow, dark text
-      "bg-amber-400 hover:bg-amber-500 text-neutral-900 border border-amber-500 shadow-md shadow-amber-200/60"
-    : // Green — deep emerald, white text
-      "bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-700 shadow-md shadow-emerald-200/60";
+  const isYellowTheme = colorTheme === "yellow" || isYellow;
+  const btnClass = isYellowTheme
+    ? "bg-yellow-500 hover:bg-yellow-600 text-black shadow-md shadow-yellow-200/60"
+    : "bg-[#008c4a] hover:bg-[#006e3a] text-white shadow-md shadow-emerald-200/60";
 
   return (
     <>
@@ -37,7 +39,7 @@ export default function TableRowViewer({
         onClick={() => setOpen(true)}
         title={`View 3D Model — ${sizeLabel}`}
         className={`
-          inline-flex items-center gap-2
+          inline-flex items-center justify-center gap-2
           px-4 py-2
           rounded-full
           text-sm font-bold tracking-wide
@@ -58,6 +60,8 @@ export default function TableRowViewer({
         modelPath={modelPath}
         sizes={allSizes}
         initialSize={sizeLabel}
+        colorTheme={isYellowTheme ? "yellow" : "green"}
+        isYellow={isYellowTheme}
       />
     </>
   );

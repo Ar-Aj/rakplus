@@ -374,6 +374,8 @@ export default function HomePage() {
 
         </div>{/* ─── END sequenceRef boundary ─── */}
 
+      </div>{/* ─── END hudRef boundary ─── */}
+
         {/* ═══════════════════════════════════════════════════════
             CINEMATIC CURTAIN — Pristine White Frosted Glass
             Slides up from below the video.
@@ -502,7 +504,7 @@ export default function HomePage() {
             </div>
 
             {/* ─── Certification Strip ─── */}
-            <div className="pt-16 md:pt-20 border-t-2 border-neutral-200 reveal-curtain-child">
+            <div className="relative z-10 pt-16 md:pt-20 border-t-2 border-neutral-200 reveal-curtain-child">
               <div className="flex flex-wrap items-center gap-3 md:gap-4">
                 <span className="text-[10px] md:text-xs text-neutral-950 font-bold uppercase tracking-wider mr-2">
                   Certified:
@@ -524,8 +526,6 @@ export default function HomePage() {
 
           </article>
         </CinematicCurtain>
-
-      </div>
     </main>
   );
 }

@@ -455,7 +455,7 @@ export default function AboutPageClient() {
           </div>
 
           {/* ─── Stats Strip ─── */}
-          <div className="mt-24 md:mt-32 pt-12 border-t border-neutral-200 reveal-curtain-child">
+          <div className="relative z-10 mt-24 md:mt-32 pt-12 border-t border-neutral-200 reveal-curtain-child">
             <div className="gsap-stagger-group grid grid-cols-2 sm:grid-cols-4 gap-8">
               {[
                 { value: "5000", suffix: "+", label: "Products" },

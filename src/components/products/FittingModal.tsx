@@ -81,22 +81,22 @@ export default function FittingModal({ isOpen, onClose, fitting }: FittingModalP
         >
           <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
+              <table className="w-full text-center align-middle">
                 <thead>
                   <tr className="bg-brand-charcoal text-white">
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap">
+                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       PART NO
                     </th>
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap">
+                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       DIMENSION
                     </th>
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap">
+                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       PACKING UNIT
                     </th>
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap">
+                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       PCS/PACKET
                     </th>
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap">
+                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       PCS/BOX
                     </th>
                   </tr>
@@ -105,21 +105,21 @@ export default function FittingModal({ isOpen, onClose, fitting }: FittingModalP
                   {fitting.specifications.map((row, index) => (
                     <tr 
                       key={index} 
-                      className={`border-b border-gray-100 last:border-b-0 hover:bg-brand-green/5 transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"}`}
+                      className={`border-b border-gray-100 last:border-b-0 hover:bg-neutral-50 transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"}`}
                     >
-                      <td className="px-6 py-4 text-sm font-semibold text-brand-charcoal whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm font-semibold text-brand-charcoal whitespace-nowrap text-center align-middle">
                         {row.partNumber}
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm font-medium text-brand-charcoal whitespace-nowrap text-center align-middle">
                         {row.dimension}
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap text-center align-middle">
                         {row.packingUnit}
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap text-center align-middle">
                         {row.piecesPerPack !== null && row.piecesPerPack !== undefined ? row.piecesPerPack : "—"}
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap text-center align-middle">
                         {row.piecesPerBox !== undefined ? row.piecesPerBox : "-"}
                       </td>
                     </tr>

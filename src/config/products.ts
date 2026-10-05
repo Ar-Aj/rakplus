@@ -64,6 +64,33 @@ const COVER_IMAGE_MAP: Record<string, string> = {
   "ppr-yellow-pn25": "/images/products/yellow/pn-25-beige-black.png",
 };
 
+// ─── Verified Authoritative SEO Copy (UAE / GCC / Standards) ───
+export const PIPE_DESCRIPTION_MAP: Record<string, string> = {
+  // PN10 (SDR11) - Green & Yellow
+  "ppr-green-pn10":
+    "Engineered to German DIN 8077/78 standards, this WRAS-approved PP-R system provides reliable cold water transmission for residential and commercial plumbing across the UAE and GCC. Features exceptional chemical resistance and a smooth inner bore to prevent scaling and pressure loss.",
+  "ppr-yellow-pn10":
+    "Engineered to German DIN 8077/78 standards, this WRAS-approved PP-R system provides reliable cold water transmission for residential and commercial plumbing across the UAE and GCC. Features exceptional chemical resistance and a smooth inner bore to prevent scaling and pressure loss.",
+
+  // PN16 (SDR7.4) - Green & Yellow
+  "ppr-green-pn16":
+    "A highly versatile, medium-pressure piping solution manufactured in the UAE. Fully ISO 9001:2015 certified for domestic hot and cold water networks, designed to maintain high thermal stability and structural integrity in demanding regional climates.",
+  "ppr-yellow-pn16":
+    "A highly versatile, medium-pressure piping solution manufactured in the UAE. Fully ISO 9001:2015 certified for domestic hot and cold water networks, designed to maintain high thermal stability and structural integrity in demanding regional climates.",
+
+  // PN20 (SDR6) - Green & Yellow
+  "ppr-green-pn20":
+    "Premium high-pressure polymer piping optimized for continuous hot water circulation and industrial fluid transfer. Built to exact German engineering standards, ensuring flawless thermodiffusion welding and zero-leakage performance for high-end GCC developments.",
+  "ppr-yellow-pn20":
+    "Premium high-pressure polymer piping optimized for continuous hot water circulation and industrial fluid transfer. Built to exact German engineering standards, ensuring flawless thermodiffusion welding and zero-leakage performance for high-end GCC developments.",
+
+  // PN25 (SDR5) - Green & Yellow
+  "ppr-green-pn25":
+    "The most robust PP-R specification available. Engineered with maximum wall thickness for heavy-duty chilled water (HVAC) networks and extreme pressure applications in Dubai and the wider UAE. Delivers unparalleled service life under continuous stress.",
+  "ppr-yellow-pn25":
+    "The most robust PP-R specification available. Engineered with maximum wall thickness for heavy-duty chilled water (HVAC) networks and extreme pressure applications in Dubai and the wider UAE. Delivers unparalleled service life under continuous stress.",
+};
+
 // ─── Helpers ───
 
 /** Safely parse a dimensional table, returning [] on any malformed data */
@@ -125,7 +152,10 @@ function parseProduct(
     category: raw.category ?? "Uncategorized",
     title: raw.title ?? "",
     description:
-      raw.description || enrichment?.description || "",
+      PIPE_DESCRIPTION_MAP[raw.slug] ||
+      raw.description ||
+      enrichment?.description ||
+      "",
     features: Array.from(
       new Set([
         ...(Array.isArray(raw.features) ? raw.features : []),

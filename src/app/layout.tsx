@@ -49,8 +49,8 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-studio-white text-ink font-sans antialiased">
-        <ScrollToTop />
         <SmoothScroll>
+          <ScrollToTop />
           {/* Fixed navigation — z-50 above everything */}
           <Navbar />
 

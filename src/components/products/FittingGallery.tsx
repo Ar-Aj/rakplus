@@ -55,14 +55,14 @@ export default function FittingGallery({ fittingItems, accent }: FittingGalleryP
                 </span>
               </div>
               
-              <h3 className="text-xl font-bold text-brand-charcoal tracking-tight font-sans mb-4 group-hover:text-brand-green transition-colors duration-200">
+              <h3 className={`text-xl font-bold text-brand-charcoal tracking-tight font-sans mb-4 transition-colors duration-200 ${accent.text.includes("yellow") ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"}`}>
                 {fitting.name}
               </h3>
 
               <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
                 <span className="text-sm font-semibold text-neutral-950">View Details</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:${accent.bg} transition-colors duration-300`}>
-                  <ArrowRight className={`w-4 h-4 text-neutral-950 group-hover:${accent.text} transition-colors duration-300 group-hover:translate-x-0.5`} />
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 transition-colors duration-300 ${accent.bg.includes("yellow") ? "group-hover:bg-yellow-500/20" : "group-hover:bg-brand-green/20"}`}>
+                  <ArrowRight className={`w-4 h-4 text-neutral-950 transition-colors duration-300 group-hover:translate-x-0.5 ${accent.text.includes("yellow") ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"}`} />
                 </div>
               </div>
             </div>

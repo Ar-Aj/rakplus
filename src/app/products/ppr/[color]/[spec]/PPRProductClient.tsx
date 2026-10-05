@@ -326,29 +326,29 @@ export default function PPRProductClient({
                 <div className="lg:col-span-8 lg:-ml-12 reveal-curtain-child">
                 <div className="rounded-2xl border border-neutral-200 shadow-sm w-full overflow-hidden bg-white">
                   <div className="overflow-x-auto w-full">
-                    <table className="w-full text-left min-w-[800px]">
+                    <table className="w-full text-center align-middle min-w-[800px]">
                       <thead>
                         <tr className="bg-neutral-50 border-b border-neutral-200">
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-emerald">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap text-center align-middle text-emerald">
                             Part No.
                           </th>
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                             OD (mm)
                           </th>
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                             Wall (mm)
                           </th>
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                             ID (mm)
                           </th>
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                             Pack
                           </th>
-                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                          <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                             Kg/Mtr
                           </th>
                           {specData.hasWaterContent && (
-                            <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap">
+                            <th className="px-6 py-5 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 whitespace-nowrap text-center align-middle">
                               Water (L/Mtr)
                             </th>
                           )}
@@ -362,27 +362,27 @@ export default function PPRProductClient({
                               i % 2 === 0 ? "bg-white" : "bg-neutral-50/50"
                             }`}
                           >
-                            <td className="px-6 py-4 text-sm text-emerald font-bold whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-emerald font-bold whitespace-nowrap text-center align-middle">
                               {row.part}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap text-center align-middle">
                               <span className="text-neutral-950 font-black mr-1">⌀</span>
                               {row.od_mm}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap text-center align-middle">
                               {row.wall_mm}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap text-center align-middle">
                               {row.id_mm}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap text-center align-middle">
                               {row.pack}
                             </td>
-                            <td className="px-6 py-4 text-sm text-neutral-950 font-bold whitespace-nowrap">
+                            <td className="px-6 py-4 text-sm text-neutral-950 font-bold whitespace-nowrap text-center align-middle">
                               {row.kg_mtr}
                             </td>
                             {specData.hasWaterContent && (
-                              <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap">
+                              <td className="px-6 py-4 text-sm text-neutral-950 font-normal whitespace-nowrap text-center align-middle">
                                 {row.water_l_mtr ?? "—"}
                               </td>
                             )}
@@ -608,14 +608,22 @@ export default function PPRProductClient({
                 <div className="flex flex-wrap items-center gap-6">
                   <Link
                     href="/contact"
-                    className="reveal-cta inline-flex items-center gap-3 px-8 py-4 bg-neutral-950 hover:bg-red-600 text-white text-base font-bold rounded-full transition-all duration-300 hover:shadow-xl group"
+                    className={`reveal-cta inline-flex items-center gap-3 px-8 py-4 text-base font-bold rounded-full transition-all duration-300 hover:shadow-xl group ${
+                      color === "yellow"
+                        ? "bg-yellow-500 hover:bg-yellow-600 text-black hover:shadow-yellow-400/40"
+                        : "bg-neutral-950 hover:bg-[#008c4a] text-white"
+                    }`}
                   >
                     Request a Quote
                     <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                   <Link
                     href="/products"
-                    className="reveal-cta inline-flex items-center gap-2 px-8 py-4 text-neutral-950 text-base font-bold rounded-full border border-neutral-300 hover:border-red-600 hover:text-red-600 transition-all duration-300"
+                    className={`reveal-cta inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-full border transition-all duration-300 ${
+                      color === "yellow"
+                        ? "text-neutral-950 border-neutral-300 hover:border-yellow-500 hover:text-yellow-600"
+                        : "text-neutral-950 border-neutral-300 hover:border-[#008c4a] hover:text-[#008c4a]"
+                    }`}
                   >
                     View All Pipes / Fittings
                   </Link>

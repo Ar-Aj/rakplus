@@ -411,7 +411,7 @@ export default function ProductsPage() {
             className="py-12 lg:py-16 px-6 lg:px-8 border-t border-gray-100"
             aria-label={category.name}
           >
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               {/* Category Header */}
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 lg:mb-12">
                 <div>
@@ -430,12 +430,12 @@ export default function ProductsPage() {
               </div>
 
               {/* Product Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 lg:gap-12">
                 {products.map((product) => (
                   <Link
                     key={product.slug}
                     href={`/products/${product.slug}`}
-                    className={`group relative flex flex-col rounded-2xl bg-brand-charcoal border-t-[3px] ${category.borderColor} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 overflow-hidden`}
+                    className={`group relative flex flex-col rounded-2xl bg-brand-charcoal border-t-[3px] ${category.borderColor} transition-all duration-300 hover:shadow-2xl hover:shadow-black/25 hover:-translate-y-1.5 overflow-hidden`}
                   >
                     {/* 16:9 Cover Image Area */}
                     <div className="aspect-video w-full overflow-hidden bg-neutral-950">
@@ -454,47 +454,45 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Card Body */}
-                    <div className="flex flex-col justify-between flex-1 p-6">
-                    {/* Product ID */}
-                    <div className="mb-4">
-                      <span className="text-[10px] font-mono text-white uppercase tracking-widest">
-                        #{String(product.id).padStart(2, "0")}
-                      </span>
-                    </div>
-
-                    {/* Product Info */}
-                    <div>
-                      <span
-                        className={`inline-block px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-md ${category.badgeClass} mb-3`}
-                      >
-                        {product.category}
-                      </span>
-                      <h3 className="font-sans text-base lg:text-lg font-semibold text-white tracking-tight leading-snug mb-2 group-hover:text-white transition-colors">
-                        {product.title}
-                      </h3>
-                      <p className="text-xs text-white leading-relaxed line-clamp-2 mb-6">
-                        {product.description}
-                      </p>
-
-                      {/* Specs peek */}
-                      {product.dimensionalTable.length > 0 && (
-                        <p className="text-[10px] text-white font-medium uppercase tracking-widest mb-4">
-                          {product.dimensionalTable.length} size
-                          {product.dimensionalTable.length !== 1
-                            ? "s"
-                            : ""}{" "}
-                          available
-                        </p>
-                      )}
-
-                      {/* CTA row */}
-                      <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                        <span className="text-xs font-medium text-white group-hover:text-white transition-colors">
-                          View details
+                    <div className="flex flex-col justify-between flex-1 p-7 sm:p-8 lg:p-9">
+                      {/* Product Header / Tag */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <span
+                          className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] rounded-md ${category.badgeClass}`}
+                        >
+                          {product.category}
                         </span>
-                        <ArrowRight className="w-4 h-4 text-white group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                        <span className="text-xs font-mono text-white/50 uppercase tracking-widest">
+                          #{String(product.id).padStart(2, "0")}
+                        </span>
                       </div>
-                    </div>
+
+                      {/* Product Info */}
+                      <div className="space-y-4 lg:space-y-5">
+                        <h3 className="font-sans text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors">
+                          {product.title}
+                        </h3>
+                        <p className="text-base sm:text-lg leading-relaxed text-gray-300">
+                          {product.description}
+                        </p>
+
+                        {/* Specs peek */}
+                        {product.dimensionalTable.length > 0 && (
+                          <p className="text-xs text-white/80 font-bold uppercase tracking-widest pt-2">
+                            {product.dimensionalTable.length} size
+                            {product.dimensionalTable.length !== 1 ? "s" : ""}{" "}
+                            available
+                          </p>
+                        )}
+
+                        {/* CTA row */}
+                        <div className="flex items-center justify-between pt-5 border-t border-white/15">
+                          <span className="text-sm font-semibold text-white group-hover:text-white transition-colors">
+                            View details
+                          </span>
+                          <ArrowRight className="w-5 h-5 text-white group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300" />
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}

@@ -43,6 +43,10 @@ interface ProductViewerModalProps {
   sizes?: PipeSize[];
   /** Which size was clicked — becomes the active default */
   initialSize?: string;
+  /** Color theme: 'green' | 'yellow' */
+  colorTheme?: "green" | "yellow";
+  /** Fallback boolean for Yellow product line */
+  isYellow?: boolean;
 }
 
 export default function ProductViewerModal({
@@ -51,7 +55,10 @@ export default function ProductViewerModal({
   modelPath,
   sizes,
   initialSize,
+  colorTheme,
+  isYellow = false,
 }: ProductViewerModalProps) {
+  const isYellowTheme = colorTheme === "yellow" || isYellow;
   // ── Active model state ─────────────────────────────────────────────────────
   const hasMultipleSizes = sizes && sizes.length > 0;
 
@@ -99,7 +106,9 @@ export default function ProductViewerModal({
       {/* ── Close button ── */}
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 sm:top-12 sm:right-12 z-50 text-neutral-950 text-sm font-sans font-bold tracking-widest uppercase hover:text-emerald-600 transition-colors flex items-center gap-2 cursor-pointer"
+        className={`absolute top-6 right-6 sm:top-12 sm:right-12 z-50 text-neutral-950 text-sm font-sans font-bold tracking-widest uppercase transition-colors flex items-center gap-2 cursor-pointer ${
+          isYellowTheme ? "hover:text-yellow-600" : "hover:text-[#008c4a]"
+        }`}
       >
         <span>CLOSE</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
@@ -140,13 +149,19 @@ export default function ProductViewerModal({
                   }}
                   className={`w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium transition-colors duration-100 tabular-nums
                     ${s.label === activeLabel
-                      ? "bg-emerald-50 text-emerald-700 font-bold"
+                      ? isYellowTheme
+                        ? "bg-yellow-50 text-yellow-800 font-bold"
+                        : "bg-emerald-50 text-[#008c4a] font-bold"
                       : "text-neutral-700 hover:bg-neutral-50"
                     }`}
                 >
                   <span>{s.label}</span>
                   {s.label === activeLabel && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        isYellowTheme ? "bg-yellow-500" : "bg-[#008c4a]"
+                      }`}
+                    />
                   )}
                 </button>
               ))}

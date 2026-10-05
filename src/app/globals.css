@@ -12,9 +12,6 @@
    ═══════════════════════════════════════════════════════ */
 
 @layer base {
-  html {
-    @apply scroll-smooth;
-  }
 
   body {
     @apply bg-studio-white text-ink font-sans antialiased;
@@ -206,15 +203,13 @@
 }
 
 .reveal-curtain-child {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: none;
 }
 
 .reveal-curtain-child.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @keyframes float-parallax {

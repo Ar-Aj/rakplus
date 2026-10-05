@@ -47,8 +47,8 @@ const LiveCoverCanvas = dynamic(
   { ssr: false }
 );
 
-const TableRowViewer = dynamic(
-  () => import("@/components/3d/TableRowViewer"),
+const ProductTable = dynamic(
+  () => import("@/components/ProductTable"),
   { ssr: false }
 );
 
@@ -139,13 +139,16 @@ function getAdjacentProducts(currentSlug: string) {
 }
 
 // ─── Accent palette ───────────────────────────────────────────────────────────
-function getCategoryAccent(category: string) {
-  if (category.includes("Yellow"))
+function getCategoryAccent(category: string, slug?: string) {
+  const isYellow =
+    category.toLowerCase().includes("yellow") ||
+    slug?.toLowerCase().includes("yellow");
+  if (isYellow)
     return {
-      text: "text-brand-yellow",
-      bg: "bg-brand-yellow/10",
-      border: "border-brand-yellow/30",
-      badge: "bg-brand-yellow/15 text-brand-yellow border-brand-yellow/25",
+      text: "text-yellow-600",
+      bg: "bg-yellow-500/10",
+      border: "border-yellow-500/30",
+      badge: "bg-yellow-500/15 text-yellow-700 border-yellow-500/25",
     };
   if (category.includes("PEX"))
     return {
@@ -155,10 +158,10 @@ function getCategoryAccent(category: string) {
       badge: "bg-brand-red/15 text-brand-red border-brand-red/25",
     };
   return {
-    text: "text-brand-green",
-    bg: "bg-brand-green/10",
-    border: "border-brand-green/30",
-    badge: "bg-brand-green/15 text-brand-green border-brand-green/25",
+    text: "text-[#008c4a]",
+    bg: "bg-[#008c4a]/10",
+    border: "border-[#008c4a]/30",
+    badge: "bg-[#008c4a]/15 text-[#008c4a] border-[#008c4a]/25",
   };
 }
 
@@ -167,20 +170,27 @@ export default function ProductPage({ params }: PageProps) {
   const product = getProductBySlug(params.slug);
   if (!product) notFound();
 
-  const accent = getCategoryAccent(product.category);
+  const isYellow =
+    product.category.toLowerCase().includes("yellow") ||
+    product.slug.toLowerCase().includes("yellow") ||
+    product.title.toLowerCase().includes("yellow");
+  const colorTheme: "green" | "yellow" = isYellow ? "yellow" : "green";
+
+  const accent = getCategoryAccent(product.category, product.slug);
   const { prev, next } = getAdjacentProducts(params.slug);
   const hasDimensionalTable = product.dimensionalTable?.length > 0;
   const hasFittingItems = (product.fittingItems?.length ?? 0) > 0;
-  const hasWaterContent = hasDimensionalTable &&
-    product.dimensionalTable.some(
-      (r) => r.waterContent !== undefined && r.waterContent !== "N/A"
-    );
 
   const heroModelPath = getHeroModelPath(product.title, product.category);
   const allSizes = hasDimensionalTable
     ? getAllSizes(product.title, product.category, product.dimensionalTable)
     : [];
   const hasSizeModels = allSizes.length > 0;
+
+  // Primary CTA class — used for "Request a Quote"
+  const ctaClass = isYellow
+    ? "bg-yellow-500 hover:bg-yellow-600 text-black hover:shadow-lg hover:shadow-yellow-400/40"
+    : "bg-[#008c4a] hover:bg-[#006e3a] text-white hover:shadow-lg hover:shadow-[#008c4a]/25";
 
   return (
     <article className="min-h-screen bg-bg-cream">
@@ -217,6 +227,8 @@ export default function ProductPage({ params }: PageProps) {
                     modelPath={heroModelPath}
                     sizes={hasSizeModels ? allSizes : undefined}
                     initialSize={hasSizeModels ? allSizes[0].label : undefined}
+                    isYellow={isYellow}
+                    colorTheme={colorTheme}
                   />
                 </div>
               ) : product.coverImage ? (
@@ -288,13 +300,17 @@ export default function ProductPage({ params }: PageProps) {
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand-green hover:bg-brand-green/90 text-white text-base font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-green/25 hover:-translate-y-0.5"
+                  className={`inline-flex items-center gap-2 px-6 py-3 text-base font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 ${ctaClass}`}
                 >
                   Request a Quote
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-brand-charcoal text-base font-medium rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:bg-gray-50"
+                  className={`inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-xl border border-gray-200 transition-all duration-200 hover:bg-gray-50 ${
+                    isYellow
+                      ? "text-brand-charcoal hover:border-yellow-500 hover:text-yellow-600"
+                      : "text-brand-charcoal hover:border-[#008c4a] hover:text-[#008c4a]"
+                  }`}
                 >
                   View All Products
                 </Link>
@@ -353,77 +369,14 @@ export default function ProductPage({ params }: PageProps) {
           {hasFittingItems ? (
             <FittingGallery fittingItems={product.fittingItems!} accent={accent} />
           ) : hasDimensionalTable ? (
-            <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="bg-brand-charcoal text-white">
-                      {/* View 3D column — only when size-specific models exist */}
-                      {hasSizeModels && (
-                        <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap w-36">
-                          3D Model
-                        </th>
-                      )}
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">PART</th>
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">DIMENSIONS (mm)</th>
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">WALL THICKNESS (mm)</th>
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">INNER DIAMETER (mm)</th>
-                      {hasWaterContent && (
-                        <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">WATER CONTENT (l/mtr)</th>
-                      )}
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">PACKING UNIT</th>
-                      <th scope="col" className="px-5 py-5 text-sm font-semibold uppercase tracking-[0.15em] text-white whitespace-nowrap">Kg/Mtr.</th>
-                    </tr>
-                  </thead>
-                  <tbody className="tabular-nums divide-y divide-gray-100">
-                    {product.dimensionalTable.map((row, index) => {
-                      const sizeLabel = `${row.dimension}mm`;
-                      const rowModelPath = hasSizeModels
-                        ? allSizes.find((s) => s.label === sizeLabel)?.modelPath
-                        : undefined;
-                      return (
-                        <tr
-                          key={index}
-                          className={`transition-colors duration-150 hover:bg-brand-green/5 ${index % 2 === 0 ? "bg-white" : "bg-bg-cream/50"}`}
-                        >
-                          {/* View 3D cell */}
-                          {hasSizeModels && (
-                            <td className="px-5 py-4">
-                              {rowModelPath ? (
-                                <TableRowViewer
-                                  modelPath={rowModelPath}
-                                  sizeLabel={sizeLabel}
-                                  allSizes={allSizes}
-                                  isYellow={product.category.includes("Yellow")}
-                                />
-                              ) : (
-                                <span className="text-xs text-neutral-300">—</span>
-                              )}
-                            </td>
-                          )}
-                          <td className="px-5 py-4 text-base font-medium text-brand-charcoal whitespace-nowrap">{row.part}</td>
-                          <td className="px-5 py-4 text-base font-medium text-brand-charcoal whitespace-nowrap">
-                            <span className={`font-semibold ${accent.text}`}>⌀</span>{" "}{row.dimension}
-                          </td>
-                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.wallThickness}</td>
-                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.innerDiameter}</td>
-                          {hasWaterContent && (
-                            <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.waterContent}</td>
-                          )}
-                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.packingUnit}</td>
-                          <td className="px-5 py-4 text-base text-neutral-700 whitespace-nowrap">{row.weight}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-              <div className="px-5 py-3 bg-gray-50 border-t border-gray-100">
-                <p className="text-xs text-neutral-400 tracking-wide">
-                  {product.dimensionalTable.length} size{product.dimensionalTable.length !== 1 ? "s" : ""} available · Data sourced from RAKPLUS product catalog
-                </p>
-              </div>
-            </div>
+            <ProductTable
+              dimensionalTable={product.dimensionalTable}
+              colorTheme={colorTheme}
+              isYellow={isYellow}
+              hasSizeModels={hasSizeModels}
+              allSizes={allSizes}
+              accent={accent}
+            />
           ) : (
             <div className="flex flex-col items-center justify-center py-16 rounded-2xl bg-white border border-dashed border-gray-200">
               <Ruler className="w-8 h-8 text-neutral-300 mb-3" />
@@ -470,26 +423,57 @@ export default function ProductPage({ params }: PageProps) {
       <section className="py-12 px-4 sm:px-6 lg:px-[15vw] border-t border-gray-100" aria-label="Product navigation">
         <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-6">
           {prev ? (
-            <Link href={`/products/${prev.slug}`} className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200">
-              <ArrowLeft className="w-4 h-4 text-neutral-400 group-hover:text-brand-green transition-colors group-hover:-translate-x-1 duration-200" />
+            <Link
+              href={`/products/${prev.slug}`}
+              className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
+            >
+              <ArrowLeft
+                className={`w-4 h-4 text-neutral-400 transition-colors group-hover:-translate-x-1 duration-200 ${
+                  isYellow ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"
+                }`}
+              />
               <div className="text-right">
                 <p className="text-xs text-neutral-400 uppercase tracking-widest font-medium">Previous</p>
-                <p className="text-base text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">{prev.title}</p>
+                <p
+                  className={`text-base text-brand-charcoal font-medium transition-colors ${
+                    isYellow ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"
+                  }`}
+                >
+                  {prev.title}
+                </p>
               </div>
             </Link>
           ) : <div />}
 
-          <Link href="/products" className="text-sm text-neutral-400 uppercase tracking-[0.2em] font-medium hover:text-brand-charcoal transition-colors">
+          <Link
+            href="/products"
+            className={`text-sm text-neutral-400 uppercase tracking-[0.2em] font-medium transition-colors ${
+              isYellow ? "hover:text-yellow-600" : "hover:text-brand-charcoal"
+            }`}
+          >
             All Products
           </Link>
 
           {next ? (
-            <Link href={`/products/${next.slug}`} className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200">
+            <Link
+              href={`/products/${next.slug}`}
+              className="group flex items-center gap-3 px-5 py-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-200 transition-all duration-200"
+            >
               <div>
                 <p className="text-xs text-neutral-400 uppercase tracking-widest font-medium">Next</p>
-                <p className="text-base text-brand-charcoal font-medium group-hover:text-brand-green transition-colors">{next.title}</p>
+                <p
+                  className={`text-base text-brand-charcoal font-medium transition-colors ${
+                    isYellow ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"
+                  }`}
+                >
+                  {next.title}
+                </p>
               </div>
-              <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-brand-green transition-colors group-hover:translate-x-1 duration-200" />
+              <ArrowRight
+                className={`w-4 h-4 text-neutral-400 transition-colors group-hover:translate-x-1 duration-200 ${
+                  isYellow ? "group-hover:text-yellow-600" : "group-hover:text-[#008c4a]"
+                }`}
+              />
             </Link>
           ) : <div />}
         </div>

@@ -41,17 +41,17 @@ export default function CinematicCurtain({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         curtain,
-        { yPercent: 12, opacity: 0.85 },
+        { y: 50, opacity: 0.9 },
         {
-          yPercent: 0,
+          y: 0,
           opacity: 1,
           ease: "power3.out",
           scrollTrigger: {
             id: `${id}-reveal`,
             trigger: curtain,
             start: "top bottom",
-            end: "top 15%",
-            scrub: 0.8,
+            end: "top 25%",
+            scrub: 0.6,
           },
         }
       );
@@ -76,14 +76,13 @@ export default function CinematicCurtain({
 
         ScrollTrigger.create({
           trigger: el,
-          start: "top 88%",
+          start: "top 95%",
           onEnter: () => {
             gsap.to(inner, {
               y: "0%",
               opacity: 1,
               duration: 1.2,
               ease: "power4.out",
-              clearProps: "transform,opacity",
             });
           },
           once: true,
@@ -94,19 +93,18 @@ export default function CinematicCurtain({
       const staggerGroups = content.querySelectorAll(".gsap-stagger-group");
       staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".gsap-stagger-item");
-        gsap.set(items, { y: 60, opacity: 0 });
+        gsap.set(items, { y: 40, opacity: 0 });
 
         ScrollTrigger.create({
           trigger: group,
-          start: "top 85%",
+          start: "top 95%",
           onEnter: () => {
             gsap.to(items, {
               y: 0,
               opacity: 1,
-              duration: 1,
+              duration: 0.8,
               ease: "power3.out",
-              stagger: 0.15,
-              clearProps: "transform,opacity",
+              stagger: 0.12,
             });
           },
           once: true,
@@ -120,13 +118,12 @@ export default function CinematicCurtain({
 
         ScrollTrigger.create({
           trigger: el,
-          start: "top 85%",
+          start: "top 92%",
           onEnter: () => {
             gsap.to(el, {
               clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
               duration: 1.4,
               ease: "power4.inOut",
-              clearProps: "clipPath",
             });
           },
           once: true,
@@ -149,18 +146,17 @@ export default function CinematicCurtain({
 
       // ── E. CTA Scale Hover + Viewport Entrance ──
       content.querySelectorAll(".gsap-cta").forEach((el) => {
-        gsap.set(el, { scale: 0.9, opacity: 0 });
+        gsap.set(el, { scale: 0.95, opacity: 0 });
 
         ScrollTrigger.create({
           trigger: el,
-          start: "top 90%",
+          start: "top 95%",
           onEnter: () => {
             gsap.to(el, {
               scale: 1,
               opacity: 1,
               duration: 0.7,
               ease: "back.out(1.7)",
-              clearProps: "transform,opacity",
             });
           },
           once: true,
@@ -183,7 +179,7 @@ export default function CinematicCurtain({
 
         ScrollTrigger.create({
           trigger: el,
-          start: "top 88%",
+          start: "top 95%",
           onEnter: () => {
             gsap.to(el, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
             gsap.to(obj, {
@@ -201,26 +197,39 @@ export default function CinematicCurtain({
 
       // ── G. Simple fade-slide fallback for reveal-curtain-child ──
       content.querySelectorAll(".reveal-curtain-child").forEach((el) => {
-        gsap.set(el, { y: 40, opacity: 0 });
+        gsap.set(el, { y: 24, opacity: 0 });
         ScrollTrigger.create({
           trigger: el,
-          start: "top 90%",
+          start: "top 96%",
           onEnter: () => {
             gsap.to(el, {
               y: 0,
               opacity: 1,
-              duration: 0.9,
+              duration: 0.8,
               ease: "power3.out",
-              clearProps: "transform,opacity",
+              onComplete: () => {
+                el.classList.add("is-visible");
+              },
             });
           },
           once: true,
         });
       });
 
+      // Ensure all dynamic positions are synced after triggers setup
+      ScrollTrigger.refresh();
+
     }, contentRef);
 
-    return () => ctx.revert();
+    // Secondary refresh after image layouts settle
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 250);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, []);
 
   return (
