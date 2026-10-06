@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -49,6 +50,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-studio-white text-ink font-sans antialiased">
+        <Preloader />
         <SmoothScroll>
           <ScrollToTop />
           {/* Fixed navigation — z-50 above everything */}

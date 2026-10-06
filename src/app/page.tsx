@@ -63,11 +63,17 @@ export default function HomePage() {
     <main className="relative w-full bg-transparent">
 
       {/* ─── Canvas Sequence — Scrub ends at 85% of sequenceRef (section track only) ─── */}
+      {/* Frame counts MUST match disk: /home-desktop = 337, /home-mobile = 452.
+          mobileEnd overrides CanvasSequence's "+=1500px" mobile fallback, which
+          ended the scrub after ~2 screens regardless of the track's real height. */}
       <CanvasSequence
         desktopPath="/home-desktop/"
         tabletPath="/home-desktop/"
         mobilePath="/home-mobile/"
         frameCount={337}
+        desktopFrameCount={337}
+        mobileFrameCount={452}
+        mobileEnd="85% bottom"
         scrollTriggerRef={sequenceRef}
       />
 
@@ -101,9 +107,11 @@ export default function HomePage() {
             <div className="w-full px-6 md:px-12 max-w-screen-2xl mx-auto">
               <h1 className="font-sans font-extrabold leading-[0.85] tracking-tighter text-neutral-950
                 text-[clamp(4rem,12vw,10rem)]">
-                <span className="relative pb-4 inline-block text-neutral-950 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EVOLVE</span>.<br className="hidden sm:block" />{" "}
-                <span className="relative pb-4 inline-block text-red-600 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EXPAND</span>.<br className="hidden sm:block" />{" "}
-                <span className="relative pb-4 inline-block text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EMPOWER</span><span className="text-emerald-600">.</span>
+                {/* Each word + period shares a nowrap parent: an inline-block's edge is a
+                    line-break opportunity, so a bare "." after it could widow on mobile. */}
+                <span className="inline-block whitespace-nowrap"><span className="relative pb-4 inline-block text-neutral-950 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EVOLVE</span>.</span><br className="hidden sm:block" />{" "}
+                <span className="inline-block whitespace-nowrap"><span className="relative pb-4 inline-block text-red-600 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EXPAND</span>.</span><br className="hidden sm:block" />{" "}
+                <span className="inline-block whitespace-nowrap"><span className="relative pb-4 inline-block text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">EMPOWER</span><span className="text-emerald-600">.</span></span>
               </h1>
             </div>
           </div>
