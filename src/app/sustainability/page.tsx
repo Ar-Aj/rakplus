@@ -83,14 +83,26 @@ export default function SustainabilityPage() {
     <main className="relative w-full bg-transparent">
       {/* ─── Full-Screen Hero Video Banner ─── */}
       <section className="relative w-full mt-16 lg:mt-20 min-h-[100dvh] overflow-hidden">
+        {/* Mobile (9:16) - Shows on screens below md */}
         <video 
-          src="/videos/banner/sustainability%20banner.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          poster="/videos/banner/sustainability%20banner%20cover%20image.png"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="block md:hidden w-full h-full object-cover"
+          src="/videos/banner/9-16-banner-sustainaibility.mp4"
+          poster="/videos/banner/banner%20cover%209-16.png"
+          autoPlay loop muted playsInline 
+        />
+        {/* Tablet (3:4) - Shows on screens between md and lg */}
+        <video 
+          className="hidden md:block lg:hidden w-full h-full object-cover"
+          src="/videos/banner/3-4-banner-sustainaibility.mp4"
+          poster="/videos/banner/banner%20cover%203-4.png"
+          autoPlay loop muted playsInline 
+        />
+        {/* Desktop (21:9) - Shows on screens lg and above */}
+        <video 
+          className="hidden lg:block w-full h-full object-cover"
+          src="/videos/banner/21-9-banner-sustainaibility.mp4"
+          poster="/videos/banner/banner%20cover%2021-9.png"
+          autoPlay loop muted playsInline 
         />
       </section>
 

@@ -14,6 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rakplusuae.com"),
   title: "RAKPLUS — PP-R & PEX Piping Systems | German Standard Engineering",
   description:
     "RAKPLUS by Aquasmart Plastic Industries — Reliable PP-R and PEX piping systems for hot & cold water transmission. ISO 9001:2015 certified. 50-year guaranteed service life. Made in UAE to German DIN standards.",
@@ -28,6 +29,32 @@ export const metadata: Metadata = {
     "German standard",
     "Aquasmart",
   ],
+
+  openGraph: {
+    title: "RAKPLUS — PP-R & PEX Piping Systems | German Standard Engineering",
+    description:
+      "RAKPLUS by Aquasmart Plastic Industries — Reliable PP-R and PEX piping systems for hot & cold water transmission. ISO 9001:2015 certified. 50-year guaranteed service life. Made in UAE to German DIN standards.",
+    url: "https://rakplusuae.com",
+    siteName: "RakPlus",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "RakPlus Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "RAKPLUS — PP-R & PEX Piping Systems | German Standard Engineering",
+    description:
+      "RAKPLUS by Aquasmart Plastic Industries — Reliable PP-R and PEX piping systems for hot & cold water transmission. ISO 9001:2015 certified. 50-year guaranteed service life. Made in UAE to German DIN standards.",
+    images: ["/images/logo.png"],
+  },
 };
 
 export default function RootLayout({

@@ -74,6 +74,8 @@ export default function HomePage() {
         desktopFrameCount={337}
         mobileFrameCount={452}
         mobileEnd="85% bottom"
+        end="+=300%"
+        scrub={0.4}
         scrollTriggerRef={sequenceRef}
       />
 

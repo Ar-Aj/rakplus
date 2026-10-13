@@ -50,8 +50,9 @@ const TABLET_BREAKPOINT = 768;    // mobile → tablet
 const DESKTOP_BREAKPOINT = 1024;  // tablet → desktop
 
 /** Frames to keep loaded ahead of the current scroll position.
- *  80 frames ≈ 2.5 s of video pre-loaded — prevents fast-scrub misses. */
-const BUFFER_AHEAD = 80;
+ *  150 frames ≈ 6.25 s of video pre-loaded — provides headroom for fast
+ *  scrolls even after the SCROLL GOVERNOR (lerp 0.15 / wheel 0.45). */
+const BUFFER_AHEAD = 150;
 /** Frames to keep loaded behind the current scroll position.
  *  40 frames ≈ 1.5 s — prevents reload cost on reverse scrubs. */
 const BUFFER_BEHIND = 40;

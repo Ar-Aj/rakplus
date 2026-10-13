@@ -176,7 +176,7 @@ export default function ProductViewerModal({
         <Canvas
           key={activeLabel}
           camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, getCameraLimits(activeLabel).cameraZ] }}
-          dpr={[1, 2]}
+          dpr={[1, 1.5]}
           gl={{ toneMapping: THREE.NeutralToneMapping, toneMappingExposure: 0.85 }}
         >
           <color attach="background" args={["#ffffff"]} />

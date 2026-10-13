@@ -9,7 +9,7 @@ export default function ProductViewerCanvas({ modelPath }: { modelPath: string }
   return (
     <div className="absolute inset-0 w-full h-full">
       <Canvas
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         camera={{ position: [0, 0, 5], fov: 45 }}
         gl={{ alpha: true }}
       >
