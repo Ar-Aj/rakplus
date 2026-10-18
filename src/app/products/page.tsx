@@ -18,121 +18,107 @@ import { ArrowRight } from "lucide-react";
 import { productRegistry } from "@/config/products";
 import type { ProductConfig } from "@/types/product";
 import ProductHeroVideo from "@/components/products/ProductHeroVideo";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import TechnicalSpecifications from "@/components/TechnicalSpecifications";
+import RelatedProducts from "@/components/RelatedProducts";
+import {
+  buildLocalBusinessJsonLd,
+  buildProductJsonLd,
+  buildFaqJsonLd,
+  buildBreadcrumbJsonLd,
+  SITE,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
   title:
-    "Premium PP-R Pipes / Fittings in UAE | WRAS Approved | Rakplus by Aquasmart",
+    "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog | RakPlus",
   description:
-    "Explore the complete RAKPLUS range of PP-R Green and Yellow pipes (PN10–PN25), WRAS-approved fittings, and PEX systems. Engineered to German STD DIN 8077/78 and ISO 9001:2015 certified. Top PP-R pipe supplier in Dubai, UAE, and the GCC.",
+    "Browse the full RakPlus catalog of PPR pipes & 100% Brass fittings in the UAE. WRAS approved, German DIN 8077/8078, 50-year guarantee. PN10–PN25, green & yellow pipes. Premium PP-R supplier for Dubai & the GCC.",
   keywords: [
-    "Premium PP-R Pipes UAE",
+    "100% brass ppr fittings uae",
+    "PPR pipes UAE",
+    "PPR fittings UAE",
     "WRAS Approved PP-R Fittings Dubai",
-    "Top PP-R Pipe Supplier GCC",
-    "PP-R pipes Dubai",
     "PPR pipe manufacturer UAE",
     "DIN 8077 PP-R pipes",
     "PN20 SDR6 PP-R pipe",
-    "Rakplus PP-R",
+    "RakPlus PPR",
     "Aquasmart Plastic Industries",
     "polypropylene pipe systems GCC",
+    "brass insert PPR fittings",
   ],
+  alternates: {
+    canonical: "https://rakplusuae.com/products/",
+  },
   openGraph: {
     title:
-      "Premium PP-R Pipes / Fittings in UAE | WRAS Approved | Rakplus",
+      "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog | RakPlus",
     description:
-      "11 precision-engineered PP-R and PEX piping products — manufactured to DIN 8077/78 German standards. ISO 9001:2015 certified. 50-year guarantee.",
+      "RakPlus full PPR catalog — 100% Polymer pipes, 100% Brass fittings. WRAS approved, German DIN 8077/8078, 50-year guarantee. PN10–PN25.",
     type: "website",
     locale: "en_AE",
+    url: "https://rakplusuae.com/products",
   },
 };
 
-// ─── JSON-LD Structured Data ───
+// ─── JSON-LD Structured Data (delegated to lib/seo.ts builders) ───
+//
+// Schema graph (linked by @id anchors):
+//   /#organization ←── owned by ─── /#localbusiness
+//                              ←── hasOfferCatalog (Organization + LocalBusiness)
+//   /products/#breadcrumb → / → /products/
+//   /products/#collection → ItemList of 11 real Product @ids
+//   /products/#faq → 5 verified Q&A pairs
+//
+// All schema data is sourced from the single source of truth in
+// `src/lib/seo.ts` — no inline conflicting declarations.
+const jsonLdLocalBusiness = buildLocalBusinessJsonLd();
 
-const jsonLdLocalBusiness = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "RakPlus by Aquasmart Plastic Industries L.L.C",
-  description:
-    "Manufacturer of premium PP-R pipe systems engineered to German STD DIN 8077/78. ISO 9001:2015 and ISO 14001:2015 certified. WRAS Approved materials.",
-  url: "https://rakplus.com",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "AE",
-    addressRegion: "Ras Al Khaimah",
-  },
-  areaServed: ["AE", "SA", "QA", "KW", "BH", "OM"],
-  priceRange: "$$",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "RAKPLUS PP-R Pipes / Fittings Catalog",
-    itemListElement: [
-      {
-        "@type": "OfferCatalog",
-        name: "PP-R Green Pipes",
-        description: "PP-R Green Pipes PN10–PN25, SDR11 to SDR5",
+// BreadcrumbList — Home → Products
+const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+  { name: "Home", url: `${SITE.url}/` },
+  { name: "Products", url: `${SITE.url}/products/` },
+]);
+
+// Real ItemList of 11 RakPlus products. Each item references a Product
+// schema with its own @id so the entity graph links this collection
+// page to every product detail page (boosts their crawl priority).
+const productListItems = Object.values(productRegistry)
+  .filter((p): p is ProductConfig => Boolean(p))
+  .map((p) => {
+    const productSchema = buildProductJsonLd({
+      name: p.title,
+      description:
+        p.description ||
+        "RAKPLUS PP-R pipe system — 100% Polymer, 100% Brass inserts, WRAS approved, 50-year guarantee.",
+      image: p.coverImage || "/images/logo.png",
+      sku: String(p.id),
+      category: p.category,
+      url: `/products/${p.slug}/`,
+    });
+    return {
+      "@type": "ListItem",
+      position: 0, // filled below
+      item: {
+        ...productSchema,
+        "@id": `${SITE.url}/products/${p.slug}/#product`,
+        url: `${SITE.url}/products/${p.slug}/`,
       },
-      {
-        "@type": "OfferCatalog",
-        name: "PP-R Yellow Pipes",
-        description: "PP-R Yellow Pipes PN10–PN25, SDR11 to SDR5",
-      },
-      {
-        "@type": "OfferCatalog",
-        name: "PP-R Fittings",
-        description:
-          "WRAS Approved PP-R fittings with DVS 2207 welding compliance",
-      },
-      {
-        "@type": "OfferCatalog",
-        name: "PEX Systems",
-        description: "Cross-linked polyethylene piping systems",
-      },
-    ],
-  },
-};
+    };
+  })
+  .map((item, i) => ({ ...item, position: i + 1 }));
 
 const jsonLdProductCollection = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  name: "RAKPLUS PP-R Pipe Systems",
+  "@type": "ItemList",
+  "@id": `${SITE.url}/products/#collection`,
+  name: "RakPlus PP-R Pipes & Fittings — Full Catalog",
   description:
-    "Complete range of PP-R polypropylene random copolymer pipes and fittings. Engineered to DIN 8077/78 German standards. WRAS Approved. ISO 9001:2015 certified.",
-  brand: {
-    "@type": "Brand",
-    name: "Rakplus",
-  },
-  manufacturer: {
-    "@type": "Organization",
-    name: "Aquasmart Plastic Industries L.L.C",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "AE",
-    },
-  },
-  category: "Plumbing Pipes / Fittings",
-  material: "Polypropylene Random Copolymer (PP-R)",
-  additionalProperty: [
-    {
-      "@type": "PropertyValue",
-      name: "Certification",
-      value: "ISO 9001:2015, ISO 14001:2015",
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Standards",
-      value: "DIN 8077/78, DIN 8076, DVS 2207, EN ISO 15874-2",
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Approval",
-      value: "WRAS Approved",
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Warranty",
-      value: "50 years guaranteed service life",
-    },
-  ],
+    "Complete RakPlus PP-R pipe and fitting catalog — 100% Polymer pipes, 100% Brass fittings, WRAS approved, 50-year guaranteed service life. PN10 to PN25, 20 mm to 160 mm.",
+  url: `${SITE.url}/products/`,
+  numberOfItems: productListItems.length,
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  itemListElement: productListItems,
 };
 
 // ─── FAQ Data (verified facts only) ───
@@ -168,16 +154,9 @@ const FAQ_ITEMS = [
 ];
 
 const jsonLdFaq = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ_ITEMS.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
+  ...buildFaqJsonLd(FAQ_ITEMS),
+  "@id": `${SITE.url}/products/#faq`,
+  url: `${SITE.url}/products/`,
 };
 
 // ─── Category Definitions ───
@@ -269,6 +248,13 @@ export default function ProductsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLdFaq),
+        }}
+      />
+      {/* ─── JSON-LD: BreadcrumbList ─── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdBreadcrumb),
         }}
       />
 
@@ -540,6 +526,19 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── Technical Specifications — high-density indexable data ─── */}
+      <TechnicalSpecifications />
+
+      {/* ─── Related Products — internal link graph ─── */}
+      <section className="py-16 lg:py-24 px-6 lg:px-8 bg-bg-cream border-t border-gray-100" aria-label="Related PPR products and resources">
+        <div className="max-w-7xl mx-auto">
+          <RelatedProducts currentSlug="ppr-green-pn20" />
+        </div>
+      </section>
+
+      {/* ─── LSI Semantic Block — topical authority ─── */}
+      <SemanticLSIBlock topic="products" />
 
       {/* ─── Bottom CTA ─── */}
       <section className="py-20 lg:py-28 px-6 lg:px-8 bg-white border-t border-gray-100">

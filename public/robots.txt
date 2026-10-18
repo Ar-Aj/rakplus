@@ -1,0 +1,62 @@
+# ────────────────────────────────────────────────────────────────
+# robots.txt — RakPlus UAE
+# Optimised for Googlebot (smartphone + desktop) and Bingbot.
+# ────────────────────────────────────────────────────────────────
+
+# ── Default rule: ALL well-behaved crawlers allowed ──
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /*?*
+
+# ── Sitemap location ──
+Sitemap: https://rakplusuae.com/sitemap.xml
+
+# ────────────────────────────────────────────────────────────────
+# Googlebot — explicit, generous, snippets ON
+# ────────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# ── Allow Googlebot-Image to crawl /images/ and WebP frames ──
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /home-desktop/
+Allow: /home-mobile/
+Allow: /sustainability-desktop/
+Allow: /sustainability-tablet/
+Allow: /sustainability-mobile/
+
+# ── Allow Googlebot-Video (for /videos/ posters) ──
+User-agent: Googlebot-Video
+Allow: /videos/
+
+# ────────────────────────────────────────────────────────────────
+# Bingbot — explicit, snippets ON
+# ────────────────────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# ── Block common non-SEO scrapers (politely) ──
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ── Crawl-delay hint for slow crawlers (in seconds) ──
+User-agent: *
+Crawl-delay: 1

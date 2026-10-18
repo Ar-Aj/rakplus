@@ -1,0 +1,20 @@
+{
+  "name": "RakPlus UAE — PPR Piping Systems",
+  "short_name": "RakPlus",
+  "description": "UAE manufacturer of WRAS approved 100% Polymer PPR pipes and 100% Brass fittings. Industrial plumbing solutions with 50-year guaranteed service life.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "industrial", "utilities"]
+}

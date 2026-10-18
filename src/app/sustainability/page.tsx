@@ -24,6 +24,14 @@ import {
   ThermometerSun,
   ShieldCheck,
 } from "lucide-react";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import RelatedProducts from "@/components/RelatedProducts";
+import { buildBreadcrumbJsonLd } from "@/lib/seo";
+
+const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+  { name: "Home", url: "https://rakplusuae.com/" },
+  { name: "Sustainability", url: "https://rakplusuae.com/sustainability/" },
+]);
 
 // ─── Sustainability Pillars Data ───
 const PILLARS = [
@@ -81,6 +89,11 @@ export default function SustainabilityPage() {
 
   return (
     <main className="relative w-full bg-transparent">
+      {/* ─── JSON-LD: BreadcrumbList ─── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
       {/* ─── Full-Screen Hero Video Banner ─── */}
       <section className="relative w-full mt-16 lg:mt-20 min-h-[100dvh] overflow-hidden">
         {/* Mobile (9:16) - Shows on screens below md */}
@@ -489,6 +502,16 @@ export default function SustainabilityPage() {
             </div>
           </div>
         </section>
+
+        {/* ─── Related Products — internal link graph ─── */}
+        <section className="relative z-10 py-16 md:py-24 px-6 lg:px-8">
+          <div className="relative z-10 max-w-7xl mx-auto">
+            <RelatedProducts currentSlug="ppr-fittings-green" />
+          </div>
+        </section>
+
+        {/* ─── LSI Semantic Block — topical authority ─── */}
+        <SemanticLSIBlock topic="sustainability" />
       </div>
     </main>
   );

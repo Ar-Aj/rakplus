@@ -22,6 +22,9 @@ import LiquidButton from "@/components/ui/LiquidButton";
 import CanvasSequence from "@/components/CanvasSequence";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
 import { FlaskConical, Layers, Shield, Cpu } from "lucide-react";
+import RelatedProducts from "@/components/RelatedProducts";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import AeoTargetBlock from "@/components/AeoTargetBlock";
 
 // ─── CTAs — Red → Yellow ─────────────────────────────────────────────────
 function PrimaryCTA({ href, children }: { href: string; children: React.ReactNode }) {
@@ -113,7 +116,7 @@ export default function InnovationPageClient() {
               </h1>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Utilizing <span className="text-emerald-500">100% Virgin Material</span>, our advanced co-extrusion process strictly adheres to <span className="text-yellow-400">German Standard</span> engineering protocols.
               </p>
@@ -154,7 +157,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Our proprietary material matrix is characterized by unmatched
               elasticity, rigidity, tightness, and compression strength.
@@ -198,7 +201,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Every millimeter of a RAKPLUS pipe is extruded in strict accordance
               with German DIN standards. Utilizing advanced <span className="text-yellow-400">DVS 2207</span> welding
@@ -240,7 +243,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
+            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Backed by <span className="text-yellow-400">ISO 9001:2015</span> certification and independent international
               laboratory testing, we guarantee a <span className="text-emerald-500">50-year</span> service life on all
@@ -284,6 +287,19 @@ export default function InnovationPageClient() {
         </div>{/* ─── END sequenceRef boundary ─── */}
 
       </div>{/* /contentRef */}
+
+      {/* ─── AEO Target Block — direct answers for AI crawlers ─── */}
+      <AeoTargetBlock />
+
+      {/* ─── Related Products — internal link graph (innovation) ─── */}
+      <section className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <RelatedProducts currentSlug="ppr-green-pn20" />
+        </div>
+      </section>
+
+      {/* ─── LSI Semantic Block — topical authority (innovation) ─── */}
+      <SemanticLSIBlock topic="innovation" />
     </main>
   );
 }

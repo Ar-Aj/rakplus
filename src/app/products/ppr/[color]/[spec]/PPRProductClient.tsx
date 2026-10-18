@@ -19,6 +19,8 @@ import Link from "next/link";
 import CinematicCurtain from "@/components/CinematicCurtain";
 import { getAdjacentSpecs } from "@/config/pprData";
 import type { PprSpecConfig } from "@/types/pprTypes";
+import RelatedProducts from "@/components/RelatedProducts";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
 import {
   ArrowRight,
   ArrowLeft,
@@ -688,6 +690,21 @@ export default function PPRProductClient({
           </div>
         </CinematicCurtain>
       </div>
+
+      {/* ─── Related Products — internal link graph (PPR detail) ───
+          Maps specSlug (e.g. "pn20-sdr6") + color → productRegistry slug
+          (e.g. "ppr-green-pn20") so the RelatedProducts component
+          can pick a curated current product. */}
+      <section className="relative z-10 bg-white py-16 md:py-24 px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <RelatedProducts
+            currentSlug={`ppr-${color}-${specData.specSlug.split("-")[0]}`}
+          />
+        </div>
+      </section>
+
+      {/* ─── LSI Semantic Block — topical authority (PPR detail) ─── */}
+      <SemanticLSIBlock topic="products" />
     </article>
   );
 }

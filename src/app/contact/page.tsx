@@ -17,7 +17,16 @@ import {
   Send,
   MapPin,
   Mail,
+  Clock,
 } from "lucide-react";
+import {
+  buildBreadcrumbJsonLd,
+  buildOrganizationJsonLd,
+  buildLocalBusinessJsonLd,
+} from "@/lib/seo";
+import RelatedProducts from "@/components/RelatedProducts";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import AeoTargetBlock from "@/components/AeoTargetBlock";
 
 // Dynamic client-only import for R3F 3D Background
 const ContactBackground3D = dynamic(
@@ -42,31 +51,37 @@ const PRODUCT_OPTIONS = [
   "Engineering Specification / Consultation",
 ] as const;
 
-// ─── JSON-LD Structured Data ───
+// ─── JSON-LD Structured Data ──────────────────────────────────────
+//
+// Only emit page-specific schemas here. The Organization and
+// LocalBusiness schemas are injected globally from the root layout —
+// duplicating them on this page would create conflicting entity
+// declarations in the schema graph. The ContactPage and BreadcrumbList
+// below are anchored to the global entities via @id.
 
 const jsonLdContactPage = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  name: "Contact Rakplus",
+  "@id": "https://rakplusuae.com/contact/#contactpage",
+  name: "Contact RakPlus",
   description:
-    "Request technical datasheets and bulk quotations for WRAS-approved PP-R pipe systems.",
-  mainEntity: {
-    "@type": "Organization",
-    name: "RakPlus by Aquasmart Plastic Industries L.L.C",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Industrial Area",
-      addressLocality: "Umm Al Quwain",
-      addressRegion: "Umm Al Quwain",
-      addressCountry: "AE",
-    },
-    telephone: "+97165233869",
-    email: "Info@Rakplusuae.com",
-    url: "https://rakplus.com",
-    areaServed: ["AE", "SA", "QA", "KW", "BH", "OM"],
-    brand: { "@type": "Brand", name: "Rakplus" },
-  },
+    "Request technical datasheets and bulk quotations for WRAS-approved PP-R pipe systems in the UAE and GCC.",
+  url: "https://rakplusuae.com/contact/",
+  inLanguage: "en-AE",
+  about: { "@id": "https://rakplusuae.com/#organization" },
+  mainEntity: { "@id": "https://rakplusuae.com/#localbusiness" },
 };
+
+const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+  { name: "Home", url: "https://rakplusuae.com/" },
+  { name: "Contact", url: "https://rakplusuae.com/contact/" },
+]);
+
+// Kept as imports for any future page-specific extensions. The
+// root layout injects Organization + LocalBusiness JSON-LD
+// globally — no duplicate emission here.
+void buildOrganizationJsonLd;
+void buildLocalBusinessJsonLd;
 
 // ─── Contact Info Cards ───
 
@@ -75,18 +90,27 @@ const CONTACT_CARDS = [
     icon: MapPin,
     title: "Factory & Headquarters",
     detail: "Industrial Area, Umm Al Quwain, U.A.E.",
+    microdata: "streetAddress",
   },
   {
     icon: Phone,
     title: "Direct Line",
     detail: "+971 6 523 3869",
     href: "tel:+97165233869",
+    microdata: "telephone",
   },
   {
     icon: Mail,
     title: "Email Inquiries",
     detail: "Info@Rakplusuae.com",
     href: "mailto:Info@Rakplusuae.com",
+    microdata: "email",
+  },
+  {
+    icon: Clock,
+    title: "Opening Hours",
+    detail: "Mon – Sat · 08:00 – 18:00 (GST, UTC+4)",
+    microdata: "openingHours",
   },
   {
     icon: ShieldCheck,
@@ -148,13 +172,22 @@ export default function ContactPage() {
 
   return (
     <main className="relative overflow-hidden min-h-screen">
-      {/* ─── JSON-LD ─── */}
+      {/* ─── JSON-LD: ContactPage ─── */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLdContactPage),
         }}
       />
+      {/* ─── JSON-LD: BreadcrumbList ─── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdBreadcrumb),
+        }}
+      />
+      {/* Organization + LocalBusiness JSON-LD is injected globally
+          by the root layout — no duplicate emission here. */}
 
       {/* ─── Dynamic 3D Hero Background (Behind Everything) ─── */}
       <div className="absolute inset-0 z-0">
@@ -199,8 +232,50 @@ export default function ContactPage() {
               our technical team is ready to support your project.
             </p>
 
-            {/* Contact Info Cards — Glassmorphism */}
-            <div className="space-y-3 pt-2">
+            {/* Contact Info Cards — wrapped in semantic <address> for GEO.
+                Mirrors the LocalBusiness JSON-LD in lib/seo.ts exactly. */}
+            <address
+              className="not-italic space-y-3 pt-2"
+              itemScope
+              itemType="https://schema.org/LocalBusiness"
+            >
+              <meta itemProp="name" content="RakPlus by Aquasmart Plastic Industries L.L.C" />
+              <meta
+                itemProp="image"
+                content="https://rakplusuae.com/images/logo.png"
+              />
+              <meta itemProp="url" content="https://rakplusuae.com/" />
+              <meta itemProp="priceRange" content="$$" />
+              <meta
+                itemProp="areaServed"
+                content="Dubai, Abu Dhabi, Sharjah, Ajman, Ras Al Khaimah, United Arab Emirates, GCC"
+              />
+              <div
+                itemProp="address"
+                itemScope
+                itemType="https://schema.org/PostalAddress"
+                style={{ display: "none" }}
+              >
+                <meta
+                  itemProp="streetAddress"
+                  content="Industrial Area, Al Haseeb Trading Co L.L.C"
+                />
+                <meta itemProp="postOfficeBoxNumber" content="21842" />
+                <meta itemProp="addressLocality" content="Umm Al Quwain" />
+                <meta itemProp="addressRegion" content="Umm Al Quwain" />
+                <meta itemProp="addressCountry" content="AE" />
+                <meta itemProp="postalCode" content="21842" />
+              </div>
+              <div
+                itemProp="geo"
+                itemScope
+                itemType="https://schema.org/GeoCoordinates"
+                style={{ display: "none" }}
+              >
+                <meta itemProp="latitude" content="25.5647" />
+                <meta itemProp="longitude" content="55.5536" />
+              </div>
+
               {CONTACT_CARDS.map((card) => {
                 const inner = (
                   <div
@@ -220,14 +295,18 @@ export default function ContactPage() {
                   </div>
                 );
                 return card.href ? (
-                  <a key={card.title} href={card.href} className="block group">
+                  <a
+                    key={card.title}
+                    href={card.href}
+                    className="block group"
+                  >
                     {inner}
                   </a>
                 ) : (
                   <div key={card.title}>{inner}</div>
                 );
               })}
-            </div>
+            </address>
 
             {/* Trust Badge Strip */}
             <div className="flex flex-wrap gap-2 pt-4">
@@ -478,6 +557,19 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* ─── AEO Target Block — direct answers for AI crawlers ─── */}
+      <AeoTargetBlock />
+
+      {/* ─── Related Products — internal link graph (contact) ─── */}
+      <section className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <RelatedProducts currentSlug="ppr-green-pn20" />
+        </div>
+      </section>
+
+      {/* ─── LSI Semantic Block — topical authority (contact) ─── */}
+      <SemanticLSIBlock topic="contact" />
     </main>
   );
 }

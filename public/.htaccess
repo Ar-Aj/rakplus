@@ -1,3 +1,21 @@
+# ────────────────────────────────────────────────────────────────
+# RakPlus UAE — Hostinger Apache / LiteSpeed .htaccess
+# Phase 54.0 — HARDENED CACHE CONTROL FOR NEXT.JS STATIC EXPORT
+#
+# The previous .htaccess had no Cache-Control headers, only ExpiresByType
+# for images/video. When a new build deployed, browsers cached the OLD
+# index.html which referenced OLD CSS/JS chunk hashes → 404 → unstyled
+# page (FOUC). This file:
+#
+#   1. NO-CACHE every .html file (browser must revalidate index.html on
+#      every visit, so it always sees the latest CSS/JS chunk hashes).
+#   2. IMMUTABLE cache for /_next/static/ (CSS, JS, fonts) — these
+#      filenames contain build-time hashes and never change.
+#   3. Immutable long cache for /images/, /videos/, frame sequences.
+#   4. Proper MIME types for .webp and .woff2.
+#   5. Clean directory security for /_next/ (no listing, no override).
+# ────────────────────────────────────────────────────────────────
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -15,13 +33,123 @@
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Add caching headers for performance
+# ────────────────────────────────────────────────────────────────
+# MIME TYPES — ensure .webp and .woff2 are served with the
+# correct Content-Type so the browser accepts them.
+# ────────────────────────────────────────────────────────────────
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType application/json .json
+  AddType image/svg+xml .svg
+</IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# CACHE CONTROL — 1: HTML (NEVER cache)
+# Every page load must revalidate index.html so the browser
+# always sees the latest CSS/JS chunk hashes from the new build.
+# Without this, users on stale caches see UNSTYLED HTML when
+# chunks 404.
+# ────────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Default: deny file-system access to dotfiles
+  <FilesMatch "^\.">
+    Require all denied
+  </FilesMatch>
+
+  # 1. HTML — never cache
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # 2. Next.js hashed assets (CSS, JS, fonts in /_next/static/) — cache 1 year
+  # These filenames contain content hashes, so they're safe to cache forever.
+  <FilesMatch "\.(css|js|woff2|woff|ttf|otf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # 3. Images, video, frame sequences — cache 1 year
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|mp4|webm|mov)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # 4. JSON manifests (sitemap, manifest) — short cache so updates propagate
+  <FilesMatch "\.(json|xml)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # 5. Service worker / static / etc. — short cache
+  <FilesMatch "(robots\.txt|sitemap\.xml|site\.webmanifest)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # 6. Disable ETags globally — they cause revalidation even when
+  # content hasn't changed. With immutable headers we don't need ETags.
+  Header unset ETag
+
+  # 7. Security / framing headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# CACHE CONTROL — 2: FALLBACK (ExpiresActive, used by hosts
+# that don't honour mod_headers on every request)
+# ────────────────────────────────────────────────────────────────
 <IfModule mod_expires.c>
   ExpiresActive On
+
+  # HTML — already no-cache via mod_headers, but kill any positive expires
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # Hashed assets — 1 year
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+
+  # Media — 1 year
+  ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/jpg "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType video/mp4 "access plus 1 year"
   ExpiresByType video/webm "access plus 1 year"
+</IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# DIRECTORY SECURITY — Block direct listing & access to internals
+# /_next/ is intentionally NOT blocked — Next.js needs to serve its
+# hashed chunks from there. We just disable directory indexing.
+# ────────────────────────────────────────────────────────────────
+
+# Disable directory listing globally
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# No directory listing for /_next/, /images/, /videos/, /home-*/, /sustainability-*/
+<DirectoryMatch "(^|/)(\.git|\.next|_next|node_modules)">
+  Options -Indexes
+</DirectoryMatch>
+
+# Block access to source maps (production hygiene)
+<FilesMatch "\.(map|ts|tsx|js\.map)$">
+  Require all denied
+</FilesMatch>
+
+# ────────────────────────────────────────────────────────────────
+# GZIP COMPRESSION — enable on Hostinger Apache so HTML/CSS/JS
+# ships compressed. Most shared hosts already enable this at the
+# server level; this is a belt-and-braces directive.
+# ────────────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
 </IfModule>

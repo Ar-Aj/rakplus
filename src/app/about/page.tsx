@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
+import {
+  buildBreadcrumbJsonLd,
+} from "@/lib/seo";
+
+const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+  { name: "Home", url: "https://rakplusuae.com/" },
+  { name: "About", url: "https://rakplusuae.com/about/" },
+]);
 
 export const metadata: Metadata = {
   title: "About RAKPLUS | German Standard PP-R Piping Engineering",
@@ -8,5 +16,13 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutPageClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <AboutPageClient />
+    </>
+  );
 }

@@ -21,6 +21,7 @@ import {
   isValidColor,
 } from "@/config/pprData";
 import PPRProductClient from "./PPRProductClient";
+import { buildBreadcrumbJsonLd, SITE } from "@/lib/seo";
 
 // ─── Static Params ───
 
@@ -166,12 +167,33 @@ export default function PPRProductPage({ params }: PageProps) {
 
   const jsonLd = generateJsonLd(specData, params.color);
 
+  // Breadcrumb: Home → Products → (Color) → (Spec)
+  const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+    { name: "Home", url: `${SITE.url}/` },
+    { name: "Products", url: `${SITE.url}/products/` },
+    {
+      name: `PP-R ${params.color.charAt(0).toUpperCase() + params.color.slice(1)} Pipes`,
+      url: `${SITE.url}/products/`,
+    },
+    {
+      name: specData.title.replace("RAKPLUS® PP-R Pipes — ", ""),
+      url: `${SITE.url}/products/ppr/${params.color}/${params.spec}/`,
+    },
+  ]);
+
   return (
     <>
       {/* JSON-LD Product Schema for Google Rich Snippets */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* JSON-LD BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdBreadcrumb),
+        }}
       />
 
       {/* Client Component: Curtain Reveal Architecture */}

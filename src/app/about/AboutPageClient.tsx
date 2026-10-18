@@ -24,6 +24,9 @@ import CanvasSequence from "@/components/CanvasSequence";
 import CinematicCurtain from "@/components/CinematicCurtain";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
 import { ShieldCheck, Award, Wrench, Droplets } from "lucide-react";
+import RelatedProducts from "@/components/RelatedProducts";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import AeoTargetBlock from "@/components/AeoTargetBlock";
 
 // ─── CTAs — Red → Yellow ───────────────────────────────────────────────
 function PrimaryCTA({ href, children }: { href: string; children: React.ReactNode }) {
@@ -106,7 +109,7 @@ export default function AboutPageClient() {
             </h1>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-8 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-8 max-w-3xl w-full">
             <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
               With over <span className="text-emerald-500">50 Years</span> of combined expertise, we are the premier thermoplastic engineers in the <span className="text-red-600">UAE</span>, certified to <span className="text-yellow-400">ISO 9001:2015</span>.
             </p>
@@ -167,13 +170,13 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 For three decades, RAKPLUS has pioneered the extrusion of advanced polymers in the <span className="text-red-600">UAE</span>. Our manufacturing matrix is powered by next-generation <span className="text-red-600">KraussMaffei engineering</span>, guaranteeing <span className="text-emerald-600">zero-tolerance precision</span> across millions of meters of pipe.
               </p>
             </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-5 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-5 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 As an <span className="text-yellow-400">ISO 9001:2015</span> &amp; 14001:2015 certified manufacturer, our
             in-house laboratories subject every batch to rigorous hydrostatic
@@ -219,7 +222,7 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 ml-auto max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 ml-auto max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Every RAKPLUS pipeline is backed by strict in-house quality control.
             Tests are carried out through independent laboratories of
@@ -282,7 +285,7 @@ export default function AboutPageClient() {
                 <h3 className="text-xl font-extrabold text-neutral-950 leading-tight">
                   {item.title}
                 </h3>
-                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 {item.body}
               </p>
@@ -311,7 +314,7 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
+          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Trusted by engineers, architects, and contractors across 52+
             countries. Certified. Zero-compromise. <span className="text-emerald-500">50-year</span> guaranteed.
@@ -371,7 +374,7 @@ export default function AboutPageClient() {
 
               {/* Staggered paragraphs */}
               <div className="gsap-stagger-group flex flex-col gap-6 mb-12 md:mb-16 max-w-2xl">
-                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 At RAKPLUS, engineering is not just a process; it is an
                   obsession. We believe that true quality is binary—there is
@@ -379,7 +382,7 @@ export default function AboutPageClient() {
                   reliability of infrastructure.
               </p>
             </div>
-                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 RAKPLUS pipes and fittings are manufactured in strict adherence to{" "}
                   <strong className="text-neutral-950"><span className="text-red-600">German standards</span> <span className="text-emerald-600">DIN 8077/8078</span></strong>
@@ -390,7 +393,7 @@ export default function AboutPageClient() {
                   through <span className="text-red-600">PN25</span>.
               </p>
             </div>
-                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Our welding and fusion processes conform to{" "}
                   <strong className="text-neutral-950"><span className="text-yellow-400">DVS 2207</span></strong>{" "}
@@ -478,6 +481,19 @@ export default function AboutPageClient() {
 
         </article>
       </CinematicCurtain>
+
+      {/* ─── AEO Target Block — direct answers for AI crawlers ─── */}
+      <AeoTargetBlock />
+
+      {/* ─── Related Products — internal link graph (about) ─── */}
+      <section className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <RelatedProducts currentSlug="ppr-green-pn20" />
+        </div>
+      </section>
+
+      {/* ─── LSI Semantic Block — topical authority (about) ─── */}
+      <SemanticLSIBlock topic="about" />
     </main>
   );
 }

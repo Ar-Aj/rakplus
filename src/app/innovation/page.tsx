@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import InnovationPageClient from "./InnovationPageClient";
+import { buildBreadcrumbJsonLd } from "@/lib/seo";
+
+const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
+  { name: "Home", url: "https://rakplusuae.com/" },
+  { name: "Innovation", url: "https://rakplusuae.com/innovation/" },
+]);
 
 export const metadata: Metadata = {
   title: "Innovation | RAKPLUS — Advanced PP-R Pipe Engineering in the UAE",
@@ -8,5 +14,13 @@ export const metadata: Metadata = {
 };
 
 export default function InnovationPage() {
-  return <InnovationPageClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <InnovationPageClient />
+    </>
+  );
 }

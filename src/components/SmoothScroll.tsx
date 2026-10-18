@@ -60,15 +60,11 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     <ReactLenis
       root
       options={{
-        // ── SCROLL GOVERNOR (Phase 52.1) ──
-        // Tighter damping to prevent fast flicks from racing past canvas frames.
-        // Trade-off: slightly heavier "lag" on small scrolls, but guaranteed
-        // lock-step playback when scrubbing through image sequences.
-        lerp: 0.15,          // ↑ from 0.08 — slower catch-up to user's hand
-        duration: 2.0,       // ↓ from 1.4 — longer animation tail = smoother top speed
-        smoothWheel: true,
-        wheelMultiplier: 0.45, // ↓ from 0.8 — HALVED. Caps raw wheel velocity.
-        touchMultiplier: 0.6,  // ↓ from 1.5 — touch is no longer faster than wheel.
+        lerp: 0.08,          // Low lerp = heavier, more luxurious scroll feel
+        duration: 1.4,        // Smooth scroll duration
+        smoothWheel: true,    // Smooth mousewheel scrolling
+        wheelMultiplier: 0.8, // Slightly slower wheel = more cinematic
+        touchMultiplier: 1.5, // Faster touch for mobile responsiveness
         autoRaf: false,       // ← CRITICAL: disable Lenis's own RAF loop.
                               //   GSAP ticker now drives it via tickerCallback.
       }}

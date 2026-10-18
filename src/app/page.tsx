@@ -16,6 +16,9 @@ import LiquidButton from "@/components/ui/LiquidButton";
 import Image from "next/image";
 import CanvasSequence from "@/components/CanvasSequence";
 import CinematicCurtain from "@/components/CinematicCurtain";
+import SemanticLSIBlock from "@/components/SemanticLSIBlock";
+import RelatedProducts from "@/components/RelatedProducts";
+import AeoTargetBlock from "@/components/AeoTargetBlock";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
 import { useLiquidReveal } from "@/hooks/useLiquidReveal";
 import {
@@ -61,6 +64,54 @@ export default function HomePage() {
        ROOT FIX: bg-transparent — never cover the canvas.
        ──────────────────────────────────────────────────── */
     <main className="relative w-full bg-transparent">
+
+      {/* ── noscript FALLBACK ────────────────────────────────
+          Renders a semantic, brand-claims-rich summary for
+          crawlers / browsers with JavaScript disabled. Real
+          HTML, no Tailwind sr-only trickery. The AeoTargetBlock
+          and SemanticLSIBlock below provide the full Q&A and
+          LSI content for JS-enabled crawlers.
+          ─────────────────────────────────────────────────── */}
+      <noscript>
+        <div
+          style={{
+            padding: "2rem 1.5rem",
+            maxWidth: "64rem",
+            margin: "0 auto",
+            fontFamily: "system-ui, sans-serif",
+            color: "#0a0a0a",
+          }}
+        >
+          <h1 style={{ fontSize: "2.25rem", fontWeight: 800, lineHeight: 1.1, margin: 0 }}>
+            RakPlus — Premium PPR Pipes &amp; Fittings in the UAE
+          </h1>
+          <p style={{ marginTop: "1rem", fontSize: "1rem", lineHeight: 1.6 }}>
+            RakPlus manufactures premium PPR pipes and PPR fittings in the
+            UAE, engineered to German Standard DIN 8077/8078. Made from
+            100% Polymer with 100% Brass inserts, every RakPlus pipe and
+            fitting is WRAS approved for contact with potable drinking
+            water and carries a 50 years guaranteed service life.
+            Specified by engineers across Dubai, Abu Dhabi, Sharjah, and
+            the wider GCC for residential, commercial, and industrial
+            water transmission.
+          </p>
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 700, marginTop: "1.5rem" }}>
+            Four Verified Claims
+          </h2>
+          <ul style={{ marginTop: "0.5rem", paddingLeft: "1.25rem", lineHeight: 1.7 }}>
+            <li>100% Polymer</li>
+            <li>100% Brass</li>
+            <li>WRAS approved</li>
+            <li>50 years guaranteed service life</li>
+          </ul>
+          <p style={{ marginTop: "1.5rem", fontSize: "0.875rem", color: "#525252" }}>
+            Pressurised water systems: PN10 to PN25. Continuous
+            operating temperature: 70&deg;C. Short-term peak: 100&deg;C.
+            Pipe diameters: 20 mm to 160 mm. ISO 9001:2015, ISO
+            14001:2015, WRAS, DIN 8077/8078, DVS 2207, EN ISO 15874-2.
+          </p>
+        </div>
+      </noscript>
 
       {/* ─── Canvas Sequence — Scrub ends at 85% of sequenceRef (section track only) ─── */}
       {/* Frame counts MUST match disk: /home-desktop = 337, /home-mobile = 452.
@@ -536,6 +587,23 @@ export default function HomePage() {
 
           </article>
         </CinematicCurtain>
+
+        {/* ═══════════════════════════════════════════════════════
+            AEO TARGET BLOCK — Direct-Answer Q&A for AI crawlers.
+            Sits OUTSIDE the canvas scrub region so the answer
+            engines can read it even before canvas hydration.
+            ═══════════════════════════════════════════════════ */}
+        <AeoTargetBlock />
+
+        {/* ─── Related Products — internal link graph (home) ─── */}
+        <section className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">
+          <div className="relative z-10 max-w-7xl mx-auto">
+            <RelatedProducts currentSlug="ppr-green-pn20" />
+          </div>
+        </section>
+
+        {/* ─── LSI Semantic Block — topical authority (home) ─── */}
+        <SemanticLSIBlock topic="home" />
     </main>
   );
 }

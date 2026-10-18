@@ -72,8 +72,56 @@ export default function Footer() {
               transmission. Made in UAE to German DIN standards.
             </p>
 
-            {/* Contact Info — extracted from submittal */}
-            <address className="not-italic space-y-3">
+            {/* Contact Info — extracted from submittal, schema-anchored.
+                The <address> block mirrors the LocalBusiness JSON-LD
+                in lib/seo.ts exactly for Generative Engine Optimization. */}
+            <address
+              className="not-italic space-y-3"
+              itemScope
+              itemType="https://schema.org/LocalBusiness"
+            >
+              <meta
+                itemProp="name"
+                content="RakPlus by Aquasmart Plastic Industries L.L.C"
+              />
+              <meta
+                itemProp="image"
+                content="https://rakplusuae.com/images/logo.png"
+              />
+              <meta itemProp="url" content="https://rakplusuae.com/" />
+              <meta itemProp="telephone" content="+971-6-523-3869" />
+              <meta itemProp="email" content="Info@Rakplusuae.com" />
+              <meta itemProp="priceRange" content="$$" />
+              <meta
+                itemProp="areaServed"
+                content="Dubai, Abu Dhabi, Sharjah, Ajman, Ras Al Khaimah, United Arab Emirates, GCC"
+              />
+              <div
+                itemProp="address"
+                itemScope
+                itemType="https://schema.org/PostalAddress"
+                style={{ display: "none" }}
+              >
+                <meta
+                  itemProp="streetAddress"
+                  content="Industrial Area, Al Haseeb Trading Co L.L.C"
+                />
+                <meta itemProp="postOfficeBoxNumber" content="21842" />
+                <meta itemProp="addressLocality" content="Umm Al Quwain" />
+                <meta itemProp="addressRegion" content="Umm Al Quwain" />
+                <meta itemProp="addressCountry" content="AE" />
+                <meta itemProp="postalCode" content="21842" />
+              </div>
+              <div
+                itemProp="geo"
+                itemScope
+                itemType="https://schema.org/GeoCoordinates"
+                style={{ display: "none" }}
+              >
+                <meta itemProp="latitude" content="25.5647" />
+                <meta itemProp="longitude" content="55.5536" />
+              </div>
+
               <div className="flex items-start gap-3 text-sm text-white">
                 <MapPin className="w-4 h-4 text-emerald mt-0.5 flex-shrink-0" />
                 <span>
@@ -85,18 +133,18 @@ export default function Footer() {
                 </span>
               </div>
               <a
-                href="tel:+97165612877"
+                href="tel:+971-6-523-3869"
                 className="flex items-center gap-3 text-sm text-white hover:text-emerald transition-colors"
               >
                 <Phone className="w-4 h-4 text-emerald flex-shrink-0" />
-                +971 6 5612877
+                +971 6 523 3869
               </a>
               <a
-                href="mailto:info@rakplus.com"
+                href="mailto:Info@Rakplusuae.com"
                 className="flex items-center gap-3 text-sm text-white hover:text-emerald transition-colors"
               >
                 <Mail className="w-4 h-4 text-emerald flex-shrink-0" />
-                info@rakplus.com
+                Info@Rakplusuae.com
               </a>
             </address>
           </div>
