@@ -1,20 +1,51 @@
 {
-  "name": "RakPlus UAE — PPR Piping Systems",
+  "name": "RakPlus UAE — WRAS Approved PPR Piping Systems",
   "short_name": "RakPlus",
-  "description": "UAE manufacturer of WRAS approved 100% Polymer PPR pipes and 100% Brass fittings. Industrial plumbing solutions with 50-year guaranteed service life.",
+  "description": "UAE manufacturer of WRAS approved 100% Polymer PPR pipes and 100% Brass fittings. German DIN 8077/8078, DVS 2207, ISO 9001:2015. PN10–PN25, 20–160 mm. 50-year guaranteed service life. RakPlus® Rohrsysteme UAE, Umm Al Quwain.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
+  "background_color": "#0A0A0A",
+  "theme_color": "#008751",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/logo.png",
-      "sizes": "any",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "585x426",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "categories": ["business", "industrial", "utilities"]
+  "categories": ["business", "industrial", "utilities", "construction"],
+  "shortcuts": [
+    {
+      "name": "PPR Products Catalog",
+      "url": "/products/",
+      "description": "Browse PN10–PN25 PP-R pipes and 100% brass fittings"
+    },
+    {
+      "name": "Request a Quotation",
+      "url": "/contact/",
+      "description": "Bulk PPR pipe quotations for UAE and GCC projects"
+    }
+  ]
 }

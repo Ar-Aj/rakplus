@@ -22,6 +22,7 @@ import LiquidButton from "@/components/ui/LiquidButton";
 import Image from "next/image";
 import CanvasSequence from "@/components/CanvasSequence";
 import CinematicCurtain from "@/components/CinematicCurtain";
+import EditorialAboveTheFold from "@/components/hero/EditorialAboveTheFold";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
 import { ShieldCheck, Award, Wrench, Droplets } from "lucide-react";
 import RelatedProducts from "@/components/RelatedProducts";
@@ -69,6 +70,78 @@ export default function AboutPageClient() {
   return (
     <main className="relative w-full bg-transparent">
 
+      {/* ─── Above-the-Fold Editorial Hero ─────────────────
+          Renders BEFORE <CanvasSequence /> so the rich editorial
+          introduction naturally pushes the 3D sequence down by
+          1.5–2.5 scrolls. ──────────────────────────────────── */}
+      <EditorialAboveTheFold
+        variant="about"
+        identityStrips={[
+          "Aquasmart Plastic Industries L.L.C",
+          "Umm Al Quwain, UAE",
+          "ISO 9001:2015",
+          "ISO 14001:2015",
+          "WRAS Approved",
+        ]}
+        overline="RakPlus® — Manufactured by Aquasmart"
+        headlineSpans={[
+          { text: "Built on a.", colorClass: "text-[#0A0A0A]" },
+          { text: "German Discipline.", colorClass: "text-[#DC2626]" },
+          { text: "Made in the UAE.", colorClass: "text-[#FACC15]" },
+        ]}
+        heroBody="Aquasmart Plastic Industries L.L.C has been a leading UAE manufacturer of plastic piping systems, with a dedicated presence in irrigation, construction, plumbing, and landscape sectors across the GCC. Every RakPlus pipe is engineered to German Standard."
+        primaryCta={{ href: "/contact", label: "Contact Aquasmart" }}
+        secondaryCta={{
+          href: "/innovation",
+          label: "Innovation & German Standards",
+        }}
+        bentoEyebrow="Manufacturer & Quality Data"
+        trustStrip={[
+          { label: "100%", value: "Polymer" },
+          { label: "100%", value: "Brass" },
+          { label: "WRAS", value: "Approved" },
+          { label: "50 YR", value: "Life" },
+        ]}
+        heroImage={{
+          src: "/images/about-aquasmart-uae-manufacturing.png",
+          alt: "Horizontal green RakPlus PP-R pipe on a brushed silver CNC inspection cradle in a bright spotless white German-standard QA/QC laboratory with floating ISO 9001/14001 certification cards.",
+          badgeHeadline: "ISO 9001",
+          badgeSubline: "Made in UAE",
+        }}
+        telemetryPills={[
+          { label: "ISO 9001:2015", value: "QA", unit: "Cert" },
+          { label: "ISO 14001:2015", value: "EMS", unit: "Cert" },
+          { label: "Manufacturing", value: "UAE", unit: "" },
+          { label: "Service Life", value: "50", unit: "yr" },
+        ]}
+        bentoCards={[
+          {
+            overline: "Aquasmart Plastic Industries L.L.C",
+            eyebrow: "Manufacturer",
+            headline: "Made in the UAE, To German Standard",
+            body:
+              "Aquasmart Plastic Industries L.L.C is the manufacturer behind the RakPlus® brand — operating from the Industrial Area of Umm Al Quwain, UAE, with a dedication to quality, trust, and the highest regional engineering standards.",
+            footer: "ISO 9001:2015 Certified",
+          },
+          {
+            overline: "Quality Control",
+            eyebrow: "QA / QC",
+            headline: "In-House QC + Independent Lab Verification",
+            body:
+              "Every RakPlus pipe and fitting passes in-house quality control and is independently tested through international laboratories. Quality management is certified by the Quality Accreditation Bureau for Qualified Companies (QA QC), USA.",
+            footer: "QA QC, USA Verified",
+          },
+          {
+            overline: "German Standard",
+            eyebrow: "Engineering",
+            headline: "Manufactured to German DIN 8077/8078",
+            body:
+              "Production lines follow the latest German technology and standards. PP-R pipes are extruded in accordance with DIN 8077 (dimensions) and DIN 8078 (general quality requirements) — the international benchmark for polypropylene pressure pipes.",
+            footer: "DIN 8077/8078 · DVS 2207",
+          },
+        ]}
+      />
+
       {/* ─── Canvas (scrollTriggerRef = sequenceRef, early-finish at 85%) ─── */}
       <CanvasSequence
         desktopPath="/about-desktop/"
@@ -101,27 +174,34 @@ export default function AboutPageClient() {
           </div>
 
           <div className="overflow-hidden hud-liquid-reveal">
-            <h1 className="font-sans font-extrabold leading-[0.9] tracking-tighter text-neutral-950
+            <h2 className="font-sans font-extrabold leading-[0.9] tracking-tighter text-neutral-950
               text-[clamp(3rem,8vw,7rem)]">
-              The Best PPR Pipes &amp; Fittings
+                The Best PPR Pipes &amp; Fittings
               <br />
               <span className="relative pb-4 inline-block text-red-600 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">Manufacturer</span> in the <span className="relative pb-4 inline-block text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">UAE</span>.
-            </h1>
+            </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-8 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-8 max-w-3xl w-full">
             <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
               With over <span className="text-emerald-500">50 Years</span> of combined expertise, we are the premier thermoplastic engineers in the <span className="text-red-600">UAE</span>, certified to <span className="text-yellow-400">ISO 9001:2015</span>.
             </p>
           </div>
 
-          {/* Stats row */}
+          {/* Stats row — STRICT CATALOGUE DATA ONLY
+              Verified values from RakPlus Catalogue (2024):
+                0–70 °C continuous operating temperature
+                100 °C peak temperature
+                0.24 W/m·K thermal conductivity
+                905 kg/m³ density
+              "50 Years" is the verified service life guarantee. */}
           <div className="mt-14 hud-stagger-group flex flex-wrap gap-8 md:gap-16 justify-start max-w-4xl">
             {[
-              { value: "5000", suffix: "+", label: "Products" },
-              { value: "52", suffix: "+", label: "Countries" },
-              { value: "7", suffix: "", label: "Production Units" },
-              { value: "30", suffix: "+", label: "Years" },
+              { value: "70", suffix: "°C", label: "Continuous Temp" },
+              { value: "100", suffix: "°C", label: "Peak Temp" },
+              { value: "0.24", suffix: "", label: "W/m·K Thermal Cond." },
+              { value: "905", suffix: "", label: "kg/m³ Density" },
+              { value: "50", suffix: " yr", label: "Service Life" },
             ].map((s) => (
               <div key={s.label} className="hud-stagger-item min-w-[120px]">
                 <span
@@ -170,13 +250,13 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
-                For three decades, RAKPLUS has pioneered the extrusion of advanced polymers in the <span className="text-red-600">UAE</span>. Our manufacturing matrix is powered by next-generation <span className="text-red-600">KraussMaffei engineering</span>, guaranteeing <span className="text-emerald-600">zero-tolerance precision</span> across millions of meters of pipe.
+                Manufactured in the UAE by Aquasmart Plastic Industries L.L.C, every RakPlus pipe is produced in accordance with <span className="text-red-600">German Standard DIN 8077/8078</span> and <span className="text-red-600">DVS 2207</span> welding regulations, with <span className="text-emerald-600">in-house quality control</span> and independent laboratory verification.
               </p>
             </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-5 max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-5 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 As an <span className="text-yellow-400">ISO 9001:2015</span> &amp; 14001:2015 certified manufacturer, our
             in-house laboratories subject every batch to rigorous hydrostatic
@@ -190,6 +270,8 @@ export default function AboutPageClient() {
               (s) => <SpecPill key={s} label={s} />
             )}
           </div>
+
+          {/* Mounted 1:1 images live in EditorialAboveTheFold (pre-canvas) to keep <div ref={sequenceRef}> clean for the 3D canvas scrub. */}
 
           <div className="mt-10 hud-blur-reveal">
             <LiquidButton isPrimary={false} href="/innovation">Explore Our Innovation</LiquidButton>
@@ -222,7 +304,7 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 ml-auto max-w-3xl w-full">
+          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 ml-auto max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Every RAKPLUS pipeline is backed by strict in-house quality control.
             Tests are carried out through independent laboratories of
@@ -285,7 +367,7 @@ export default function AboutPageClient() {
                 <h3 className="text-xl font-extrabold text-neutral-950 leading-tight">
                   {item.title}
                 </h3>
-                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 {item.body}
               </p>
@@ -314,10 +396,9 @@ export default function AboutPageClient() {
             </h2>
           </div>
 
-          <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
+          <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
-                Trusted by engineers, architects, and contractors across 52+
-            countries. Certified. Zero-compromise. <span className="text-emerald-500">50-year</span> guaranteed.
+                Trusted by engineers, architects, and contractors across the GCC — UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, and Oman. Certified. Zero-compromise. <span className="text-emerald-500">50-year</span> guaranteed.
               </p>
             </div>
 
@@ -351,7 +432,7 @@ export default function AboutPageClient() {
           </div>
 
           {/* ─── Asymmetrical Grid: Copy Left + Asset Right ─── */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 xl:gap-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 xl:gap-32">
 
             {/* LEFT: Typography block */}
             <div className="lg:col-span-7 flex flex-col gap-8">
@@ -374,7 +455,7 @@ export default function AboutPageClient() {
 
               {/* Staggered paragraphs */}
               <div className="gsap-stagger-group flex flex-col gap-6 mb-12 md:mb-16 max-w-2xl">
-                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 At RAKPLUS, engineering is not just a process; it is an
                   obsession. We believe that true quality is binary—there is
@@ -382,7 +463,7 @@ export default function AboutPageClient() {
                   reliability of infrastructure.
               </p>
             </div>
-                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 RAKPLUS pipes and fittings are manufactured in strict adherence to{" "}
                   <strong className="text-neutral-950"><span className="text-red-600">German standards</span> <span className="text-emerald-600">DIN 8077/8078</span></strong>
@@ -393,7 +474,7 @@ export default function AboutPageClient() {
                   through <span className="text-red-600">PN25</span>.
               </p>
             </div>
-                <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
+                <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Our welding and fusion processes conform to{" "}
                   <strong className="text-neutral-950"><span className="text-yellow-400">DVS 2207</span></strong>{" "}
@@ -443,7 +524,7 @@ export default function AboutPageClient() {
             <div className="lg:col-span-5 gsap-img-wipe overflow-hidden rounded-3xl relative">
               <div className="gsap-parallax relative w-full aspect-[4/3]">
                 <Image
-                  src="/images/curtain-about-factory.png"
+                  src="/images/curtain-about-factory.jpg"
                   alt="RAKPLUS PP-R pipe on high-tech laser inspection table inside industrial manufacturing facility"
                   width={800}
                   height={600}
@@ -457,14 +538,21 @@ export default function AboutPageClient() {
             </div>
           </div>
 
-          {/* ─── Stats Strip ─── */}
+          {/* ─── Stats Strip — STRICT CATALOGUE DATA ───
+              Verified values from RakPlus Catalogue (2024):
+                0–70 °C continuous operating temperature
+                100 °C peak temperature
+                0.24 W/m·K thermal conductivity
+                905 kg/m³ density
+              "50 Years" is the verified service life guarantee. */}
           <div className="relative z-10 mt-24 md:mt-32 pt-12 border-t border-neutral-200 reveal-curtain-child">
             <div className="gsap-stagger-group grid grid-cols-2 sm:grid-cols-4 gap-8">
               {[
-                { value: "5000", suffix: "+", label: "Products" },
-                { value: "52", suffix: "+", label: "Countries" },
-                { value: "7", suffix: "", label: "Production Units" },
-                { value: "30", suffix: "+", label: "Years" },
+                { value: "70", suffix: "°C", label: "Continuous Temp" },
+                { value: "100", suffix: "°C", label: "Peak Temp" },
+                { value: "0.24", suffix: "", label: "W/m·K Thermal Cond." },
+                { value: "905", suffix: "", label: "kg/m³ Density" },
+                { value: "50", suffix: " yr", label: "Service Life" },
               ].map((stat) => (
                 <div key={stat.label} className="gsap-stagger-item text-center">
                   <span className="block font-sans font-black text-neutral-950 tabular-nums tracking-tighter leading-none

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { clashDisplay } from "@/lib/fonts";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
@@ -9,22 +10,21 @@ import {
   buildOrganizationJsonLd,
   buildLocalBusinessJsonLd,
   buildFaqJsonLd,
+  buildOgImages,
+  OG_DEFAULT_DESCRIPTION,
+  OG_COVER,
+  absoluteUrl,
 } from "@/lib/seo";
 import { AEO_QA_ITEMS } from "@/components/AeoTargetBlock";
+import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
-
-// ─── SEO-SAFE DOMAIN ───────────────────────────────────────────────
-// RAKPLUS canonical domain — used across all metadata + JSON-LD.
-export const SITE_URL = "https://rakplusuae.com";
-export const SITE_NAME = "RakPlus";
-export const SITE_NAME_FULL =
-  "RakPlus by Aquasmart Plastic Industries L.L.C";
 
 /**
  * ROOT METADATA — Overrides the parent layout for ALL pages.
@@ -63,7 +63,8 @@ export const metadata: Metadata = {
     "50 years guaranteed ppr plumbing uae",
     "RakPlus",
     "PP-R pipes",
-    "Aquasmart Plastic Industries",
+    "ppr pipe manufacturer in gcc",
+    "RakPlus Rohrsysteme UAE",
   ],
   authors: [{ name: SITE_NAME_FULL, url: SITE_URL }],
   creator: SITE_NAME_FULL,
@@ -100,26 +101,18 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title:
       "RakPlus — WRAS Approved PPR Pipes & Fittings in UAE | 50-Year Guarantee",
-    description:
-      "Premium PPR pipes & fittings engineered to German DIN 8077/8078. 100% Polymer, 100% Brass inserts, WRAS approved, 50-year guarantee. UAE's trusted PP-R manufacturer.",
-    images: [
-      {
-        url: "/images/og-rakplus-cover.jpg",
-        width: 1200,
-        height: 630,
-        alt: "RakPlus WRAS-approved PPR pipes and fittings — 50-year guaranteed service life",
-        type: "image/jpeg",
-      },
-    ],
+    description: OG_DEFAULT_DESCRIPTION,
+    images: buildOgImages(
+      "RakPlus — WRAS approved PP-R pipes and 100% brass fittings manufactured in the UAE by RakPlus® Rohrsysteme UAE"
+    ),
   },
 
   twitter: {
     card: "summary_large_image",
     title:
       "RakPlus — WRAS Approved PPR Pipes & Fittings in UAE | 50-Year Guarantee",
-    description:
-      "Premium PPR pipes & fittings engineered to German DIN 8077/8078. 100% Polymer, 100% Brass inserts, WRAS approved, 50-year guarantee.",
-    images: ["/images/og-rakplus-cover.jpg"],
+    description: OG_DEFAULT_DESCRIPTION,
+    images: [absoluteUrl(OG_COVER)],
     creator: "@rakplusuae",
     site: "@rakplusuae",
   },
@@ -132,13 +125,17 @@ export const metadata: Metadata = {
   },
 
   // ── Icons / manifest.
+  //    favicon.ico + icon.png + apple-icon.png live in src/app/ and are
+  //    emitted by Next.js at the site root automatically. The PNG sizes
+  //    below are the PWA set generated from the RakPlus emblem.
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon.ico"],
   },
 
   manifest: "/site.webmanifest",
@@ -160,7 +157,7 @@ const jsonLdFaqPage = buildFaqJsonLd(AEO_QA_ITEMS);
 const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": `${SITE_URL}#website`,
+  "@id": `${SITE_URL}/#website`,
   url: `${SITE_URL}/`,
   name: SITE_NAME,
   publisher: { "@id": `${SITE_URL}#organization` },
@@ -181,9 +178,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-AE" className={inter.variable}>
+    <html
+      lang="en-AE"
+      className={`${inter.variable} ${clashDisplay.variable} scroll-smooth`}
+    >
       <head>
-        {/* Clash Display — display/hero font loaded via Fontshare CDN */}
+        {/* ── Preload Clash Display — critical CSS path for HUD headlines ── */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap"
+        />
         <link
           rel="preconnect"
           href="https://api.fontshare.com"
@@ -194,8 +199,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* ── Preconnect to Google Fonts for self-host perf ── */}
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* ── Self-hosted Inter is delivered via next/font/google (--font-inter) ── */}
 
         {/* ── JSON-LD: Organization (global) ── */}
         <script

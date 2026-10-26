@@ -1,0 +1,322 @@
+(node:49456) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\rakplus\.next\server\app\innovation\page.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/innovation/page' in C:\rakplus\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\rakplus\.next\server\app\innovation\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/innovation/page' in 'C:\rakplus\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/innovation/page (expected C:\rakplus\.next\server\app\innovation\page.js)
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js
+<w>  at file C:\rakplus\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\compiled\webpack\bundle5.js
+<w>  at file C:\rakplus\node_modules\next\dist\compiled\webpack\bundle5.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\compiled\webpack\webpack.js
+<w>  at file C:\rakplus\node_modules\next\dist\compiled\webpack\webpack.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\plugins\define-env-plugin.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\plugins\define-env-plugin.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\swc\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\swc\index.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-barrel-loader.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-barrel-loader.js
+<w>  at resolve commonjs C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\rakplus\.next\server\app\innovation\page.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/innovation/page' in C:\rakplus\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\rakplus\.next\server\app\innovation\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/innovation/page' in 'C:\rakplus\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/innovation/page (expected C:\rakplus\.next\server\app\innovation\page.js)
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\rakplus\.next\server\app\innovation\page.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/innovation/page' in C:\rakplus\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\rakplus\.next\server\app\innovation\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/innovation/page' in 'C:\rakplus\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/innovation/page (expected C:\rakplus\.next\server\app\innovation\page.js)
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\rakplus\.next\server\app\innovation\page.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/innovation/page' in C:\rakplus\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\rakplus\.next\server\app\innovation\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/innovation/page' in 'C:\rakplus\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/innovation/page (expected C:\rakplus\.next\server\app\innovation\page.js)
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+ ⨯ ./src/components/CanvasSequence.tsx
+Error: 
+  [31mx[0m the name `criticalReserveMb` is defined multiple times
+     ,-[[36;1;4mC:\rakplus\src\components\CanvasSequence.tsx[0m:381:1]
+ [2m381[0m |      * its conservative footprint). That guarantees a positive headroom for
+ [2m382[0m |      * every sequence in the repo AND for any future frame size.
+ [2m383[0m |      */
+ [2m384[0m |     const criticalReserveMb = () => startupTarget() * measuredFrameMb;
+     : [31;1m          ^^^^^^^^|^^^^^^^^[0m
+     :                   [31;1m`-- [31;1mprevious definition of `criticalReserveMb` here[0m[0m
+ [2m385[0m | 
+ [2m386[0m |     const budgetMb = () => {
+ [2m387[0m |       const base = mobileTier ? BUDGET_MB_MOBILE : BUDGET_MB_DESKTOP;
+ [2m388[0m |       const reserve = criticalReserveMb();
+ [2m389[0m |       const withHeadroom = reserve * (1 + NONCRITICAL_HEADROOM_RATIO);
+ [2m390[0m |       return Math.min(BUDGET_MB_CEILING, Math.max(base, withHeadroom));
+ [2m391[0m |     };
+ [2m392[0m | 
+ [2m393[0m |     /**
+ [2m394[0m |      * The hard floor that must stay available for non-critical frames, i.e.
+ [2m395[0m |      * enough to have paid for the whole critical startup buffer. Gating
+ [2m396[0m |      * non-critical loads on "resident < budget - reserve" guarantees the
+ [2m397[0m |      * critical set can always finish, whatever the frame size.
+ [2m398[0m |      */
+ [2m399[0m |     const criticalReserveMb = () => startupTarget() * measuredFrameMb;
+     : [33;1m          ^^^^^^^^|^^^^^^^^[0m
+     :                   [33;1m`-- [33;1m`criticalReserveMb` redefined here[0m[0m
+ [2m400[0m | 
+ [2m401[0m |     const frameBytes = (img: HTMLImageElement) =>
+ [2m401[0m |       img.naturalWidth > 0 && img.naturalHeight > 0
+     `----
+
+Import trace for requested module:
+./src/components/CanvasSequence.tsx
+./src/app/HomePageClient.tsx
+ ⨯ ./src/components/CanvasSequence.tsx
+Error: 
+  [31mx[0m the name `criticalReserveMb` is defined multiple times
+     ,-[[36;1;4mC:\rakplus\src\components\CanvasSequence.tsx[0m:368:1]
+ [2m368[0m |      * non-critical loads on "resident < budget - reserve" guarantees the
+ [2m369[0m |      * critical set can always finish, whatever the frame size.
+ [2m370[0m |      */
+ [2m371[0m |     const criticalReserveMb = () => startupTarget() * measuredFrameMb;
+     : [31;1m          ^^^^^^^^|^^^^^^^^[0m
+     :                   [31;1m`-- [31;1mprevious definition of `criticalReserveMb` here[0m[0m
+ [2m372[0m | 
+ [2m373[0m |     /**
+ [2m374[0m |      * Total byte budget for the live sequence.
+ [2m375[0m |      *
+ [2m376[0m |      * The previous value was a per-tier CONSTANT (420 / 150 MB) chosen for a
+ [2m377[0m |      * 1080p frame. But the critical startup buffer is a fixed FRAME COUNT, so
+ [2m378[0m |      * for any sequence whose frames are larger than ~1080p the critical set
+ [2m379[0m |      * alone exceeds the constant — and `pump()` then refuses every
+ [2m380[0m |      * non-critical frame forever (the freeze the user reported).
+ [2m381[0m |      *
+ [2m382[0m |      * The budget must clear the critical reserve by a real margin, otherwise
+ [2m383[0m |      * non-critical frames still have nowhere to live and the deadlock simply
+ [2m384[0m |      * moves rather than disappears. So it is sized as:
+ [2m385[0m |      *
+ [2m386[0m |      *     budget = criticalReserve * (1 + NONCRITICAL_HEADROOM_RATIO)
+ [2m387[0m |      *
+ [2m388[0m |      * (and never below the per-tier constant, so a small-frame sequence keeps
+ [2m389[0m |      * its conservative footprint). That guarantees a positive headroom for
+ [2m390[0m |      * every sequence in the repo AND for any future frame size.
+ [2m391[0m |      */
+ [2m392[0m |     const criticalReserveMb = () => startupTarget() * measuredFrameMb;
+     : [33;1m          ^^^^^^^^|^^^^^^^^[0m
+     :                   [33;1m`-- [33;1m`criticalReserveMb` redefined here[0m[0m
+ [2m393[0m | 
+ [2m394[0m |     const budgetMb = () => {
+ [2m394[0m |       const base = mobileTier ? BUDGET_MB_MOBILE : BUDGET_MB_DESKTOP;
+     `----
+
+Import trace for requested module:
+./src/components/CanvasSequence.tsx
+./src/app/HomePageClient.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\rakplus\.next\server\app\innovation\page.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/innovation/page' in C:\rakplus\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\rakplus\.next\server\app\innovation\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/innovation/page' in 'C:\rakplus\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/innovation/page (expected C:\rakplus\.next\server\app\innovation\page.js)
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file C:\rakplus\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\rakplus\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\rakplus\.next\cache\webpack\client-development\9.pack.gz_' -> 'C:\rakplus\.next\cache\webpack\client-development\9.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\rakplus\.next\cache\webpack\server-development\6.pack.gz_' -> 'C:\rakplus\.next\cache\webpack\server-development\6.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\rakplus\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\rakplus\.next\cache\webpack\client-development\0.pack.gz'
+ ⨯ Error: Cannot find module './682.js'
+Require stack:
+- C:\rakplus\.next\server\webpack-runtime.js
+- C:\rakplus\.next\server\pages\_document.js
+- C:\rakplus\node_modules\next\dist\server\require.js
+- C:\rakplus\node_modules\next\dist\server\load-components.js
+- C:\rakplus\node_modules\next\dist\build\utils.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-middleware.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-reloader-webpack.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-server.js
+- C:\rakplus\node_modules\next\dist\server\lib\start-server.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1249:15)
+    at C:\rakplus\node_modules\next\dist\server\require-hook.js:55:36
+    at Function._load (node:internal/modules/cjs/loader:1075:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at __webpack_require__.f.require (C:\rakplus\.next\server\webpack-runtime.js:198:28)
+    at C:\rakplus\.next\server\webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (C:\rakplus\.next\server\webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (C:\rakplus\.next\server\webpack-runtime.js:162:22)
+    at C:\rakplus\.next\server\pages\_document.js:1:335
+    at Object.<anonymous> (C:\rakplus\.next\server\pages\_document.js:1:376)
+    at Module._compile (node:internal/modules/cjs/loader:1565:14)
+    at Object..js (node:internal/modules/cjs/loader:1708:10)
+    at Module.load (node:internal/modules/cjs/loader:1318:32)
+    at Function._load (node:internal/modules/cjs/loader:1128:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at requirePage (C:\rakplus\node_modules\next\dist\server\require.js:109:84)
+    at C:\rakplus\node_modules\next\dist\server\load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (C:\rakplus\node_modules\next\dist\server\load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (C:\rakplus\node_modules\next\dist\server\next-server.js:714:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\rakplus\\.next\\server\\webpack-runtime.js',
+    'C:\\rakplus\\.next\\server\\pages\\_document.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-middleware.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-reloader-webpack.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-utils\\setup-dev-bundler.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-server.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\start-server.js'
+  ]
+}
+ ⨯ Error: Cannot find module './682.js'
+Require stack:
+- C:\rakplus\.next\server\webpack-runtime.js
+- C:\rakplus\.next\server\pages\_document.js
+- C:\rakplus\node_modules\next\dist\server\require.js
+- C:\rakplus\node_modules\next\dist\server\load-components.js
+- C:\rakplus\node_modules\next\dist\build\utils.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-middleware.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-reloader-webpack.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-server.js
+- C:\rakplus\node_modules\next\dist\server\lib\start-server.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1249:15)
+    at C:\rakplus\node_modules\next\dist\server\require-hook.js:55:36
+    at Function._load (node:internal/modules/cjs/loader:1075:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at __webpack_require__.f.require (C:\rakplus\.next\server\webpack-runtime.js:198:28)
+    at C:\rakplus\.next\server\webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (C:\rakplus\.next\server\webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (C:\rakplus\.next\server\webpack-runtime.js:162:22)
+    at C:\rakplus\.next\server\pages\_document.js:1:335
+    at Object.<anonymous> (C:\rakplus\.next\server\pages\_document.js:1:376)
+    at Module._compile (node:internal/modules/cjs/loader:1565:14)
+    at Object..js (node:internal/modules/cjs/loader:1708:10)
+    at Module.load (node:internal/modules/cjs/loader:1318:32)
+    at Function._load (node:internal/modules/cjs/loader:1128:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at requirePage (C:\rakplus\node_modules\next\dist\server\require.js:109:84)
+    at C:\rakplus\node_modules\next\dist\server\load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (C:\rakplus\node_modules\next\dist\server\load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (C:\rakplus\node_modules\next\dist\server\next-server.js:714:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\rakplus\\.next\\server\\webpack-runtime.js',
+    'C:\\rakplus\\.next\\server\\pages\\_document.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-middleware.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-reloader-webpack.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-utils\\setup-dev-bundler.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-server.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\start-server.js'
+  ]
+}
+ ⨯ Error: Cannot find module './682.js'
+Require stack:
+- C:\rakplus\.next\server\webpack-runtime.js
+- C:\rakplus\.next\server\pages\_document.js
+- C:\rakplus\node_modules\next\dist\server\require.js
+- C:\rakplus\node_modules\next\dist\server\load-components.js
+- C:\rakplus\node_modules\next\dist\build\utils.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-middleware.js
+- C:\rakplus\node_modules\next\dist\server\dev\hot-reloader-webpack.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\rakplus\node_modules\next\dist\server\lib\router-server.js
+- C:\rakplus\node_modules\next\dist\server\lib\start-server.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1249:15)
+    at C:\rakplus\node_modules\next\dist\server\require-hook.js:55:36
+    at Function._load (node:internal/modules/cjs/loader:1075:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at __webpack_require__.f.require (C:\rakplus\.next\server\webpack-runtime.js:198:28)
+    at C:\rakplus\.next\server\webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (C:\rakplus\.next\server\webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (C:\rakplus\.next\server\webpack-runtime.js:162:22)
+    at C:\rakplus\.next\server\pages\_document.js:1:335
+    at Object.<anonymous> (C:\rakplus\.next\server\pages\_document.js:1:376)
+    at Module._compile (node:internal/modules/cjs/loader:1565:14)
+    at Object..js (node:internal/modules/cjs/loader:1708:10)
+    at Module.load (node:internal/modules/cjs/loader:1318:32)
+    at Function._load (node:internal/modules/cjs/loader:1128:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1340:12)
+    at mod.require (C:\rakplus\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at requirePage (C:\rakplus\node_modules\next\dist\server\require.js:109:84)
+    at C:\rakplus\node_modules\next\dist\server\load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (C:\rakplus\node_modules\next\dist\server\load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (C:\rakplus\node_modules\next\dist\server\next-server.js:714:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\rakplus\\.next\\server\\webpack-runtime.js',
+    'C:\\rakplus\\.next\\server\\pages\\_document.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-middleware.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\dev\\hot-reloader-webpack.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-utils\\setup-dev-bundler.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\router-server.js',
+    'C:\\rakplus\\node_modules\\next\\dist\\server\\lib\\start-server.js'
+  ]
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\rakplus\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\rakplus\.next\cache\webpack\client-development-fallback\0.pack.gz'

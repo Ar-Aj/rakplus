@@ -12,7 +12,7 @@ interface LiveCoverCanvasProps {
 
 export default function LiveCoverCanvas({ modelPath }: LiveCoverCanvasProps) {
   return (
-    <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4] }} dpr={[1, 1.5]} gl={{ toneMapping: THREE.NeutralToneMapping, toneMappingExposure: 0.85 }}>
+    <Canvas camera={{ fov: 45, near: 0.01, far: 100, position: [0, 0, 4] }} dpr={[1, 2]} gl={{ toneMapping: THREE.NeutralToneMapping, toneMappingExposure: 0.85 }}>
       <color attach="background" args={["#ffffff"]} />
 
       <Suspense fallback={null}>

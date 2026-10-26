@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 

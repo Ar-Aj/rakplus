@@ -16,22 +16,59 @@
 #   5. Clean directory security for /_next/ (no listing, no override).
 # ────────────────────────────────────────────────────────────────
 
+# ────────────────────────────────────────────────────────────────
+# 1. CANONICAL 301 — Strict Single-Hop Redirect
+# ────────────────────────────────────────────────────────────────
+# Force BOTH http:// AND www.rakplusuae.com to the single canonical
+# host https://rakplusuae.com, preserving the full request path.
+# Implemented as ONE rule so the redirect is single-hop (no redirect
+# chains — chains waste crawl budget and leak link juice through an
+# intermediate hop).
+#
+# [OR] means "redirect if EITHER condition matches": either the
+# connection is not HTTPS, OR the host is www.
+#
+# ⚠ ORDER IS CRITICAL: this block MUST precede the pretty-URL rules
+# below. Those end in [L] (last), so any request reaching them first
+# would be internally rewritten to index.html and this 301 would never
+# execute — leaving http:// and www on the canonical host unfixed.
+# ────────────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Skip when already on the canonical https non-www host, otherwise
+  # Apache would loop forever.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.rakplusuae\.com$ [NC]
+  RewriteRule ^ https://rakplusuae.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# 2. PRETTY URL ROUTING — trailing-slash static export (trailingSlash: true)
+# ────────────────────────────────────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. If it's an exact file or directory, serve it normally
+  # a. If it's an exact file or directory, serve it normally
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 2. If an .html file exists for the request, append .html and serve it
+  # b. If an .html file exists for the request, append .html and serve it
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.*)$ $1.html [L]
 
-  # 3. Fallback to index.html for dynamic SPA routes
+  # c. Fallback to index.html for dynamic SPA routes
   RewriteRule ^ index.html [L]
 </IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# ERROR DOCUMENTS — serve the custom 404 for missing resources.
+# Without this, Apache shows the default host error page, which leaks
+# the hosting provider's name and returns no crawlable navigation.
+# ────────────────────────────────────────────────────────────────
+ErrorDocument 404 /404.html
 
 # ────────────────────────────────────────────────────────────────
 # MIME TYPES — ensure .webp and .woff2 are served with the
@@ -44,6 +81,7 @@
   AddType text/css .css
   AddType application/json .json
   AddType image/svg+xml .svg
+  AddType model/gltf-binary .glb
 </IfModule>
 
 # ────────────────────────────────────────────────────────────────
@@ -52,6 +90,31 @@
 # always sees the latest CSS/JS chunk hashes from the new build.
 # Without this, users on stale caches see UNSTYLED HTML when
 # chunks 404.
+#
+# ⚠ CDN EDGE OVERRIDE (production crash fix, Phase 58)
+# Hostinger's CDN (hcdn) caches by the ORIGIN's Cache-Control header.
+# A directory request like `/` is NOT matched by `<FilesMatch
+# "\.(html|htm)$">` — that directive only sees the FINAL resolved
+# file, and for a directory index the served entity was being
+# classified as a generic asset and emitted:
+#
+#     Cache-Control: public, max-age=31536000, immutable
+#
+# That pinned the homepage HTML in the edge for a YEAR. On the next
+# deploy the edge kept serving the OLD index.html, which referenced the
+# OLD content-hashed CSS/JS chunks. Those files are gone, so every one
+# 404'd — and the result was the exact "raw unstyled page" symptom:
+# HTML rendered with no stylesheet, Times New Roman text, and a dead
+# client runtime. Measured live: 10 of 18 referenced assets 404'd on
+# a cache HIT, while the same page with a cache-buster returned
+# 18/18 OK.
+#
+# The fix has two halves:
+#   1. Keep the no-cache header on .html files (browser side).
+#   2. Add an explicit <Location> block below so directory requests
+#      to page routes ALSO get no-store, overriding whatever the CDN
+#      would otherwise infer. Hashed assets under /_next/static keep
+#      their immutable year-long cache, which is correct and safe.
 # ────────────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
   # Default: deny file-system access to dotfiles
@@ -143,13 +206,69 @@
 </FilesMatch>
 
 # ────────────────────────────────────────────────────────────────
-# GZIP COMPRESSION — enable on Hostinger Apache so HTML/CSS/JS
-# ships compressed. Most shared hosts already enable this at the
-# server level; this is a belt-and-braces directive.
+# CACHE CONTROL — 3: PAGE ROUTES — override the CDN edge
+#
+# `<FilesMatch "\.(html|htm)$">` above cannot see a DIRECTORY request:
+# `/about/` resolves to about/index.html internally, but the directive
+# that ends up applied is chosen before that resolution, so the CDN was
+# handed `immutable` and cached the page for a year.
+#
+# `<LocationMatch>` is evaluated on the REQUEST URI, so it matches the
+# pretty-URL form users actually request and wins over the inferred
+# asset classification. Page routes get no-store; hashed build assets
+# keep their year-long immutable cache because they are excluded below.
+#
+# NOTE: `Header set` here REPLACES any earlier value rather than
+# appending, so there is no risk of a duplicated Cache-Control header.
 # ────────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Page routes (pretty URLs) — must revalidate on every visit.
+  <LocationMatch "^/(about|contact|innovation|locations|privacy|products|sustainability|terms)(/.*)?$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </LocationMatch>
+
+  # The site root — the single most important one, and the one the CDN
+  # was pinning hardest. Matched explicitly because "^/$" is a subset
+  # of the pattern above only by accident of ordering.
+  <Location "/">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </Location>
+
+  # Hashed build output stays immutable — content-addressed, never stale.
+  <LocationMatch "^/_next/static/">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </LocationMatch>
+
+  # RSC flight payloads (.txt) — always revalidate so client-side
+  # navigation never replays a stale chunk manifest.
+  <LocationMatch "\.txt$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </LocationMatch>
+</IfModule>
+
+# ────────────────────────────────────────────────────────────────
+# COMPRESSION — GZIP (universal) + BROTLI (preferred when available)
+# ────────────────────────────────────────────────────────────────
+# Brotli ships ~15–20 % smaller than gzip for the same content and is
+# supported by every current browser. LiteSpeed/Hostinger ships
+# mod_brotli, so it is attempted FIRST; the gzip block remains as the
+# fallback for any host without it. The <IfModule> guards mean neither
+# directive causes a 500 on a server missing the module.
+# ────────────────────────────────────────────────────────────────
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS application/xml application/rss+xml
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml font/woff2 model/gltf-binary
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
   AddOutputFilterByType DEFLATE application/javascript application/json
   AddOutputFilterByType DEFLATE application/xml application/rss+xml
-  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2 model/gltf-binary
 </IfModule>

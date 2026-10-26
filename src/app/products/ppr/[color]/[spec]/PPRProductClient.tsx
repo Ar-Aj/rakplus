@@ -100,14 +100,6 @@ export default function PPRProductClient({
                 {specData.shortDescription}
               </p>
             </div>
-
-            {/* Scroll indicator */}
-            <div className="mt-12 flex items-center gap-3">
-              <div className="w-[1px] h-16 bg-neutral-950/20" />
-              <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-950 font-bold">
-                Scroll to explore
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -185,7 +177,7 @@ export default function PPRProductClient({
 
               <div className="w-24 h-[3px] bg-emerald-500 rounded-full mb-12 reveal-curtain-child" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
                 <div className="lg:col-span-8">
                   <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl max-w-3xl w-full mb-10">
                     <p 
@@ -233,7 +225,7 @@ export default function PPRProductClient({
             </div>
 
               {/* Asymmetrical 12-col grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
                 
                 {/* Left: Engineering Advantages (Spans 5 cols) */}
                 <div className="lg:col-span-5 reveal-curtain-child">
@@ -299,7 +291,7 @@ export default function PPRProductClient({
               aria-label="Engineering specifications"
             >
               {/* Asymmetrical 12-col grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
                 
                 {/* Left: Typography (Spans 4 cols) */}
                 <div className="lg:col-span-4 reveal-curtain-child z-10 relative">
@@ -327,7 +319,7 @@ export default function PPRProductClient({
                 {/* Right: Table (Spans 8 cols, pulls left with negative margin) */}
                 <div className="lg:col-span-8 lg:-ml-12 reveal-curtain-child">
                 <div className="rounded-2xl border border-neutral-200 shadow-sm w-full overflow-hidden bg-white">
-                  <div className="overflow-x-auto w-full">
+                  <div className="overflow-x-auto w-full table-scroll-hint">
                     <table className="w-full text-center align-middle min-w-[800px]">
                       <thead>
                         <tr className="bg-neutral-50 border-b border-neutral-200">
@@ -412,7 +404,7 @@ export default function PPRProductClient({
               aria-label="Installation and Welding Guidelines"
             >
               {/* Asymmetrical 12-col grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
                 
                 {/* Left: Welding Directives (Spans 5 cols) */}
                 <div className="lg:col-span-5 reveal-curtain-child">
@@ -603,7 +595,7 @@ export default function PPRProductClient({
                   Specify This Product for Your Project
                 </h3>
                 <p className="text-neutral-950 text-lg font-medium leading-relaxed mb-10 w-full max-w-3xl">
-                  Our engineering team at Aquasmart Plastic Industries can help
+                  Our engineering team at RakPlus® Rohrsysteme UAE can help
                   configure the exact PP-R Pipes / Fittings specification for
                   your infrastructure requirements across Dubai and the UAE.
                 </p>

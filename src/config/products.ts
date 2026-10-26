@@ -44,7 +44,9 @@ function validateCatalog(data: unknown): CatalogJSON {
   } catch {
     // Fall through to empty fallback
   }
-  console.warn("[RAKPLUS] Malformed catalog data. Using empty fallback.");
+  // Malformed catalogue → return the empty fallback and keep the build
+  // deterministic. (Previously console.warn'd; the warning ran at module
+  // scope on every build without changing behaviour.)
   return EMPTY_CATALOG;
 }
 
@@ -208,11 +210,9 @@ for (const catalogProduct of catalogData.products) {
 
     const enrichment = submittalIndex.get(slug);
     productRegistry[slug] = parseProduct(catalogProduct, enrichment);
-  } catch (err) {
-    console.warn(
-      `[RAKPLUS] Failed to parse product "${catalogProduct?.slug ?? "unknown"}":`,
-      err
-    );
+  } catch {
+    // A single malformed product entry is skipped rather than failing the
+    // whole build; the rest of the registry still renders.
   }
 }
 
@@ -238,7 +238,7 @@ export function getProductBySlug(slug: string): ProductConfig | undefined {
  * Company details extracted from the catalog.
  */
 export const companyDetails = {
-  name: catalogData.companyDetails?.name ?? "RakPlus by Aquasmart Plastic Industries L.L.C",
+  name: catalogData.companyDetails?.name ?? "RakPlus® Rohrsysteme UAE",
   standards: catalogData.companyDetails?.standards ?? [],
   warranty: catalogData.companyDetails?.warranty ?? "",
 };

@@ -14,10 +14,17 @@
 
 export const SITE = {
   url: "https://rakplusuae.com",
-  name: "RakPlus",
-  legal: "RakPlus by Aquasmart Plastic Industries L.L.C",
+  /**
+   * PRIMARY BRAND ENTITY. Google indexes `name` as the undisputed
+   * primary organization. RakPlus® is the only public-facing brand.
+   */
+  name: "RakPlus UAE",
+  /** Corporate legal entity behind the RakPlus® brand. */
+  legal: "RakPlus Rohrsysteme UAE",
+  /** Full descriptor used in metadata / structured data. */
+  full: "RakPlus® Rohrsysteme UAE",
   email: "Info@Rakplusuae.com",
-  phone: "+971-6-523-3869",
+  phone: "+97165233869",
   address: {
     street: "Industrial Area, Al Haseeb Trading Co L.L.C",
     poBox: "PO Box 21842",
@@ -28,6 +35,114 @@ export const SITE = {
   },
   geo: { lat: 25.5647, lng: 55.5536 },
 } as const;
+
+/* ══════════════════════════════════════════════════════════════════
+   SOCIAL / LINK-PREVIEW ASSETS
+   ────────────────────────────────────────────────────────────────
+   WhatsApp, LinkedIn, Facebook, Slack and X all read Open Graph
+   tags (NOT the <title> tag) when rendering a link preview.
+   Without an explicit og:image the chat bubble shows a blank grey
+   box; without og:title/og:description it shows the bare URL.
+
+   These constants point at the generated brand assets:
+     • og-rakplus-cover.jpg  — 1200x630 landscape cover (default)
+     • og-rakplus-square.jpg — 1200x1200 (WhatsApp / mobile crop)
+     • icon-512.png          — square mark
+   ══════════════════════════════════════════════════════════════════ */
+
+export const OG_COVER = "/images/og-rakplus-cover.jpg";
+export const OG_COVER_PNG = "/images/og-rakplus-cover.png";
+export const OG_SQUARE = "/images/og-rakplus-square.jpg";
+export const OG_LOGO = "/images/og-rakplus-logo.png";
+export const BRAND_ICON = "/icon-512.png";
+
+/**
+ * The four approved brand claims, woven into a single keyword-rich
+ * sentence. Used as the meta description fallback and as the base
+ * of every Open Graph description so that link previews always
+ * carry the same verified facts.
+ */
+export const OG_DEFAULT_DESCRIPTION =
+  "RakPlus® Rohrsysteme UAE — UAE manufacturer of WRAS approved PPR pipes & 100% brass insert fittings. German DIN 8077/8078, DVS 2207, ISO 9001:2015. PN10–PN25, 20–160 mm, 0–70°C continuous / 100°C peak. 100% Polymer, 100% Brass, 50-year guaranteed service life. Supplying Dubai, Abu Dhabi, Sharjah & the GCC.";
+
+/** Absolute URL for a site-relative asset path. */
+export function absoluteUrl(path: string): string {
+  return path.startsWith("http") ? path : `${SITE.url}${path}`;
+}
+
+/**
+ * Builds the `openGraph.images` array. Always includes the 1200x630
+ * landscape cover (WhatsApp desktop + LinkedIn + Facebook) and the
+ * 1200x1200 square (WhatsApp mobile + Instagram-style cards).
+ */
+export function buildOgImages(alt: string) {
+  return [
+    {
+      url: absoluteUrl(OG_COVER),
+      secureUrl: absoluteUrl(OG_COVER),
+      width: 1200,
+      height: 630,
+      alt,
+      type: "image/jpeg",
+    },
+    {
+      url: absoluteUrl(OG_SQUARE),
+      secureUrl: absoluteUrl(OG_SQUARE),
+      width: 1200,
+      height: 1200,
+      alt,
+      type: "image/jpeg",
+    },
+  ];
+}
+
+/**
+ * Builds a consistent Open Graph + Twitter card pair for a page.
+ * Passing these through every page guarantees that a link shared in
+ * WhatsApp renders the RakPlus logo + a keyword-rich description
+ * rather than a bare URL.
+ */
+export function buildSocialMetadata(opts: {
+  title: string;
+  description: string;
+  url: string;
+  type?: "website" | "article" | "product";
+  imageAlt?: string;
+  image?: string;
+}) {
+  const imageAlt =
+    opts.imageAlt ??
+    "RakPlus — WRAS approved PP-R pipes and 100% brass fittings manufactured in the UAE";
+  const image = opts.image ?? OG_COVER;
+
+  return {
+    openGraph: {
+      title: opts.title,
+      description: opts.description,
+      url: opts.url,
+      siteName: SITE.name,
+      locale: "en_AE",
+      type: opts.type ?? ("website" as const),
+      images: opts.image
+        ? [
+            {
+              url: absoluteUrl(opts.image),
+              width: 1200,
+              height: 630,
+              alt: imageAlt,
+              type: "image/jpeg",
+            },
+          ]
+        : buildOgImages(imageAlt),
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: opts.title,
+      description: opts.description,
+      images: [absoluteUrl(image)],
+    },
+  };
+}
 
 /** GCC areaServed list — explicit for Generative Engine Optimization. */
 export const AREA_SERVED = [
@@ -192,15 +307,23 @@ export function buildOrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
-    name: SITE.legal,
-    alternateName: ["RakPlus", "Rakplus UAE", "RAKPLUS"],
+    name: SITE.name,
+    legalName: SITE.legal,
+    alternateName: [
+      "RakPlus",
+      "RakPlus®",
+      "RakPlus Rohrsysteme UAE",
+      "Rakplus UAE",
+      "RAKPLUS",
+    ],
     url: `${SITE.url}/`,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE.url}/images/logo.png`,
+      url: `${SITE.url}/icon-512.png`,
       width: 512,
       height: 512,
     },
+    image: `${SITE.url}/images/og-rakplus-cover.jpg`,
     description:
       "UAE premium manufacturer of WRAS-approved PPR pipes and fittings — engineered to German DIN 8077/8078. Made from 100% Polymer with 100% Brass inserts, 50-year guaranteed service life.",
     foundingLocation: {
@@ -227,11 +350,10 @@ export function buildOrganizationJsonLd() {
       },
     ],
     brand: { "@type": "Brand", name: SITE.name },
-    sameAs: [
-      "https://www.linkedin.com/company/rakplusuae",
-      "https://www.facebook.com/rakplusuae",
-      "https://www.instagram.com/rakplusuae",
-    ],
+    // NOTE: sameAs social URLs are intentionally omitted until
+    // verified LinkedIn / Facebook / Instagram accounts exist.
+    // Submitting placeholder URLs returns 404 and weakens the
+    // Organization entity's authority score in SGE.
     // ── B2B Service catalog ─────────────────────────────
     // These four Service entries cover the four primary
     // commercial queries engineers and procurement teams
@@ -265,8 +387,11 @@ export function buildLocalBusinessJsonLd() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${SITE.url}/#localbusiness`,
-    name: SITE.legal,
-    image: `${SITE.url}/images/logo.png`,
+    name: SITE.name,
+    legalName: SITE.legal,
+    alternateName: ["RakPlus®", "RakPlus Rohrsysteme UAE"],
+    image: `${SITE.url}/images/og-rakplus-cover.jpg`,
+    logo: `${SITE.url}/icon-512.png`,
     url: `${SITE.url}/`,
     telephone: SITE.phone,
     email: SITE.email,

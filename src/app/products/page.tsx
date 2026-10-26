@@ -13,6 +13,7 @@
  */
 
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { productRegistry } from "@/config/products";
@@ -22,16 +23,29 @@ import SemanticLSIBlock from "@/components/SemanticLSIBlock";
 import TechnicalSpecifications from "@/components/TechnicalSpecifications";
 import RelatedProducts from "@/components/RelatedProducts";
 import {
-  buildLocalBusinessJsonLd,
   buildProductJsonLd,
   buildFaqJsonLd,
   buildBreadcrumbJsonLd,
+  buildOgImages,
+  absoluteUrl,
+  OG_COVER,
   SITE,
 } from "@/lib/seo";
 
+// Below-the-fold blueprint calculator. Loaded on demand so its module
+// (and its React/SVG dependency graph) stays out of the initial route
+// bundle instead of being shared eagerly with /products/[slug]/.
+const InteractivePipeCrossSection = dynamic(
+  () =>
+    import("@/components/calculator/InteractivePipeCrossSection").then(
+      (m) => m.default
+    ),
+  { ssr: false }
+);
+
 export const metadata: Metadata = {
   title:
-    "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog | RakPlus",
+    "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog",
   description:
     "Browse the full RakPlus catalog of PPR pipes & 100% Brass fittings in the UAE. WRAS approved, German DIN 8077/8078, 50-year guarantee. PN10–PN25, green & yellow pipes. Premium PP-R supplier for Dubai & the GCC.",
   keywords: [
@@ -43,7 +57,8 @@ export const metadata: Metadata = {
     "DIN 8077 PP-R pipes",
     "PN20 SDR6 PP-R pipe",
     "RakPlus PPR",
-    "Aquasmart Plastic Industries",
+    "RakPlus Rohrsysteme UAE",
+    "ppr pipes and fittings supplier in dubai",
     "polypropylene pipe systems GCC",
     "brass insert PPR fittings",
   ],
@@ -52,12 +67,22 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog | RakPlus",
+      "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog",
     description:
-      "RakPlus full PPR catalog — 100% Polymer pipes, 100% Brass fittings. WRAS approved, German DIN 8077/8078, 50-year guarantee. PN10–PN25.",
+      "RakPlus full PPR catalog — 100% Polymer pipes, 100% Brass fittings. WRAS approved, German DIN 8077/8078, DVS 2207, ISO 9001:2015. PN10–PN25, 20–160 mm, 0–70°C continuous / 100°C peak. 50-year guarantee.",
     type: "website",
     locale: "en_AE",
-    url: "https://rakplusuae.com/products",
+    url: "https://rakplusuae.com/products/",
+    images: buildOgImages(
+      "RakPlus PP-R pipes and 100% brass insert fittings catalog — PN10 to PN25, 20 mm to 160 mm, WRAS approved"
+    ),
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "100% Brass PPR Fittings UAE — Full Pipe & Fitting Catalog",
+    description:
+      "RakPlus full PPR catalog — 100% Polymer pipes, 100% Brass fittings. WRAS approved, DIN 8077/8078, 50-year guarantee.",
+    images: [absoluteUrl(OG_COVER)],
   },
 };
 
@@ -72,7 +97,9 @@ export const metadata: Metadata = {
 //
 // All schema data is sourced from the single source of truth in
 // `src/lib/seo.ts` — no inline conflicting declarations.
-const jsonLdLocalBusiness = buildLocalBusinessJsonLd();
+// NOTE: LocalBusiness / Organization are emitted globally via
+// `src/app/layout.tsx` to avoid duplicate @id conflicts. The
+// @id references here use the global `parentOrganization` link.
 
 // BreadcrumbList — Home → Products
 const jsonLdBreadcrumb = buildBreadcrumbJsonLd([
@@ -232,12 +259,8 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-bg-cream">
       {/* ─── JSON-LD Structured Data ─── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdLocalBusiness),
-        }}
-      />
+      {/* LocalBusiness + Organization are emitted globally via
+          `src/app/layout.tsx` — DO NOT re-emit here. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -293,6 +316,9 @@ export default function ProductsPage() {
             muted
             loop
             playsInline
+            // Decorative background layer — never the LCP element. Metadata-only
+            // preload keeps the hero text and card grid at the front of the queue.
+            preload="metadata"
             className="w-full h-full object-cover"
           />
           {/* Dark gradient overlay — ensures WCAG AA contrast for text */}
@@ -307,7 +333,7 @@ export default function ProductsPage() {
             Mobile/Tablet: single column — text flows normally over the
             background video defined above.
           */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
             {/* ── Left column: Text content ── */}
             <div>
@@ -337,7 +363,7 @@ export default function ProductsPage() {
                 Engineered to German STD DIN 8077/78, Rakplus delivers
                 high-quality, WRAS-approved PP-R pipe systems designed for
                 extreme durability in the GCC climate. Manufactured by
-                Aquasmart Plastic Industries L.L.C with ISO 9001:2015 and
+                RakPlus® Rohrsysteme UAE with ISO 9001:2015 and
                 ISO 14001:2015 certifications — every product is backed by
                 a 50-year guaranteed service life.
               </p>
@@ -386,6 +412,135 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* ─── Section 02 · Complete German-Standard Piping Ecosystem ───
+          Layout follows the Home page language:
+            • Desktop (lg): 12-col grid — text in col-span-7 (left), a strict
+              1:1 square image in col-span-5 (right, pushed flush with ml-auto).
+            • Tablet/mobile: stacked, unchanged order, 1:1 square frame so the
+              2048×2048 showcase plate is never vertically cropped. */}
+      <section className="py-12 lg:py-16 px-6 lg:px-8 bg-studio-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-center gap-8 lg:gap-12">
+
+            {/* ── LEFT COLUMN (text · 7-col on desktop) ── */}
+            <div className="lg:col-span-7">
+              <p className="text-[11px] font-semibold text-pitch-black/70 uppercase tracking-[0.22em] mb-3 font-mono">
+                // 02 · Complete German-Standard Piping Ecosystem
+                <span className="text-crimson">
+                  {" "}
+                  (SDR11 – SDR5 · Ø20mm – Ø110mm)
+                </span>
+              </p>
+
+              <h2
+                className="font-sans font-extrabold tracking-tighter text-[clamp(2rem,4.4vw,3.25rem)] leading-[0.95] mb-5"
+                style={{ textWrap: "balance" }}
+              >
+                <span className="block text-[#0A0A0A]">Complete PP-R Pipes.</span>
+                <span className="block text-[#DC2626]">
+                  100% Brass Fittings<span className="text-[#0A0A0A]">.</span>
+                </span>
+                <span className="block text-[#FACC15]">
+                  Engineered to Connect<span className="text-[#0A0A0A]">.</span>
+                </span>
+              </h2>
+
+              <div className="space-y-4 max-w-2xl">
+                <p className="text-[15px] md:text-base text-neutral-800 leading-relaxed">
+                  RakPlus® manufactures a fully integrated{" "}
+                  <strong className="text-pitch-black font-bold">
+                    PP-R pipe and fitting system
+                  </strong>{" "}
+                  in the UAE across all four pressure classes —{" "}
+                  <strong className="text-crimson">SDR11 / PN10</strong>,{" "}
+                  <strong className="text-crimson">SDR7.4 / PN16</strong>,{" "}
+                  <strong className="text-crimson">SDR6 / PN20</strong> and{" "}
+                  <strong className="text-crimson">SDR5 / PN25</strong> —
+                  spanning outer diameters from{" "}
+                  <strong className="text-pitch-black font-bold">
+                    Ø20mm to Ø110mm
+                  </strong>
+                  . Engineered in strict compliance with{" "}
+                  <strong className="text-pitch-black font-bold">
+                    German Standard DIN 8077/8078
+                  </strong>{" "}
+                  and{" "}
+                  <strong className="text-pitch-black font-bold">
+                    DVS 2207
+                  </strong>{" "}
+                  homogeneous socket fusion guidelines, every pipe and fitting
+                  is <strong className="text-pitch-black font-bold">WRAS approved</strong>{" "}
+                  for hygienic hot and cold potable water transmission in
+                  residential villas, high-rise towers and industrial plants
+                  across Dubai, Abu Dhabi, Sharjah and the wider GCC.
+                </p>
+
+                <p className="text-[15px] md:text-base text-neutral-800 leading-relaxed">
+                  From heavy-duty{" "}
+                  <strong className="text-pitch-black font-bold">
+                    RPFSH Hexagonal 100% Brass Transition Series
+                  </strong>{" "}
+                  (DIN 8076) that guarantee leak-free metal-to-polymer thread
+                  connections, to precision-molded{" "}
+                  <strong className="text-pitch-black font-bold">RPE90 90° Elbows</strong>,{" "}
+                  <strong className="text-pitch-black font-bold">RPRS Step Reducers</strong>,{" "}
+                  <strong className="text-pitch-black font-bold">RPS Equal Sockets</strong>{" "}
+                  and acoustic-damping{" "}
+                  <strong className="text-pitch-black font-bold">
+                    RPBT Pipe Clamp Brackets
+                  </strong>
+                  , every component is injection-molded from 100% virgin PP-R
+                  Type 3 polymer and backed by a guaranteed{" "}
+                  <strong className="text-crimson">50-year service life</strong>.
+                </p>
+              </div>
+
+              {/* Scannable spec pills */}
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {[
+                  "DIN 8077/8078",
+                  "DVS 2207",
+                  "DIN 8076",
+                  "WRAS Approved",
+                  "100% Polymer",
+                  "100% Brass",
+                  "50-Year Guarantee",
+                ].map((pill) => (
+                  <li
+                    key={pill}
+                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-pitch-black/12 bg-white text-[11px] font-semibold tracking-wide text-pitch-black"
+                  >
+                    {pill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* ── RIGHT COLUMN (1:1 square image · 5-col on desktop) ── */}
+            <div className="lg:col-span-5">
+              <figure className="group">
+                <div className="relative aspect-square w-full max-w-[520px] ml-auto rounded-2xl overflow-hidden shadow-xl border border-neutral-900/10 bg-concrete-light">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/products-complete-system-showcase.png"
+                    alt="RakPlus brass transition elbow, all-green 90° elbow, reducer socket, and pipe clamp on a bright white architectural engineering board with grey millimetre grid lines and CAD callout labels for each fitting family."
+                    width={2048}
+                    height={2048}
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full aspect-square object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-pitch-black/10 rounded-2xl" />
+                </div>
+                <figcaption className="mt-3 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 lg:text-right">
+                  Complete 29-family system · Catalogue pp.06–19
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Category Sections ─── */}
       {CATEGORIES.map((category) => {
         const products = getProductsForCategory(category);
@@ -430,6 +585,10 @@ export default function ProductsPage() {
                         <img
                           src={product.coverImage}
                           alt={product.title}
+                          width={1672}
+                          height={941}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
@@ -493,6 +652,11 @@ export default function ProductsPage() {
         );
       })}
 
+      {/* ─── SIGNATURE FEATURE 3A: Interactive Pipe Cross-Section Blueprint ───
+          Sourced from RakPlus Catalogue pp.06–07. Renders before the
+          legacy TechnicalSpecifications block for visual impact. */}
+      <InteractivePipeCrossSection />
+
       {/* ─── Technical FAQ Section ─── */}
       <section className="py-16 lg:py-24 px-6 lg:px-8 bg-white border-t border-gray-100" aria-label="Frequently Asked Questions">
         <div className="max-w-7xl mx-auto">
@@ -547,7 +711,7 @@ export default function ProductsPage() {
             Need a Custom Solution?
           </h2>
           <p className="mt-4 text-base text-neutral-950 leading-relaxed max-w-lg mx-auto">
-            Our engineering team at Aquasmart Plastic Industries can help
+            Our engineering team at RakPlus® Rohrsysteme UAE can help
             specify the exact pipe and fitting configuration for your project.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">

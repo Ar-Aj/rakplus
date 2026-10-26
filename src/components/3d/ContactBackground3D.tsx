@@ -176,7 +176,10 @@ export default function ContactBackground3D() {
         gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
         style={{ width: "100%", height: "100%" }}
       >
-        {/* Solid white background */}
+        {/* Solid white background — the contact page's 2nd section is a
+            LIGHT surface (white card + black copy). The canvas must match
+            it, otherwise it paints an opaque rectangle that fights the
+            section's own background. */}
         <color attach="background" args={["#ffffff"]} />
 
         {/* Crisp lighting for high-contrast presentation */}

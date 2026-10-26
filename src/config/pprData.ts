@@ -66,9 +66,8 @@ for (const mapping of SPEC_MAPPINGS) {
   const rows: PprEngineeringRow[] = engineeringData[mapping.dataKey] ?? [];
 
   if (!unique) {
-    console.warn(
-      `[RAKPLUS/PPR] Missing content data for key "${mapping.dataKey}". Skipping.`
-    );
+    // Missing content for this spec mapping → skip that entry (it simply
+    // won't appear in the registry). No console noise on every build.
     continue;
   }
 

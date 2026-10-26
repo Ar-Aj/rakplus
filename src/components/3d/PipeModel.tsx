@@ -8,8 +8,15 @@ interface PipeModelProps {
   category?: string;
 }
 
-const GREEN_MODEL_PATH = encodeURI("/3D Models/sdr6-32g.glb");
-const YELLOW_MODEL_PATH = encodeURI("/3D Models/sdr6-32y.glb");
+// Real, on-disk asset paths (verified against /public/3D Models/…).
+// The previous "/3D Models/sdr6-32g.glb" / "sdr6-32y.glb" files never
+// existed, so both useGLTF.preload calls 404'd on every product page.
+const GREEN_MODEL_PATH = encodeURI(
+  "/3D Models/RAKPLUS GREEN PIPES/SDR6 GREEN/SDR6-32-GREEN.glb"
+);
+const YELLOW_MODEL_PATH = encodeURI(
+  "/3D Models/RAKPLUS YELLOW PIPES/SDR6 YELLOW/SDR6-32-YELLOW.glb"
+);
 
 export default function PipeModel({ modelPath, color, category }: PipeModelProps) {
   const isYellow =

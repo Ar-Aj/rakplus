@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "WRAS approved pipes Dubai",
     "PPR fittings quote GCC",
     "DIN 8077 pipe manufacturer",
-    "Aquasmart Plastic Industries",
+    "ppr pipes and fittings supplier in dubai",
   ],
   alternates: {
     canonical: "https://rakplusuae.com/contact/",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "Contact RakPlus — Premium PPR Pipes & Fittings Supplier UAE",
     description:
       "Get in touch with RakPlus for WRAS-approved PPR pipes & fittings in the UAE. Request datasheets, bulk quotations & project specifications.",
-    url: "https://rakplusuae.com/contact",
+    url: "https://rakplusuae.com/contact/",
     type: "website",
     locale: "en_AE",
   },

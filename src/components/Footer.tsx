@@ -32,6 +32,14 @@ const COMPANY_LINKS = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+const LOCATION_LINKS = [
+  { label: "PPR Pipes UAE — Master Hub", href: "/locations/ppr-pipes-uae" },
+  { label: "PPR Pipes & Fittings — Dubai", href: "/locations/dubai" },
+  { label: "PPR Pipes — Abu Dhabi (WRAS)", href: "/locations/abu-dhabi" },
+  { label: "PPR Piping — Sharjah Industrial", href: "/locations/sharjah" },
+  { label: "PPR Factory — Umm Al Quwain", href: "/locations/umm-al-quwain" },
+] as const;
+
 const CERTIFICATIONS = [
   "ISO 9001:2015",
   "ISO 14001:2015",
@@ -54,7 +62,7 @@ export default function Footer() {
 
       {/* ─── Main footer content ─── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Column 1: Brand + Contact */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6 group">
@@ -82,7 +90,7 @@ export default function Footer() {
             >
               <meta
                 itemProp="name"
-                content="RakPlus by Aquasmart Plastic Industries L.L.C"
+                content="RakPlus® Rohrsysteme UAE"
               />
               <meta
                 itemProp="image"
@@ -199,6 +207,25 @@ export default function Footer() {
               ))}
             </div>
           </div>
+
+          {/* Column 4: UAE Locations */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-6">
+              UAE Locations
+            </h3>
+            <ul className="space-y-2">
+              {LOCATION_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white hover:text-emerald transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -206,7 +233,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white">
-            &copy; {currentYear} RakPlus by Aquasmart Plastic Industries L.L.C.
+            &copy; {currentYear} RakPlus® Rohrsysteme UAE.
             All rights reserved.
           </p>
           <div className="flex items-center gap-6">

@@ -19,7 +19,7 @@
  *   <RelatedProducts currentSlug="ppr-green-pn20" category="fittings" />
  */
 
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { productRegistry } from "@/config/products";
 import type { ProductConfig } from "@/types/product";
 
@@ -154,6 +154,46 @@ export default function RelatedProducts({
                 Request Technical Datasheet — Contact
               </Link>
             </li>
+            <li>
+              <Link
+                href="/locations/ppr-pipes-uae/"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300/60 text-emerald-800 hover:bg-emerald-100 transition-colors"
+              >
+                PPR Pipes UAE — Master Hub
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/locations/dubai/"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg bg-yellow-50 border border-yellow-300/60 text-yellow-800 hover:bg-yellow-100 transition-colors"
+              >
+                PPR Pipes Dubai — MEP &amp; Towers
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/locations/abu-dhabi/"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg bg-red-50 border border-red-300/60 text-red-700 hover:bg-red-100 transition-colors"
+              >
+                PPR Pipes Abu Dhabi — WRAS Approved
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/locations/sharjah/"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg bg-neutral-100 border border-neutral-300/60 text-neutral-800 hover:bg-neutral-200 transition-colors"
+              >
+                PPR Pipes Sharjah — Industrial
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/locations/umm-al-quwain/"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300/60 text-emerald-800 hover:bg-emerald-100 transition-colors"
+              >
+                PPR Factory — Umm Al Quwain
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>
@@ -228,6 +268,46 @@ export default function RelatedProducts({
               className="inline-flex items-center px-3 py-1.5 rounded-lg bg-neutral-100 border border-neutral-300/60 text-neutral-800 hover:bg-neutral-200 transition-colors"
             >
               Request Technical Datasheet — Contact
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/locations/ppr-pipes-uae/"
+              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300/60 text-emerald-800 hover:bg-emerald-100 transition-colors"
+            >
+              PPR Pipes UAE — Master Hub
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/locations/dubai/"
+              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-yellow-50 border border-yellow-300/60 text-yellow-800 hover:bg-yellow-100 transition-colors"
+            >
+              PPR Pipes Dubai — MEP &amp; Towers
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/locations/abu-dhabi/"
+              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-red-50 border border-red-300/60 text-red-700 hover:bg-red-100 transition-colors"
+            >
+              PPR Pipes Abu Dhabi — WRAS Approved
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/locations/sharjah/"
+              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-neutral-100 border border-neutral-300/60 text-neutral-800 hover:bg-neutral-200 transition-colors"
+            >
+              PPR Pipes Sharjah — Industrial
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/locations/umm-al-quwain/"
+              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300/60 text-emerald-800 hover:bg-emerald-100 transition-colors"
+            >
+              PPR Factory — Umm Al Quwain
             </Link>
           </li>
         </ul>

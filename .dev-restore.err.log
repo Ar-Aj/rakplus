@@ -1,0 +1,6 @@
+(node:2328) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ⨯ Error: Page "/products/[slug]/page" is missing param "/products/a57-ajooba-men-s-suede-finish-tassel-slip-on-loafers" in "generateStaticParams()", which is required with "output: export" config.
+    at DevServer.renderToResponseWithComponentsImpl (C:\rakplus\node_modules\next\dist\server\base-server.js:1083:27) {
+  page: '/products/a57-ajooba-men-s-suede-finish-tassel-slip-on-loafers'
+}

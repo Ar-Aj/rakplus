@@ -1,0 +1,54 @@
+
+> scaffold@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 5.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 17.5s (715 modules)
+ GET / 200 in 19277ms
+ ✓ Compiled in 1873ms (330 modules)
+ GET / 200 in 211ms
+ GET / 200 in 366ms
+ GET / 200 in 596ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.3s (695 modules)
+ GET /videos/Loader/Logo%20Animation.mp4 404 in 3261ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 10s (921 modules)
+ GET /sw.js 404 in 10801ms
+ GET /_next/static/webpack/685a0731492be590.webpack.hot-update.json 404 in 5822ms
+ GET /_next/static/css/app/layout.css?v=1792751242038 404 in 149ms
+ ✓ Compiled in 3.1s (930 modules)
+ ✓ Compiled in 11s (930 modules)
+ ✓ Compiled in 3.6s (930 modules)
+ ✓ Compiled in 3.5s (930 modules)
+ ✓ Compiled in 1606ms (930 modules)
+ ✓ Compiled in 4.2s (930 modules)
+ GET / 200 in 1783ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1029ms (919 modules)
+ GET /home-desktop/frame_1000.webp 404 in 1736ms
+ GET /home-desktop/frame_1000.webp 404 in 150ms
+ GET /home-desktop/frame_1000.webp 404 in 162ms
+ GET /home-desktop/frame_1000.webp 404 in 116ms
+ GET /home-desktop/frame_1000.webp 404 in 128ms
+ GET /home-desktop/frame_1000.webp 404 in 120ms
+ GET / 200 in 397ms
+ GET / 200 in 132ms
+ GET /sw.js 404 in 115ms
+ GET / 200 in 476ms
+ GET /sw.js 404 in 161ms
+ GET / 200 in 444ms
+ GET /_next/static/css/app/layout.css?v=1792758727360 404 in 491ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 917ms
+ GET /_next/static/chunks/main-app.js?v=1792758727360 404 in 914ms
+ GET /_next/static/chunks/webpack.js?v=1792758727360 404 in 911ms
+ GET /_next/static/chunks/app/page.js 404 in 896ms
+ GET /_next/static/chunks/app/layout.js 404 in 909ms
+ GET /sw.js 404 in 122ms
+ ✓ Compiled in 7.1s (933 modules)
+[?25h

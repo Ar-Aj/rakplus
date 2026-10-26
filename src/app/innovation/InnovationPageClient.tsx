@@ -20,6 +20,8 @@
 import { useRef } from "react";
 import LiquidButton from "@/components/ui/LiquidButton";
 import CanvasSequence from "@/components/CanvasSequence";
+import EditorialAboveTheFold from "@/components/hero/EditorialAboveTheFold";
+import ThermalExpansionCalculator from "@/components/calculator/ThermalExpansionCalculator";
 import { useHUDReveal } from "@/hooks/useHUDReveal";
 import { FlaskConical, Layers, Shield, Cpu } from "lucide-react";
 import RelatedProducts from "@/components/RelatedProducts";
@@ -67,6 +69,102 @@ export default function InnovationPageClient() {
   return (
     <main className="relative w-full bg-transparent">
 
+      {/* ─── Above-the-Fold Editorial Hero ─────────────────
+          Renders BEFORE <CanvasSequence /> so the rich editorial
+          introduction naturally pushes the 3D sequence down by
+          1.5–2.5 scrolls. ──────────────────────────────────── */}
+      <EditorialAboveTheFold
+        variant="innovation"
+        identityStrips={[
+          "PP-R Multi-Layer Co-Extrusion",
+          "DIN 8077/8078",
+          "DVS 2207",
+          "EN ISO 15874-2",
+          "ISO 9001:2015",
+        ]}
+        overline="RakPlus® Innovation — German Engineering"
+        headlineSpans={[
+          { text: "Engineering", colorClass: "text-[#0A0A0A]" },
+          { text: "PP-R Systems.", colorClass: "text-[#DC2626]" },
+          { text: "Built to Outlast.", colorClass: "text-[#FACC15]" },
+        ]}
+        heroBody="100% Virgin Polypropylene Random-Copolymer (PP-R Type 3) extruded to DIN 8077/8078 — fused with DVS 2207 welding parameters. Manufactured by RakPlus® Rohrsysteme UAE in Umm Al Quwain, UAE."
+        primaryCta={{ href: "/products", label: "View Catalogue" }}
+        secondaryCta={{
+          href: "/sustainability",
+          label: "WRAS Approved Material",
+        }}
+        bentoEyebrow="Engineering Data — Verified Catalogue Values"
+        trustStrip={[
+          { label: "100%", value: "Polymer" },
+          { label: "100%", value: "Brass" },
+          { label: "WRAS", value: "Approved" },
+          { label: "50 YR", value: "Life" },
+        ]}
+        heroImage={{
+          src: "/images/innovation-thermal-resilience.png",
+          alt: "RakPlus horizontal green PP-R pipe in a bright white climate test chamber with icy-blue and warm amber isotherm glassmorphic spec cards above the pipe.",
+          badgeHeadline: "0–100 °C",
+          badgeSubline: "DVS 2207",
+        }}
+        telemetryPills={[
+          { label: "Continuous Temp", value: "70", unit: "°C" },
+          { label: "Peak Temp", value: "100", unit: "°C" },
+          { label: "Density (ISO 1183)", value: "905", unit: "kg/m³" },
+          { label: "Charpy Impact", value: "NB", unit: "No Break" },
+        ]}
+        bentoCards={[
+          {
+            overline: "PP-R Type 3",
+            eyebrow: "Material",
+            headline: "100% Virgin Polypropylene Random-Copolymer",
+            body:
+              "Pure polymer matrix characterised by elasticity, compression strength, and resistance to high-temperature extraction — the molecular foundation of every RakPlus pipe.",
+            footer: "ISO 1183 · Density 905 kg/m³",
+          },
+          {
+            overline: "DIN 8077/8078",
+            eyebrow: "Dimensional",
+            headline: "Strict German Dimensional Compliance",
+            body:
+              "Every RakPlus pipe line is produced in accordance with German Standard DIN 8077 (pipe dimensions) and DIN 8078 (general quality requirements) — the global benchmark for polypropylene pressure pipes.",
+            footer: "MFR ≤ 0.3 g/10min",
+          },
+          {
+            overline: "DVS 2207",
+            eyebrow: "Welding",
+            headline: "DVS 2207 Fusion Welding Compliance",
+            body:
+              "Socket fusion parameters are calibrated and stabilised at 260°C (±10°C) per DVS 2207 regulations — producing a seamless molecular bond that eliminates joint failure.",
+            footer: "260°C ± 10°C",
+          },
+        ]}
+        secondaryShowcases={[
+          {
+            src: "/images/innovation-din-precision-sockets.png",
+            alt: "RakPlus green socket pair on a bright white optical-grade ceramic inspection stage with emerald laser measurement rings and dimensional tolerance telemetry card.",
+            headline: [
+              { text: "DIN 8077/8078.", colorClass: "text-[#0A0A0A]" },
+              { text: "905 kg/m³ Density.", colorClass: "text-[#DC2626]" },
+              { text: "Micron Precision.", colorClass: "text-[#FACC15]" },
+            ],
+            body:
+              "Optical-grade laser metrology verifies every extruded socket to within ±0.05 mm of the DIN 8077/8078 dimensional tolerance — paired with a Melt Flow Rate ≤ 0.3 g/10min (ISO 1133) to guarantee consistent polymer chain length and weldability batch after batch.",
+          },
+          {
+            src: "/images/innovation-dvs2207-elbow-joint.png",
+            alt: "RakPlus all-green 90° elbow on a bright alabaster architectural pedestal with cyan fluid-dynamics flow arrows and a DVS 2207 fusion zone spec card.",
+            headline: [
+              { text: "DVS 2207 Fusion.", colorClass: "text-[#0A0A0A]" },
+              { text: "Homogeneous Bond.", colorClass: "text-[#DC2626]" },
+              { text: "Zero Weak Joints.", colorClass: "text-[#FACC15]" },
+            ],
+            body:
+              "Socket fusion parameters are stabilised at 260 °C ± 10 °C per DVS 2207, producing a seamless molecular bond — verified by Charpy Impact 'No Break' results under ISO 179/1eU. Every elbow joint is engineered to outlast the buildings it serves.",
+          },
+        ]}
+      />
+
       {/* ─── Canvas (scrollTriggerRef = sequenceRef, early-finish at 85%) ─── */}
       <CanvasSequence
         desktopPath="/innovation-desktop/"
@@ -106,27 +204,20 @@ export default function InnovationPageClient() {
             </div>
 
             <div className="hud-liquid-reveal">
-              <h1 className="font-sans font-extrabold leading-[0.9] tracking-tighter text-neutral-950
+              <h2 className="font-sans font-extrabold leading-[0.9] tracking-tighter text-neutral-950
                 text-[clamp(2.5rem,6vw,5.5rem)]">
                 Engineering the Best
                 <br />
                 PP-R Pipes in the
                 <br />
                 <span className="relative pb-4 inline-block text-emerald-500 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">Multi-Layer</span> <span className="relative pb-4 inline-block text-red-600 after:absolute after:bottom-0 after:left-0 after:h-[6px] after:bg-emerald-500 after:w-full after:rounded-br-[12px]">Technology</span>.
-              </h1>
+              </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Utilizing <span className="text-emerald-500">100% Virgin Material</span>, our advanced co-extrusion process strictly adheres to <span className="text-yellow-400">German Standard</span> engineering protocols.
               </p>
-            </div>
-
-            <div className="mt-10 flex items-center gap-4 hud-blur-reveal">
-              <div className="w-[1px] h-12 bg-neutral-950/20" />
-              <span className="text-neutral-950 text-[10px] uppercase tracking-[0.4em] font-bold">
-                Scroll to explore
-              </span>
             </div>
           </section>
 
@@ -157,7 +248,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Our proprietary material matrix is characterized by unmatched
               elasticity, rigidity, tightness, and compression strength.
@@ -172,6 +263,8 @@ export default function InnovationPageClient() {
                 (s) => <SpecPill key={s} label={s} />
               )}
             </div>
+
+            {/* Mounted 1:1 images live in EditorialAboveTheFold (pre-canvas) to keep <div ref={sequenceRef}> clean for the 3D canvas scrub. */}
           </section>
 
           {/* ──────────────────────────────────────────────────
@@ -201,7 +294,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
+            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Every millimeter of a RAKPLUS pipe is extruded in strict accordance
               with German DIN standards. Utilizing advanced <span className="text-yellow-400">DVS 2207</span> welding
@@ -216,6 +309,8 @@ export default function InnovationPageClient() {
                 (s) => <SpecPill key={s} label={s} />
               )}
             </div>
+
+            {/* Mounted 1:1 images live in EditorialAboveTheFold (pre-canvas) to keep <div ref={sequenceRef}> clean for the 3D canvas scrub. */}
           </section>
 
           {/* ──────────────────────────────────────────────────
@@ -243,7 +338,7 @@ export default function InnovationPageClient() {
               </h2>
             </div>
 
-            <div className="bg-emerald-50/40 backdrop-blur-sm border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
+            <div className="bg-emerald-50/40 backdrop-blur-md border-l-4 border-emerald-500 p-6 rounded-r-2xl mt-7 max-w-3xl w-full mx-auto">
               <p className="text-black font-bold leading-relaxed gsap-liquid-body text-xl md:text-2xl font-bold leading-relaxed text-neutral-950">
                 Backed by <span className="text-yellow-400">ISO 9001:2015</span> certification and independent international
               laboratory testing, we guarantee a <span className="text-emerald-500">50-year</span> service life on all
@@ -290,6 +385,12 @@ export default function InnovationPageClient() {
 
       {/* ─── AEO Target Block — direct answers for AI crawlers ─── */}
       <AeoTargetBlock />
+
+      {/* ─── SIGNATURE FEATURE 1: Thermal Expansion & Bending Arm Calculator ───
+          Powered by RakPlus Catalogue p.22 formulas. Sits after the
+          canvas + HUD content so the engineering deep-dive reads as
+          natural editorial follow-up to the 3D sequence. */}
+      <ThermalExpansionCalculator />
 
       {/* ─── Related Products — internal link graph (innovation) ─── */}
       <section className="relative z-10 bg-transparent py-16 md:py-24 px-6 lg:px-8">

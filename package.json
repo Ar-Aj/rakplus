@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node -e \"const fs=require('fs');['robots.txt','sitemap.xml','.htaccess'].forEach(f=>{const src='public/'+f;const dst='out/'+f;if(fs.existsSync(src)){fs.copyFileSync(src,dst);console.log('Copied '+f+' -> out/'+f);}else{console.warn('Missing '+src);}})\"",
+    "build:brand": "node scripts/build-brand-assets.mjs",
     "start": "next start",
     "lint": "next lint",
     "extract-frames": "node scripts/extract-frames.js"

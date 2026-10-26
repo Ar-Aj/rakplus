@@ -79,7 +79,7 @@ export default function FittingModal({ isOpen, onClose, fitting }: FittingModalP
           className="flex-1 min-h-0 overflow-y-auto overscroll-contain bg-white p-6 sm:p-8"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm table-scroll-hint" data-theme="dark">
             <div className="overflow-x-auto">
               <table className="w-full text-center align-middle">
                 <thead>
@@ -95,9 +95,6 @@ export default function FittingModal({ isOpen, onClose, fitting }: FittingModalP
                     </th>
                     <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
                       PCS/PACKET
-                    </th>
-                    <th scope="col" className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.15em] whitespace-nowrap text-center align-middle">
-                      PCS/BOX
                     </th>
                   </tr>
                 </thead>
@@ -118,9 +115,6 @@ export default function FittingModal({ isOpen, onClose, fitting }: FittingModalP
                       </td>
                       <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap text-center align-middle">
                         {row.piecesPerPack !== null && row.piecesPerPack !== undefined ? row.piecesPerPack : "—"}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-neutral-950 whitespace-nowrap text-center align-middle">
-                        {row.piecesPerBox !== undefined ? row.piecesPerBox : "-"}
                       </td>
                     </tr>
                   ))}

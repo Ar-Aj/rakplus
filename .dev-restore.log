@@ -1,0 +1,44 @@
+
+> scaffold@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 7.9s
+ ○ Compiling / ...
+ ✓ Compiled / in 16.3s (713 modules)
+ GET / 200 in 18697ms
+ ✓ Compiled in 2.5s (329 modules)
+ ○ Compiling /about ...
+ ✓ Compiled /about in 4.9s (706 modules)
+ GET /about/ 200 in 5433ms
+ ○ Compiling /products ...
+ ✓ Compiled /products in 21.1s (1923 modules)
+ GET /products/ 200 in 21914ms
+ ○ Compiling /products/[slug] ...
+ ✓ Compiled /products/[slug] in 3.1s (1959 modules)
+ GET /products/ppr-green-pn20/ 200 in 5793ms
+ ○ Compiling /sustainability ...
+ ✓ Compiled /sustainability in 2s (1999 modules)
+ GET /sustainability/ 200 in 2717ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 6.1s (2025 modules)
+ GET /contact/ 200 in 7940ms
+ ○ Compiling /innovation ...
+ ✓ Compiled /innovation in 1371ms (2047 modules)
+ GET /innovation/ 200 in 1630ms
+ ○ Compiling /locations/[emirate] ...
+ ✓ Compiled /locations/[emirate] in 663ms (2051 modules)
+ GET /locations/dubai/ 200 in 2267ms
+ ○ Compiling /products/ppr/[color]/[spec] ...
+ ✓ Compiled /products/ppr/[color]/[spec] in 1161ms (2077 modules)
+ GET /products/ppr/green/pn20-sdr6/ 200 in 2379ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 10.2s (2197 modules)
+ GET /products/a57-ajooba-men-s-suede-finish-tassel-slip-on-loafers/ 500 in 11549ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /_not-found in 3.4s (2218 modules)
+ GET /sw.js 404 in 2366ms
+ GET /favicon.ico 200 in 4548ms

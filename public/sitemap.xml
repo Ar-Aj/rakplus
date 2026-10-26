@@ -6,14 +6,16 @@
 >
   <!--
     RakPlus UAE — XML Sitemap (static export).
-    Last updated: 2026-10-14
+    Last updated: 2026-10-18
 
-    Priority hierarchy:
-      1.0  Home (PRIMARY keyword: ppr pipes uae, ppr fittings uae)
-      0.9  Products (SECONDARY keyword: 100% brass ppr fittings uae)
+    Priority hierarchy (Phase 3):
+      1.0  Home ONLY — sole authority for the head term "ppr pipes uae"
+      0.9  UAE Master Commercial Hub + Products Hub + 4 Emirate Supply Hubs
       0.8  Sustainability, Contact, Innovation
+      0.8  PPR product spec pages (8 routes × 2 colors)
       0.7  About
-      0.6  All product detail pages
+      0.6  Legacy product slugs (kept for redirects)
+      0.3  Privacy, Terms
 
     All URLs end with a trailing slash to match Hostinger Apache
     static-export routing policy (trailingSlash: true in next.config.mjs).
@@ -22,7 +24,7 @@
   <!-- ─── HOME — Primary Keyword Hub ─── -->
   <url>
     <loc>https://rakplusuae.com/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -32,22 +34,59 @@
     </image:image>
   </url>
 
+  <!-- ─── LOCATIONS — UAE Master Commercial Hub ───
+       Priority is deliberately 0.9 (not 1.0): the homepage is the sole
+       1.0 authority for the head term "ppr pipes uae"; this hub supports
+       it rather than competing with it in the SERP. -->
+  <url>
+    <loc>https://rakplusuae.com/locations/ppr-pipes-uae/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- ─── PRODUCTS — 100% Brass Fittings keyword hub ─── -->
   <url>
     <loc>https://rakplusuae.com/products/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://rakplusuae.com/images/og-products-cover.jpg</image:loc>
+      <image:loc>https://rakplusuae.com/images/products-complete-system-showcase.png</image:loc>
       <image:title>RakPlus Product Catalog — 100% Brass PPR Fittings UAE</image:title>
     </image:image>
+  </url>
+
+  <!-- ─── LOCATIONS — Emirate Supply Hubs (0.9 tier) ─── -->
+  <url>
+    <loc>https://rakplusuae.com/locations/dubai/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rakplusuae.com/locations/abu-dhabi/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rakplusuae.com/locations/sharjah/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rakplusuae.com/locations/umm-al-quwain/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- ─── SUSTAINABILITY — WRAS approved ppr pipes dubai ─── -->
   <url>
     <loc>https://rakplusuae.com/sustainability/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -55,7 +94,7 @@
   <!-- ─── INNOVATION — hot and cold water ppr pipes uae ─── -->
   <url>
     <loc>https://rakplusuae.com/innovation/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -63,7 +102,7 @@
   <!-- ─── ABOUT — premium ppr pipe manufacturers uae + 50-year guarantee ─── -->
   <url>
     <loc>https://rakplusuae.com/about/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -71,32 +110,54 @@
   <!-- ─── CONTACT — conversion page ─── -->
   <url>
     <loc>https://rakplusuae.com/contact/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- ────────────────────────────────────────────────
-       PRODUCT DETAIL PAGES — 11 RakPlus SKUs
+       PPR PRODUCT SPEC PAGES — /products/ppr/[color]/[spec]/
+       8 routes (4 specs × 2 colors)
        ──────────────────────────────────────────────── -->
 
   <!-- PP-R Green Pipes -->
-  <url><loc>https://rakplusuae.com/products/ppr-green-pn10/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-green-pn16/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-green-pn20/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-green-pn25/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/green/pn10-sdr11/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/green/pn16-sdr74/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/green/pn20-sdr6/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/green/pn25-sdr5/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
   <!-- PP-R Yellow Pipes -->
-  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn10/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn16/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn20/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn25/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/yellow/pn10-sdr11/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/yellow/pn16-sdr74/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/yellow/pn20-sdr6/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr/yellow/pn25-sdr5/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- ────────────────────────────────────────────────
+       LEGACY PRODUCT DETAIL PAGES — /products/[slug]/
+       11 RakPlus SKUs (kept for redirect parity)
+       ──────────────────────────────────────────────── -->
+
+  <!-- PP-R Green Pipes -->
+  <url><loc>https://rakplusuae.com/products/ppr-green-pn10/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-green-pn16/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-green-pn20/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-green-pn25/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- PP-R Yellow Pipes -->
+  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn10/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn16/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn20/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-yellow-pn25/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- PP-R Fittings -->
-  <url><loc>https://rakplusuae.com/products/ppr-fittings-green/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://rakplusuae.com/products/ppr-fittings-yellow/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-fittings-green/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/ppr-fittings-yellow/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- PEX Systems -->
-  <url><loc>https://rakplusuae.com/products/pex-systems/</loc><lastmod>2026-10-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://rakplusuae.com/products/pex-systems/</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+<!-- ─── LEGAL — footer-linked trust pages ─── -->
+  <url><loc>https://rakplusuae.com/privacy/</loc><lastmod>2026-10-22</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://rakplusuae.com/terms/</loc><lastmod>2026-10-22</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
 </urlset>

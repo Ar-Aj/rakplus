@@ -6,12 +6,32 @@
  * Minimal, premium navbar designed for white backgrounds.
  * Pitch-black typography, emerald hover accents, clean borders.
  * Hides on scroll-down, reappears on scroll-up.
- * Mobile: Full-screen white overlay with staggered link reveals.
+ * Mobile + Tablet (<1024px): Full-screen white overlay with staggered
+ *   link reveals.
+ *
+ * IMPORTANT — overlay + Lenis + scroll-down-header-hide interact badly
+ * on tablet:
+ *   1. Lenis keeps running even when the overlay is open, so the
+ *      scroll-down handler keeps firing and the header (with the close
+ *      button) slides off-screen with no way back.
+ *   2. The body-overflow lock in CSS is silently fought by Lenis.
+ * Fixes below:
+ *   • Use `useLenis()` to call `lenis.stop()` when the overlay opens
+ *     and `lenis.start()` when it closes. Zero effect on
+ *     CanvasSequence — only the Lenis runtime RAF + wheel handler are
+ *     paused, the GSAP ticker / ScrollTrigger wiring is untouched.
+ *   • While the overlay is open, force `isVisible=true` and ignore
+ *     scroll direction.
+ *   • Close the overlay on Escape, on resize-past-`lg`, and on route
+ *     change — covers the iPad-Safari landscape/portrait rotation
+ *     and back-navigation edge cases.
  */
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 interface NavLink {
@@ -34,14 +54,31 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Track scroll position for styling and direction for hide/show
+  // `useLenis()` returns the Lenis instance provided by `<ReactLenis>`
+  // in SmoothScroll.tsx. Stopping it pauses wheel + touch + RAF without
+  // touching GSAP's ticker or ScrollTrigger (those rules are locked per
+  // .cursor/rules/no-touching-to-scroll-behavior.mdc).
+  // `useLenis()` is null until after hydration on the client; we treat
+  // null as "no Lenis in this environment" (e.g. SSR / no-JS previews).
+  const lenis = useLenis();
+  const pathname = usePathname();
+
+  // Track scroll position for styling and direction for hide/show.
+  // While the mobile/tablet overlay is open we FREEZE the visibility
+  // state and ignore scroll direction — otherwise the header (with
+  // the close button) slides off-screen under iPad/tablet viewports
+  // because Lenis keeps firing wheel events behind the overlay.
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let rafId = 0;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       setIsScrolled(currentScrollY > 50);
+
+      // Suppress auto-hide when the menu overlay is open
+      if (isMobileOpen) return;
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false); // scrolling down
@@ -51,20 +88,69 @@ export default function Navbar() {
       lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const onScroll = () => {
+      // Throttle to one update per animation frame so a Lenis-driven
+      // smooth-scroll doesn't spam setState (was fine before, but now
+      // we gate isMobileOpen inside the handler so we want minimal work).
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleScroll);
+    };
 
-  // Lock body scroll when mobile menu is open
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, [isMobileOpen]);
+
+  // Lock body scroll + Lenis while the overlay is open. We do BOTH:
+  //   • document.body.style.overflow = "hidden" — kills native scrollbar
+  //     and prevents rubber-band scrolling on iOS Safari.
+  //   • lenis.stop() / lenis.start() — kills Lenis's RAF/wheel handler,
+  //     which is what was leaking past the body-overflow lock.
   useEffect(() => {
     if (isMobileOpen) {
       document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
       document.body.style.overflow = "";
+      lenis?.start();
     }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
+  }, [isMobileOpen, lenis]);
+
+  // Close overlay on Escape — universal a11y expectation.
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMobileOpen]);
+
+  // Close overlay on route change (Link click already does this for
+  // most cases, but this also covers back/forward navigation and any
+  // programmatic route swap). Cheap because pathname only changes on
+  // navigation.
+  useEffect(() => {
+    if (isMobileOpen) setIsMobileOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // Close overlay if viewport grows past `lg` (1024px) — the desktop
+  // bar appears, the overlay becomes orphaned whitespace.
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024 && isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, [isMobileOpen]);
 
   return (

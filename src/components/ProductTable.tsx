@@ -36,7 +36,7 @@ export default function ProductTable({
     ) ?? false;
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm table-scroll-hint">
       <div className="overflow-x-auto">
         <table className="w-full text-center align-middle">
           <thead>

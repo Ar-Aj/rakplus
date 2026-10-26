@@ -33,12 +33,25 @@ import {
   getAllProductSlugs,
   getProductBySlug,
 } from "@/config/products";
+import { buildOgImages, absoluteUrl, OG_COVER } from "@/lib/seo";
 import dynamic from "next/dynamic";
 import FittingGallery from "@/components/products/FittingGallery";
 import type { PipeSize } from "@/components/3d/ProductViewerModal";
 
 const ProductViewerTrigger = dynamic(
   () => import("@/components/3d/ProductViewerTrigger"),
+  { ssr: false }
+);
+
+// InteractivePipeCrossSection is a self-contained, below-the-fold SVG
+// calculator. Importing it statically pulled its whole dependency tree
+// into the FIRST-LOAD route bundle. Splitting it means the browser
+// fetches that chunk only if the user scrolls deep enough to need it.
+const InteractivePipeCrossSection = dynamic(
+  () =>
+    import("@/components/calculator/InteractivePipeCrossSection").then(
+      (m) => m.default
+    ),
   { ssr: false }
 );
 
@@ -115,16 +128,42 @@ interface PageProps {
 export function generateMetadata({ params }: PageProps): Metadata {
   const product = getProductBySlug(params.slug);
   if (!product) return { title: "Product Not Found — RAKPLUS" };
+  const productUrl = `https://rakplusuae.com/products/${params.slug}/`;
   return {
-    title: `${product.title} — RAKPLUS Piping Systems`,
-    description: `${product.description} ${product.specifications.temperatureResistance}. ${product.specifications.standards.join(", ")} certified.`,
+    title: `${product.title} — WRAS Approved RAKPLUS Piping Systems`,
+    description: `${product.description} ${product.specifications.temperatureResistance}. ${product.specifications.standards.join(", ")} certified. WRAS approved, 100% polymer, 100% brass, 50-year guarantee.`,
     keywords: [
       product.title,
       product.category,
       "RAKPLUS",
       "PPR pipes",
+      "PPR fittings",
+      "WRAS approved",
+      "ppr pipes uae",
+      "ppr pipes and fittings supplier in dubai",
+      "ppr pipe manufacturer in gcc",
       ...product.specifications.standards,
     ],
+    alternates: {
+      canonical: productUrl,
+    },
+    openGraph: {
+      title: `${product.title} — WRAS Approved RAKPLUS Piping Systems`,
+      description: `${product.description} WRAS approved, 100% polymer, 100% brass, 50-year guarantee.`,
+      url: productUrl,
+      siteName: "RakPlus",
+      locale: "en_AE",
+      type: "website",
+      images: buildOgImages(
+        `${product.title} — WRAS approved RAKPLUS piping system, German DIN 8077/8078, 100% Polymer and 100% Brass`
+      ),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} — RAKPLUS Piping Systems`,
+      description: `${product.description} WRAS approved, 50-year guarantee.`,
+      images: [absoluteUrl(OG_COVER)],
+    },
   };
 }
 
@@ -348,6 +387,22 @@ export default function ProductPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          INTERACTIVE PIPE CROSS-SECTION (2D Engineering Blueprint &
+          Tolerance Inspector) — sits below the hero / above the
+          dimensional specification table as a SUPPLEMENTARY inspection
+          tool. The primary 3D experience (hero LiveCoverCanvas +
+          per-row ProductViewerModal) lives ABOVE this section.
+
+          `initialSlug` is passed so the configurator opens on THIS page's
+          exact pipe series (colour line + SDR/PN class) rather than a
+          generic default. Non-pipe products (fittings / PEX) simply fall
+          back to the configurator's own default selection.
+          ═══════════════════════════════════════════════════════════════════════ */}
+      <div id="pipe-cross-section">
+        <InteractivePipeCrossSection initialSlug={product.slug} />
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           DIMENSIONAL TABLE — FULL WIDTH with "View 3D" first column

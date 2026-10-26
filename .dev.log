@@ -1,0 +1,88 @@
+
+> scaffold@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 7.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 18.3s (716 modules)
+ GET / 200 in 20446ms
+ ✓ Compiled in 2.3s (330 modules)
+ ○ Compiling /about ...
+ ✓ Compiled /about in 10.8s (709 modules)
+ GET /about/ 200 in 11503ms
+ ○ Compiling /products ...
+ ✓ Compiled /products in 30.8s (1925 modules)
+ GET /products/ 200 in 32521ms
+ ○ Compiling /products/[slug] ...
+ ✓ Compiled /products/[slug] in 5.1s (1961 modules)
+ GET /products/ppr-green-pn20/ 200 in 13079ms
+ ○ Compiling /sustainability ...
+ ✓ Compiled /sustainability in 6.6s (1993 modules)
+ GET /sustainability/ 200 in 8634ms
+ ○ Compiling /contact ...
+ ✓ Compiled / in 5.1s (2027 modules)
+ GET /contact/ 200 in 7031ms
+ GET / 200 in 5904ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 4s (1092 modules)
+ GET /favicon.ico 200 in 8905ms
+ GET /favicon.ico 200 in 458ms
+ ○ Compiling /locations/[emirate] ...
+ ✓ Compiled /locations/[emirate] in 5.3s (2056 modules)
+ GET /favicon.ico 200 in 1391ms
+ GET /favicon.ico 200 in 164ms
+ GET /favicon.ico 200 in 181ms
+ GET /favicon.ico 200 in 151ms
+ GET /favicon.ico 200 in 144ms
+ ○ Compiling /_not-found ...
+ GET /locations/dubai/ 200 in 13247ms
+ ✓ Compiled /_not-found in 4s (2047 modules)
+ GET /sw.js 404 in 4926ms
+ ○ Compiling /innovation ...
+ ✓ Compiled /innovation in 2.1s (2069 modules)
+ GET /innovation/ 200 in 2826ms
+ GET /videos/Loader/Logo%20Animation.mp4 404 in 218ms
+ GET /videos/Loader/Logo%20Animation.mp4 404 in 164ms
+ GET / 200 in 427ms
+ GET /videos/Loader/Logo%20Animation.mp4 404 in 362ms
+ GET /favicon.ico 200 in 212ms
+ GET /sw.js 404 in 205ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 16.1s (1608 modules)
+ GET / 404 in 17907ms
+ GET / 200 in 1922ms
+ GET /videos/Loader/Logo%20Animation.mp4 404 in 384ms
+ GET /_next/static/css/app/layout.css?v=1792748019194 404 in 380ms
+ GET /_next/static/css/app/layout.css?v=1792748020629 404 in 178ms
+ GET /_next/static/chunks/main-app.js?v=1792748019194 404 in 1024ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 943ms
+ GET /_next/static/chunks/app/page.js 404 in 827ms
+ GET /_next/static/chunks/app/layout.js 404 in 522ms
+ GET /favicon.ico 404 in 117ms
+ GET /favicon.ico 404 in 76ms
+ GET /favicon.ico 404 in 59ms
+ GET /favicon.ico 404 in 67ms
+ GET /favicon.ico 404 in 61ms
+ GET /favicon.ico 404 in 55ms
+ GET /sw.js 404 in 380ms
+ ✓ Compiled in 12.6s (1584 modules)
+ ✓ Compiled in 3.9s (1584 modules)
+ ✓ Compiled in 17s (1584 modules)
+ ✓ Compiled in 1479ms (1169 modules)
+ ✓ Compiled in 1303ms (1584 modules)
+ ✓ Compiled in 1456ms (1584 modules)
+ ✓ Compiled in 2.3s (1584 modules)
+ ✓ Compiled in 1931ms (1584 modules)
+ ✓ Compiled in 2.7s (1584 modules)
+ ✓ Compiled in 3.1s (1584 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 6.1s (1587 modules)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.1s (1575 modules)
+ GET / 500 in 24034ms
+ GET /sw.js 500 in 16374ms
+ GET / 500 in 395ms

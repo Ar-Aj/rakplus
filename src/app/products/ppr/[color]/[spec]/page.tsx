@@ -21,7 +21,13 @@ import {
   isValidColor,
 } from "@/config/pprData";
 import PPRProductClient from "./PPRProductClient";
-import { buildBreadcrumbJsonLd, SITE } from "@/lib/seo";
+import {
+  buildBreadcrumbJsonLd,
+  buildOgImages,
+  absoluteUrl,
+  OG_COVER,
+  SITE,
+} from "@/lib/seo";
 
 // ─── Static Params ───
 
@@ -62,11 +68,18 @@ export function generateMetadata({ params }: PageProps): Metadata {
     };
   }
 
-  // Extract spec label from title for meta (e.g., "SDR11 / PN10")
-  const specLabel = specData.title.replace("RAKPLUS® PP-R Pipes — ", "");
+  // Extract spec label from title for meta (e.g., "SDR11 / PN10").
+  // The source titles embed a stray "®r" after the ® glyph (e.g.
+  // "RAKPLUS®r SDR11 / PN10"); strip the trademark run so the SERP title
+  // reads cleanly. The brand suffix is appended ONCE by the root
+  // layout template, so nothing else may follow a "|" here.
+  const specLabel = specData.title
+    .replace("RAKPLUS® PP-R Pipes — ", "")
+    .replace(/®r/g, "")
+    .trim();
 
   return {
-    title: `Best PPR Pipes / Fittings Provider in Dubai | RAKPLUS® ${specLabel} German Standard`,
+    title: `Best PPR Pipes / Fittings Provider in Dubai — ${specLabel} German Standard`,
     description: `${specData.shortDescription} RAKPLUS® is the top PPR fittings manufacturer in UAE — ${specData.overviewParagraph.slice(0, 160)}`,
     keywords: [
       "Best PPR pipes provider Dubai",
@@ -78,14 +91,31 @@ export function generateMetadata({ params }: PageProps): Metadata {
       "PPR pipes Dubai",
       "PP-R piping systems",
       "hot cold water pipes UAE",
-      "Aquasmart Plastic Industries",
+      "RakPlus Rohrsysteme UAE",
       "Pipes / Fittings",
+      "ppr pipes uae",
+      "ppr pipes and fittings supplier in dubai",
+      "ppr pipe manufacturer in gcc",
     ],
+    alternates: {
+      canonical: `https://rakplusuae.com/products/ppr/${params.color}/${params.spec}/`,
+    },
     openGraph: {
       title: `RAKPLUS® ${specLabel} — Best PPR Pipes / Fittings in Dubai & UAE`,
-      description: specData.shortDescription,
+      description: `${specData.shortDescription} WRAS approved, 100% Polymer, 100% Brass, German DIN 8077/8078, 50-year guaranteed service life.`,
+      url: `https://rakplusuae.com/products/ppr/${params.color}/${params.spec}/`,
+      siteName: SITE.name,
       type: "website",
       locale: "en_AE",
+      images: buildOgImages(
+        `RAKPLUS® ${specLabel} — WRAS approved PP-R pipes manufactured in the UAE to German DIN 8077/8078`
+      ),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `RAKPLUS® ${specLabel} — Best PPR Pipes / Fittings in Dubai & UAE`,
+      description: `${specData.shortDescription} WRAS approved, 50-year guarantee.`,
+      images: [absoluteUrl(OG_COVER)],
     },
   };
 }
@@ -106,7 +136,7 @@ function generateJsonLd(specData: NonNullable<ReturnType<typeof getSpecData>>, c
     },
     manufacturer: {
       "@type": "Organization",
-      name: "Aquasmart Plastic Industries L.L.C",
+      name: "RakPlus Rohrsysteme UAE",
       address: {
         "@type": "PostalAddress",
         addressCountry: "AE",

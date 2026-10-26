@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+
+
+# CRITICAL REPOSITORY GUARDRAILS — RAKPLUS UAE (rakplusuae.com)
+
+## 1. DO NOT TOUCH THE SCROLL, CANVAS, OR PRELOADER ENGINE (LOCKED AT COMMIT `cc67e6b`)
+The scroll-based timing, frame sequence playback, loading behavior, and GSAP/Lenis synchronization across all pages are now 100% locked and perfected. 
+Under NO circumstances may you modify, refactor, "optimize", or alter the timing/logic of the following files and systems:
+- `src/components/CanvasSequence.tsx` (Do NOT change buffer sizes, loading strategy, drawImage loop, DPR, or GSAP scrub logic)
+- `src/components/SmoothScroll.tsx` (Do NOT alter Lenis lerp, duration, wheelMultiplier, or touchMultiplier)
+- `src/components/CinematicCurtain.tsx` (Do NOT alter yPercent, clearProps, or ScrollTrigger start/end timings)
+- `src/components/ScrollToTop.tsx` & its placement outside `<SmoothScroll>` in `src/app/layout.tsx`
+- `src/components/Preloader.tsx` (Do NOT alter the preloader timing or state machine)
+- `src/hooks/useHUDReveal.ts` & `src/hooks/useLiquidReveal.ts` (Do NOT alter core GSAP scroll-trigger mechanics)
+- Any `<CanvasSequence />` props (`scrub`, `start`, `end`, `mobileEnd`, `frameCount`) across any page (`page.tsx`, `about`, `innovation`, `sustainability`).
+
+## 2. DO NOT ALTER CORE SEO / AEO / GEO INFRASTRUCTURE
+- Keep `trailingSlash: true` in `next.config.mjs` (Required for Hostinger LiteSpeed static export `out/`).
+- Preserve all canonical JSON-LD schemas in `src/lib/seo.ts` (`Organization`, `LocalBusiness`, `Product`, `FAQPage`, `BreadcrumbList`).
+- Strictly adhere to the 4 verified brand claims: **100% Polymer**, **100% Brass**, **WRAS approved material**, and **50 years of life guaranteed**. Never invent unverified certifications or specs.
+
+## 3. ALLOWED SCOPE FOR UPCOMING WORK (UI / UX OVERHAUL ONLY)
+All future changes must focus strictly on **visual UI/UX design, typography, card layouts, spacing, color harmony, responsiveness, and component styling** without disrupting the underlying scroll-trigger distances or canvas performance.

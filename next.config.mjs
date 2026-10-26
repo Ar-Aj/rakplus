@@ -29,12 +29,15 @@ const nextConfig = {
   // ── Experimental: optimize package imports for smaller JS bundles
   //    → faster crawl budget, lower Time-to-Interactive, less risk
   //    of Googlebot bailing before hydration completes.
+  //
+  //    NOTE: @react-three/fiber and @react-three/drei were REMOVED from
+  //    this list. Barrel-optimizing those packages breaks the webpack
+  //    chunk map for `next/dynamic` imports in dev, producing
+  //    `ChunkLoadError: ... (error: http://localhost:3000/_next/undefined)`
+  //    because the dynamic chunk resolves to an undefined hash. R3F is
+  //    also loaded client-only (ssr:false), so the bundle win is moot.
   experimental: {
-    optimizePackageImports: [
-      'lucide-react',
-      '@react-three/fiber',
-      '@react-three/drei',
-    ],
+    optimizePackageImports: ['lucide-react'],
   },
 };
 

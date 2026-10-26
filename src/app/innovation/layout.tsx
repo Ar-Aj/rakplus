@@ -9,7 +9,7 @@ import InnovationPageClient from "./InnovationPageClient";
  */
 export const metadata: Metadata = {
   title:
-    "Hot & Cold Water PPR Pipes UAE — German Engineering | RakPlus",
+    "Hot & Cold Water PPR Pipes UAE — German Engineering",
   description:
     "RakPlus hot & cold water PPR pipes for UAE projects. 100% Polymer, 70°C continuous / 100°C peak rating, German DIN 8077/8078 engineered. 50-year guarantee. Premium PP-R innovation for residential & commercial.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Hot & Cold Water PPR Pipes UAE — German Engineering | RakPlus",
+      "Hot & Cold Water PPR Pipes UAE — German Engineering",
     description:
       "RakPlus hot & cold water PPR pipes engineered to German DIN 8077/8078. 100% Polymer, 50-year guarantee, 70°C continuous rating. UAE & GCC innovation.",
     url: "https://rakplusuae.com/innovation",
